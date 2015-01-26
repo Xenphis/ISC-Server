@@ -146,6 +146,7 @@ namespace WorldPackets
         struct CharCustomizeInfo;
         struct CharRaceOrFactionChangeInfo;
 
+        class EnumCharacters;
         class CreateCharacter;
         class CharDelete;
         class CharacterRenameRequest;
@@ -249,6 +250,7 @@ namespace WorldPackets
     namespace Item
     {
         class AutoEquipItem;
+        class AutoStoreBagItem;
         class BuyBackItem;
         class DestroyItem;
         class GetItemPurchaseData;
@@ -546,8 +548,8 @@ class TC_GAME_API WorldSession
         void SendPacket(WorldPacket const* packet);
         void SendIscPacket(IscPacket const& packet);
         bool SendConversation(uint32 conversationId);
-        void SendNotification(const char *format, ...) ATTR_PRINTF(2, 3);
-        void SendNotification(uint32 string_id, ...);
+        void SendNotification(char const* format, ...) ATTR_PRINTF(2, 3);
+        void SendNotification(uint32 stringId, ...);
         void SendPetNameInvalid(uint32 error, std::string const& name, DeclinedName *declinedName);
         void SendPartyResult(PartyOperation operation, std::string const& member, PartyResult res, uint32 val = 0);
         void SendAreaTriggerMessage(char const* Text, ...) ATTR_PRINTF(2, 3);
@@ -745,9 +747,8 @@ class TC_GAME_API WorldSession
         void Handle_NULL(WorldPacket& recvPacket);          // not used
         void Handle_EarlyProccess(WorldPacket& recvPacket); // just mark packets processed in WorldSocket::ReadDataHandler
         void Handle_ServerSide(WorldPacket& recvPacket);    // sever side only, can't be accepted from client
-        void Handle_Deprecated(WorldPacket& recvPacket);    // never used anymore by client
 
-        void HandleCharEnumOpcode(WorldPacket& recvPacket);
+        void HandleCharEnumOpcode(WorldPackets::Character::EnumCharacters& enumCharacters);
         void HandleCharDeleteOpcode(WorldPackets::Character::CharDelete& charDelete);
         void HandleCharCreateOpcode(WorldPackets::Character::CreateCharacter& charCreate);
         void HandlePlayerLoginOpcode(WorldPacket& recvPacket);
@@ -1003,7 +1004,7 @@ class TC_GAME_API WorldSession
         void HandleBuyItemInSlotOpcode(WorldPacket& recvPacket);
         void HandleBuyItemOpcode(WorldPacket& recvPacket);
         void HandleListInventoryOpcode(WorldPackets::NPC::Hello& packet);
-        void HandleAutoStoreBagItemOpcode(WorldPacket& recvPacket);
+        void HandleAutoStoreBagItemOpcode(WorldPackets::Item::AutoStoreBagItem& packet);
         void HandleReadItem(WorldPacket& recvPacket);
         void HandleAutoEquipItemSlotOpcode(WorldPacket& recvPacket);
         void HandleSwapItem(WorldPackets::Item::SwapItem& swapItem);
@@ -1255,7 +1256,7 @@ class TC_GAME_API WorldSession
         void HandleEquipmentSetSave(WorldPackets::EquipmentSet::SaveEquipmentSet& saveEquipmentSet);
         void HandleEquipmentSetDelete(WorldPacket& recvData);
         void HandleEquipmentSetUse(WorldPacket& recvData);
-        void HandleWorldStateUITimerUpdate(WorldPackets::Misc::UITimeRequest& recvData);
+        void HandleUITimeRequest(WorldPackets::Misc::UITimeRequest& recvData);
         void HandleReadyForAccountDataTimes(WorldPacket& recvData);
         void HandleQueryQuestsCompleted(WorldPackets::Quest::QueryQuestsCompleted& queryQuestsCompleted);
         void HandleQuestPOIQuery(WorldPackets::Query::QuestPOIQuery& query);
