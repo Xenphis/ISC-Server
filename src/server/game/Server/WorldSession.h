@@ -245,6 +245,8 @@ namespace WorldPackets
     namespace Inspect
     {
         class Inspect;
+        class QueryInspectAchievements;
+        class RequestHonorStats;
     }
 
     namespace Item
@@ -776,11 +778,10 @@ class TC_GAME_API WorldSession
         // played time
         void HandlePlayedTime(WorldPackets::Character::PlayedTimeClient& packet);
 
-        // new inspect
+        // Inspect
         void HandleInspectOpcode(WorldPackets::Inspect::Inspect& inspect);
-
-        // new party stats
-        void HandleInspectHonorStatsOpcode(WorldPacket& recvPacket);
+        void HandleRequestHonorStats(WorldPackets::Inspect::RequestHonorStats& request);
+        void HandleQueryInspectAchievements(WorldPackets::Inspect::QueryInspectAchievements& inspect);
 
         void HandleForceSpeedChangeAck(WorldPacket& recvData);
         void HandleMoveKnockBackAck(WorldPacket& recvPacket);
@@ -1253,7 +1254,6 @@ class TC_GAME_API WorldSession
         void HandleSpellClick(WorldPacket& recvData);
         void HandleMirrorImageDataRequest(WorldPacket& recvData);
         void HandleRemoveGlyph(WorldPacket& recvData);
-        void HandleQueryInspectAchievements(WorldPacket& recvData);
         void HandleEquipmentSetSave(WorldPackets::EquipmentSet::SaveEquipmentSet& saveEquipmentSet);
         void HandleEquipmentSetDelete(WorldPacket& recvData);
         void HandleEquipmentSetUse(WorldPacket& recvData);
