@@ -401,6 +401,12 @@ namespace WorldPackets
     {
         class CancelTrade;
     }
+
+    namespace Who
+    {
+        class WhoIsRequest;
+        class WhoRequestPkt;
+    }
 }
 
 enum AccountDataType
@@ -819,7 +825,7 @@ class TC_GAME_API WorldSession
         void HandleLootOpcode(WorldPackets::Loot::LootUnit& packet);
         void HandleLootReleaseOpcode(WorldPackets::Loot::LootRelease& packet);
         void HandleLootMasterGiveOpcode(WorldPacket& recvPacket);
-        void HandleWhoOpcode(WorldPacket& recvPacket);
+        void HandleWhoOpcode(WorldPackets::Who::WhoRequestPkt& whoRequest);
         void HandleLogoutRequestOpcode(WorldPackets::Character::LogoutRequest& logoutRequest);
         void HandlePlayerLogoutOpcode(WorldPackets::Character::PlayerLogout& playerLogout);
         void HandleLogoutCancelOpcode(WorldPackets::Character::LogoutCancel& logoutCancel);
@@ -1154,7 +1160,7 @@ class TC_GAME_API WorldSession
         void HandleSetTitleOpcode(WorldPacket& recvData);
         void HandleRealmSplitOpcode(WorldPacket& recvData);
         void HandleTimeSyncResponse(WorldPackets::Misc::TimeSyncResponse& packet);
-        void HandleWhoIsOpcode(WorldPacket& recvData);
+        void HandleWhoIsOpcode(WorldPackets::Who::WhoIsRequest& packet);
         void HandleResetInstancesOpcode(WorldPacket& recvData);
         void HandleInstanceLockResponse(WorldPacket& recvPacket);
 

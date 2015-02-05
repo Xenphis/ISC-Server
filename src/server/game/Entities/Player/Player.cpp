@@ -24551,7 +24551,6 @@ void Player::StoreLootItem(uint8 lootSlot, Loot* loot)
         // LootItem is being removed (looted) from the container, delete it from the DB.
         if (loot->containerID > 0)
             sLootItemStorage->RemoveStoredLootItemForContainer(loot->containerID, item->itemid, item->count, item->LootListId);
-
     }
     else
         SendEquipError(msg, nullptr, nullptr, item->itemid);
