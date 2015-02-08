@@ -358,6 +358,8 @@ Creature* Transport::CreateNPCPassenger(ObjectGuid::LowType guid, CreatureData c
     if (!creature)
         return nullptr;
 
+    ASSERT(data);
+
     float x, y, z, o;
     data->spawnPoint.GetPosition(x, y, z, o);
 
