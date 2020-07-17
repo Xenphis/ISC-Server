@@ -1261,7 +1261,7 @@ void GameEventMgr::GameEventSpawn(int16 event_id)
             Map* map = sMapMgr->CreateBaseMap(data->mapId);
             map->RemoveRespawnTime(SPAWN_TYPE_CREATURE, *itr);
             // We use spawn coords to spawn
-            if (!map->Instanceable() && map->IsGridLoaded(data->spawnPoint))
+            if (map && !map->Instanceable() && map->IsGridLoaded(data->spawnPoint))
                 Creature::CreateCreatureFromDB(*itr, map);
         }
     }
@@ -1284,7 +1284,7 @@ void GameEventMgr::GameEventSpawn(int16 event_id)
             Map* map = sMapMgr->CreateBaseMap(data->mapId);
             map->RemoveRespawnTime(SPAWN_TYPE_GAMEOBJECT, *itr);
             // We use current coords to unspawn, not spawn coords since creature can have changed grid
-            if (!map->Instanceable() && map->IsGridLoaded(data->spawnPoint))
+            if (map && !map->Instanceable() && map->IsGridLoaded(data->spawnPoint))
             {
                 if (GameObject* go = GameObject::CreateGameObjectFromDB(*itr, map, false))
                 {
