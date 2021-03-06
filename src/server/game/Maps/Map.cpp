@@ -421,49 +421,6 @@ void Map::SwitchGridContainers(Creature* obj, bool on)
     obj->m_isTempWorldObject = on;
 }
 
-template<>
-void Map::SwitchGridContainers(GameObject* obj, bool on)
-{
-    ASSERT(!obj->IsAlwaysStoredInWorldObjectGridContainer());
-    CellCoord p = Trinity::ComputeCellCoord(obj->GetPositionX(), obj->GetPositionY());
-    if (!p.IsCoordValid())
-    {
-        TC_LOG_ERROR("maps", "Map::SwitchGridContainers: Object {} has invalid coordinates X:{} Y:{} grid cell [{}:{}]", obj->GetGUID().ToString(), obj->GetPositionX(), obj->GetPositionY(), p.x_coord, p.y_coord);
-        return;
-    }
-
-    Cell cell(p);
-    if (!IsGridLoaded(GridCoord(cell.data.Part.grid_x, cell.data.Part.grid_y)))
-        return;
-
-    if (sLog->ShouldLog("maps", LOG_LEVEL_DEBUG))
-    {
-        // Extract bitfield values
-        uint32 const grid_x = cell.data.Part.grid_x;
-        uint32 const grid_y = cell.data.Part.grid_y;
-
-        TC_LOG_DEBUG("maps", "Switch object {} from grid[{}, {}] {}", obj->GetGUID().ToString(), grid_x, grid_y, on);
-    }
-
-    NGridType *ngrid = getNGrid(cell.GridX(), cell.GridY());
-    ASSERT(ngrid != nullptr);
-
-    GridType &grid = ngrid->GetGridType(cell.CellX(), cell.CellY());
-
-    obj->RemoveFromGrid(); //This step is not really necessary but we want to do ASSERT in remove/add
-
-    if (on)
-    {
-        grid.AddWorldObject(obj);
-        AddWorldObject(obj);
-    }
-    else
-    {
-        grid.AddGridObject(obj);
-        RemoveWorldObject(obj);
-    }
-}
-
 template<class T>
 void Map::DeleteFromWorld(T* obj)
 {
@@ -3577,7 +3534,7 @@ void Map::AddObjectToSwitchList(WorldObject* obj, bool on)
     ASSERT(obj->GetMapId() == GetId() && obj->GetInstanceId() == GetInstanceId());
     // i_objectsToSwitch is iterated only in Map::RemoveAllObjectsInRemoveList() and it uses
     // the contained objects only if GetTypeId() == TYPEID_UNIT , so we can return in all other cases
-    if (obj->GetTypeId() != TYPEID_UNIT && obj->GetTypeId() != TYPEID_GAMEOBJECT)
+    if (obj->GetTypeId() != TYPEID_UNIT)
         return;
 
     std::map<WorldObject*, bool>::iterator itr = i_objectsToSwitch.find(obj);
@@ -3604,9 +3561,6 @@ void Map::RemoveAllObjectsInRemoveList()
             {
                 case TYPEID_UNIT:
                     SwitchGridContainers<Creature>(obj->ToCreature(), on);
-                    break;
-                case TYPEID_GAMEOBJECT:
-                    SwitchGridContainers<GameObject>(obj->ToGameObject(), on);
                     break;
                 default:
                     break;
