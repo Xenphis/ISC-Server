@@ -133,10 +133,6 @@ Map::EnterState MapManager::PlayerCannotEnter(uint32 mapid, Player* player, bool
     if (!entry->IsDungeon())
         return Map::CAN_ENTER;
 
-    InstanceTemplate const* instance = sObjectMgr->GetInstanceTemplate(mapid);
-    if (!instance)
-        return Map::CANNOT_ENTER_UNINSTANCED_DUNGEON;
-
     Group* group = player->GetGroup();
     Difficulty targetDifficulty, requestedDifficulty;
     targetDifficulty = requestedDifficulty = group ? group->GetDifficultyID(entry) : player->GetDifficultyID(entry);
@@ -236,16 +232,9 @@ void MapManager::Update(uint32 diff)
 
 void MapManager::DoDelayedMovesAndRemoves() { }
 
-bool MapManager::IsValidMAP(uint32 mapid, bool startUp)
+bool MapManager::IsValidMAP(uint32 mapId)
 {
-    MapEntry const* mEntry = sMapStore.LookupEntry(mapid);
-
-    if (startUp)
-        return mEntry ? true : false;
-    else
-        return mEntry && (!mEntry->IsDungeon() || sObjectMgr->GetInstanceTemplate(mapid));
-
-    /// @todo add check for battleground template
+    return sMapStore.LookupEntry(mapId) != nullptr;
 }
 
 void MapManager::UnloadAll()

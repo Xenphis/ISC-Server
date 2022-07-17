@@ -18,6 +18,7 @@
 #include "Common.h"
 #include "CellImpl.h"
 #include "Config.h"
+#include "Containers.h"
 #include "DynamicObject.h"
 #include "GridNotifiersImpl.h"
 #include "Item.h"

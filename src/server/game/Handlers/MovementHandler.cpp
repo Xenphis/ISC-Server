@@ -29,7 +29,6 @@
 #include "MovementPacketSender.h"
 #include "MoveSpline.h"
 #include "ObjectAccessor.h"
-#include "ObjectMgr.h"
 #include "Player.h"
 #include "Transport.h"
 #include "Vehicle.h"
@@ -209,10 +208,9 @@ void WorldSession::HandleMoveWorldportAck()
 
     // get the destination map entry, not the current one, this will fix homebind and reset greeting
     MapEntry const* mEntry = sMapStore.LookupEntry(loc.GetMapId());
-    InstanceTemplate const* mInstance = sObjectMgr->GetInstanceTemplate(loc.GetMapId());
 
     // reset instance validity, except if going to an instance inside an instance
-    if (player->m_InstanceValid == false && !mInstance)
+    if (player->m_InstanceValid == false && !mEntry->IsDungeon())
         player->m_InstanceValid = true;
 
     Map* oldMap = player->GetMap();
@@ -303,7 +301,7 @@ void WorldSession::HandleMoveWorldportAck()
     }
 
     bool allowMount = !mEntry->IsDungeon() || mEntry->IsBattlegroundOrArena();
-    if (mInstance)
+    if (mEntry->IsDungeon())
     {
         // check if this instance has a reset time and send it to player if so
         Difficulty diff = newMap->GetDifficultyID();
@@ -322,9 +320,6 @@ void WorldSession::HandleMoveWorldportAck()
         // check if instance is valid
         if (!player->CheckInstanceValidity(false))
             player->m_InstanceValid = false;
-
-        // instance mounting is handled in InstanceTemplate
-        allowMount = mInstance->AllowMount;
     }
 
     // mount allow check

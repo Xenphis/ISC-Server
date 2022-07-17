@@ -23,7 +23,6 @@
 #include "Log.h"
 #include "MapManager.h"
 #include "MMapFactory.h"
-#include "ObjectMgr.h"
 #include "Player.h"
 #include "ScriptMgr.h"
 #include "VMapFactory.h"
@@ -209,12 +208,6 @@ InstanceMap* MapInstanced::CreateInstance(uint32 InstanceId, InstanceSave* save,
     if (!entry)
     {
         TC_LOG_ERROR("maps", "CreateInstance: no entry for map {}", GetId());
-        ABORT();
-    }
-    InstanceTemplate const* iTemplate = sObjectMgr->GetInstanceTemplate(GetId());
-    if (!iTemplate)
-    {
-        TC_LOG_ERROR("maps", "CreateInstance: no instance template for map {}", GetId());
         ABORT();
     }
 
