@@ -585,7 +585,6 @@ void WorldSession::LogoutPlayer(bool save)
         if (Group* group = _player->GetGroup())
         {
             group->SendUpdate();
-            group->ResetMaxEnchantingLevel();
             if (group->GetLeaderGUID() == _player->GetGUID())
                 group->StartLeaderOfflineTimer();
         }
