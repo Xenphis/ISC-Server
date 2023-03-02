@@ -23,41 +23,44 @@
 
 class Creature;
 
-template<class T>
-class PointMovementGenerator : public MovementGeneratorMedium<T, PointMovementGenerator<T>>
+class PointMovementGenerator : public MovementGenerator
 {
     public:
-        explicit PointMovementGenerator(uint32 id, float x, float y, float z, bool generatePath, float speed = 0.0f, Optional<float> finalOrient = {});
+        explicit PointMovementGenerator(uint32 id, float x, float y, float z, bool generatePath, Optional<float> speed = {}, Optional<float> finalOrient = {},
+        MovementWalkRunSpeedSelectionMode speedSelectionMode = MovementWalkRunSpeedSelectionMode::Default, Optional<float> closeEnoughDistance = {});
 
         MovementGeneratorType GetMovementGeneratorType() const override;
 
-        bool DoInitialize(T*);
-        bool DoReset(T*);
-        bool DoUpdate(T*, uint32);
-        void DoDeactivate(T*);
-        void DoFinalize(T*, bool, bool);
+        bool Initialize(Unit* owner) override;
+        bool Reset(Unit* owner) override;
+        bool Update(Unit* owner, uint32 diff) override;
+        void Deactivate(Unit* owner) override;
+        void Finalize(Unit* owner, bool active, bool movementInform) override;
 
-        void UnitSpeedChanged() override { PointMovementGenerator<T>::AddFlag(MOVEMENTGENERATOR_FLAG_SPEED_UPDATE_PENDING); }
+        void UnitSpeedChanged() override { AddFlag(MOVEMENTGENERATOR_FLAG_SPEED_UPDATE_PENDING); }
 
         uint32 GetId() const { return _movementId; }
 
     private:
-        void MovementInform(T*);
+        void MovementInform(Unit*);
 
         uint32 _movementId;
-        float _x, _y, _z;
-        float _speed;
+        Position _destination;
+        Optional<float> _speed;
         bool _generatePath;
         //! if set then unit will turn to specified _orient in provided _pos
         Optional<float> _finalOrient;
+
+        MovementWalkRunSpeedSelectionMode _speedSelectionMode;
+        Optional<float> _closeEnoughDistance;
 };
 
-class AssistanceMovementGenerator : public PointMovementGenerator<Creature>
+class AssistanceMovementGenerator : public PointMovementGenerator
 {
     public:
-        explicit AssistanceMovementGenerator(uint32 id, float x, float y, float z) : PointMovementGenerator<Creature>(id, x, y, z, true) { }
+        explicit AssistanceMovementGenerator(uint32 id, float x, float y, float z) : PointMovementGenerator(id, x, y, z, true) { }
 
-        void Finalize(Unit*, bool, bool) override;
+        void Finalize(Unit* owner, bool active, bool movementInform) override;
         MovementGeneratorType GetMovementGeneratorType() const override;
 };
 

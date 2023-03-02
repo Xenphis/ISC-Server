@@ -53,15 +53,15 @@ class TC_GAME_API MovementGenerator
         virtual ~MovementGenerator();
 
         // on top first update
-        virtual bool Initialize(Unit*) = 0;
+        virtual bool Initialize(Unit* owner) = 0;
         // on top reassign
-        virtual bool Reset(Unit*) = 0;
+        virtual bool Reset(Unit* owner) = 0;
         // on top on MotionMaster::Update
-        virtual bool Update(Unit*, uint32 diff) = 0;
+        virtual bool Update(Unit* owner, uint32 diff) = 0;
         // on current top if another movement replaces
-        virtual void Deactivate(Unit*) = 0;
+        virtual void Deactivate(Unit* owner) = 0;
         // on movement delete
-        virtual void Finalize(Unit*, bool, bool) = 0;
+        virtual void Finalize(Unit* owner, bool active, bool movementInform) = 0;
         virtual MovementGeneratorType GetMovementGeneratorType() const = 0;
 
         virtual void UnitSpeedChanged() { }
