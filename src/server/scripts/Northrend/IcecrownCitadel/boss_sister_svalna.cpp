@@ -839,7 +839,7 @@ public:
                 me->SetReactState(REACT_DEFENSIVE);
                 FollowAngle = me->GetAbsoluteAngle(crok) + me->GetOrientation();
                 FollowDist = me->GetDistance2d(crok);
-                me->GetMotionMaster()->MoveFollow(crok, FollowDist, FollowAngle, MOTION_SLOT_DEFAULT);
+                me->GetMotionMaster()->MoveFollow(crok, FollowDist, FollowAngle, {}, MOTION_SLOT_DEFAULT);
             }
 
             me->setActive(true);
@@ -880,7 +880,7 @@ public:
         {
             me->GetMotionMaster()->Clear();
             if (Creature* crok = ObjectAccessor::GetCreature(*me, instance->GetGuidData(DATA_CROK_SCOURGEBANE)))
-                me->GetMotionMaster()->MoveFollow(crok, FollowDist, FollowAngle, MOTION_SLOT_DEFAULT);
+                me->GetMotionMaster()->MoveFollow(crok, FollowDist, FollowAngle, {}, MOTION_SLOT_DEFAULT);
         }
 
         Reset();
