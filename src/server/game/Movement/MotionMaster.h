@@ -38,6 +38,7 @@ struct Position;
 struct SplineChainLink;
 struct SplineChainResumeInfo;
 struct WaypointPath;
+enum UnitMoveType : uint8;
 
 namespace Movement
 {
@@ -198,6 +199,9 @@ class TC_GAME_API MotionMaster
         void MoveFace(WorldObject const* object, uint32 id = EVENT_FACE);
 
         void LaunchMoveSpline(std::function<void(Movement::MoveSplineInit& init)>&& initializer, uint32 id = 0, MovementGeneratorPriority priority = MOTION_PRIORITY_NORMAL, MovementGeneratorType type = EFFECT_MOTION_TYPE);
+
+        void CalculateJumpSpeeds(float dist, UnitMoveType moveType, float speedMultiplier, float minHeight, float maxHeight, float& speedXY, float& speedZ) const;
+
     private:
         typedef std::unique_ptr<MovementGenerator, MovementGeneratorDeleter> MovementGeneratorPointer;
         typedef std::set<MovementGenerator*, MovementGeneratorComparator> MotionMasterContainer;
