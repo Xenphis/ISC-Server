@@ -33,6 +33,7 @@
 #include "CharacterCache.h"
 #include "CharacterDatabaseCleaner.h"
 #include "CharacterPackets.h"
+#include "CharmInfo.h"
 #include "Chat.h"
 #include "ChatPackets.h"
 #include "CinematicMgr.h"
