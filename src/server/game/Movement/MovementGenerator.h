@@ -20,6 +20,7 @@
 
 #include "Define.h"
 #include "FactoryHolder.h"
+#include "MovementDefines.h"
 #include "ObjectRegistry.h"
 
 class Creature;
