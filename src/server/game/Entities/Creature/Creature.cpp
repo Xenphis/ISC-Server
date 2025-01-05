@@ -280,7 +280,7 @@ void Creature::AddToWorld()
     ///- Register the creature for guid lookup
     if (!IsInWorld())
     {
-        GetMap()->GetObjectsStore().Insert<Creature>(GetGUID(), this);
+        GetMap()->GetObjectsStore().Insert<Creature>(this);
         if (m_spawnId)
             GetMap()->GetCreatureBySpawnIdStore().insert(std::make_pair(m_spawnId, this));
 
@@ -312,8 +312,7 @@ void Creature::RemoveFromWorld()
         if (m_spawnId)
             Trinity::Containers::MultimapErasePair(GetMap()->GetCreatureBySpawnIdStore(), m_spawnId, this);
 
-        TC_LOG_DEBUG("entities.unit", "Removing creature {} with DBGUID {} to world in map {}", GetGUID().ToString(), m_spawnId, GetMap()->GetId());
-        GetMap()->GetObjectsStore().Remove<Creature>(GetGUID());
+        GetMap()->GetObjectsStore().Remove<Creature>(this);
     }
 }
 

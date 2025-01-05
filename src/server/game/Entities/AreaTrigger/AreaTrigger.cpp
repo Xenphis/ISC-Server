@@ -49,7 +49,7 @@ void AreaTrigger::AddToWorld()
     ///- Register the areatrigger for guid lookup and for caster
     if (!IsInWorld())
     {
-        GetMap()->GetObjectsStore().Insert<AreaTrigger>(GetGUID(), this);
+        GetMap()->GetObjectsStore().Insert<AreaTrigger>(this);
         WorldObject::AddToWorld();
         if (!_casterGuid.IsEmpty())
             BindToCaster();
@@ -65,7 +65,7 @@ void AreaTrigger::RemoveFromWorld()
         if (_caster)
             UnbindFromCaster();
         WorldObject::RemoveFromWorld();
-        GetMap()->GetObjectsStore().Remove<AreaTrigger>(GetGUID());
+        GetMap()->GetObjectsStore().Remove<AreaTrigger>(this);
     }
 }
 
