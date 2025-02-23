@@ -19,6 +19,7 @@
 #define TRINITYCORE_MAP_UTILS_H
 
 #include <type_traits>
+#include <utility>
 
 namespace Trinity::Containers
 {
@@ -47,5 +48,16 @@ void MultimapErasePair(M<K, V, Rest...>& multimap, K const& key, V const& value)
             ++itr;
     }
 }
+
+/**
+ * Map key projection for various std::ranges algorithms
+ */
+inline constexpr auto MapKey = []<typename Pair>(Pair&& pair) constexpr -> decltype(auto) { return (std::forward<Pair>(pair).first); /*Parentheses required for decltype(auto) to deduce a reference*/ };
+
+/**
+ * Map value projection for various std::ranges algorithms
+ */
+inline constexpr auto MapValue = []<typename Pair>(Pair&& pair) constexpr -> decltype(auto) { return (std::forward<Pair>(pair).second); /*Parentheses required for decltype(auto) to deduce a reference*/
+};
 }
 #endif // TRINITYCORE_MAP_UTILS_H
