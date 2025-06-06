@@ -86,11 +86,11 @@ extern template struct TypeListContainer<GridRefManagerContainer, Player, Creatu
 typedef TypeListContainer<GridRefManagerContainer, GameObject, Creature/*except pets*/, DynamicObject, Corpse/*Bones*/, AreaTrigger> GridTypeMapContainer;
 typedef TypeListContainer<GridRefManagerContainer, Player, Creature/*pets*/, Corpse/*resurrectable*/, DynamicObject/*farsight target*/> WorldTypeMapContainer;
 
-extern template class Grid<Player, WorldTypeMapContainer, GridTypeMapContainer>;
-extern template class NGrid<MAX_NUMBER_OF_CELLS, Player, WorldTypeMapContainer, GridTypeMapContainer>;
+extern template class Grid<WorldTypeMapContainer, GridTypeMapContainer>;
+extern template class NGrid<MAX_NUMBER_OF_CELLS, WorldTypeMapContainer, GridTypeMapContainer>;
 
-typedef Grid<Player, WorldTypeMapContainer, GridTypeMapContainer> GridType;
-typedef NGrid<MAX_NUMBER_OF_CELLS, Player, WorldTypeMapContainer, GridTypeMapContainer> NGridType;
+typedef Grid<WorldTypeMapContainer, GridTypeMapContainer> GridType;
+typedef NGrid<MAX_NUMBER_OF_CELLS, WorldTypeMapContainer, GridTypeMapContainer> NGridType;
 
 template<uint32 LIMIT>
 struct CoordPair
