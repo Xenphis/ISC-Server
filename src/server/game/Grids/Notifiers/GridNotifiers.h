@@ -1087,19 +1087,21 @@ namespace Trinity
     class AnyUnitInObjectRangeCheck
     {
         public:
-            AnyUnitInObjectRangeCheck(WorldObject const* obj, float range) : i_obj(obj), i_range(range) { }
+            AnyUnitInObjectRangeCheck(WorldObject const* obj, float range, bool check3D = true, bool reqAlive = true) : i_obj(obj), i_range(range), i_check3D(check3D), i_reqAlive(reqAlive) { }
 
             bool operator()(Unit* u) const
             {
-                if (u->IsAlive() && i_obj->IsWithinDistInMap(u, i_range))
-                    return true;
+                if (i_reqAlive && !u->IsAlive())
+                    return false;
 
-                return false;
+                return i_obj->IsWithinDistInMap(u, i_range, i_check3D);
             }
 
         private:
             WorldObject const* i_obj;
             float i_range;
+            bool i_check3D;
+            bool i_reqAlive;
     };
 
     // Success at unit in range, range update for next check (this can be use with UnitLastSearcher to find nearest unit)
@@ -1505,28 +1507,6 @@ namespace Trinity
         WorldObject const& i_obj;
         FindGameObjectOptions const& i_args;
         Customizer& i_customizer;
-    };
-
-    class AnyPlayerInObjectRangeCheck
-    {
-        public:
-            AnyPlayerInObjectRangeCheck(WorldObject const* obj, float range, bool reqAlive = true) : _obj(obj), _range(range), _reqAlive(reqAlive) { }
-
-            bool operator()(Player* u) const
-            {
-                if (_reqAlive && !u->IsAlive())
-                    return false;
-
-                if (!_obj->IsWithinDistInMap(u, _range))
-                    return false;
-
-                return true;
-            }
-
-        private:
-            WorldObject const* _obj;
-            float _range;
-            bool _reqAlive;
     };
 
     class AnyPlayerInPositionRangeCheck

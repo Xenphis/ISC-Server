@@ -140,25 +140,18 @@ public:
                 Initialize();
         }
 
-        void IsSummonedBy(WorldObject* /*summoner*/) override
+        void IsSummonedBy(WorldObject* summoner) override
         {
-            std::list<Player*> playerOnQuestList;
-            Trinity::AnyPlayerInObjectRangeCheck checker(me, 5.0f);
-            Trinity::PlayerListSearcher<Trinity::AnyPlayerInObjectRangeCheck> searcher(me, playerOnQuestList, checker);
-            Cell::VisitWorldObjects(me, searcher, 5.0f);
-            for (std::list<Player*>::const_iterator itr = playerOnQuestList.begin(); itr != playerOnQuestList.end(); ++itr)
+            std::vector<Player*> playerList;
+            summoner->GetPlayerListInGrid(playerList, 5.0f);
+            for (Player* player : playerList)
             {
-                // Check if found player target has active quest
-                if (Player* player = (*itr))
+                // Check if found player target has active ques
+                if (player->GetQuestStatus(10965) == QUEST_STATUS_INCOMPLETE)
                 {
-                    if (player->GetQuestStatus(10965) == QUEST_STATUS_INCOMPLETE)
-                    {
-                        StartEvent(player);
-                        break;
-                    }
-                }
-                else
+                    StartEvent(player);
                     break;
+                }
             }
         }
 
