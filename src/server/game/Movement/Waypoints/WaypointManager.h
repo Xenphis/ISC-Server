@@ -25,6 +25,11 @@
 class TC_GAME_API WaypointMgr
 {
     public:
+        WaypointMgr(WaypointMgr const&) = delete;
+        WaypointMgr(WaypointMgr&&) = delete;
+        WaypointMgr& operator=(WaypointMgr const&) = delete;
+        WaypointMgr& operator=(WaypointMgr&&) = delete;
+
         static WaypointMgr* instance();
 
         // Attempts to reload a single path from database
@@ -37,7 +42,8 @@ class TC_GAME_API WaypointMgr
         WaypointPath const* GetPath(uint32 id) const;
 
     private:
-        WaypointMgr() { }
+        WaypointMgr();
+        ~WaypointMgr();
 
         std::unordered_map<uint32, WaypointPath> _waypointStore;
 };

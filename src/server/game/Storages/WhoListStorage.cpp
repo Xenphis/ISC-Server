@@ -22,6 +22,9 @@
 #include "GuildMgr.h"
 #include "WorldSession.h"
 
+WhoListStorageMgr::WhoListStorageMgr() = default;
+WhoListStorageMgr::~WhoListStorageMgr() = default;
+
 WhoListStorageMgr* WhoListStorageMgr::instance()
 {
     static WhoListStorageMgr instance;

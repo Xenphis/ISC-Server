@@ -51,6 +51,9 @@ static constexpr SecretInfo secret_info[NUM_SECRETS] =
     { "TOTPMasterSecret", "TOTPOldMasterSecret", 128, SERVER_PROCESS_AUTHSERVER, WORLDSERVER_DEFER_LOAD }
 };
 
+SecretMgr::SecretMgr() = default;
+SecretMgr::~SecretMgr() = default;
+
 /*static*/ SecretMgr* SecretMgr::instance()
 {
     static SecretMgr instance;

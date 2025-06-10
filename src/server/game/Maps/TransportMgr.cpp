@@ -34,8 +34,12 @@ bool KeyFrame::IsStopFrame() const
 
 TransportTemplate::~TransportTemplate() = default;
 
-TransportMgr::TransportMgr() = default;
+TransportAnimation::TransportAnimation() = default;
+TransportAnimation::~TransportAnimation() = default;
+TransportAnimation::TransportAnimation(TransportAnimation&&) noexcept = default;
+TransportAnimation& TransportAnimation::operator=(TransportAnimation&&) noexcept = default;
 
+TransportMgr::TransportMgr() = default;
 TransportMgr::~TransportMgr() = default;
 
 TransportMgr* TransportMgr::instance()

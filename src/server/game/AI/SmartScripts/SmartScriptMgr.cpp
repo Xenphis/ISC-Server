@@ -44,6 +44,9 @@
     } \
 }
 
+SmartAIMgr::SmartAIMgr() = default;
+SmartAIMgr::~SmartAIMgr() = default;
+
 SmartAIMgr* SmartAIMgr::instance()
 {
     static SmartAIMgr instance;

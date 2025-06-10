@@ -25,6 +25,10 @@
 #include "World.h"
 #include "WorldSession.h"
 
+ChannelMgr::ChannelMgr(uint32 team) : _team(team)
+{
+}
+
 ChannelMgr::~ChannelMgr()
 {
     for (auto itr = _channels.begin(); itr != _channels.end(); ++itr)

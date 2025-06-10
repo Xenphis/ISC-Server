@@ -29,6 +29,12 @@
 #include "SmartEnum.h"
 #include "World.h"
 
+AuctionBotConfig::AuctionBotConfig() : _itemsPerCycleBoost(1000), _itemsPerCycleNormal(20), _configUint32Values(), _configBoolValues(), _configFloatValues()
+{
+}
+
+AuctionBotConfig::~AuctionBotConfig() = default;
+
 AuctionBotConfig* AuctionBotConfig::instance()
 {
     static AuctionBotConfig instance;

@@ -21,6 +21,9 @@
 #include "MapManager.h"
 #include "Log.h"
 
+WaypointMgr::WaypointMgr() = default;
+WaypointMgr::~WaypointMgr() = default;
+
 void WaypointMgr::Load()
 {
     uint32 oldMSTime = getMSTime();

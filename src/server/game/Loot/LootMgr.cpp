@@ -108,6 +108,11 @@ class LootTemplate::LootGroup                               // A set of loot def
         LootGroup& operator=(LootGroup const&) = delete;
 };
 
+LootStore::LootStore(char const* name, char const* entryName, bool ratesAllowed)
+    : m_name(name), m_entryName(entryName), m_ratesAllowed(ratesAllowed)
+{
+}
+
 //Remove all data and free all memory
 void LootStore::Clear()
 {

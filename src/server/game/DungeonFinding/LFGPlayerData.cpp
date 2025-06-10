@@ -24,7 +24,9 @@ LfgPlayerData::LfgPlayerData(): m_State(LFG_STATE_NONE), m_OldState(LFG_STATE_NO
     m_Team(0), m_Group(), m_Roles(0), m_Comment(""), m_NumberOfPartyMembersAtJoin(0)
 { }
 
-LfgPlayerData::~LfgPlayerData() { }
+LfgPlayerData::LfgPlayerData(LfgPlayerData&& other) noexcept = default;
+LfgPlayerData& LfgPlayerData::operator=(LfgPlayerData&& right) noexcept = default;
+LfgPlayerData::~LfgPlayerData() = default;
 
 void LfgPlayerData::SetState(LfgState state)
 {

@@ -72,6 +72,11 @@ class StoredLootContainer
 class LootItemStorage
 {
     public:
+        LootItemStorage(LootItemStorage const&) = delete;
+        LootItemStorage(LootItemStorage&&) = delete;
+        LootItemStorage& operator=(LootItemStorage const&) = delete;
+        LootItemStorage& operator=(LootItemStorage&&) = delete;
+
         static LootItemStorage* instance();
         static std::shared_mutex* GetLock();
 
@@ -83,8 +88,8 @@ class LootItemStorage
         void AddNewStoredLoot(Loot* loot, Player* player);
 
     private:
-        LootItemStorage() { }
-        ~LootItemStorage() { }
+        LootItemStorage() = default;
+        ~LootItemStorage() = default;
 };
 
 #define sLootItemStorage LootItemStorage::instance()

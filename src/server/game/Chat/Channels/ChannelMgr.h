@@ -33,7 +33,7 @@ class TC_GAME_API ChannelMgr
     typedef std::unordered_map<std::pair<uint32 /*channelId*/, uint32 /*zoneId*/>, Channel*> BuiltinChannelContainer; //identify builtin (DBC) channels by zoneId instead, since name changes by client locale
 
     protected:
-        explicit ChannelMgr(uint32 team) : _team(team) { }
+        explicit ChannelMgr(uint32 team);
         ~ChannelMgr();
 
     public:
