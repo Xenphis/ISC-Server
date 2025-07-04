@@ -22,8 +22,10 @@
  */
 
 #include "ScriptMgr.h"
+#include "CellImpl.h"
 #include "Creature.h"
 #include "GameObject.h"
+#include "GridNotifiersImpl.h"
 #include "Log.h"
 #include "ObjectMgr.h"
 #include "Optional.h"
