@@ -757,12 +757,9 @@ void Transport::DoEventIfAny(KeyFrame const& node, bool departure)
 
 void Transport::BuildUpdate(UpdateDataMapType& data_map)
 {
-    Map::PlayerList const& players = GetMap()->GetPlayers();
-    if (players.isEmpty())
-        return;
-
-    for (Map::PlayerList::const_iterator itr = players.begin(); itr != players.end(); ++itr)
-        BuildFieldsUpdate(itr->GetSource(), data_map);
+    for (MapReference const& playerReference : GetMap()->GetPlayers())
+        if (playerReference.GetSource()->InSamePhase(this))
+            BuildFieldsUpdate(playerReference.GetSource(), data_map);
 
     ClearUpdateMask(true);
 }

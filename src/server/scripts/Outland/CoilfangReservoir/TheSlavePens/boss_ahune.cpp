@@ -280,7 +280,7 @@ struct boss_ahune : public BossAI
             bunny->AI()->DoAction(ACTION_STOP_EVENT_WIN);
 
         Map::PlayerList const& players = me->GetMap()->GetPlayers();
-        if (!players.isEmpty())
+        if (!players.empty())
         {
             if (Group* group = players.begin()->GetSource()->GetGroup())
                 if (group->isLFGGroup())

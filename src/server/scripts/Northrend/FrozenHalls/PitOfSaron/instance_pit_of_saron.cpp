@@ -64,7 +64,7 @@ class instance_pit_of_saron : public InstanceMapScript
                 if (!_teamInInstance)
                 {
                     Map::PlayerList const& players = instance->GetPlayers();
-                    if (!players.isEmpty())
+                    if (!players.empty())
                         if (Player* player = players.begin()->GetSource())
                             _teamInInstance = player->GetTeam();
                 }

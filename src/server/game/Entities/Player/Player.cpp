@@ -18844,11 +18844,9 @@ bool Player::CheckInstanceValidity(bool /*isLogin*/)
         if (!bind || !bind->save || bind->save->GetInstanceId() != map->GetInstanceId())
             return false;
 
-        Map::PlayerList const& players = map->GetPlayers();
-        if (!players.isEmpty())
-            for (Map::PlayerList::const_iterator it = players.begin(); it != players.end(); ++it)
+            for (MapReference const& playerReference : map->GetPlayers())
             {
-                if (Player* otherPlayer = it->GetSource())
+                if (Player* otherPlayer = playerReference.GetSource())
                 {
                     if (otherPlayer->IsGameMaster())
                         continue;

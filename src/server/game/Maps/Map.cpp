@@ -506,7 +506,7 @@ bool Map::AddToMap(Transport* obj)
     _transports.insert(obj);
 
     // Broadcast creation to players
-    if (!GetPlayers().isEmpty())
+    if (!GetPlayers().empty())
     {
         for (Map::PlayerList::const_iterator itr = GetPlayers().begin(); itr != GetPlayers().end(); ++itr)
         {
@@ -711,7 +711,7 @@ void Map::Update(uint32 t_diff)
     MoveAllCreaturesInMoveList();
     MoveAllGameObjectsInMoveList();
 
-    if (!m_mapRefManager.isEmpty() || !m_activeNonPlayers.empty())
+    if (!m_mapRefManager.empty() || !m_activeNonPlayers.empty())
         ProcessRelocationNotifies(t_diff);
 
     sScriptMgr->OnMapUpdate(this, t_diff);
@@ -864,7 +864,7 @@ void Map::RemoveFromMap(Transport* obj, bool remove)
     obj->RemoveFromWorld();
 
     Map::PlayerList const& players = GetPlayers();
-    if (!players.isEmpty())
+    if (!players.empty())
     {
         UpdateData data;
         obj->BuildOutOfRangeUpdateBlock(&data);
@@ -2883,7 +2883,7 @@ bool InstanceMap::Reset(uint8 method)
         m_resetAfterUnload = !(method == INSTANCE_RESET_GLOBAL && HasPermBoundPlayers());
     }
 
-    return m_mapRefManager.isEmpty();
+    return m_mapRefManager.empty();
 }
 
 std::string const& InstanceMap::GetScriptName() const

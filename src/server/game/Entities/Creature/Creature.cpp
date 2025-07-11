@@ -791,19 +791,17 @@ void Creature::Update(uint32 diff)
 
                 if (m_combatPulseTime == 0)
                 {
-                    Map::PlayerList const& players = GetMap()->GetPlayers();
-                    if (!players.isEmpty())
-                        for (Map::PlayerList::const_iterator it = players.begin(); it != players.end(); ++it)
+                    for (MapReference const& playerReference : GetMap()->GetPlayers())
+                    {
+                        if (Player* player = playerReference.GetSource())
                         {
-                            if (Player* player = it->GetSource())
-                            {
-                                if (player->IsGameMaster())
-                                    continue;
+                            if (player->IsGameMaster())
+                                continue;
 
-                                if (player->IsAlive() && IsHostileTo(player))
-                                    EngageWithTarget(player);
-                            }
+                            if (player->IsAlive() && IsHostileTo(player))
+                                EngageWithTarget(player);
                         }
+                    }
 
                     m_combatPulseTime = m_combatPulseDelay * IN_MILLISECONDS;
                 }

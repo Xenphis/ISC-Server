@@ -176,7 +176,7 @@ struct boss_apothecary_hummel : public BossAI
         instance->SetBossState(DATA_APOTHECARY_HUMMEL, DONE);
 
         Map::PlayerList const& players = me->GetMap()->GetPlayers();
-        if (!players.isEmpty())
+        if (!players.empty())
         {
             if (Group* group = players.begin()->GetSource()->GetGroup())
                 if (group->isLFGGroup())

@@ -397,7 +397,7 @@ class instance_ulduar : public InstanceMapScript
                 if (!TeamInInstance)
                 {
                     Map::PlayerList const& Players = instance->GetPlayers();
-                    if (!Players.isEmpty())
+                    if (!Players.empty())
                         if (Player* player = Players.begin()->GetSource())
                             TeamInInstance = player->GetTeam();
                 }

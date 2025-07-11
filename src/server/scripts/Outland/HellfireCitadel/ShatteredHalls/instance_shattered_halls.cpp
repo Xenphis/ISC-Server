@@ -109,7 +109,7 @@ class instance_shattered_halls : public InstanceMapScript
                 if (!_team)
                 {
                     Map::PlayerList const& players = instance->GetPlayers();
-                    if (!players.isEmpty())
+                    if (!players.empty())
                         if (Player* player = players.begin()->GetSource())
                             _team = player->GetTeam();
                 }

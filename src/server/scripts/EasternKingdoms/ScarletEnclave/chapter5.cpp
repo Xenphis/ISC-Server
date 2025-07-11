@@ -227,7 +227,7 @@ void UpdateWorldState(Map* map, uint32 id, uint32 state)
 {
     Map::PlayerList const& players = map->GetPlayers();
 
-    if (!players.isEmpty())
+    if (!players.empty())
     {
         for (Map::PlayerList::const_iterator itr = players.begin(); itr != players.end(); ++itr)
         {
@@ -1276,7 +1276,7 @@ public:
                             {
                                 // search players with in 50 yards for quest credit
                                 Map::PlayerList const& PlayerList = me->GetMap()->GetPlayers();
-                                if (!PlayerList.isEmpty())
+                                if (!PlayerList.empty())
                                 {
                                     for (Map::PlayerList::const_iterator i = PlayerList.begin(); i != PlayerList.end(); ++i)
                                         if (me->IsWithinDistInMap(i->GetSource(), 500))

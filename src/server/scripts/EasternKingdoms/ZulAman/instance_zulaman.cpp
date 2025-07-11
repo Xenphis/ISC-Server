@@ -194,7 +194,7 @@ class instance_zulaman : public InstanceMapScript
                     return;
 
                 Map::PlayerList const& playerList = instance->GetPlayers();
-                if (playerList.isEmpty())
+                if (playerList.empty())
                     return;
 
                 if (Player* player = playerList.getFirst()->GetSource())
