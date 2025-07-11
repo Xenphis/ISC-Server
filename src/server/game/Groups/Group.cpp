@@ -613,7 +613,7 @@ bool Group::RemoveMember(ObjectGuid guid, RemoveMethod const& method /*= GROUP_R
             }
         }
 
-        if (m_memberMgr.getSize() < ((isLFGGroup() || isBGGroup()) ? 1u : 2u))
+        if (m_memberMgr.size() < ((isLFGGroup() || isBGGroup()) ? 1u : 2u))
             Disband();
 
         return true;

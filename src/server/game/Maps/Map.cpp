@@ -2783,7 +2783,7 @@ void InstanceMap::RemovePlayerFromMap(Player* player, bool remove)
         i_data->OnPlayerLeave(player);
 
     // if last player set unload timer
-    if (!m_unloadTimer && m_mapRefManager.getSize() == 1)
+    if (!m_unloadTimer && m_mapRefManager.size() == 1)
         m_unloadTimer = m_unloadWhenEmpty ? MIN_UNLOAD_DELAY : std::max(sWorld->getIntConfig(CONFIG_INSTANCE_UNLOAD_DELAY), (uint32)MIN_UNLOAD_DELAY);
 
     Map::RemovePlayerFromMap(player, remove);
