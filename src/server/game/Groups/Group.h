@@ -209,9 +209,9 @@ class TC_GAME_API Group
         bool SameSubGroup(Player const* member1, Player const* member2) const;
         bool HasFreeSlotSubGroup(uint8 subgroup) const;
 
+        GroupRefManager& GetMembers() { return m_memberMgr; }
+        GroupRefManager const& GetMembers() const { return m_memberMgr; }
         MemberSlotList const& GetMemberSlots() const { return m_memberSlots; }
-        GroupReference* GetFirstMember() { return m_memberMgr.getFirst(); }
-        GroupReference const* GetFirstMember() const { return m_memberMgr.getFirst(); }
         uint32 GetMembersCount() const { return m_memberSlots.size(); }
         uint32 GetInviteeCount() const { return m_invitees.size(); }
         GroupType GetGroupType() const { return m_groupType; }
@@ -246,17 +246,10 @@ class TC_GAME_API Group
         void UpdatePlayerOutOfRange(Player* player);
 
         template<class Worker>
-        void BroadcastWorker(Worker& worker)
-        {
-            for (GroupReference* itr = GetFirstMember(); itr != nullptr; itr = itr->next())
-                worker(itr->GetSource());
-        }
-
-        template<class Worker>
         void BroadcastWorker(Worker const& worker) const
         {
-            for (GroupReference const* itr = GetFirstMember(); itr != nullptr; itr = itr->next())
-                worker(itr->GetSource());
+            for (GroupReference const& itr : GetMembers())
+                worker(itr.GetSource());
         }
 
         void BroadcastPacket(WorldPacket const* packet, bool ignorePlayersInBGRaid, int group = -1, ObjectGuid ignoredPlayer = ObjectGuid::Empty);

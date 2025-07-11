@@ -162,11 +162,9 @@ GroupQueueInfo* BattlegroundQueue::AddGroup(Player* leader, Group const* group, 
     //add players from group to ginfo
     if (group)
     {
-        for (GroupReference const* itr = group->GetFirstMember(); itr != nullptr; itr = itr->next())
+        for (GroupReference const& itr : group->GetMembers())
         {
-            Player* member = itr->GetSource();
-            if (!member)
-                continue;   // this should never happen
+            Player* member = itr.GetSource();
             PlayerQueueInfo& pl_info = m_QueuedPlayers[member->GetGUID()];
             pl_info.LastOnlineTime   = lastOnlineTime;
             pl_info.GroupInfo        = ginfo;

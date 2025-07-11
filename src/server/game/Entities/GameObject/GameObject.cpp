@@ -1804,10 +1804,9 @@ void GameObject::Use(Unit* user)
 
                 if (Group* group = player->GetGroup())
                 {
-                    for (GroupReference const* itr = group->GetFirstMember(); itr != nullptr; itr = itr->next())
-                        if (Player* member = itr->GetSource())
-                            if (member->IsAtGroupRewardDistance(this))
-                                member->KillCreditGO(info->entry, GetGUID());
+                    for (GroupReference const& itr : group->GetMembers())
+                        if (itr.GetSource()->IsAtGroupRewardDistance(this))
+                            itr.GetSource()->KillCreditGO(info->entry, GetGUID());
                 }
                 else
                     player->KillCreditGO(info->entry, GetGUID());

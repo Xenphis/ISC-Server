@@ -583,8 +583,8 @@ void Loot::AddItem(LootStoreItem const& item)
         {
             if (Group* group = player->GetGroup())
             {
-                for (GroupReference* itr = group->GetFirstMember(); itr != nullptr; itr = itr->next())
-                    if (Player* member = itr->GetSource())
+                for (GroupReference const& itr : group->GetMembers())
+                    if (Player* member = itr.GetSource())
                         if (generatedLoot.AllowedForPlayer(member, lootOwnerGUID))
                             canSeeItemInLootWindow = true;
             }
@@ -634,10 +634,12 @@ bool Loot::FillLoot(uint32 lootId, LootStore const& store, Player* lootOwner, bo
         _lootMethod = group->GetLootMethod();
         _lootMaster = group->GetMasterLooterGuid();
 
-        for (GroupReference* itr = group->GetFirstMember(); itr != nullptr; itr = itr->next())
-            if (Player* player = itr->GetSource())   // should actually be looted object instead of lootOwner but looter has to be really close so doesnt really matter
-                if (player->IsAtGroupRewardDistance(lootOwner))
-                    FillNotNormalLootFor(player);
+        for (GroupReference const& itr : group->GetMembers())
+        {
+            Player* member = itr.GetSource(); // should actually be looted object instead of lootOwner but looter has to be really close so doesnt really matter
+            if (member->IsAtGroupRewardDistance(lootOwner))
+                FillNotNormalLootFor(member);
+        }
 
         auto processLootItem = [&](LootItem& item)
         {

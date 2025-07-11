@@ -447,30 +447,25 @@ bool Group::AddMember(Player* player)
         WorldPacket groupDataPacket;
 
         // Broadcast group members' fields to player
-        for (GroupReference* itr = GetFirstMember(); itr != nullptr; itr = itr->next())
+        for (GroupReference const& itr : GetMembers())
         {
-            if (itr->GetSource() == player)
+            Player* existingMember = itr.GetSource();
+            if (existingMember == player)
                 continue;
 
-            if (Player* existingMember = itr->GetSource())
-            {
-                if (player->HaveAtClient(existingMember))
-                {
-                    existingMember->SetFieldNotifyFlag(UF_FLAG_PARTY_MEMBER);
-                    existingMember->BuildValuesUpdateBlockForPlayer(&groupData, player);
-                    existingMember->RemoveFieldNotifyFlag(UF_FLAG_PARTY_MEMBER);
-                }
 
-                if (existingMember->HaveAtClient(player))
+            if (player->HaveAtClient(existingMember))
+                existingMember->BuildValuesUpdateBlockForPlayer(&groupData, player);
+
+            if (existingMember->HaveAtClient(player))
+            {
+                UpdateData newData;
+                WorldPacket newDataPacket;
+                player->BuildValuesUpdateBlockForPlayer(&newData, existingMember);
+                if (newData.HasData())
                 {
-                    UpdateData newData;
-                    WorldPacket newDataPacket;
-                    player->BuildValuesUpdateBlockForPlayer(&newData, existingMember);
-                    if (newData.HasData())
-                    {
-                        newData.BuildPacket(&newDataPacket);
-                        existingMember->SendDirectMessage(&newDataPacket);
-                    }
+                    newData.BuildPacket(&newDataPacket);
+                    existingMember->SendDirectMessage(&newDataPacket);
                 }
             }
         }
@@ -496,16 +491,14 @@ bool Group::RemoveMember(ObjectGuid guid, RemoveMethod const& method /*= GROUP_R
     Player* player = ObjectAccessor::FindConnectedPlayer(guid);
     if (player)
     {
-        for (GroupReference* itr = GetFirstMember(); itr != nullptr; itr = itr->next())
+        for (GroupReference const& itr : GetMembers())
         {
-            if (Player* groupMember = itr->GetSource())
-            {
-                if (groupMember->GetGUID() == guid)
-                    continue;
+            Player* groupMember = itr.GetSource();
+            if (groupMember->GetGUID() == guid)
+                continue;
 
-                groupMember->RemoveAllGroupBuffsFromCaster(guid);
-                player->RemoveAllGroupBuffsFromCaster(groupMember->GetGUID());
-            }
+            groupMember->RemoveAllGroupBuffsFromCaster(guid);
+            player->RemoveAllGroupBuffsFromCaster(groupMember->GetGUID());
         }
     }
 
@@ -975,33 +968,33 @@ void Group::UpdatePlayerOutOfRange(Player* player)
     WorldPacket data;
     player->GetSession()->BuildPartyMemberStatsChangedPacket(player, &data);
 
-    Player* member;
-    for (GroupReference* itr = GetFirstMember(); itr != nullptr; itr = itr->next())
+    for (GroupReference const& itr : GetMembers())
     {
-        member = itr->GetSource();
-        if (member && member != player && (!member->IsInMap(player) || !member->IsWithinDist(player, member->GetSightRange(), false)))
+        Player const* member = itr.GetSource();
+        if (member != player && (!member->IsInMap(player) || !member->IsWithinDist(player, member->GetSightRange(), false)))
             member->SendDirectMessage(&data);
     }
 }
 
 void Group::BroadcastPacket(WorldPacket const* packet, bool ignorePlayersInBGRaid, int group /*= -1*/, ObjectGuid ignoredPlayer /*= ObjectGuid::Empty*/)
 {
-    for (GroupReference* itr = GetFirstMember(); itr != nullptr; itr = itr->next())
+    for (GroupReference const& itr : GetMembers())
     {
-        Player* player = itr->GetSource();
-        if (!player || (!ignoredPlayer.IsEmpty() && player->GetGUID() == ignoredPlayer) || (ignorePlayersInBGRaid && player->GetGroup() != this))
+        Player* player = itr.GetSource();
+        if ((!ignoredPlayer.IsEmpty() && player->GetGUID() == ignoredPlayer) || (ignorePlayersInBGRaid && player->GetGroup() != this))
             continue;
 
-        if (player->GetSession() && (group == -1 || itr->getSubGroup() == group))
+        if (player->GetSession() && (group == -1 || itr.getSubGroup() == group))
             player->SendDirectMessage(packet);
     }
 }
 
 void Group::BroadcastReadyCheck(WorldPacket const* packet)
 {
-    for (GroupReference* itr = GetFirstMember(); itr != nullptr; itr = itr->next())
+    for (GroupReference const& itr : GetMembers())
     {
-        Player* player = itr->GetSource();
+        Player const* player = itr.GetSource();
+
         if (player && player->GetSession())
             if (IsLeader(player->GetGUID()) || IsAssistant(player->GetGUID()))
                 player->SendDirectMessage(packet);
@@ -1203,11 +1196,13 @@ GroupJoinBattlegroundResult Group::CanJoinBattlegroundQueue(Battleground const* 
         return ERR_BATTLEGROUND_NONE;                        // ERR_GROUP_JOIN_BATTLEGROUND_TOO_MANY handled on client side
 
     // get a player as reference, to compare other players' stats to (arena team id, queue id based on level, etc.)
-    Player* reference = ASSERT_NOTNULL(GetFirstMember())->GetSource();
+    auto membersIterator = GetMembers().begin();
+    auto membersEnd = GetMembers().end();
     // no reference found, can't join this way
-    if (!reference)
+    if (membersIterator == membersEnd)
         return ERR_BATTLEGROUND_JOIN_FAILED;
 
+    Player* reference = membersIterator->GetSource();
     PvPDifficultyEntry const* bracketEntry = GetBattlegroundBracketByLevel(bgOrTemplate->GetMapId(), reference->GetLevel());
     if (!bracketEntry)
         return ERR_BATTLEGROUND_JOIN_FAILED;
@@ -1217,9 +1212,9 @@ GroupJoinBattlegroundResult Group::CanJoinBattlegroundQueue(Battleground const* 
 
     // check every member of the group to be able to join
     memberscount = 0;
-    for (GroupReference const* itr = GetFirstMember(); itr != nullptr; itr = itr->next(), ++memberscount)
+    for (; membersIterator != membersEnd; ++membersIterator)
     {
-        Player* member = itr->GetSource();
+        Player* member = membersIterator->GetSource();
         // offline member? don't let join
         if (!member)
             return ERR_BATTLEGROUND_JOIN_FAILED;
@@ -1356,8 +1351,8 @@ void Group::ResetInstances(uint8 method, bool isRaid, Player* SendMsgTo)
             {
                 if (Group* group = SendMsgTo->GetGroup())
                 {
-                    for (GroupReference* groupRef = group->GetFirstMember(); groupRef != nullptr; groupRef = groupRef->next())
-                        if (Player* player = groupRef->GetSource())
+                    for (GroupReference const& groupRef : group->GetMembers())
+                        if (Player* player = groupRef.GetSource())
                             player->SendResetInstanceSuccess(instanceSave->GetMapId());
                 }
 
@@ -1746,17 +1741,9 @@ void Group::LinkMember(GroupReference* pRef)
 
 void Group::DelinkMember(ObjectGuid guid)
 {
-    GroupReference* ref = m_memberMgr.getFirst();
-    while (ref)
-    {
-        GroupReference* nextRef = ref->next();
-        if (ref->GetSource()->GetGUID() == guid)
-        {
-            ref->unlink();
-            break;
-        }
-        ref = nextRef;
-    }
+    auto itr = std::ranges::find(m_memberMgr, guid, [](GroupReference const& ref) { return ref.GetSource()->GetGUID(); });
+    if (itr != m_memberMgr.end())
+        itr->unlink();
 }
 
 Group::BoundInstancesMap& Group::GetBoundInstances(Difficulty difficulty)

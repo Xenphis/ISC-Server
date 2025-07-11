@@ -243,12 +243,9 @@ void WorldSession::SendLfgPartyLockInfo()
 
     // Get the locked dungeons of the other party members
     lfg::LfgLockPartyMap lockMap;
-    for (GroupReference* itr = group->GetFirstMember(); itr != nullptr; itr = itr->next())
+    for (GroupReference const& itr : group->GetMembers())
     {
-        Player* plrg = itr->GetSource();
-        if (!plrg)
-            continue;
-
+        Player* plrg = itr.GetSource();
         ObjectGuid pguid = plrg->GetGUID();
         if (pguid == guid)
             continue;

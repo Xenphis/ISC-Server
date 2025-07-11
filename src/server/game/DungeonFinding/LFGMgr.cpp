@@ -457,23 +457,24 @@ void LFGMgr::JoinLfg(Player* player, uint8 roles, LfgDungeonSet& dungeons, const
         else
         {
             uint8 memberCount = 0;
-            for (GroupReference* itr = grp->GetFirstMember(); itr != nullptr && joinData.result == LFG_JOIN_OK; itr = itr->next())
+            for (GroupReference const& itr : grp->GetMembers())
             {
-                if (Player* plrg = itr->GetSource())
-                {
-                    if (!plrg->GetSession()->HasPermission(rbac::RBAC_PERM_JOIN_DUNGEON_FINDER))
-                        joinData.result = LFG_JOIN_PARTY_NOT_MEET_REQS;
-                    if (plrg->HasAura(LFG_SPELL_DUNGEON_DESERTER))
-                        joinData.result = LFG_JOIN_PARTY_DESERTER;
-                    else if (!isContinue && plrg->HasAura(LFG_SPELL_DUNGEON_COOLDOWN))
-                        joinData.result = LFG_JOIN_PARTY_RANDOM_COOLDOWN;
-                    else if (plrg->InBattleground() || plrg->InArena() || plrg->InBattlegroundQueue())
-                        joinData.result = LFG_JOIN_USING_BG_SYSTEM;
-                    else if (plrg->HasAura(9454)) // check Freeze debuff
-                        joinData.result = LFG_JOIN_PARTY_NOT_MEET_REQS;
-                    ++memberCount;
-                    players.insert(plrg->GetGUID());
-                }
+                Player* plrg = itr.GetSource();
+                if (!plrg->GetSession()->HasPermission(rbac::RBAC_PERM_JOIN_DUNGEON_FINDER))
+                    joinData.result = LFG_JOIN_PARTY_NOT_MEET_REQS;
+                if (plrg->HasAura(LFG_SPELL_DUNGEON_DESERTER))
+                    joinData.result = LFG_JOIN_PARTY_DESERTER;
+                else if (!isContinue && plrg->HasAura(LFG_SPELL_DUNGEON_COOLDOWN))
+                    joinData.result = LFG_JOIN_PARTY_RANDOM_COOLDOWN;
+                else if (plrg->InBattleground() || plrg->InArena() || plrg->InBattlegroundQueue())
+                    joinData.result = LFG_JOIN_USING_BG_SYSTEM;
+                else if (plrg->HasAura(9454)) // check Freeze debuff
+                    joinData.result = LFG_JOIN_PARTY_NOT_MEET_REQS;
+                ++memberCount;
+                players.insert(plrg->GetGUID());
+
+                if (joinData.result != LFG_JOIN_OK)
+                    break;
             }
 
             if (joinData.result == LFG_JOIN_OK && memberCount != grp->GetMembersCount())
@@ -570,20 +571,19 @@ void LFGMgr::JoinLfg(Player* player, uint8 roles, LfgDungeonSet& dungeons, const
         SetState(gguid, LFG_STATE_ROLECHECK);
         // Send update to player
         LfgUpdateData updateData = LfgUpdateData(LFG_UPDATETYPE_JOIN_QUEUE, dungeons, comment);
-        for (GroupReference* itr = grp->GetFirstMember(); itr != nullptr; itr = itr->next())
+        for (GroupReference const& itr : grp->GetMembers())
         {
-            if (Player* plrg = itr->GetSource())
-            {
-                ObjectGuid pguid = plrg->GetGUID();
-                plrg->GetSession()->SendLfgUpdateParty(updateData);
-                SetState(pguid, LFG_STATE_ROLECHECK);
-                if (!isContinue)
-                    SetSelectedDungeons(pguid, dungeons);
-                roleCheck.roles[pguid] = 0;
-                if (!debugNames.empty())
-                    debugNames.append(", ");
-                debugNames.append(plrg->GetName());
-            }
+            Player* plrg = itr.GetSource();
+
+            ObjectGuid pguid = plrg->GetGUID();
+            plrg->GetSession()->SendLfgUpdateParty(updateData);
+            SetState(pguid, LFG_STATE_ROLECHECK);
+            if (!isContinue)
+                SetSelectedDungeons(pguid, dungeons);
+            roleCheck.roles[pguid] = 0;
+            if (!debugNames.empty())
+                debugNames.append(", ");
+            debugNames.append(plrg->GetName());
         }
         // Update leader role
         UpdateRoleCheck(gguid, guid, roles);
@@ -1390,10 +1390,10 @@ void LFGMgr::TeleportPlayer(Player* player, bool out, bool fromOpcode /*= false*
         if (!fromOpcode)
         {
             // Select a player inside to be teleported to
-            for (GroupReference* itr = group->GetFirstMember(); itr != nullptr; itr = itr->next())
+            for (GroupReference const& itr : group->GetMembers())
             {
-                Player* plrg = itr->GetSource();
-                if (plrg && plrg != player && plrg->GetMapId() == uint32(dungeon->map))
+                Player* plrg = itr.GetSource();
+                if (plrg != player && plrg->GetMapId() == uint32(dungeon->map))
                 {
                     mapid = plrg->GetMapId();
                     x = plrg->GetPositionX();

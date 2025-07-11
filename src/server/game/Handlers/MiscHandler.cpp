@@ -1060,9 +1060,9 @@ void WorldSession::HandleSetDungeonDifficultyOpcode(WorldPackets::Misc::SetDunge
         if (group->isLFGGroup())
             return;
 
-        for (GroupReference* itr = group->GetFirstMember(); itr != nullptr; itr = itr->next())
+        for (GroupReference const& itr : group->GetMembers())
         {
-            Player* groupGuy = itr->GetSource();
+            Player* groupGuy = itr.GetSource();
             if (!groupGuy)
                 continue;
 
@@ -1125,9 +1125,9 @@ void WorldSession::HandleSetRaidDifficultyOpcode(WorldPackets::Misc::SetRaidDiff
         if (group->isLFGGroup())
             return;
 
-        for (GroupReference* itr = group->GetFirstMember(); itr != nullptr; itr = itr->next())
+        for (GroupReference const& itr : group->GetMembers())
         {
-            Player* groupGuy = itr->GetSource();
+            Player* groupGuy = itr.GetSource();
             if (!groupGuy)
                 continue;
 

@@ -2494,10 +2494,9 @@ void SmartScript::GetTargets(ObjectVector& targets, SmartScriptHolder const& e, 
                 {
                     if (Group* group = player->GetGroup())
                     {
-                        for (GroupReference* groupRef = group->GetFirstMember(); groupRef != nullptr; groupRef = groupRef->next())
-                            if (Player* member = groupRef->GetSource())
-                                if (member->IsInMap(player))
-                                    targets.push_back(member);
+                        for (GroupReference const& groupRef : group->GetMembers())
+                            if (groupRef.GetSource()->IsInMap(player))
+                                targets.push_back(groupRef.GetSource());
                     }
                     // We still add the player to the list if there is no group. If we do
                     // this even if there is a group (thus the else-check), it will add the
@@ -2730,10 +2729,9 @@ void SmartScript::GetTargets(ObjectVector& targets, SmartScriptHolder const& e, 
             {
                 if (Group* lootGroup = me->GetLootRecipientGroup())
                 {
-                    for (GroupReference* it = lootGroup->GetFirstMember(); it != nullptr; it = it->next())
-                        if (Player* recipient = it->GetSource())
-                            if (recipient->IsInMap(me))
-                                targets.push_back(recipient);
+                    for (GroupReference const& groupRef : lootGroup->GetMembers())
+                        if (groupRef.GetSource()->IsInMap(me))
+                                targets.push_back(groupRef.GetSource());
                 }
                 else
                 {

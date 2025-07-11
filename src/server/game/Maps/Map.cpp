@@ -128,7 +128,7 @@ void Map::DeleteStateMachine()
 Map::Map(uint32 id, time_t expiry, uint32 InstanceId, uint8 SpawnMode, Map* /*_parent*/):
 _creatureToMoveLock(false), _gameObjectsToMoveLock(false), _dynamicObjectsToMoveLock(false),
 i_mapEntry(sMapStore.LookupEntry(id)), i_spawnMode(SpawnMode), i_InstanceId(InstanceId),
-m_unloadTimer(0), m_VisibleDistance(DEFAULT_VISIBILITY_DISTANCE),
+m_unloadTimer(0), m_VisibleDistance(DEFAULT_VISIBILITY_DISTANCE), m_mapRefIter(m_mapRefManager.end()),
 m_VisibilityNotifyPeriod(DEFAULT_VISIBILITY_NOTIFY_PERIOD),
 m_activeNonPlayersIter(m_activeNonPlayers.end()), _transportsUpdateIter(_transports.end()),
 i_gridExpiry(expiry), m_terrain(sTerrainMgr.LoadTerrain(id)),
