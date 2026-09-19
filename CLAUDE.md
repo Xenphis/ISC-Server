@@ -29,3 +29,4 @@ ISC (Immersive SoloCraft) is a fork of **TrinityCore** (a WoW 3.3.5 MMORPG serve
 **`src/tests/`** — Test unit tests + mocks.
 **`sql/`** — migration files to update the database. Use only update folder to create migrations.
 **`dep/`** — vendored third-party dependencies.
+**`client/`** — client-side addons (Lua 5.1, WoW 3.3.5a); `client/AddOns/ISC` implements the ISC protocol (server side: `src/server/game/Server/Protocol/Isc*`).

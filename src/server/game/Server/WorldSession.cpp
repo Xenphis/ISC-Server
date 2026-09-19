@@ -36,6 +36,7 @@
 #include "Guild.h"
 #include "GuildMgr.h"
 #include "Hyperlinks.h"
+#include "IscProtocol.h"
 #include "Log.h"
 #include "Map.h"
 #include "Metric.h"
@@ -123,6 +124,8 @@ WorldSession::WorldSession(uint32 id, std::string&& name, std::shared_ptr<WorldS
     _accountId(id),
     _accountName(std::move(name)),
     m_expansion(expansion),
+    _iscReassembler(std::make_unique<Isc::Reassembler>()),
+    _iscNextMessageId(0),
     _logoutTime(0),
     m_inQueue(false),
     m_playerLoading(false),

@@ -41,6 +41,7 @@ class Creature;
 class GameClient;
 class GameObject;
 class InstanceSave;
+class IscPacket;
 class Item;
 class LoginQueryHolder;
 class Object;
@@ -61,6 +62,11 @@ struct TradeStatusInfo;
 enum AuctionCommand : uint8;
 enum AuctionResult : uint8;
 enum InventoryResult : uint8;
+
+namespace Isc
+{
+    class Reassembler;
+}
 
 namespace lfg
 {
@@ -539,6 +545,7 @@ class TC_GAME_API WorldSession
         void static WriteMovementInfo(WorldPacket* data, MovementInfo* mi);
 
         void SendPacket(WorldPacket const* packet);
+        void SendIscPacket(IscPacket const& packet);
         void SendNotification(const char *format, ...) ATTR_PRINTF(2, 3);
         void SendNotification(uint32 string_id, ...);
         void SendPetNameInvalid(uint32 error, std::string const& name, DeclinedName *declinedName);
@@ -1042,6 +1049,10 @@ class TC_GAME_API WorldSession
 
         void HandleChatMessageOpcode(WorldPackets::Chat::ChatMessage& chatMessage);
         void HandleChatMessage(ChatMsg type, Language lang, std::string msg, std::string target);
+
+        // ISC protocol, see IscProtocol.h
+        bool HandleIscAddonMessage(std::string const& msg, std::string target);
+
         void SendPlayerNotFoundNotice(std::string const& name);
         void SendPlayerAmbiguousNotice(std::string const& name);
         void SendWrongFactionNotice();
@@ -1323,6 +1334,10 @@ class TC_GAME_API WorldSession
 
         // Warden
         std::unique_ptr<Warden> _warden;                                    // Remains NULL if Warden system is not enabled by config
+
+        // ISC protocol
+        std::unique_ptr<Isc::Reassembler> _iscReassembler;
+        std::atomic<uint16> _iscNextMessageId;
 
         time_t _logoutTime;
         bool m_inQueue;                                     // session wait in auth.queue

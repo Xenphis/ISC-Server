@@ -107,6 +107,10 @@ void WorldSession::HandleChatMessage(ChatMsg type, Language lang, std::string ms
 
     if (lang == LANG_ADDON)
     {
+        // ISC protocol frames bypass the regular addon channel rules (flood control, AddonChannel config), see IscProtocol.h
+        if (type == CHAT_MSG_WHISPER && HandleIscAddonMessage(msg, target))
+            return;
+
         // LANG_ADDON is only valid for the following message types
         switch (type)
         {
