@@ -49,6 +49,7 @@ EndScriptData */
 #include "Transport.h"
 #include "Warden.h"
 #include "World.h"
+#include "WorldSession.h"
 #include <fstream>
 #include <limits>
 #include <map>
@@ -90,6 +91,7 @@ public:
             { "threat",             HandleDebugThreatListCommand,          rbac::RBAC_PERM_COMMAND_DEBUG,   Console::No },
             { "threatinfo",         HandleDebugThreatInfoCommand,          rbac::RBAC_PERM_COMMAND_DEBUG,   Console::No },
             { "combat",             HandleDebugCombatListCommand,          rbac::RBAC_PERM_COMMAND_DEBUG,   Console::No },
+            { "conversation",       HandleDebugConversationCommand,        rbac::RBAC_PERM_COMMAND_DEBUG,   Console::No },
             { "anim",               HandleDebugAnimCommand,                rbac::RBAC_PERM_COMMAND_DEBUG,   Console::No },
             { "arena",              HandleDebugArenaCommand,               rbac::RBAC_PERM_COMMAND_DEBUG,   Console::Yes },
             { "bg",                 HandleDebugBattlegroundCommand,        rbac::RBAC_PERM_COMMAND_DEBUG,   Console::Yes },
@@ -131,6 +133,19 @@ public:
             { "wpgps",              HandleWPGPSCommand,                    rbac::RBAC_PERM_COMMAND_DEBUG,   Console::No },
         };
         return commandTable;
+    }
+
+    // conversationId - Id from conversation_line (ISC client addon)
+    static bool HandleDebugConversationCommand(ChatHandler* handler, uint32 conversationId)
+    {
+        if (!handler->GetSession()->SendConversation(conversationId))
+        {
+            handler->PSendSysMessage("Conversation %u does not exist.", conversationId);
+            handler->SetSentErrorMessage(true);
+            return false;
+        }
+
+        return true;
     }
 
     // cinematicId - ID from CinematicSequences.dbc

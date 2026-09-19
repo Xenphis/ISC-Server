@@ -16,6 +16,7 @@
  */
 
 #include "SmartScriptMgr.h"
+#include "ConversationDataStore.h"
 #include "CreatureTextMgr.h"
 #include "DatabaseEnv.h"
 #include "DBCStores.h"
@@ -861,7 +862,7 @@ bool SmartAIMgr::CheckUnusedActionParams(SmartScriptHolder const& e)
             //case SMART_ACTION_SET_AI_ANIM_KIT: return sizeof(SmartAction::raw);
             case SMART_ACTION_SET_HOVER: return sizeof(SmartAction::setHover);
             case SMART_ACTION_SET_HEALTH_PCT: return sizeof(SmartAction::setHealthPct);
-            //case SMART_ACTION_CREATE_CONVERSATION: return sizeof(SmartAction::raw);
+            case SMART_ACTION_CREATE_CONVERSATION: return sizeof(SmartAction::conversation);
             case SMART_ACTION_SET_IMMUNE_PC: return sizeof(SmartAction::setImmunePC);
             case SMART_ACTION_SET_IMMUNE_NPC: return sizeof(SmartAction::setImmuneNPC);
             case SMART_ACTION_SET_UNINTERACTIBLE: return sizeof(SmartAction::setUninteractible);
@@ -2048,6 +2049,16 @@ bool SmartAIMgr::IsEventValid(SmartScriptHolder& e)
         case SMART_ACTION_TRIGGER_RANDOM_TIMED_EVENT:
         case SMART_ACTION_SPAWN_SPAWNGROUP:
         case SMART_ACTION_DESPAWN_SPAWNGROUP:
+        case SMART_ACTION_CREATE_CONVERSATION:
+        {
+            if (!sConversationDataStore->GetConversationTemplate(e.action.conversation.id))
+            {
+                TC_LOG_ERROR("sql.sql", "SmartAIMgr: SMART_ACTION_CREATE_CONVERSATION Entry {} SourceType {} Event {} Action {} uses invalid entry {}, skipped.", e.entryOrGuid, e.GetScriptType(), e.event_id, e.GetActionType(), e.action.conversation.id);
+                return false;
+            }
+
+            break;
+        }
         case SMART_ACTION_PLAY_CINEMATIC:
         case SMART_ACTION_ADD_TO_STORED_TARGET_LIST:
         case SMART_ACTION_RESUME_MOVEMENT:

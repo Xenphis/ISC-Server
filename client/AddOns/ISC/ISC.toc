@@ -6,3 +6,4 @@ Base64.lua
 Packet.lua
 Opcodes.lua
 Protocol.lua
+Conversation.lua

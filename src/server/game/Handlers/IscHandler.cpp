@@ -17,11 +17,75 @@
 
 #include "WorldSession.h"
 #include "ChatPackets.h"
+#include "ConversationDataStore.h"
+#include "Creature.h"
+#include "DBCStores.h"
 #include "IscProtocol.h"
 #include "Log.h"
 #include "ObjectMgr.h"
 #include "Player.h"
 #include "Util.h"
+#include <algorithm>
+#include <cctype>
+
+namespace
+{
+    // Same variables as the quest texts: $n name, $r race, $c class, $gmale:female;
+    std::string ReplaceTextVariables(std::string_view text, Player const* player, LocaleConstant dbcLocale)
+    {
+        std::string result;
+        result.reserve(text.size());
+
+        for (std::size_t i = 0; i < text.size(); ++i)
+        {
+            if (text[i] != '$' || i + 1 == text.size())
+            {
+                result += text[i];
+                continue;
+            }
+
+            switch (std::tolower(static_cast<unsigned char>(text[i + 1])))
+            {
+                case 'n':
+                    result += player->GetName();
+                    ++i;
+                    break;
+                case 'r':
+                    if (ChrRacesEntry const* race = sChrRacesStore.LookupEntry(player->GetRace()))
+                        result += race->Name[dbcLocale];
+                    ++i;
+                    break;
+                case 'c':
+                    if (ChrClassesEntry const* playerClass = sChrClassesStore.LookupEntry(player->GetClass()))
+                        result += playerClass->Name[dbcLocale];
+                    ++i;
+                    break;
+                case 'g':
+                {
+                    std::size_t const colon = text.find(':', i + 2);
+                    std::size_t const end = colon != std::string_view::npos ? text.find(';', colon + 1) : std::string_view::npos;
+                    if (end == std::string_view::npos)
+                    {
+                        result += text[i];
+                        break;
+                    }
+
+                    if (player->GetNativeGender() == GENDER_FEMALE)
+                        result += text.substr(colon + 1, end - colon - 1);
+                    else
+                        result += text.substr(i + 2, colon - i - 2);
+                    i = end;
+                    break;
+                }
+                default:
+                    result += text[i];
+                    break;
+            }
+        }
+
+        return result;
+    }
+}
 
 bool WorldSession::HandleIscAddonMessage(std::string const& msg, std::string target)
 {
@@ -70,4 +134,51 @@ void WorldSession::SendIscPacket(IscPacket const& packet)
         chat.Initialize(CHAT_MSG_WHISPER, LANG_ADDON, player, player, std::string(Isc::SERVER_PREFIX) + '\t' + frame);
         SendPacket(chat.Write());
     }
+}
+
+bool WorldSession::SendConversation(uint32 conversationId)
+{
+    Player* player = GetPlayer();
+    ConversationTemplate const* conversation = sConversationDataStore->GetConversationTemplate(conversationId);
+    if (!player || !conversation)
+        return false;
+
+    LocaleConstant const locale = GetSessionDbLocaleIndex();
+
+    // one actor per speaker, the client finds a unit with its guid to show it like the unit frames do
+    std::vector<uint32> actors;
+    for (auto const& [_, line] : conversation->Lines)
+        if (std::ranges::find(actors, line.CreatureId) == actors.end())
+            actors.push_back(line.CreatureId);
+
+    IscPacket packet(ISC_SMSG_CONVERSATION);
+    packet << uint8(actors.size());                                 // actors: name, guid, creature entry (0: not a creature)
+    for (uint32 creatureId : actors)
+    {
+        if (!creatureId)
+        {
+            packet << player->GetName() << player->GetGUID() << uint32(0);
+            continue;
+        }
+
+        CreatureTemplate const* creatureTemplate = sObjectMgr->GetCreatureTemplate(creatureId);    // checked at load
+        std::string name = creatureTemplate->Name;
+        if (CreatureLocale const* creatureLocale = sObjectMgr->GetCreatureLocale(creatureId))
+            ObjectMgr::GetLocaleString(creatureLocale->Name, locale, name);
+
+        Creature const* creature = player->FindNearestCreature(creatureId, player->GetVisibilityRange());
+        packet << name << (creature ? creature->GetGUID() : ObjectGuid::Empty) << uint32(creatureId);
+    }
+
+    packet << uint8(conversation->Lines.size());                    // lines: actor index, duration in ms, text
+    for (auto const& [_, line] : conversation->Lines)
+    {
+        std::string_view text = ObjectMgr::GetLocaleString(line.Text, LOCALE_enUS);
+        ObjectMgr::GetLocaleString(line.Text, locale, text);
+
+        packet << uint8(std::ranges::find(actors, line.CreatureId) - actors.begin()) << uint32(line.Duration) << ReplaceTextVariables(text, player, GetSessionDbcLocale());
+    }
+
+    SendIscPacket(packet);
+    return true;
 }

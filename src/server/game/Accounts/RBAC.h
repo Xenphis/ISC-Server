@@ -719,7 +719,7 @@ enum RBACPermissions
     RBAC_PERM_COMMAND_RELOAD_SCENE_TEMPLATE                  = 850, // not on 3.3.5a
     RBAC_PERM_COMMAND_RELOAD_AREATRIGGER_TEMPLATE            = 851, // not on 3.3.5a
     // 852 previously used, do not reuse
-    RBAC_PERM_COMMAND_RELOAD_CONVERSATION_TEMPLATE           = 853, // not on 3.3.5a
+    RBAC_PERM_COMMAND_RELOAD_CONVERSATION_TEMPLATE           = 853,
     RBAC_PERM_COMMAND_DEBUG_CONVERSATION                     = 854, // not on 3.3.5a
     // 855 previously used, do not reuse
     RBAC_PERM_COMMAND_NPC_SPAWNGROUP                         = 856,

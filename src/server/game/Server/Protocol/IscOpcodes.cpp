@@ -29,7 +29,7 @@ namespace
 
 #define DEFINE_ISC_HANDLER(opcode, handler) table[opcode] = IscOpcodeHandler{ #opcode, handler }
 #define DEFINE_ISC_SERVER_OPCODE(opcode) table[opcode] = IscOpcodeHandler{ #opcode, nullptr }
-
+        /*0x001*/ DEFINE_ISC_SERVER_OPCODE(ISC_SMSG_CONVERSATION);
 #undef DEFINE_ISC_HANDLER
 #undef DEFINE_ISC_SERVER_OPCODE
 

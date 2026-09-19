@@ -29,6 +29,7 @@ class WorldSession;
 enum IscOpcodes : uint16
 {
     ISC_NULL_OPCODE                                 = 0x000,
+    ISC_SMSG_CONVERSATION                           = 0x001,
     NUM_ISC_OPCODES
 };
 

@@ -546,6 +546,7 @@ class TC_GAME_API WorldSession
 
         void SendPacket(WorldPacket const* packet);
         void SendIscPacket(IscPacket const& packet);
+        bool SendConversation(uint32 conversationId);
         void SendNotification(const char *format, ...) ATTR_PRINTF(2, 3);
         void SendNotification(uint32 string_id, ...);
         void SendPetNameInvalid(uint32 error, std::string const& name, DeclinedName *declinedName);

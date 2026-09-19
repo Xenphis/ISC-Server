@@ -42,6 +42,7 @@
 #include "Vehicle.h"
 #include "WaypointDefines.h"
 #include "WaypointManager.h"
+#include "WorldSession.h"
 #include <G3D/Quat.h>
 
 SmartScript::SmartScript()
@@ -2212,6 +2213,18 @@ void SmartScript::ProcessAction(SmartScriptHolder& e, Unit* unit, uint32 var0, u
                     continue;
 
                 target->ToPlayer()->SendCinematicStart(e.action.cinematic.entry);
+            }
+            break;
+        }
+        case SMART_ACTION_CREATE_CONVERSATION:
+        {
+            for (WorldObject* target : targets)
+            {
+                if (!IsPlayer(target))
+                    continue;
+
+                if (!target->ToPlayer()->GetSession()->SendConversation(e.action.conversation.id))
+                    TC_LOG_ERROR("sql.sql", "SmartScript::ProcessAction: Entry {} SourceType {}, Event {} - tries to play non existing Conversation {}", e.entryOrGuid, e.GetScriptType(), e.event_id, e.action.conversation.id);
             }
             break;
         }
