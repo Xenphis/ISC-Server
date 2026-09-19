@@ -6,7 +6,7 @@ on:
 
 jobs:
   build:
-    runs-on: macos-14
+    runs-on: macos-15
 
     steps:
     - uses: actions/checkout@v5
@@ -22,7 +22,7 @@ jobs:
         HOMEBREW_NO_INSTALLED_DEPENDENTS_CHECK: 1
       run: |
         brew update
-        brew uninstall openssl@1.1
+        brew uninstall openssl@1.1 || true
         for pkg in mysql openssl readline cmake boost coreutils ninja; do
           brew ls --versions $pkg || brew install $pkg
         done
