@@ -1,9 +1,0 @@
-## Interface: 30300
-## Title: ISC
-## Notes: Immersive SoloCraft client/server protocol
-
-Base64.lua
-Packet.lua
-Opcodes.lua
-Protocol.lua
-Conversation.lua
