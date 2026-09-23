@@ -6,11 +6,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ISC (Immersive SoloCraft) is a fork of **TrinityCore** (a WoW 3.3.5 MMORPG server framework), being adapted from a massively-multiplayer server into a client/server framework for a standalone, lore-focused single-player RPG. The client/server architecture is preserved, but the server (worldserver/authserver) is being extended and optimized to support intelligent NPC bots/companions and other single-player-specific features. This is an educational project; no commercial use or mass distribution is intended.
 
+**Architecture conventions for new ISC systems:**
+- The project is a full overhaul toward a standalone framework: new core services (managers/singletons) are
+  first-class citizens of the core, not add-ons. Initialize them directly in `World::SetInitialWorldSettings`
+  (`src/server/game/World/World.cpp`) alongside the other singletons — do NOT use ScriptMgr hooks
+  (WorldScript/PlayerScript) to bootstrap core services. Script hooks are reserved for content scripts.
+
 **Coding rules:**
 1. **Think before coding.** State assumptions out loud. If a request is ambiguous, ask instead of guessing. If a simpler approach exists, push back on the request rather than silently implementing the more complex one.
 2. **Simplicity first.** Write the minimum code that solves the problem. No speculative abstractions, no flexibility nobody asked for.
 3. **Surgical changes.** Touch only what the task requires. Don't refactor or "improve" neighboring code. Every changed line should trace back to the request.
 4. **Goal-driven execution.** Turn vague instructions into verifiable targets before writing code (e.g. "add validation" → "write tests for invalid inputs, then make them pass").
+5. **All code and comments must be written in English** (docs/ and conversations stay in French).
 
 **Toolchain baseline:** C++23, CMake ≥ 4, Boost ≥ 1.90, OpenSSL ≥ 3, MySQL ≥ 9.
 
