@@ -30,6 +30,13 @@ namespace
 #define DEFINE_ISC_HANDLER(opcode, handler) table[opcode] = IscOpcodeHandler{ #opcode, handler }
 #define DEFINE_ISC_SERVER_OPCODE(opcode) table[opcode] = IscOpcodeHandler{ #opcode, nullptr }
         /*0x001*/ DEFINE_ISC_SERVER_OPCODE(ISC_SMSG_CONVERSATION);
+        /*0x002*/ DEFINE_ISC_HANDLER(ISC_CMSG_DEVTOOLS_SYNC,              &WorldSession::HandleIscDevToolsSync);
+        /*0x003*/ DEFINE_ISC_HANDLER(ISC_CMSG_DEVTOOLS_DELETE_CREATURE,   &WorldSession::HandleIscDevToolsDeleteCreature);
+        /*0x004*/ DEFINE_ISC_HANDLER(ISC_CMSG_DEVTOOLS_UNDO,              &WorldSession::HandleIscDevToolsUndo);
+        /*0x005*/ DEFINE_ISC_HANDLER(ISC_CMSG_DEVTOOLS_COMMIT,            &WorldSession::HandleIscDevToolsCommit);
+        /*0x006*/ DEFINE_ISC_SERVER_OPCODE(ISC_SMSG_DEVTOOLS_CHANGES);
+        /*0x007*/ DEFINE_ISC_SERVER_OPCODE(ISC_SMSG_DEVTOOLS_RESULT);
+        /*0x008*/ DEFINE_ISC_HANDLER(ISC_CMSG_DEVTOOLS_SPAWN_CREATURE,    &WorldSession::HandleIscDevToolsSpawnCreature);
 #undef DEFINE_ISC_HANDLER
 #undef DEFINE_ISC_SERVER_OPCODE
 

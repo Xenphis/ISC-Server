@@ -20,11 +20,15 @@
 #include "ConversationDataStore.h"
 #include "Creature.h"
 #include "DBCStores.h"
+#include "DevToolsMgr.h"
 #include "IscProtocol.h"
 #include "Log.h"
+#include "ObjectAccessor.h"
 #include "ObjectMgr.h"
 #include "Player.h"
+#include "RBAC.h"
 #include "Util.h"
+#include "World.h"
 #include <algorithm>
 #include <cctype>
 
@@ -181,4 +185,106 @@ bool WorldSession::SendConversation(uint32 conversationId)
 
     SendIscPacket(packet);
     return true;
+}
+
+bool WorldSession::CanUseIscDevTools()
+{
+    if (sWorld->getBoolConfig(CONFIG_DEVTOOLS_ENABLE) && HasPermission(rbac::RBAC_PERM_COMMAND_NPC_DELETE))
+        return true;
+
+    SendIscDevToolsResult(false, "DevTools are disabled (DevTools.Enable) or your account lacks the permission.");
+    return false;
+}
+
+void WorldSession::HandleIscDevToolsSync(IscPacket& /*packet*/)
+{
+    if (CanUseIscDevTools())
+        SendIscDevToolsChanges();
+}
+
+void WorldSession::HandleIscDevToolsDeleteCreature(IscPacket& packet)
+{
+    ObjectGuid guid;
+    packet >> guid;
+
+    if (!CanUseIscDevTools())
+        return;
+
+    Creature* creature = ObjectAccessor::GetCreature(*GetPlayer(), guid);
+    if (!creature)
+    {
+        SendIscDevToolsResult(false, "Creature not found.");
+        return;
+    }
+
+    std::string message;
+    bool const success = sDevToolsMgr->DeleteCreatureSpawn(creature, message);
+    SendIscDevToolsResult(success, message);
+    SendIscDevToolsChanges();
+}
+
+void WorldSession::HandleIscDevToolsSpawnCreature(IscPacket& packet)
+{
+    uint32 entry;
+    packet >> entry;
+
+    if (!CanUseIscDevTools())
+        return;
+
+    std::string message;
+    bool const success = sDevToolsMgr->SpawnCreature(GetPlayer(), entry, message);
+    SendIscDevToolsResult(success, message);
+    SendIscDevToolsChanges();
+}
+
+void WorldSession::HandleIscDevToolsUndo(IscPacket& packet)
+{
+    uint32 changeId;
+    packet >> changeId;
+
+    if (!CanUseIscDevTools())
+        return;
+
+    std::string error;
+    if (!sDevToolsMgr->Undo(changeId, error))
+        SendIscDevToolsResult(false, error);
+
+    SendIscDevToolsChanges();
+}
+
+void WorldSession::HandleIscDevToolsCommit(IscPacket& packet)
+{
+    std::string description;
+    packet >> description;
+
+    if (!CanUseIscDevTools())
+        return;
+
+    std::string error;
+    std::string const fileName = sDevToolsMgr->Commit(description, error);
+    if (!fileName.empty())
+        SendIscDevToolsResult(true, "Written to sql/updates/world/3.3.5/" + fileName + ", applied at the next restart.");
+    else
+        SendIscDevToolsResult(false, error);
+
+    SendIscDevToolsChanges();
+}
+
+void WorldSession::SendIscDevToolsChanges()
+{
+    std::vector<DevToolsChange> const& changes = sDevToolsMgr->GetChanges();
+
+    IscPacket packet(ISC_SMSG_DEVTOOLS_CHANGES);
+    packet << uint32(changes.size());                               // changes: id, label, details
+    for (DevToolsChange const& change : changes)
+        packet << uint32(change.Id) << change.Label << change.Details;
+
+    SendIscPacket(packet);
+}
+
+void WorldSession::SendIscDevToolsResult(bool success, std::string const& message)
+{
+    IscPacket packet(ISC_SMSG_DEVTOOLS_RESULT);
+    packet << bool(success) << message;
+    SendIscPacket(packet);
 }

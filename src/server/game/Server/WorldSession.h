@@ -1052,6 +1052,14 @@ class TC_GAME_API WorldSession
 
         // ISC protocol, see IscProtocol.h
         bool HandleIscAddonMessage(std::string const& msg, std::string target);
+        void HandleIscDevToolsSync(IscPacket& packet);
+        void HandleIscDevToolsDeleteCreature(IscPacket& packet);
+        void HandleIscDevToolsSpawnCreature(IscPacket& packet);
+        void HandleIscDevToolsUndo(IscPacket& packet);
+        void HandleIscDevToolsCommit(IscPacket& packet);
+        bool CanUseIscDevTools();
+        void SendIscDevToolsChanges();
+        void SendIscDevToolsResult(bool success, std::string const& message);
 
         void SendPlayerNotFoundNotice(std::string const& name);
         void SendPlayerAmbiguousNotice(std::string const& name);

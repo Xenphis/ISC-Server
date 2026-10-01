@@ -25,6 +25,7 @@
 #include "CreatureAISelector.h"
 #include "CreatureGroups.h"
 #include "DatabaseEnv.h"
+#include "DevToolsMgr.h"
 #include "Formulas.h"
 #include "GameEventMgr.h"
 #include "GameTime.h"
@@ -1622,6 +1623,10 @@ bool Creature::CreateFromProto(ObjectGuid::LowType guidlow, uint32 entry, Creatu
 
 bool Creature::LoadFromDB(ObjectGuid::LowType spawnId, Map* map, bool addToMap, bool allowDuplicate)
 {
+    // deleted with the ISC DevTools, the world database keeps it until the update file is applied
+    if (sDevToolsMgr->IsCreatureSpawnHidden(spawnId))
+        return false;
+
     if (!allowDuplicate)
     {
         // If an alive instance of this spawnId is already found, skip creation

@@ -3155,6 +3155,15 @@ AllowTrackBothResources = 0
 PlayerStart.AllReputation = 0
 
 #
+#    DevTools.Enable
+#        Description: Enables the ISC DevTools addon (client/AddOns/ISC_DevTools): world changes made
+#                     in game by game masters are written to sql/updates/world/3.3.5 (see SourceDirectory).
+#        Default:     0 - (Disabled)
+#                     1 - (Enabled)
+
+DevTools.Enable = 0
+
+#
 #    XP.Boost.Daymask
 #        Description: Enables experience boost during the defined days. This field is a bitmask.
 #

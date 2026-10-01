@@ -30,6 +30,13 @@ enum IscOpcodes : uint16
 {
     ISC_NULL_OPCODE                                 = 0x000,
     ISC_SMSG_CONVERSATION                           = 0x001,
+    ISC_CMSG_DEVTOOLS_SYNC                          = 0x002,
+    ISC_CMSG_DEVTOOLS_DELETE_CREATURE               = 0x003,
+    ISC_CMSG_DEVTOOLS_UNDO                          = 0x004,
+    ISC_CMSG_DEVTOOLS_COMMIT                        = 0x005,
+    ISC_SMSG_DEVTOOLS_CHANGES                       = 0x006,
+    ISC_SMSG_DEVTOOLS_RESULT                        = 0x007,
+    ISC_CMSG_DEVTOOLS_SPAWN_CREATURE                = 0x008,
     NUM_ISC_OPCODES
 };
 
