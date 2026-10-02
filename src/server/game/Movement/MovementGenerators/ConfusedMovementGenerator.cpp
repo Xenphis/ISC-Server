@@ -25,7 +25,7 @@
 #include "Random.h"
 
 template<class T>
-ConfusedMovementGenerator<T>::ConfusedMovementGenerator() : _timer(0), _x(0.f), _y(0.f), _z(0.f)
+ConfusedMovementGenerator<T>::ConfusedMovementGenerator() : _timer(0), _reference(0.f, 0.f, 0.f)
 {
     this->Priority = MOTION_PRIORITY_HIGHEST;
     this->Flags = MOVEMENTGENERATOR_FLAG_INITIALIZATION_PENDING;
@@ -51,7 +51,7 @@ bool ConfusedMovementGenerator<T>::DoInitialize(T* owner)
     owner->SetUnitFlag(UNIT_FLAG_CONFUSED);
 
     _timer.Reset(0);
-    owner->GetPosition(_x, _y, _z);
+    owner->GetPosition(_reference.m_positionX, _reference.m_positionY, _reference.m_positionZ);
 
     _path = nullptr;
     SetTargetLocation(owner);
@@ -135,7 +135,7 @@ void ConfusedMovementGenerator<T>::SetTargetLocation(T* owner)
     if (!owner)
         return;
 
-    Position destination(_x, _y, _z);
+    Position destination(_reference);
     float distance = 4.0f * frand(0.0f, 1.0f) - 2.0f;
     float angle = frand(0.0f, 1.0f) * float(M_PI) * 2.0f;
     owner->MovePositionToFirstCollision(destination, distance, angle);
