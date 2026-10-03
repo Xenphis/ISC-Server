@@ -39,6 +39,18 @@ enum VectusEvents
     EVENT_FLAMESTRIKE
 };
 
+enum VectusTexts
+{
+    SAY_IDLE_1                   = 0,
+    SAY_IDLE_2                   = 1,
+    SAY_IDLE_3                   = 2
+};
+
+enum VectusMisc
+{
+    PATH_VECTUS_IDLE             = 3904400
+};
+
 // 10432 - Vectus
 struct boss_vectus : public ScriptedAI
 {
@@ -89,6 +101,27 @@ struct boss_vectus : public ScriptedAI
         }
 
         DoMeleeAttackIfReady();
+    }
+
+    void WaypointReached(uint32 waypointId, uint32 pathId) override
+    {
+        if (pathId != PATH_VECTUS_IDLE)
+            return;
+
+        switch (waypointId)
+        {
+            case 2:
+                Talk(SAY_IDLE_1);
+                break;
+            case 3:
+                Talk(SAY_IDLE_2);
+                break;
+            case 4:
+                Talk(SAY_IDLE_3);
+                break;
+            default:
+                break;
+        }
     }
 
 private:

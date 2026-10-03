@@ -488,7 +488,9 @@ public:
         {
             SPELL_ARCANE_MISSILES = 34447,
             SPELL_CHAINS_OF_ICE   = 22744,
-            SPELL_COUNTERSPELL    = 31999
+            SPELL_COUNTERSPELL    = 31999,
+
+            PATH_KIL_SORROW_SPELLBINDER = 4816480
         };
 
         npc_kil_sorrow_spellbinderAI(Creature* creature) : npc_nagrand_bannerAI(creature), has_fled(false), interrupt_cooldown(20000)
@@ -540,6 +542,32 @@ public:
             {
                 me->DoFleeToGetAssistance();
                 has_fled = true;
+            }
+        }
+
+        void WaypointReached(uint32 waypointId, uint32 pathId) override
+        {
+            if (pathId != PATH_KIL_SORROW_SPELLBINDER)
+                return;
+
+            switch (waypointId)
+            {
+                case 3:
+                case 7:
+                    me->m_Events.AddEventAtOffset([creature = me]() { creature->SetEmoteState(EMOTE_STATE_USE_STANDING); }, 1s);
+                    break;
+                case 4:
+                case 8:
+                    me->SetEmoteState(EMOTE_ONESHOT_NONE);
+                    break;
+                case 10:
+                    me->HandleEmoteCommand(EMOTE_ONESHOT_POINT);
+                    break;
+                case 11:
+                    me->HandleEmoteCommand(EMOTE_ONESHOT_APPLAUD);
+                    break;
+                default:
+                    break;
             }
         }
 

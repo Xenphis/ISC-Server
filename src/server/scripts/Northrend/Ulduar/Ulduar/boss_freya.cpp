@@ -56,6 +56,9 @@ enum FreyaSpells
     SPELL_SUNBEAM                                = 62623,
     SPELL_ENRAGE                                 = 47008,
     SPELL_FREYA_GROUND_TREMOR                    = 62437,
+    SPELL_FREYA_DUMMY_GREEN                      = 63295,
+    SPELL_FREYA_DUMMY_YELLOW                     = 63292,
+    SPELL_FREYA_DUMMY_BLUE                       = 63294,
     SPELL_ROOTS_FREYA                            = 62283,
     SPELL_STONEBARK_ESSENCE                      = 62483,
     SPELL_IRONBRANCH_ESSENCE                     = 62484,
@@ -167,6 +170,7 @@ enum FreyaNpcs
     NPC_UNSTABLE_SUN_BEAM                        = 33050,
     NPC_IRON_ROOTS                               = 33088,
     NPC_STRENGTHENED_IRON_ROOTS                  = 33168,
+    NPC_CHANNEL_STALKER_FREYA                    = 33575,
 
     OBJECT_NATURE_BOMB                           = 194902
 };
@@ -208,7 +212,8 @@ enum Misc
 {
     TIME_DIFFERENCE                             = 10000, // If difference between waveTime and WAVE_TIME is bigger then TIME_DIFFERENCE, schedule EVENT_WAVE in 10 seconds
     DATA_GETTING_BACK_TO_NATURE                 = 1,
-    DATA_KNOCK_ON_WOOD                          = 2
+    DATA_KNOCK_ON_WOOD                          = 2,
+    PATH_FREYA_IDLE                             = 10924320
 };
 
 constexpr Seconds FREYA_WAVE_TIME = 60s; // Normal wave is one minute
@@ -686,6 +691,34 @@ class boss_freya : public CreatureScript
                         summons.Despawn(summoned);
                         break;
                 }
+            }
+
+            void WaypointReached(uint32 waypointId, uint32 pathId) override
+            {
+                if (pathId != PATH_FREYA_IDLE)
+                    return;
+
+                uint32 spellId = 0;
+                switch (waypointId)
+                {
+                    case 4:
+                        spellId = SPELL_FREYA_DUMMY_GREEN;
+                        break;
+                    case 10:
+                        spellId = SPELL_FREYA_DUMMY_YELLOW;
+                        break;
+                    case 18:
+                        spellId = SPELL_FREYA_DUMMY_BLUE;
+                        break;
+                    default:
+                        return;
+                }
+
+                me->m_Events.AddEventAtOffset([creature = me, spellId]()
+                {
+                    if (Creature* stalker = creature->FindNearestCreature(NPC_CHANNEL_STALKER_FREYA, 30.0f))
+                        creature->CastSpell(stalker, spellId);
+                }, 3s);
             }
         };
 

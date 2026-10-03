@@ -62,6 +62,11 @@ enum BlackStalkerEvents
     EVENT_SUMMON_SPORE_STRIDER
 };
 
+enum BlackStalkerMisc
+{
+    PATH_BLACK_STALKER_IDLE             = 4346960
+};
+
 // 17882 - The Black Stalker
 struct boss_the_black_stalker : public BossAI
 {
@@ -124,6 +129,15 @@ struct boss_the_black_stalker : public BossAI
         }
 
         DoMeleeAttackIfReady();
+    }
+
+    void WaypointReached(uint32 waypointId, uint32 pathId) override
+    {
+        if (pathId != PATH_BLACK_STALKER_IDLE)
+            return;
+
+        if (waypointId == 2 || waypointId == 4 || waypointId == 6)
+            me->m_Events.AddEventAtOffset([creature = me]() { creature->HandleEmoteCommand(EMOTE_ONESHOT_EAT); }, 2s);
     }
 };
 

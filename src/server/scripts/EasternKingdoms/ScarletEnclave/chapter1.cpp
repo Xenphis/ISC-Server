@@ -36,6 +36,7 @@
 #include "SpellScript.h"
 #include "TemporarySummon.h"
 #include "Vehicle.h"
+#include "WaypointManager.h"
 
 /*######
 ##Quest 12848
@@ -630,6 +631,16 @@ enum Misc_VBN
     QUEST_DEATH_CHALLENGE       = 12733
 };
 
+// Spawn paths of Death Knight Initiates and Hearthglen/Tirisfal Crusaders end with a despawn
+static bool IsLastNodeOfSpawnPath(Creature const* creature, uint32 waypointId, uint32 pathId)
+{
+    if (pathId != creature->GetWaypointPath())
+        return false;
+
+    WaypointPath const* path = sWaypointMgr->GetPath(pathId);
+    return path && !path->nodes.empty() && path->nodes.back().id == waypointId;
+}
+
 class npc_death_knight_initiate : public CreatureScript
 {
 public:
@@ -736,6 +747,12 @@ public:
             /// @todo spells
 
             CombatAI::UpdateAI(uiDiff);
+        }
+
+        void WaypointReached(uint32 waypointId, uint32 pathId) override
+        {
+            if (IsLastNodeOfSpawnPath(me, waypointId, pathId))
+                me->DespawnOrUnsummon(2s);
         }
 
         bool OnGossipSelect(Player* player, uint32 /*menuId*/, uint32 gossipListId) override
@@ -1146,6 +1163,19 @@ struct npc_scarlet_ghoul : public ScriptedAI
     }
 };
 
+// 29102 - Hearthglen Crusader
+// 29103 - Tirisfal Crusader
+struct npc_hearthglen_crusader : public ArcherAI
+{
+    npc_hearthglen_crusader(Creature* creature) : ArcherAI(creature) { }
+
+    void WaypointReached(uint32 waypointId, uint32 pathId) override
+    {
+        if (IsLastNodeOfSpawnPath(me, waypointId, pathId))
+            me->DespawnOrUnsummon(2s);
+    }
+};
+
 enum GiftOfTheHarvester
 {
     SPELL_GHOUL_TRANFORM    = 52490,
@@ -1310,6 +1340,7 @@ void AddSC_the_scarlet_enclave_c1()
     new npc_ros_dark_rider();
     new npc_dkc1_gothik();
     RegisterCreatureAI(npc_scarlet_ghoul);
+    RegisterCreatureAI(npc_hearthglen_crusader);
     RegisterSpellScript(spell_gift_of_the_harvester);
     RegisterSpellScript(spell_chapter1_runeforging_credit);
     RegisterSpellScript(spell_chapter1_sky_darkener_assault);

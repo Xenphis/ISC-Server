@@ -135,7 +135,8 @@ enum Misc
 {
     ACHIEV_MUST_DECONSTRUCT_FASTER = 21027,
     HEART_VEHICLE_SEAT_EXPOSED     = 1,
-    GROUP_SEARING_GRAVITY          = 1
+    GROUP_SEARING_GRAVITY          = 1,
+    PATH_XT002_IDLE                = 10884320
 };
 
 struct boss_xt002 : public BossAI
@@ -386,6 +387,27 @@ struct boss_xt002 : public BossAI
 
         if (events.IsInPhase(PHASE_1))
             DoMeleeAttackIfReady();
+    }
+
+    void WaypointReached(uint32 waypointId, uint32 pathId) override
+    {
+        if (pathId != PATH_XT002_IDLE)
+            return;
+
+        switch (waypointId)
+        {
+            case 3:
+            case 9:
+                me->SetEmoteState(EMOTE_STATE_SPELL_CHANNEL_OMNI);
+                me->m_Events.AddEventAtOffset([creature = me]() { creature->SetEmoteState(EMOTE_ONESHOT_NONE); }, 11s);
+                break;
+            case 13:
+                me->SetEmoteState(EMOTE_STATE_DANCE);
+                me->m_Events.AddEventAtOffset([creature = me]() { creature->SetEmoteState(EMOTE_ONESHOT_NONE); }, 30s);
+                break;
+            default:
+                break;
+        }
     }
 
 private:

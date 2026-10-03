@@ -38,7 +38,9 @@ enum BlackheartTexts
     SAY_CHAOS                      = 0,
     SAY_AGGRO                      = 1,
     SAY_SLAY                       = 2,
-    SAY_DEATH                      = 3
+    SAY_DEATH                      = 3,
+    SAY_IDLE_1                     = 4,
+    SAY_IDLE_2                     = 5
 };
 
 enum BlackheartSpells
@@ -71,6 +73,11 @@ enum BlackheartEvents
     EVENT_INCITE_CHAOS             = 1,
     EVENT_WAR_STOMP,
     EVENT_CHARGE_ATTACK
+};
+
+enum BlackheartMisc
+{
+    PATH_BLACKHEART_IDLE           = 5354960
 };
 
 static constexpr std::array<uint32, 5> InciteChaosSummonSpells =
@@ -158,6 +165,17 @@ struct boss_blackheart_the_inciter : public BossAI
         }
 
         DoMeleeAttackIfReady();
+    }
+
+    void WaypointReached(uint32 waypointId, uint32 pathId) override
+    {
+        if (pathId != PATH_BLACKHEART_IDLE)
+            return;
+
+        if (waypointId == 2)
+            Talk(SAY_IDLE_1);
+        else if (waypointId == 3)
+            Talk(SAY_IDLE_2);
     }
 };
 
