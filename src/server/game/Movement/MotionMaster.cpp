@@ -635,7 +635,7 @@ void MotionMaster::MovePoint(uint32 id, float x, float y, float z, bool generate
     MovementWalkRunSpeedSelectionMode speedSelectionMode /*= MovementWalkRunSpeedSelectionMode::Default*/, Optional<float> closeEnoughDistance /*= {}*/)
 {
     TC_LOG_DEBUG("movement.motionmaster", "MotionMaster::MovePoint: '{}', targeted point Id: {} (X: {}, Y: {}, Z: {})", _owner->GetGUID().ToString(), id, x, y, z);
-    Add(new PointMovementGenerator(id, x, y, z, generatePath, speed, finalOrient, nullptr, nullptr, speedSelectionMode, closeEnoughDistance));
+    Add(new PointMovementGenerator(id, x, y, z, generatePath, speed, finalOrient, speedSelectionMode, closeEnoughDistance));
 }
 
 void MotionMaster::MoveCloserAndStop(uint32 id, Unit* target, float distance)
@@ -695,7 +695,7 @@ void MotionMaster::MoveCharge(float x, float y, float z, float speed /*= SPEED_C
         return;
 */
     TC_LOG_DEBUG("movement.motionmaster", "MotionMaster::MoveCharge: '{}', charging point Id: {} (X: {}, Y: {}, Z: {})", _owner->GetGUID().ToString(), id, x, y, z);
-    PointMovementGenerator* movement = new PointMovementGenerator(id, x, y, z, generatePath, speed, {}, target, spellEffectExtraData);
+    PointMovementGenerator* movement = new PointMovementGenerator(id, x, y, z, generatePath, speed);
     movement->Priority = MOTION_PRIORITY_HIGHEST;
     movement->BaseUnitState = UNIT_STATE_CHARGING;
     Add(movement);
