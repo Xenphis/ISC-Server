@@ -20,6 +20,7 @@
 
 #include "MovementGenerator.h"
 #include "Optional.h"
+#include "Position.h"
 
 class Creature;
 
