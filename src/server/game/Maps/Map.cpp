@@ -3585,6 +3585,21 @@ Weather* Map::GetOrGenerateZoneDefaultWeather(uint32 zoneId)
     return info.DefaultWeather.get();
 }
 
+WeatherState Map::GetZoneWeather(uint32 zoneId) const
+{
+    ZoneDynamicInfo const* zoneDynamicInfo = Trinity::Containers::MapGetValuePtr(_zoneDynamicInfo, zoneId);
+    if (zoneDynamicInfo)
+    {
+        if (WeatherState weatherId = zoneDynamicInfo->WeatherId)
+            return weatherId;
+
+        if (zoneDynamicInfo->DefaultWeather)
+            return zoneDynamicInfo->DefaultWeather->GetWeatherState();
+    }
+
+    return WEATHER_STATE_FINE;
+}
+
 void Map::SetZoneWeather(uint32 zoneId, WeatherState weatherId, float intensity)
 {
     ZoneDynamicInfo& info = _zoneDynamicInfo[zoneId];
