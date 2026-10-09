@@ -197,7 +197,7 @@ class instance_zulaman : public InstanceMapScript
                 if (playerList.empty())
                     return;
 
-                if (Player* player = playerList.getFirst()->GetSource())
+                if (Player* player = playerList.front()->GetSource())
                 {
                     if (Unit* hostage = player->SummonCreature(HostageInfo[num].npc, HostageInfo[num].pos, TEMPSUMMON_DEAD_DESPAWN))
                     {
