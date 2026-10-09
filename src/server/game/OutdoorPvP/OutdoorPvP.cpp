@@ -137,6 +137,26 @@ bool OPvPCapturePoint::AddCreature(uint32 type, uint32 entry, uint32 map, Positi
     return false;
 }
 
+bool OPvPCapturePoint::SetCapturePointData(uint32 entry)
+{
+    TC_LOG_DEBUG("outdoorpvp", "Creating capture point %u", entry);
+
+    // check info existence
+    GameObjectTemplate const* goinfo = sObjectMgr->GetGameObjectTemplate(entry);
+    if (!goinfo || goinfo->type != GAMEOBJECT_TYPE_CAPTURE_POINT)
+    {
+        TC_LOG_ERROR("outdoorpvp", "OutdoorPvP: GO %u is not capture point!", entry);
+        return false;
+    }
+
+    // get the needed values from goinfo
+    m_maxValue = (float)goinfo->capturePoint.maxTime;
+    m_maxSpeed = m_maxValue / (goinfo->capturePoint.minTime ? goinfo->capturePoint.minTime : 60);
+    m_neutralValuePct = goinfo->capturePoint.neutralPercent;
+    m_minValue = CalculatePct(m_maxValue, m_neutralValuePct);
+    return true;
+}
+
 bool OPvPCapturePoint::SetCapturePointData(uint32 entry, uint32 map, Position const& pos, QuaternionData const& rot)
 {
     TC_LOG_DEBUG("outdoorpvp", "Creating capture point {}", entry);
