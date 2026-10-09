@@ -15,12 +15,12 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef TRINITY_OBJECTGRIDLOADER_H
-#define TRINITY_OBJECTGRIDLOADER_H
+#ifndef TRINITY_OBJECT_GRID_LOADER_H
+#define TRINITY_OBJECT_GRID_LOADER_H
 
+#include "Cell.h"
 #include "Define.h"
 #include "GridDefines.h"
-#include "Cell.h"
 
 class MapObject;
 class ObjectWorldLoader;
