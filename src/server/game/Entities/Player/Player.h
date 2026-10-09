@@ -2091,7 +2091,7 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
 
         bool IsVisibleGloballyFor(Player const* player) const;
 
-        void SendInitialVisiblePackets(Unit* target) const;
+        void SendInitialVisiblePackets(WorldObject* target) const;
         void UpdateObjectVisibility(bool forced = true) override;
         void UpdateVisibilityForPlayer();
         void UpdateVisibilityOf(WorldObject* target);
@@ -2099,7 +2099,7 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
         void SetPhaseMask(uint32 newPhaseMask, bool update) override;// overwrite Unit::SetPhaseMask
 
         template<class T>
-        void UpdateVisibilityOf(T* target, UpdateData& data, std::set<Unit*>& visibleNow);
+        void UpdateVisibilityOf(T* target, UpdateData& data, std::set<WorldObject*>& visibleNow);
 
         bool HasAtLoginFlag(AtLoginFlags f) const { return (m_atLoginFlags & f) != 0; }
         void SetAtLoginFlag(AtLoginFlags f) { m_atLoginFlags |= f; }

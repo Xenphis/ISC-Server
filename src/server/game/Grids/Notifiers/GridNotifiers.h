@@ -47,7 +47,7 @@ namespace Trinity
     {
         Player &i_player;
         UpdateData i_data;
-        std::set<Unit*> i_visibleNow;
+        std::set<WorldObject*> i_visibleNow;
         GuidUnorderedSet vis_guids;
 
         VisibleNotifier(Player &player) : i_player(player), vis_guids(player.m_clientGUIDs) { }
