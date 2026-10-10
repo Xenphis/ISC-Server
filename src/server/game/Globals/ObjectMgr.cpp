@@ -487,9 +487,18 @@ void ObjectMgr::LoadCreatureTemplates()
         // 63
         "ScriptName,"
         // 64
-        "StringId"
+        "StringId,"
+        // 65
+        "csft.StaticFlags1,"
+        // 66
+        "csft.StaticFlags2,"
+        // 67
+        "csft.StaticFlags3,"
+        // 68
+        "csft.StaticFlags4"
         " FROM creature_template ct"
-        " LEFT JOIN creature_template_movement ctm ON ct.entry = ctm.CreatureId");
+        " LEFT JOIN creature_template_movement ctm ON ct.entry = ctm.CreatureId"
+        " LEFT JOIN creature_static_flag_template csft ON ct.entry = csft.CreatureId");
 
     if (!result)
     {
@@ -608,6 +617,12 @@ void ObjectMgr::LoadCreatureTemplate(Field* fields)
     creatureTemplate.flags_extra           = fields[62].GetUInt32();
     creatureTemplate.ScriptID              = GetScriptId(fields[63].GetString());
     creatureTemplate.StringId              = fields[64].GetString();
+    creatureTemplate.StaticFlags           = CreatureStaticFlagsHolder(
+        fields[65].IsNull() ? CreatureStaticFlags() : CreatureStaticFlags(fields[65].GetUInt32()),
+        fields[66].IsNull() ? CreatureStaticFlags2() : CreatureStaticFlags2(fields[66].GetUInt32()),
+        fields[67].IsNull() ? CreatureStaticFlags3() : CreatureStaticFlags3(fields[67].GetUInt32()),
+        fields[68].IsNull() ? CreatureStaticFlags4() : CreatureStaticFlags4(fields[68].GetUInt32())
+    );
 }
 
 void ObjectMgr::LoadCreatureTemplateResistances()
