@@ -136,7 +136,7 @@ SpellCastResult UnitAI::DoCast(uint32 spellId)
                 float range = spellInfo->GetMaxRange(false);
 
                 DefaultTargetSelector targetSelector(me, range, playerOnly, true, -(int32)spellId);
-                if (!(spellInfo->AuraInterruptFlags & AURA_INTERRUPT_FLAG_NOT_VICTIM)
+                if (!spellInfo->HasAuraInterruptFlag(SpellAuraInterruptFlags::NotVictim)
                     && targetSelector(me->GetVictim()))
                     target = me->GetVictim();
                 else

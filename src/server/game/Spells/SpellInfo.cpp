@@ -835,8 +835,8 @@ SpellInfo::SpellInfo(SpellEntry const* spellEntry)
     StartRecoveryCategory = spellEntry->StartRecoveryCategory;
     StartRecoveryTime = spellEntry->StartRecoveryTime;
     InterruptFlags = spellEntry->InterruptFlags;
-    AuraInterruptFlags = spellEntry->AuraInterruptFlags;
-    ChannelInterruptFlags = spellEntry->ChannelInterruptFlags;
+    AuraInterruptFlags = SpellAuraInterruptFlags(spellEntry->AuraInterruptFlags);
+    ChannelInterruptFlags = SpellAuraInterruptFlags(spellEntry->ChannelInterruptFlags);
     ProcFlags = spellEntry->ProcTypeMask;
     ProcChance = spellEntry->ProcChance;
     ProcCharges = spellEntry->ProcCharges;
@@ -1244,7 +1244,7 @@ bool SpellInfo::IsChanneled() const
 
 bool SpellInfo::IsMoveAllowedChannel() const
 {
-    return IsChanneled() && (HasAttribute(SPELL_ATTR5_CAN_CHANNEL_WHEN_MOVING) || (!(ChannelInterruptFlags & (AURA_INTERRUPT_FLAG_MOVE | AURA_INTERRUPT_FLAG_TURNING))));
+    return IsChanneled() && (HasAttribute(SPELL_ATTR5_CAN_CHANNEL_WHEN_MOVING) || !ChannelInterruptFlags.HasFlag(SpellAuraInterruptFlags::Moving | SpellAuraInterruptFlags::Turning));
 }
 
 bool SpellInfo::NeedsComboPoints() const
@@ -2053,7 +2053,7 @@ void SpellInfo::_LoadSpellSpecific()
             case SPELLFAMILY_GENERIC:
             {
                 // Food / Drinks (mostly)
-                if (AuraInterruptFlags & AURA_INTERRUPT_FLAG_NOT_SEATED)
+                if (HasAuraInterruptFlag(SpellAuraInterruptFlags::Standing))
                 {
                     bool food = false;
                     bool drink = false;

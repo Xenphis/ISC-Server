@@ -852,7 +852,7 @@ bool VehicleJoinEvent::Execute(uint64, uint32)
             player->UnsummonPetTemporaryIfAny();
 
         // This is not perfectly mirroring official behavior (aura removal is delayed, most likely on heartbeat)
-        player->RemoveAurasWithInterruptFlags(AURA_INTERRUPT_FLAG_NOT_SEATED);
+        player->RemoveAurasWithInterruptFlags(SpellAuraInterruptFlags::Standing);
     }
 
     if (veSeat->HasFlag(VEHICLE_SEAT_FLAG_PASSENGER_NOT_SELECTABLE))
