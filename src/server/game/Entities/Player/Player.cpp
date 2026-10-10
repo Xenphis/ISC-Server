@@ -18850,18 +18850,18 @@ bool Player::CheckInstanceValidity(bool /*isLogin*/)
         if (!bind || !bind->save || bind->save->GetInstanceId() != map->GetInstanceId())
             return false;
 
-            for (MapReference const& playerReference : map->GetPlayers())
+        for (MapReference const& playerReference : map->GetPlayers())
+        {
+            if (Player* otherPlayer = playerReference.GetSource())
             {
-                if (Player* otherPlayer = playerReference.GetSource())
-                {
-                    if (otherPlayer->IsGameMaster())
-                        continue;
-                    if (!otherPlayer->m_InstanceValid) // ignore players that currently have a homebind timer active
-                        continue;
-                    if (group != otherPlayer->GetGroup())
-                        return false;
-                }
+                if (otherPlayer->IsGameMaster())
+                    continue;
+                if (!otherPlayer->m_InstanceValid) // ignore players that currently have a homebind timer active
+                    continue;
+                if (group != otherPlayer->GetGroup())
+                    return false;
             }
+        }
     }
     else
     {
