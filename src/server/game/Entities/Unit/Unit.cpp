@@ -746,7 +746,7 @@ bool Unit::HasBreakableByDamageCrowdControlAura(Unit* excludeCasterChannel) cons
         else
             victim->RemoveAurasWithInterruptFlags(SpellAuraInterruptFlags::Damage, 0);
 
-        // interrupt spells with SPELL_INTERRUPT_FLAG_ABORT_ON_DMG on absorbed damage (no dots)
+        // interrupt spells with SpellInterruptFlags::DamageCancelsPlayerOnly on absorbed damage (no dots)
         if (!damage && damagetype != DOT && cleanDamage && cleanDamage->absorbed_damage)
         {
             if (victim != attacker && victim->GetTypeId() == TYPEID_PLAYER)
@@ -754,8 +754,7 @@ bool Unit::HasBreakableByDamageCrowdControlAura(Unit* excludeCasterChannel) cons
                 if (Spell* spell = victim->m_currentSpells[CURRENT_GENERIC_SPELL])
                     if (spell->getState() == SPELL_STATE_PREPARING)
                     {
-                        uint32 interruptFlags = spell->m_spellInfo->InterruptFlags;
-                        if ((interruptFlags & SPELL_INTERRUPT_FLAG_ABORT_ON_DMG) != 0)
+                        if (spell->m_spellInfo->InterruptFlags.HasFlag(SpellInterruptFlags::DamageCancelsPlayerOnly))
                             victim->InterruptNonMeleeSpells(false);
                     }
             }
@@ -942,8 +941,7 @@ bool Unit::HasBreakableByDamageCrowdControlAura(Unit* excludeCasterChannel) cons
                     {
                         if (spell->getState() == SPELL_STATE_PREPARING)
                         {
-                            uint32 interruptFlags = spell->m_spellInfo->InterruptFlags;
-                            if (interruptFlags & SPELL_INTERRUPT_FLAG_ABORT_ON_DMG)
+                            if (spell->m_spellInfo->InterruptFlags.HasFlag(SpellInterruptFlags::DamageCancelsPlayerOnly))
                                 victim->InterruptNonMeleeSpells(false);
                             else
                                 spell->Delayed();
@@ -3139,7 +3137,7 @@ bool Unit::IsMovementPreventedByCasting() const
 
     if (Spell* spell = m_currentSpells[CURRENT_GENERIC_SPELL])
         if (spell->getState() == SPELL_STATE_FINISHED ||
-            !(spell->m_spellInfo->InterruptFlags & SPELL_INTERRUPT_FLAG_MOVEMENT))
+            !spell->m_spellInfo->InterruptFlags.HasFlag(SpellInterruptFlags::Movement))
             return false;
 
     // channeled spells during channel stage (after the initial cast timer) allow movement with a specific spell attribute

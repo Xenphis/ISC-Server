@@ -3335,7 +3335,7 @@ void Spell::EffectInterruptCast()
             if ((spell->getState() == SPELL_STATE_CASTING
                 || (spell->getState() == SPELL_STATE_PREPARING && spell->GetCastTime() > 0.0f))
                 && curSpellInfo->PreventionType == SPELL_PREVENTION_TYPE_SILENCE
-                && ((i == CURRENT_GENERIC_SPELL && curSpellInfo->InterruptFlags & SPELL_INTERRUPT_FLAG_INTERRUPT)
+                && ((i == CURRENT_GENERIC_SPELL && curSpellInfo->InterruptFlags.HasFlag(SpellInterruptFlags::Interrupt))
                 || (i == CURRENT_CHANNELED_SPELL && curSpellInfo->HasChannelInterruptFlag(SpellAuraInterruptFlags::Moving))))
             {
                 if (Unit* unitCaster = GetUnitCasterForEffectHandlers())
