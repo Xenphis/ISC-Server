@@ -213,7 +213,7 @@ class spell_shirrak_inhibit_magic : public SpellScript
         GetCaster()->CastSpell(nullptr, GetSpellInfo()->Id, CastSpellExtraArgs()
             .SetTriggerFlags(TRIGGERED_FULL_MASK)
             .AddSpellMod(SPELLVALUE_BASE_POINT1, castIndex + 1)
-            .AddSpellMod(SPELLVALUE_RADIUS_MOD, int32(radiusMod * 10000)));
+            .AddSpellMod(SPELLVALUE_RADIUS_MOD, radiusMod));
     }
 
     int32 GetCastIndex() const

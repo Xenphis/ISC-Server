@@ -29,6 +29,7 @@ class Corpse;
 class GameObject;
 class Item;
 class Player;
+class Spell;
 class Unit;
 class WorldObject;
 
@@ -128,14 +129,20 @@ enum SpellModOp : uint8
     MAX_SPELLMOD
 };
 
-enum SpellValueMod : uint8
+enum SpellValueMod : int32
 {
     SPELLVALUE_BASE_POINT0,
     SPELLVALUE_BASE_POINT1,
     SPELLVALUE_BASE_POINT2,
-    SPELLVALUE_RADIUS_MOD,
     SPELLVALUE_MAX_TARGETS,
     SPELLVALUE_AURA_STACK,
+
+    SPELLVALUE_INT_END
+};
+
+enum SpellValueModFloat : int32
+{
+    SPELLVALUE_RADIUS_MOD = SPELLVALUE_INT_END,
     SPELLVALUE_CRIT_CHANCE
 };
 
@@ -337,41 +344,50 @@ struct TC_GAME_API CastSpellTargetArg
     Optional<SpellCastTargets> Targets; // empty optional used to signal error state
 };
 
-struct TC_GAME_API CastSpellExtraArgs
+struct CastSpellExtraArgsInit
+{
+    TriggerCastFlags TriggerFlags = TRIGGERED_NONE;
+    Item* CastItem = nullptr;
+    Spell const* TriggeringSpell = nullptr;
+    AuraEffect const* TriggeringAura = nullptr;
+    ObjectGuid OriginalCaster = ObjectGuid::Empty;
+    struct SpellValueOverride
+    {
+        SpellValueOverride(SpellValueMod mod, int32 val) : Type(mod) { Value.I = val; }
+        SpellValueOverride(SpellValueModFloat mod, float val) : Type(mod) { Value.F = val; }
+
+        int32 Type;
+        union
+        {
+            float F;
+            int32 I;
+        } Value;
+    };
+    std::vector<SpellValueOverride> SpellValueOverrides;
+};
+
+struct TC_GAME_API CastSpellExtraArgs : public CastSpellExtraArgsInit
 {
     CastSpellExtraArgs() {}
-    CastSpellExtraArgs(bool triggered) : TriggerFlags(triggered ? TRIGGERED_FULL_MASK : TRIGGERED_NONE) {}
-    CastSpellExtraArgs(TriggerCastFlags trigger) : TriggerFlags(trigger) {}
-    CastSpellExtraArgs(Item* item) : TriggerFlags(TRIGGERED_FULL_MASK), CastItem(item) {}
-    CastSpellExtraArgs(AuraEffect const* eff) : TriggerFlags(TRIGGERED_FULL_MASK), TriggeringAura(eff) {}
-    CastSpellExtraArgs(ObjectGuid const& origCaster) : TriggerFlags(TRIGGERED_FULL_MASK), OriginalCaster(origCaster) {}
-    CastSpellExtraArgs(AuraEffect const* eff, ObjectGuid const& origCaster) : TriggerFlags(TRIGGERED_FULL_MASK), TriggeringAura(eff), OriginalCaster(origCaster) {}
-    CastSpellExtraArgs(SpellValueMod mod, int32 val) { SpellValueOverrides.AddMod(mod, val); }
+    CastSpellExtraArgs(bool triggered) { TriggerFlags = triggered ? TRIGGERED_FULL_MASK : TRIGGERED_NONE; }
+    CastSpellExtraArgs(TriggerCastFlags trigger) { TriggerFlags = trigger; }
+    CastSpellExtraArgs(Item* item) { TriggerFlags = TRIGGERED_FULL_MASK; CastItem = item; }
+    CastSpellExtraArgs(Spell const* triggeringSpell) { TriggerFlags = TRIGGERED_FULL_MASK; TriggeringSpell = triggeringSpell; }
+    CastSpellExtraArgs(AuraEffect const* eff) { TriggerFlags = TRIGGERED_FULL_MASK; TriggeringAura = eff; }
+    CastSpellExtraArgs(ObjectGuid const& origCaster) { TriggerFlags = TRIGGERED_FULL_MASK; OriginalCaster = origCaster; }
+    CastSpellExtraArgs(AuraEffect const* eff, ObjectGuid const& origCaster) { TriggerFlags = TRIGGERED_FULL_MASK; TriggeringAura = eff; OriginalCaster = origCaster; }
+    CastSpellExtraArgs(SpellValueMod mod, int32 val) { SpellValueOverrides.emplace_back(mod, val); }
+    CastSpellExtraArgs(SpellValueModFloat mod, float val) { SpellValueOverrides.emplace_back(mod, val); }
+    CastSpellExtraArgs(CastSpellExtraArgsInit&& init) : CastSpellExtraArgsInit(std::move(init)) { }
 
     CastSpellExtraArgs& SetTriggerFlags(TriggerCastFlags flag) { TriggerFlags = flag; return *this; }
     CastSpellExtraArgs& SetCastItem(Item* item) { CastItem = item; return *this; }
+    CastSpellExtraArgs& SetTriggeringSpell(Spell const* triggeringSpell) { TriggeringSpell = triggeringSpell; return *this; }
     CastSpellExtraArgs& SetTriggeringAura(AuraEffect const* triggeringAura) { TriggeringAura = triggeringAura; return *this; }
     CastSpellExtraArgs& SetOriginalCaster(ObjectGuid const& guid) { OriginalCaster = guid; return *this; }
-    CastSpellExtraArgs& AddSpellMod(SpellValueMod mod, int32 val) { SpellValueOverrides.AddMod(mod, val); return *this; }
+    CastSpellExtraArgs& AddSpellMod(SpellValueMod mod, int32 val) { SpellValueOverrides.emplace_back(mod, val); return *this; }
+    CastSpellExtraArgs& AddSpellMod(SpellValueModFloat mod, float val) { SpellValueOverrides.emplace_back(mod, val); return *this; }
     CastSpellExtraArgs& AddSpellBP0(int32 val) { return AddSpellMod(SPELLVALUE_BASE_POINT0, val); } // because i don't want to type SPELLVALUE_BASE_POINT0 300 times
-
-    TriggerCastFlags TriggerFlags = TRIGGERED_NONE;
-    Item* CastItem = nullptr;
-    AuraEffect const* TriggeringAura = nullptr;
-    ObjectGuid OriginalCaster = ObjectGuid::Empty;
-    struct
-    {
-        friend struct CastSpellExtraArgs;
-        friend class WorldObject;
-
-        private:
-            void AddMod(SpellValueMod mod, int32 val) { data.push_back({ mod, val }); }
-
-            auto begin() const { return data.cbegin(); }
-            auto end() const { return data.cend(); }
-
-            std::vector<std::pair<SpellValueMod, int32>> data;
-    } SpellValueOverrides;
 };
 
 #endif
