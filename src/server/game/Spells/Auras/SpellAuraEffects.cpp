@@ -542,7 +542,7 @@ uint32 AuraEffect::GetTotalTicks() const
     if (_period && !GetBase()->IsPermanent())
     {
         totalTicks = static_cast<uint32>(GetBase()->GetMaxDuration() / _period);
-        if (m_spellInfo->HasAttribute(SPELL_ATTR5_START_PERIODIC_AT_APPLY))
+        if (m_spellInfo->HasAttribute(SPELL_ATTR5_EXTRA_INITIAL_PERIOD))
             ++totalTicks;
     }
 
@@ -556,7 +556,7 @@ void AuraEffect::ResetPeriodic(bool resetPeriodicTimer /*= false*/)
     {
         _periodicTimer = 0;
         // Start periodic on next tick or at aura apply
-        if (m_spellInfo->HasAttribute(SPELL_ATTR5_START_PERIODIC_AT_APPLY))
+        if (m_spellInfo->HasAttribute(SPELL_ATTR5_EXTRA_INITIAL_PERIOD))
             _periodicTimer = _period;
     }
 }
@@ -608,7 +608,7 @@ void AuraEffect::CalculatePeriodic(Unit* caster, bool resetPeriodicTimer /*= tru
             if (m_spellInfo->IsChanneled())
                 caster->ModSpellDurationTime(m_spellInfo, _period);
             // and periodic time of auras affected by SPELL_AURA_PERIODIC_HASTE
-            else if (caster->HasAuraTypeWithAffectMask(SPELL_AURA_PERIODIC_HASTE, m_spellInfo) || m_spellInfo->HasAttribute(SPELL_ATTR5_HASTE_AFFECT_DURATION))
+            else if (caster->HasAuraTypeWithAffectMask(SPELL_AURA_PERIODIC_HASTE, m_spellInfo) || m_spellInfo->HasAttribute(SPELL_ATTR5_SPELL_HASTE_AFFECTS_PERIODIC))
                 _period = int32(_period * caster->GetFloatValue(UNIT_MOD_CAST_SPEED));
         }
     }
@@ -624,7 +624,7 @@ void AuraEffect::CalculatePeriodic(Unit* caster, bool resetPeriodicTimer /*= tru
             _periodicTimer = elapsedTime % uint32(_period);
         }
 
-        if (m_spellInfo->HasAttribute(SPELL_ATTR5_START_PERIODIC_AT_APPLY))
+        if (m_spellInfo->HasAttribute(SPELL_ATTR5_EXTRA_INITIAL_PERIOD))
             ++_ticksDone;
     }
     else // aura just created or reapplied
