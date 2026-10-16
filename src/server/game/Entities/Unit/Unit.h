@@ -1743,8 +1743,6 @@ class TC_GAME_API Unit : public WorldObject
 
         bool m_ControlledByPlayer;
 
-        bool m_AutoRepeatFirstCast;
-
         std::array<float, MAX_STATS> m_createStats;
 
         AttackerSet m_attackers;
