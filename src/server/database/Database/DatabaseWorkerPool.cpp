@@ -189,7 +189,8 @@ void DatabaseWorkerPool<T>::Close()
 {
     TC_LOG_INFO("sql.driver", "Closing down DatabasePool '{}'.", GetDatabaseName());
 
-    _ioContext->stop();
+    if (_ioContext)
+        _ioContext->stop();
 
     //! Closes the actualy MySQL connection.
     _connections[IDX_ASYNC].clear();
