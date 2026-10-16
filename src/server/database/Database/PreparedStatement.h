@@ -18,12 +18,15 @@
 #ifndef _PREPAREDSTATEMENT_H
 #define _PREPAREDSTATEMENT_H
 
+#include "DatabaseEnvFwd.h"
 #include "Define.h"
 #include "Duration.h"
-#include "SQLOperation.h"
-#include <future>
-#include <vector>
+#include <array>
+#include <string>
 #include <variant>
+#include <vector>
+
+class MySQLConnection;
 
 struct PreparedStatementData
 {
@@ -116,18 +119,11 @@ private:
 };
 
 //- Lower-level class, enqueuable operation
-class TC_DATABASE_API PreparedStatementTask : public SQLOperation
+class TC_DATABASE_API PreparedStatementTask
 {
-    public:
-        PreparedStatementTask(PreparedStatementBase* stmt, bool async = false);
-        ~PreparedStatementTask();
-
-        bool Execute() override;
-        PreparedQueryResultFuture GetFuture() { return m_result->get_future(); }
-
-    protected:
-        PreparedStatementBase* m_stmt;
-        bool m_has_result;
-        PreparedQueryResultPromise* m_result;
+public:
+    static PreparedQueryResult Query(MySQLConnection* conn, PreparedStatementBase* stmt);
+    static bool Execute(MySQLConnection* conn, PreparedStatementBase* stmt);
 };
+
 #endif
