@@ -21,6 +21,13 @@ ISC (Immersive SoloCraft) is a fork of **TrinityCore** (a WoW 3.3.5 MMORPG serve
 
 **Toolchain baseline:** C++23, CMake ≥ 4, Boost ≥ 1.90, OpenSSL ≥ 3, MySQL ≥ 9.
 
+**Project related folder**
+The project have split in different github repository :
+
+- '/client' folder related files to UI modifications done as Addons.
+- '../ISC-StoryBook' contains the lore developpment for the project
+- '../Client-Source-Code' contains the source code of the client.
+
 ## Build
 
 **Do not configure or build unless explicitly asked**. Builds are slow (CMake + compile of a large C++ codebase) and rarely needed to make code changes.
