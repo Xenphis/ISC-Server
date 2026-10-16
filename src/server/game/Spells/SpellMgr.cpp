@@ -3851,7 +3851,7 @@ void SpellMgr::LoadSpellInfoCorrections()
         8983   // Druid - Bash  - R3
     }, [](SpellInfo* spellInfo)
     {
-        spellInfo->AttributesEx7 |= SPELL_ATTR7_INTERRUPT_ONLY_NONPLAYER;
+        spellInfo->AttributesEx7 |= SPELL_ATTR7_CAN_CAUSE_INTERRUPT;
     });
 
     // Guardian Spirit
