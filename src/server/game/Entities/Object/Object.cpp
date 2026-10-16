@@ -2427,7 +2427,7 @@ void WorldObject::ModSpellCastTime(SpellInfo const* spellInfo, int32& castTime, 
     if (!unitCaster)
         return;
 
-    if (!(spellInfo->HasAttribute(SPELL_ATTR0_IS_ABILITY) || spellInfo->HasAttribute(SPELL_ATTR0_IS_TRADESKILL) || spellInfo->HasAttribute(SPELL_ATTR3_NO_DONE_BONUS)) &&
+    if (!(spellInfo->HasAttribute(SPELL_ATTR0_IS_ABILITY) || spellInfo->HasAttribute(SPELL_ATTR0_IS_TRADESKILL) || spellInfo->HasAttribute(SPELL_ATTR3_IGNORE_CASTER_MODIFIERS)) &&
         ((GetTypeId() == TYPEID_PLAYER && spellInfo->SpellFamilyName) || GetTypeId() == TYPEID_UNIT))
         castTime = unitCaster->CanInstantCast() ? 0 : int32(float(castTime) * unitCaster->GetFloatValue(UNIT_MOD_CAST_SPEED));
     else if (spellInfo->HasAttribute(SPELL_ATTR0_USES_RANGED_SLOT) && !spellInfo->HasAttribute(SPELL_ATTR2_AUTO_REPEAT))
@@ -2452,7 +2452,7 @@ void WorldObject::ModSpellDurationTime(SpellInfo const* spellInfo, int32& durati
     if (!unitCaster)
         return;
 
-    if (!(spellInfo->HasAttribute(SPELL_ATTR0_IS_ABILITY) || spellInfo->HasAttribute(SPELL_ATTR0_IS_TRADESKILL) || spellInfo->HasAttribute(SPELL_ATTR3_NO_DONE_BONUS)) &&
+    if (!(spellInfo->HasAttribute(SPELL_ATTR0_IS_ABILITY) || spellInfo->HasAttribute(SPELL_ATTR0_IS_TRADESKILL) || spellInfo->HasAttribute(SPELL_ATTR3_IGNORE_CASTER_MODIFIERS)) &&
         ((GetTypeId() == TYPEID_PLAYER && spellInfo->SpellFamilyName) || GetTypeId() == TYPEID_UNIT))
         duration = int32(float(duration) * unitCaster->GetFloatValue(UNIT_MOD_CAST_SPEED));
     else if (spellInfo->HasAttribute(SPELL_ATTR0_USES_RANGED_SLOT) && !spellInfo->HasAttribute(SPELL_ATTR2_AUTO_REPEAT))
@@ -2604,7 +2604,7 @@ SpellMissInfo WorldObject::SpellHitResult(Unit* victim, SpellInfo const* spellIn
             return SPELL_MISS_REFLECT;
     }
 
-    if (spellInfo->HasAttribute(SPELL_ATTR3_IGNORE_HIT_RESULT))
+    if (spellInfo->HasAttribute(SPELL_ATTR3_ALWAYS_HIT))
         return SPELL_MISS_NONE;
 
     switch (spellInfo->DmgClass)

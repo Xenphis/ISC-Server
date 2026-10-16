@@ -4215,7 +4215,7 @@ void Unit::RemoveArenaAuras()
         Aura const* aura = aurApp->GetBase();
         return (!aura->GetSpellInfo()->HasAttribute(SPELL_ATTR4_DONT_REMOVE_IN_ARENA)                          // don't remove stances, shadowform, pally/hunter auras
             && !aura->IsPassive()                                                                              // don't remove passive auras
-            && (aurApp->IsPositive() || !aura->GetSpellInfo()->HasAttribute(SPELL_ATTR3_DEATH_PERSISTENT))) || // not negative death persistent auras
+            && (aurApp->IsPositive() || !aura->GetSpellInfo()->HasAttribute(SPELL_ATTR3_ALLOW_AURA_WHILE_DEAD))) || // not negative death persistent auras
             aura->GetSpellInfo()->HasAttribute(SPELL_ATTR5_REMOVE_ON_ARENA_ENTER);                             // special marker, always remove
     });
 }
@@ -6449,7 +6449,7 @@ uint32 Unit::SpellDamageBonusDone(Unit* victim, SpellInfo const* spellProto, uin
         return pdamage;
 
     // Some spells don't benefit from done mods
-    if (spellProto->HasAttribute(SPELL_ATTR3_NO_DONE_BONUS))
+    if (spellProto->HasAttribute(SPELL_ATTR3_IGNORE_CASTER_MODIFIERS))
         return pdamage;
 
     // For totems get damage bonus from owner
@@ -6589,7 +6589,7 @@ float Unit::SpellDamagePctDone(Unit* victim, SpellInfo const* spellProto, Damage
         return 1.0f;
 
     // Some spells don't benefit from done mods
-    if (spellProto->HasAttribute(SPELL_ATTR3_NO_DONE_BONUS))
+    if (spellProto->HasAttribute(SPELL_ATTR3_IGNORE_CASTER_MODIFIERS))
         return 1.0f;
 
     // Some spells don't benefit from pct done mods
@@ -7476,7 +7476,7 @@ float Unit::SpellHealingPctDone(Unit* victim, SpellInfo const* spellProto) const
             return owner->SpellHealingPctDone(victim, spellProto);
 
     // Some spells don't benefit from done mods
-    if (spellProto->HasAttribute(SPELL_ATTR3_NO_DONE_BONUS))
+    if (spellProto->HasAttribute(SPELL_ATTR3_IGNORE_CASTER_MODIFIERS))
         return 1.0f;
 
     // Some spells don't benefit from done mods
@@ -7653,7 +7653,7 @@ bool Unit::IsImmunedToDamage(SpellInfo const* spellInfo) const
         return false;
 
     // for example 40175
-    if (spellInfo->HasAttribute(SPELL_ATTR0_NO_IMMUNITIES) && spellInfo->HasAttribute(SPELL_ATTR3_IGNORE_HIT_RESULT))
+    if (spellInfo->HasAttribute(SPELL_ATTR0_NO_IMMUNITIES) && spellInfo->HasAttribute(SPELL_ATTR3_ALWAYS_HIT))
         return false;
 
     if (spellInfo->HasAttribute(SPELL_ATTR1_IMMUNITY_TO_HOSTILE_AND_FRIENDLY_EFFECTS) || spellInfo->HasAttribute(SPELL_ATTR2_NO_SCHOOL_IMMUNITIES))
@@ -7840,7 +7840,7 @@ bool Unit::IsImmunedToSpellEffect(SpellInfo const* spellInfo, SpellEffectInfo co
 
     if (AuraType aura = spellEffectInfo.ApplyAuraName)
     {
-        if (!spellInfo->HasAttribute(SPELL_ATTR3_IGNORE_HIT_RESULT))
+        if (!spellInfo->HasAttribute(SPELL_ATTR3_ALWAYS_HIT))
         {
             SpellImmuneContainer const& list = m_spellImmune[IMMUNITY_STATE];
             if (hasImmunity(list, aura))
@@ -10016,12 +10016,12 @@ void Unit::TriggerAurasProcOnEvent(ProcEventInfo& eventInfo, AuraApplicationProc
             continue;
 
         SpellInfo const* spellInfo = aurApp->GetBase()->GetSpellInfo();
-        if (spellInfo->HasAttribute(SPELL_ATTR3_DISABLE_PROC))
+        if (spellInfo->HasAttribute(SPELL_ATTR3_INSTANT_TARGET_PROCS))
             SetCantProc(true);
 
         aurApp->GetBase()->TriggerProcOnEvent(procEffectMask, aurApp, eventInfo);
 
-        if (spellInfo->HasAttribute(SPELL_ATTR3_DISABLE_PROC))
+        if (spellInfo->HasAttribute(SPELL_ATTR3_INSTANT_TARGET_PROCS))
             SetCantProc(false);
     }
 

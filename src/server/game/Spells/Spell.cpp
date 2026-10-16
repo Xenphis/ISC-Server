@@ -1885,9 +1885,9 @@ uint32 Spell::GetSearcherTypeMask(SpellTargetObjectTypes objType, ConditionConta
             break;
     }
 
-    if (m_spellInfo->HasAttribute(SPELL_ATTR3_ONLY_TARGET_PLAYERS))
+    if (m_spellInfo->HasAttribute(SPELL_ATTR3_ONLY_ON_PLAYER))
         retMask &= GRID_MAP_TYPE_MASK_CORPSE | GRID_MAP_TYPE_MASK_PLAYER;
-    if (m_spellInfo->HasAttribute(SPELL_ATTR3_ONLY_TARGET_GHOSTS))
+    if (m_spellInfo->HasAttribute(SPELL_ATTR3_ONLY_ON_GHOSTS))
         retMask &= GRID_MAP_TYPE_MASK_PLAYER;
 
     if (condList)
@@ -2512,7 +2512,7 @@ void Spell::TargetInfo::DoDamageAndTriggers(Spell* spell)
         uint32 hitMask = PROC_HIT_NONE;
 
         // Spells with this flag cannot trigger if effect is cast on self
-        bool const canEffectTrigger = !spell->m_spellInfo->HasAttribute(SPELL_ATTR3_CANT_TRIGGER_PROC) && spell->unitTarget->CanProc() &&
+        bool const canEffectTrigger = !spell->m_spellInfo->HasAttribute(SPELL_ATTR3_SUPPRESS_CASTER_PROCS) && spell->unitTarget->CanProc() &&
             (spell->CanExecuteTriggersOnHit(EffectMask) || MissCondition == SPELL_MISS_IMMUNE || MissCondition == SPELL_MISS_IMMUNE2);
 
         // Trigger info was not filled in Spell::prepareDataForTriggerSystem - we do it now
@@ -4723,7 +4723,7 @@ void Spell::SendResurrectRequest(Player* target)
     data << sentName;
     data << uint8(m_caster->GetTypeId() == TYPEID_UNIT && m_caster->ToCreature()->IsSpiritHealer()); // "you'll be afflicted with resurrection sickness"
     // override delay sent with SMSG_CORPSE_RECLAIM_DELAY, set instant resurrection for spells with this attribute
-    data << uint8(!m_spellInfo->HasAttribute(SPELL_ATTR3_IGNORE_RESURRECTION_TIMER));
+    data << uint8(!m_spellInfo->HasAttribute(SPELL_ATTR3_NO_RES_TIMER));
     target->SendDirectMessage(&data);
 }
 
@@ -5415,7 +5415,7 @@ SpellCastResult Spell::CheckCast(bool strict, uint32* param1 /*= nullptr*/, uint
     }
 
     // Spell cast only in battleground
-    if (m_spellInfo->HasAttribute(SPELL_ATTR3_BATTLEGROUND) && m_caster->GetTypeId() == TYPEID_PLAYER)
+    if (m_spellInfo->HasAttribute(SPELL_ATTR3_ONLY_BATTLEGROUNDS) && m_caster->GetTypeId() == TYPEID_PLAYER)
         if (!m_caster->ToPlayer()->InBattleground())
             return SPELL_FAILED_ONLY_BATTLEGROUNDS;
 
@@ -7209,14 +7209,14 @@ SpellCastResult Spell::CheckItems(uint32* param1 /*= nullptr*/, uint32* param2 /
             return SPELL_CAST_OK;
         };
 
-        if (m_spellInfo->HasAttribute(SPELL_ATTR3_MAIN_HAND))
+        if (m_spellInfo->HasAttribute(SPELL_ATTR3_REQUIRES_MAIN_HAND_WEAPON))
         {
             SpellCastResult mainHandResult = weaponCheck(BASE_ATTACK);
             if (mainHandResult != SPELL_CAST_OK)
                 return mainHandResult;
         }
 
-        if (m_spellInfo->HasAttribute(SPELL_ATTR3_REQ_OFFHAND))
+        if (m_spellInfo->HasAttribute(SPELL_ATTR3_REQUIRES_OFF_HAND_WEAPON))
         {
             SpellCastResult offHandResult = weaponCheck(OFF_ATTACK);
             if (offHandResult != SPELL_CAST_OK)

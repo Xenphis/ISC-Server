@@ -2736,7 +2736,7 @@ void SpellMgr::LoadSpellInfoCustomAttributes()
         }
 
         // spells ignoring hit result should not be binary
-        if (!spellInfo->HasAttribute(SPELL_ATTR3_IGNORE_HIT_RESULT))
+        if (!spellInfo->HasAttribute(SPELL_ATTR3_ALWAYS_HIT))
         {
             bool setFlag = false;
             for (SpellEffectInfo const& spellEffectInfo : spellInfo->GetEffects())
@@ -3216,7 +3216,7 @@ void SpellMgr::LoadSpellInfoCorrections()
         51629  // Turn the Tables (Rank 3)
     }, [](SpellInfo* spellInfo)
     {
-        spellInfo->AttributesEx3 |= SPELL_ATTR3_STACK_FOR_DIFF_CASTERS;
+        spellInfo->AttributesEx3 |= SPELL_ATTR3_DOT_STACKING_RULE;
     });
 
     ApplySpellFix({
@@ -3251,7 +3251,7 @@ void SpellMgr::LoadSpellInfoCorrections()
         47471  // (Rank 9)
     }, [](SpellInfo* spellInfo)
     {
-        spellInfo->AttributesEx3 |= SPELL_ATTR3_CANT_TRIGGER_PROC;
+        spellInfo->AttributesEx3 |= SPELL_ATTR3_SUPPRESS_CASTER_PROCS;
     });
 
     // Improved Spell Reflection - aoe aura
@@ -3440,7 +3440,7 @@ void SpellMgr::LoadSpellInfoCorrections()
     // Oscillation Field
     ApplySpellFix({ 37408 }, [](SpellInfo* spellInfo)
     {
-        spellInfo->AttributesEx3 |= SPELL_ATTR3_STACK_FOR_DIFF_CASTERS;
+        spellInfo->AttributesEx3 |= SPELL_ATTR3_DOT_STACKING_RULE;
     });
 
     // Everlasting Affliction
@@ -3551,13 +3551,13 @@ void SpellMgr::LoadSpellInfoCorrections()
     // Ebon Plague
     ApplySpellFix({ 65142 }, [](SpellInfo* spellInfo)
     {
-        spellInfo->AttributesEx3 &= ~SPELL_ATTR3_STACK_FOR_DIFF_CASTERS;
+        spellInfo->AttributesEx3 &= ~SPELL_ATTR3_DOT_STACKING_RULE;
     });
 
     // Ebon Plague
     ApplySpellFix({ 51735, 51734, 51726 }, [](SpellInfo* spellInfo)
     {
-        spellInfo->AttributesEx3 |= SPELL_ATTR3_STACK_FOR_DIFF_CASTERS;
+        spellInfo->AttributesEx3 |= SPELL_ATTR3_DOT_STACKING_RULE;
         spellInfo->SpellFamilyFlags[2] = 0x10;
         spellInfo->_GetEffect(EFFECT_1).ApplyAuraName = SPELL_AURA_MOD_DAMAGE_PERCENT_TAKEN;
     });
@@ -3619,7 +3619,7 @@ void SpellMgr::LoadSpellInfoCorrections()
         15290  // Vampiric Embrace
     }, [](SpellInfo* spellInfo)
     {
-        spellInfo->AttributesEx3 |= SPELL_ATTR3_NO_INITIAL_AGGRO;
+        spellInfo->AttributesEx3 |= SPELL_ATTR3_SUPPRESS_TARGET_PROCS;
     });
 
     // Vampiric Touch (dispel effect)
@@ -3639,7 +3639,7 @@ void SpellMgr::LoadSpellInfoCorrections()
     // Improved Devouring Plague
     ApplySpellFix({ 63675 }, [](SpellInfo* spellInfo)
     {
-        spellInfo->AttributesEx3 |= SPELL_ATTR3_NO_DONE_BONUS;
+        spellInfo->AttributesEx3 |= SPELL_ATTR3_IGNORE_CASTER_MODIFIERS;
     });
 
     // Deep Wounds
@@ -3831,7 +3831,7 @@ void SpellMgr::LoadSpellInfoCorrections()
         53651  // Light's Beacon
     }, [](SpellInfo* spellInfo)
     {
-        spellInfo->AttributesEx3 |= SPELL_ATTR3_STACK_FOR_DIFF_CASTERS;
+        spellInfo->AttributesEx3 |= SPELL_ATTR3_DOT_STACKING_RULE;
     });
 
     ApplySpellFix({
@@ -4052,7 +4052,7 @@ void SpellMgr::LoadSpellInfoCorrections()
         64381  // Strength of the Pack (Auriaya)
     }, [](SpellInfo* spellInfo)
     {
-        spellInfo->AttributesEx3 |= SPELL_ATTR3_STACK_FOR_DIFF_CASTERS;
+        spellInfo->AttributesEx3 |= SPELL_ATTR3_DOT_STACKING_RULE;
     });
 
     ApplySpellFix({
@@ -4245,13 +4245,13 @@ void SpellMgr::LoadSpellInfoCorrections()
     // Shadow's Fate
     ApplySpellFix({ 71169 }, [](SpellInfo* spellInfo)
     {
-        spellInfo->AttributesEx3 |= SPELL_ATTR3_STACK_FOR_DIFF_CASTERS;
+        spellInfo->AttributesEx3 |= SPELL_ATTR3_DOT_STACKING_RULE;
     });
 
     // Lock Players and Tap Chest
     ApplySpellFix({ 72347 }, [](SpellInfo* spellInfo)
     {
-        spellInfo->AttributesEx3 &= ~SPELL_ATTR3_NO_INITIAL_AGGRO;
+        spellInfo->AttributesEx3 &= ~SPELL_ATTR3_SUPPRESS_TARGET_PROCS;
     });
 
     // Award Reputation - Boss Kill
@@ -4346,7 +4346,7 @@ void SpellMgr::LoadSpellInfoCorrections()
     // Empowered Flare (Blood Prince Council)
     ApplySpellFix({ 71708, 72785, 72786, 72787 }, [](SpellInfo* spellInfo)
     {
-        spellInfo->AttributesEx3 |= SPELL_ATTR3_NO_DONE_BONUS;
+        spellInfo->AttributesEx3 |= SPELL_ATTR3_IGNORE_CASTER_MODIFIERS;
     });
 
     // Swarming Shadows
@@ -4358,7 +4358,7 @@ void SpellMgr::LoadSpellInfoCorrections()
     // Corruption
     ApplySpellFix({ 70602 }, [](SpellInfo* spellInfo)
     {
-        spellInfo->AttributesEx3 |= SPELL_ATTR3_STACK_FOR_DIFF_CASTERS;
+        spellInfo->AttributesEx3 |= SPELL_ATTR3_DOT_STACKING_RULE;
     });
 
     // Column of Frost (visual marker)
@@ -4410,7 +4410,7 @@ void SpellMgr::LoadSpellInfoCorrections()
     // Chilled to the Bone
     ApplySpellFix({ 70106 }, [](SpellInfo* spellInfo)
     {
-        spellInfo->AttributesEx3 |= SPELL_ATTR3_NO_DONE_BONUS;
+        spellInfo->AttributesEx3 |= SPELL_ATTR3_IGNORE_CASTER_MODIFIERS;
         spellInfo->AttributesEx6 |= SPELL_ATTR6_LIMIT_PCT_DAMAGE_MODS;
     });
 
@@ -4462,7 +4462,7 @@ void SpellMgr::LoadSpellInfoCorrections()
     // Harvest Soul
     ApplySpellFix({ 73655 }, [](SpellInfo* spellInfo)
     {
-        spellInfo->AttributesEx3 |= SPELL_ATTR3_NO_DONE_BONUS;
+        spellInfo->AttributesEx3 |= SPELL_ATTR3_IGNORE_CASTER_MODIFIERS;
     });
 
     // Summon Shadow Trap
@@ -4625,7 +4625,7 @@ void SpellMgr::LoadSpellInfoCorrections()
     // Arcane Barrage (cast by players and NONMELEEDAMAGELOG with caster Scion of Eternity (original caster)).
     ApplySpellFix({ 63934 }, [](SpellInfo* spellInfo)
     {
-        // This would never crit on retail and it has attribute for SPELL_ATTR3_NO_DONE_BONUS because is handled from player,
+        // This would never crit on retail and it has attribute for SPELL_ATTR3_IGNORE_CASTER_MODIFIERS because is handled from player,
         // until someone figures how to make scions not critting without hack and without making them main casters this should stay here.
         spellInfo->AttributesEx2 |= SPELL_ATTR2_CANT_CRIT;
     });
@@ -4860,13 +4860,13 @@ void SpellMgr::LoadSpellInfoCorrections()
     // Baron Rivendare (Stratholme) - Unholy Aura
     ApplySpellFix({ 17466, 17467 }, [](SpellInfo* spellInfo)
     {
-        spellInfo->AttributesEx3 |= SPELL_ATTR3_NO_INITIAL_AGGRO;
+        spellInfo->AttributesEx3 |= SPELL_ATTR3_SUPPRESS_TARGET_PROCS;
     });
 
     // Spore - Spore Visual
     ApplySpellFix({ 42525 }, [](SpellInfo* spellInfo)
     {
-        spellInfo->AttributesEx3 |= SPELL_ATTR3_DEATH_PERSISTENT;
+        spellInfo->AttributesEx3 |= SPELL_ATTR3_ALLOW_AURA_WHILE_DEAD;
         spellInfo->AttributesEx2 |= SPELL_ATTR2_ALLOW_DEAD_TARGET;
     });
 

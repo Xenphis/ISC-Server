@@ -377,7 +377,7 @@ void ThreatManager::AddThreat(Unit* target, float amount, SpellInfo const* spell
     {
         if (spell->HasAttribute(SPELL_ATTR1_NO_THREAT))
             return;
-        if (!_owner->IsEngaged() && spell->HasAttribute(SPELL_ATTR3_NO_INITIAL_AGGRO))
+        if (!_owner->IsEngaged() && spell->HasAttribute(SPELL_ATTR3_SUPPRESS_TARGET_PROCS))
             return;
     }
 
