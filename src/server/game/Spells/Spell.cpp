@@ -590,7 +590,7 @@ m_caster((info->HasAttribute(SPELL_ATTR6_CAST_BY_CHARMER) && caster->GetCharmerO
 
     m_spellState = SPELL_STATE_NULL;
     _triggeredCastFlags = triggerFlags;
-    if (info->HasAttribute(SPELL_ATTR4_CAN_CAST_WHILE_CASTING))
+    if (info->HasAttribute(SPELL_ATTR4_ALLOW_CAST_WHILE_CASTING))
         _triggeredCastFlags |= TRIGGERED_IGNORE_CAST_IN_PROGRESS | TRIGGERED_CAST_DIRECTLY;
 
     m_CastItem = nullptr;
@@ -1973,7 +1973,7 @@ void Spell::SearchChainTargets(std::list<WorldObject*>& targets, uint32 chainTar
     }
 
     // chain lightning/heal spells and similar - allow to jump at larger distance and go out of los
-    bool isBouncingFar = (m_spellInfo->HasAttribute(SPELL_ATTR4_AREA_TARGET_CHAIN)
+    bool isBouncingFar = (m_spellInfo->HasAttribute(SPELL_ATTR4_BOUNCY_CHAIN_MISSILES)
         || m_spellInfo->DmgClass == SPELL_DAMAGE_CLASS_NONE
         || m_spellInfo->DmgClass == SPELL_DAMAGE_CLASS_MAGIC);
 
@@ -2663,7 +2663,7 @@ void Spell::TargetInfo::DoDamageAndTriggers(Spell* spell)
             if (caster->GetTypeId() == TYPEID_PLAYER && (procSpellType & (PROC_SPELL_TYPE_DAMAGE | PROC_SPELL_TYPE_NO_DMG_HEAL)))
             {
                 if (spell->m_spellInfo->DmgClass == SPELL_DAMAGE_CLASS_MELEE || spell->m_spellInfo->DmgClass == SPELL_DAMAGE_CLASS_RANGED)
-                    if (!spell->m_spellInfo->HasAttribute(SPELL_ATTR0_CANCELS_AUTO_ATTACK_COMBAT) && !spell->m_spellInfo->HasAttribute(SPELL_ATTR4_CANT_TRIGGER_ITEM_SPELLS))
+                    if (!spell->m_spellInfo->HasAttribute(SPELL_ATTR0_CANCELS_AUTO_ATTACK_COMBAT) && !spell->m_spellInfo->HasAttribute(SPELL_ATTR4_SUPPRESS_WEAPON_PROCS))
                         caster->ToPlayer()->CastItemCombatSpell(*spellDamageInfo);
             }
         }
@@ -5946,7 +5946,7 @@ SpellCastResult Spell::CheckCast(bool strict, uint32* param1 /*= nullptr*/, uint
                     if (!(aura->GetSpellInfo()->GetDispelMask() & dispelMask))
                         continue;
 
-                    if (aura->IsPassive() || aura->GetSpellInfo()->HasAttribute(SPELL_ATTR4_NOT_STEALABLE))
+                    if (aura->IsPassive() || aura->GetSpellInfo()->HasAttribute(SPELL_ATTR4_CANNOT_BE_STOLEN))
                         continue;
 
                     hasStealableAura = true;
@@ -6421,11 +6421,11 @@ SpellCastResult Spell::CheckArenaCastRules() const
 {
     // check USABLE attributes
     // USABLE takes precedence over NOT_USABLE
-    if (m_spellInfo->HasAttribute(SPELL_ATTR4_USABLE_IN_ARENA))
+    if (m_spellInfo->HasAttribute(SPELL_ATTR4_IGNORE_DEFAULT_ARENA_RESTRICTIONS))
         return SPELL_CAST_OK;
 
     // check NOT_USABLE attributes
-    if (m_spellInfo->HasAttribute(SPELL_ATTR4_NOT_USABLE_IN_ARENA))
+    if (m_spellInfo->HasAttribute(SPELL_ATTR4_NOT_IN_ARENA_OR_RATED_BATTLEGROUND))
         return SPELL_FAILED_NOT_IN_ARENA;
 
     // check cooldowns
@@ -8215,8 +8215,8 @@ bool Spell::CheckScriptEffectImplicitTargets(uint32 effIndex, uint32 effIndexToC
 
 bool Spell::CanExecuteTriggersOnHit(uint8 effMask, SpellInfo const* triggeredByAura) const
 {
-    bool only_on_caster = (triggeredByAura && triggeredByAura->HasAttribute(SPELL_ATTR4_PROC_ONLY_ON_CASTER));
-    // If triggeredByAura has SPELL_ATTR4_PROC_ONLY_ON_CASTER then it can only proc on a cast spell with TARGET_UNIT_CASTER
+    bool only_on_caster = (triggeredByAura && triggeredByAura->HasAttribute(SPELL_ATTR4_CLASS_TRIGGER_ONLY_ON_TARGET));
+    // If triggeredByAura has SPELL_ATTR4_CLASS_TRIGGER_ONLY_ON_TARGET then it can only proc on a cast spell with TARGET_UNIT_CASTER
     for (SpellEffectInfo const& spellEffectInfo : m_spellInfo->GetEffects())
     {
         if ((effMask & (1 << spellEffectInfo.EffectIndex)) && (!only_on_caster || (spellEffectInfo.TargetA.GetTarget() == TARGET_UNIT_CASTER)))

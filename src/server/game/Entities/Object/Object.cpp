@@ -2528,7 +2528,7 @@ SpellMissInfo WorldObject::MagicSpellHitResult(Unit* victim, SpellInfo const* sp
     int32 resist_chance = victim->GetMechanicResistChance(spellInfo) * 100;
 
     // Chance resist debuff
-    if (!spellInfo->IsPositive() && !spellInfo->HasAttribute(SPELL_ATTR4_IGNORE_RESISTANCES))
+    if (!spellInfo->IsPositive() && !spellInfo->HasAttribute(SPELL_ATTR4_NO_CAST_LOG))
     {
         bool hasAura = false;
         for (SpellEffectInfo const& spellEffectInfo : spellInfo->GetEffects())

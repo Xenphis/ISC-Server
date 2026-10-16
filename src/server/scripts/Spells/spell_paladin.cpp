@@ -1740,7 +1740,7 @@ class spell_pal_seal_of_vengeance : public SpellScriptLoader
                         return;
                 }
 
-                // don't cast triggered, spell already has SPELL_ATTR4_CAN_CAST_WHILE_CASTING attr
+                // don't cast triggered, spell already has SPELL_ATTR4_ALLOW_CAST_WHILE_CASTING attr
                 eventInfo.GetActor()->CastSpell(eventInfo.GetActionTarget(), DoTSpell, CastSpellExtraArgs(TRIGGERED_DONT_RESET_PERIODIC_TIMER).SetTriggeringAura(aurEff));
             }
 

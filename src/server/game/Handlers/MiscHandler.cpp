@@ -418,7 +418,7 @@ void WorldSession::HandleSetSelectionOpcode(WorldPackets::Misc::SetSelection& pa
     {
         if (Spell* autoReapeatSpell = _player->GetCurrentSpell(CURRENT_AUTOREPEAT_SPELL))
         {
-            if (!autoReapeatSpell->GetSpellInfo()->HasAttribute(SPELL_ATTR4_UNK24) // client automatically handles spells with SPELL_ATTR4_AUTO_RANGED_COMBAT
+            if (!autoReapeatSpell->GetSpellInfo()->HasAttribute(SPELL_ATTR4_AUTO_RANGED_COMBAT) // client automatically handles spells with SPELL_ATTR4_AUTO_RANGED_COMBAT
                 && autoReapeatSpell->m_targets.GetUnitTargetGUID() != packet.Selection)
             {
                 Unit* unitTarget = [&]() -> Unit*

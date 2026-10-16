@@ -3131,7 +3131,7 @@ void SpellMgr::LoadSpellInfoCorrections()
         60864  // Jaws of Death
     }, [](SpellInfo* spellInfo)
     {
-        spellInfo->AttributesEx4 |= SPELL_ATTR4_FIXED_DAMAGE;
+        spellInfo->AttributesEx4 |= SPELL_ATTR4_IGNORE_DAMAGE_TAKEN_MODIFIERS;
     });
 
     // Missile Barrage
@@ -3626,7 +3626,7 @@ void SpellMgr::LoadSpellInfoCorrections()
     ApplySpellFix({ 64085 }, [](SpellInfo* spellInfo)
     {
         // copy from similar effect of Unstable Affliction (31117)
-        spellInfo->AttributesEx4 |= SPELL_ATTR4_FIXED_DAMAGE;
+        spellInfo->AttributesEx4 |= SPELL_ATTR4_IGNORE_DAMAGE_TAKEN_MODIFIERS;
         spellInfo->AttributesEx6 |= SPELL_ATTR6_LIMIT_PCT_DAMAGE_MODS;
     });
 
@@ -3646,7 +3646,7 @@ void SpellMgr::LoadSpellInfoCorrections()
     ApplySpellFix({ 12721 }, [](SpellInfo* spellInfo)
     {
         // shouldnt ignore resillience or damage taken auras because its damage is not based off a spell.
-        spellInfo->AttributesEx4 &= ~SPELL_ATTR4_FIXED_DAMAGE;
+        spellInfo->AttributesEx4 &= ~SPELL_ATTR4_IGNORE_DAMAGE_TAKEN_MODIFIERS;
     });
 
     // Tremor Totem (instant pulse)
@@ -4239,7 +4239,7 @@ void SpellMgr::LoadSpellInfoCorrections()
     // Coldflame (Lord Marrowgar)
     ApplySpellFix({ 69146, 70823, 70824, 70825 }, [](SpellInfo* spellInfo)
     {
-        spellInfo->AttributesEx4 &= ~SPELL_ATTR4_IGNORE_RESISTANCES;
+        spellInfo->AttributesEx4 &= ~SPELL_ATTR4_NO_CAST_LOG;
     });
 
     // Shadow's Fate

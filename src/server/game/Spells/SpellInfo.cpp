@@ -1532,7 +1532,7 @@ SpellCastResult SpellInfo::CheckLocation(uint32 map_id, uint32 zone_id, uint32 a
     }
 
     // continent limitation (virtual continent)
-    if (HasAttribute(SPELL_ATTR4_CAST_ONLY_IN_OUTLAND))
+    if (HasAttribute(SPELL_ATTR4_ONLY_FLYING_AREAS))
     {
         if (strict)
         {
@@ -3291,7 +3291,7 @@ int32 SpellInfo::CalcPowerCost(WorldObject const* caster, SpellSchoolMask school
         powerCost += (*i)->GetAmount();
     }
     // Shiv - costs 20 + weaponSpeed*10 energy (apply only to non-triggered spell with energy cost)
-    if (HasAttribute(SPELL_ATTR4_SPELL_VS_EXTEND_COST))
+    if (HasAttribute(SPELL_ATTR4_WEAPON_SPEED_COST_SCALING))
     {
         uint32 speed = 0;
         if (SpellShapeshiftFormEntry const* ss = sSpellShapeshiftFormStore.LookupEntry(unitCaster->GetShapeshiftForm()))

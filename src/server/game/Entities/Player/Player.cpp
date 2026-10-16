@@ -17683,7 +17683,7 @@ void Player::_LoadAuras(PreparedQueryResult auraResult, uint32 timediff)
             ChrRacesEntry const* raceEntry = sChrRacesStore.AssertEntry(GetRace());
 
             // negative effects should continue counting down after logout
-            if (remainTime != -1 && ((!spellInfo->IsPositive() && spellInfo->Id != raceEntry->ResSicknessSpellID) || spellInfo->HasAttribute(SPELL_ATTR4_FADES_WHILE_LOGGED_OUT))) // Resurrection sickness should not fade while logged out
+            if (remainTime != -1 && ((!spellInfo->IsPositive() && spellInfo->Id != raceEntry->ResSicknessSpellID) || spellInfo->HasAttribute(SPELL_ATTR4_AURA_EXPIRES_OFFLINE))) // Resurrection sickness should not fade while logged out
             {
                 if (remainTime/IN_MILLISECONDS <= int32(timediff))
                     continue;
