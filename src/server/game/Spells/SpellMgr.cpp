@@ -1792,6 +1792,7 @@ void SpellMgr::LoadSpellProcs()
         procEntry.SpellPhaseMask  = PROC_SPELL_PHASE_HIT;
         procEntry.HitMask         = PROC_HIT_NONE; // uses default proc @see SpellMgr::CanSpellTriggerProcOnEvent
 
+        bool triggersSpell = false;
         for (SpellEffectInfo const& spellEffectInfo : spellInfo->GetEffects())
         {
             if (!spellEffectInfo.IsAura())
@@ -1817,6 +1818,10 @@ void SpellMgr::LoadSpellProcs()
                     if (spellEffectInfo.CalcValue() <= -100)
                         procEntry.HitMask = PROC_HIT_MISS;
                     break;
+                case SPELL_AURA_PROC_TRIGGER_SPELL:
+                case SPELL_AURA_PROC_TRIGGER_SPELL_WITH_VALUE:
+                    triggersSpell = spellEffectInfo.TriggerSpell != 0;
+                    break;
                 default:
                     continue;
             }
@@ -1834,6 +1839,22 @@ void SpellMgr::LoadSpellProcs()
         procEntry.Chance          = spellInfo->ProcChance;
         procEntry.Cooldown        = Milliseconds::zero();
         procEntry.Charges         = spellInfo->ProcCharges;
+
+        if (spellInfo->HasAttribute(SPELL_ATTR3_CAN_PROC_FROM_PROCS) && !procEntry.SpellFamilyMask
+            && procEntry.Chance >= 100
+            && procEntry.ProcsPerMinute <= 0.0f
+            && procEntry.Cooldown <= Milliseconds::zero()
+            && procEntry.Charges <= 0
+            && procEntry.ProcFlags & (PROC_FLAG_DONE_SPELL_MELEE_DMG_CLASS | PROC_FLAG_DONE_RANGED_AUTO_ATTACK | PROC_FLAG_DONE_SPELL_RANGED_DMG_CLASS
+                | PROC_FLAG_DONE_SPELL_NONE_DMG_CLASS_POS | PROC_FLAG_DONE_SPELL_NONE_DMG_CLASS_NEG | PROC_FLAG_DONE_SPELL_MAGIC_DMG_CLASS_POS
+                | PROC_FLAG_DONE_SPELL_MAGIC_DMG_CLASS_NEG | PROC_FLAG_DONE_PERIODIC)
+            && triggersSpell)
+        {
+            TC_LOG_ERROR("sql.sql", "Spell Id {} has SPELL_ATTR3_CAN_PROC_FROM_PROCS attribute and no restriction on what spells can cause it to proc and no cooldown. "
+                "This spell can cause infinite proc loops. Proc data for this spell was not generated, data in `spell_proc` table is required for it to function!",
+                spellInfo->Id);
+            continue;
+        }
 
         mSpellProcMap[spellInfo->Id] = procEntry;
         ++count;
