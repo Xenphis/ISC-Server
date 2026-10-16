@@ -683,6 +683,8 @@ class TC_GAME_API Unit : public WorldObject
 
         typedef std::map<uint8, AuraApplication*> VisibleAuraMap;
 
+        static std::vector<AuraEffect*> CopyAuraEffectList(AuraEffectList const& list);
+
         virtual ~Unit();
 
         bool IsAIEnabled() const { return (i_AI != nullptr); }

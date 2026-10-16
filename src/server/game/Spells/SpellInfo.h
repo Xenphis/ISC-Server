@@ -282,6 +282,8 @@ struct TC_GAME_API SpellDiminishInfo
     int32 DiminishDurationLimit = 0;
 };
 
+typedef std::vector<AuraEffect*> AuraEffectVector;
+
 class TC_GAME_API SpellInfo
 {
     friend class SpellMgr;
