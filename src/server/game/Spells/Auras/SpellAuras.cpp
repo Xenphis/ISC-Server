@@ -1091,7 +1091,7 @@ bool Aura::IsRemovedOnShapeLost(Unit* target) const
 {
     return GetCasterGUID() == target->GetGUID()
         && m_spellInfo->Stances
-        && !m_spellInfo->HasAttribute(SPELL_ATTR2_NOT_NEED_SHAPESHIFT)
+        && !m_spellInfo->HasAttribute(SPELL_ATTR2_ALLOW_WHILE_NOT_SHAPESHIFTED_CASTER_FORM)
         && !m_spellInfo->HasAttribute(SPELL_ATTR0_NOT_SHAPESHIFTED);
 }
 

@@ -2021,7 +2021,7 @@ void SpellMgr::LoadEnchantCustomAttr()
             continue;
 
         /// @todo find a better check
-        if (!spellInfo->HasAttribute(SPELL_ATTR2_PRESERVE_ENCHANT_IN_ARENA) || !spellInfo->HasAttribute(SPELL_ATTR0_NOT_SHAPESHIFTED))
+        if (!spellInfo->HasAttribute(SPELL_ATTR2_ENCHANT_OWN_ITEM_ONLY) || !spellInfo->HasAttribute(SPELL_ATTR0_NOT_SHAPESHIFTED))
             continue;
 
         for (SpellEffectInfo const& spellEffectInfo : spellInfo->GetEffects())
@@ -3652,7 +3652,7 @@ void SpellMgr::LoadSpellInfoCorrections()
     // Tremor Totem (instant pulse)
     ApplySpellFix({ 8145 }, [](SpellInfo* spellInfo)
     {
-        spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;
+        spellInfo->AttributesEx2 |= SPELL_ATTR2_IGNORE_LINE_OF_SIGHT;
         spellInfo->AttributesEx5 |= SPELL_ATTR5_START_PERIODIC_AT_APPLY;
     });
 
@@ -4582,7 +4582,7 @@ void SpellMgr::LoadSpellInfoCorrections()
     ApplySpellFix({ 75509 }, [](SpellInfo* spellInfo)
     {
         spellInfo->AttributesEx6 |= SPELL_ATTR6_CAN_TARGET_INVISIBLE;
-        spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;
+        spellInfo->AttributesEx2 |= SPELL_ATTR2_IGNORE_LINE_OF_SIGHT;
     });
 
     // Combustion and Consumption Heroic versions lacks radius data
@@ -4619,7 +4619,7 @@ void SpellMgr::LoadSpellInfoCorrections()
         57143  // Life Burst (Wyrmrest Skytalon)
     }, [](SpellInfo* spellInfo)
     {
-        spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_NOT_IN_LOS;
+        spellInfo->AttributesEx2 |= SPELL_ATTR2_IGNORE_LINE_OF_SIGHT;
     });
 
     // Arcane Barrage (cast by players and NONMELEEDAMAGELOG with caster Scion of Eternity (original caster)).
@@ -4867,7 +4867,7 @@ void SpellMgr::LoadSpellInfoCorrections()
     ApplySpellFix({ 42525 }, [](SpellInfo* spellInfo)
     {
         spellInfo->AttributesEx3 |= SPELL_ATTR3_DEATH_PERSISTENT;
-        spellInfo->AttributesEx2 |= SPELL_ATTR2_CAN_TARGET_DEAD;
+        spellInfo->AttributesEx2 |= SPELL_ATTR2_ALLOW_DEAD_TARGET;
     });
 
     // Death's Embrace
