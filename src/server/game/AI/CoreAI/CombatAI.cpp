@@ -231,7 +231,7 @@ void ArcherAI::UpdateAI(uint32 /*diff*/)
 // TurretAI
 //////////////
 
-TurretAI::TurretAI(Creature* creature) : CreatureAI(creature)
+TurretAI::TurretAI(Creature* creature) noexcept : CreatureAI(creature)
 {
     if (!creature->m_spells[0])
         TC_LOG_ERROR("scripts.ai", "TurretAI set for creature with spell1 = 0. AI will do nothing ({})", creature->GetGUID().ToString());
@@ -268,7 +268,7 @@ void TurretAI::UpdateAI(uint32 /*diff*/)
 // VehicleAI
 //////////////
 
-VehicleAI::VehicleAI(Creature* creature) : CreatureAI(creature), _hasConditions(false), _conditionsTimer(VEHICLE_CONDITION_CHECK_TIME)
+VehicleAI::VehicleAI(Creature* creature) noexcept : CreatureAI(creature), _hasConditions(false), _conditionsTimer(VEHICLE_CONDITION_CHECK_TIME)
 {
     LoadConditions();
     _dismiss = false;

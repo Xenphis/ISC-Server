@@ -30,7 +30,7 @@ struct CreatureData;
 class TC_GAME_API ZoneScript
 {
     public:
-        ZoneScript() { }
+        ZoneScript() noexcept { }
         virtual ~ZoneScript() { }
 
         virtual uint32 GetCreatureEntry(ObjectGuid::LowType /*guidLow*/, CreatureData const* data);

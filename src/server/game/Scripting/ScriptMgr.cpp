@@ -1006,7 +1006,7 @@ struct TSpellSummary
     uint8 Effects; // set of enum SelectEffect
 } *SpellSummary;
 
-ScriptObject::ScriptObject(char const* name) : _name(name)
+ScriptObject::ScriptObject(char const* name) noexcept : _name(name)
 {
     sScriptMgr->IncreaseScriptCount();
 }
@@ -2123,7 +2123,7 @@ AuraScript* SpellScriptLoader::GetAuraScript() const
     return nullptr;
 }
 
-ServerScript::ServerScript(char const* name)
+ServerScript::ServerScript(char const* name) noexcept
     : ScriptObject(name)
 {
     ScriptRegistry<ServerScript>::Instance()->AddScript(this);
@@ -2153,7 +2153,7 @@ void ServerScript::OnPacketReceive(WorldSession* /*session*/, WorldPacket& /*pac
 {
 }
 
-WorldScript::WorldScript(char const* name)
+WorldScript::WorldScript(char const* name) noexcept
     : ScriptObject(name)
 {
     ScriptRegistry<WorldScript>::Instance()->AddScript(this);
@@ -2191,7 +2191,7 @@ void WorldScript::OnShutdown()
 {
 }
 
-FormulaScript::FormulaScript(char const* name)
+FormulaScript::FormulaScript(char const* name) noexcept
     : ScriptObject(name)
 {
     ScriptRegistry<FormulaScript>::Instance()->AddScript(this);
@@ -2226,7 +2226,7 @@ void FormulaScript::OnGroupRateCalculation(float& /*rate*/, uint32 /*count*/, bo
 }
 
 template <class TMap>
-MapScript<TMap>::MapScript(MapEntry const* mapEntry) : _mapEntry(mapEntry)
+MapScript<TMap>::MapScript(MapEntry const* mapEntry) noexcept : _mapEntry(mapEntry)
 {
 }
 
@@ -2265,7 +2265,7 @@ template class TC_GAME_API MapScript<Map>;
 template class TC_GAME_API MapScript<InstanceMap>;
 template class TC_GAME_API MapScript<BattlegroundMap>;
 
-WorldMapScript::WorldMapScript(char const* name, uint32 mapId)
+WorldMapScript::WorldMapScript(char const* name, uint32 mapId) noexcept
     : ScriptObject(name), MapScript(sMapStore.LookupEntry(mapId))
 {
     if (!GetEntry())
@@ -2277,7 +2277,7 @@ WorldMapScript::WorldMapScript(char const* name, uint32 mapId)
     ScriptRegistry<WorldMapScript>::Instance()->AddScript(this);
 }
 
-InstanceMapScript::InstanceMapScript(char const* name, uint32 mapId)
+InstanceMapScript::InstanceMapScript(char const* name, uint32 mapId) noexcept
     : ScriptObject(name), MapScript(sMapStore.LookupEntry(mapId))
 {
     if (!GetEntry())
@@ -2294,7 +2294,7 @@ InstanceScript* InstanceMapScript::GetInstanceScript(InstanceMap* /*map*/) const
     return nullptr;
 }
 
-BattlegroundMapScript::BattlegroundMapScript(char const* name, uint32 mapId)
+BattlegroundMapScript::BattlegroundMapScript(char const* name, uint32 mapId) noexcept
     : ScriptObject(name), MapScript(sMapStore.LookupEntry(mapId))
 {
     if (!GetEntry())
@@ -2306,7 +2306,7 @@ BattlegroundMapScript::BattlegroundMapScript(char const* name, uint32 mapId)
     ScriptRegistry<BattlegroundMapScript>::Instance()->AddScript(this);
 }
 
-ItemScript::ItemScript(char const* name)
+ItemScript::ItemScript(char const* name) noexcept
     : ScriptObject(name)
 {
     ScriptRegistry<ItemScript>::Instance()->AddScript(this);
@@ -2337,7 +2337,7 @@ bool ItemScript::OnCastItemCombatSpell(Player* /*player*/, Unit* /*victim*/, Spe
     return true;
 }
 
-UnitScript::UnitScript(char const* name)
+UnitScript::UnitScript(char const* name) noexcept
     : ScriptObject(name)
 {
     ScriptRegistry<UnitScript>::Instance()->AddScript(this);
@@ -2363,19 +2363,19 @@ void UnitScript::ModifySpellDamageTaken(Unit* /*target*/, Unit* /*attacker*/, in
 {
 }
 
-CreatureScript::CreatureScript(char const* name)
+CreatureScript::CreatureScript(char const* name) noexcept
     : ScriptObject(name)
 {
     ScriptRegistry<CreatureScript>::Instance()->AddScript(this);
 }
 
-GameObjectScript::GameObjectScript(char const* name)
+GameObjectScript::GameObjectScript(char const* name) noexcept
     : ScriptObject(name)
 {
     ScriptRegistry<GameObjectScript>::Instance()->AddScript(this);
 }
 
-AreaTriggerScript::AreaTriggerScript(char const* name)
+AreaTriggerScript::AreaTriggerScript(char const* name) noexcept
     : ScriptObject(name)
 {
     ScriptRegistry<AreaTriggerScript>::Instance()->AddScript(this);
@@ -2401,31 +2401,31 @@ bool OnlyOnceAreaTriggerScript::OnTrigger(Player* player, AreaTriggerEntry const
 void OnlyOnceAreaTriggerScript::ResetAreaTriggerDone(InstanceScript* instance, uint32 triggerId) { instance->ResetAreaTriggerDone(triggerId); }
 void OnlyOnceAreaTriggerScript::ResetAreaTriggerDone(Player const* player, AreaTriggerEntry const* trigger) { if (InstanceScript* instance = player->GetInstanceScript()) ResetAreaTriggerDone(instance, trigger->ID); }
 
-BattlefieldScript::BattlefieldScript(char const* name)
+BattlefieldScript::BattlefieldScript(char const* name) noexcept
         : ScriptObject(name)
 {
     ScriptRegistry<BattlefieldScript>::Instance()->AddScript(this);
 }
 
-BattlegroundScript::BattlegroundScript(char const* name)
+BattlegroundScript::BattlegroundScript(char const* name) noexcept
     : ScriptObject(name)
 {
     ScriptRegistry<BattlegroundScript>::Instance()->AddScript(this);
 }
 
-OutdoorPvPScript::OutdoorPvPScript(char const* name)
+OutdoorPvPScript::OutdoorPvPScript(char const* name) noexcept
     : ScriptObject(name)
 {
     ScriptRegistry<OutdoorPvPScript>::Instance()->AddScript(this);
 }
 
-CommandScript::CommandScript(char const* name)
+CommandScript::CommandScript(char const* name) noexcept
     : ScriptObject(name)
 {
     ScriptRegistry<CommandScript>::Instance()->AddScript(this);
 }
 
-WeatherScript::WeatherScript(char const* name)
+WeatherScript::WeatherScript(char const* name) noexcept
     : ScriptObject(name)
 {
     ScriptRegistry<WeatherScript>::Instance()->AddScript(this);
@@ -2439,7 +2439,7 @@ void WeatherScript::OnUpdate(Weather* /*weather*/, uint32 /*diff*/)
 {
 }
 
-AuctionHouseScript::AuctionHouseScript(char const* name)
+AuctionHouseScript::AuctionHouseScript(char const* name) noexcept
     : ScriptObject(name)
 {
     ScriptRegistry<AuctionHouseScript>::Instance()->AddScript(this);
@@ -2461,7 +2461,7 @@ void AuctionHouseScript::OnAuctionExpire(AuctionHouseObject* /*ah*/, AuctionEntr
 {
 }
 
-ConditionScript::ConditionScript(char const* name)
+ConditionScript::ConditionScript(char const* name) noexcept
     : ScriptObject(name)
 {
     ScriptRegistry<ConditionScript>::Instance()->AddScript(this);
@@ -2472,7 +2472,7 @@ bool ConditionScript::OnConditionCheck(Condition const* /*condition*/, Condition
     return true;
 }
 
-VehicleScript::VehicleScript(char const* name)
+VehicleScript::VehicleScript(char const* name) noexcept
     : ScriptObject(name)
 {
     ScriptRegistry<VehicleScript>::Instance()->AddScript(this);
@@ -2502,7 +2502,7 @@ void VehicleScript::OnRemovePassenger(Vehicle* /*veh*/, Unit* /*passenger*/)
 {
 }
 
-DynamicObjectScript::DynamicObjectScript(char const* name)
+DynamicObjectScript::DynamicObjectScript(char const* name) noexcept
     : ScriptObject(name)
 {
     ScriptRegistry<DynamicObjectScript>::Instance()->AddScript(this);
@@ -2512,7 +2512,7 @@ void DynamicObjectScript::OnUpdate(DynamicObject* /*obj*/, uint32 /*diff*/)
 {
 }
 
-TransportScript::TransportScript(char const* name)
+TransportScript::TransportScript(char const* name) noexcept
     : ScriptObject(name)
 {
     ScriptRegistry<TransportScript>::Instance()->AddScript(this);
@@ -2538,13 +2538,13 @@ void TransportScript::OnUpdate(Transport* /*transport*/, uint32 /*diff*/)
 {
 }
 
-AchievementCriteriaScript::AchievementCriteriaScript(char const* name)
+AchievementCriteriaScript::AchievementCriteriaScript(char const* name) noexcept
     : ScriptObject(name)
 {
     ScriptRegistry<AchievementCriteriaScript>::Instance()->AddScript(this);
 }
 
-PlayerScript::PlayerScript(char const* name)
+PlayerScript::PlayerScript(char const* name) noexcept
     : ScriptObject(name)
 {
     ScriptRegistry<PlayerScript>::Instance()->AddScript(this);
@@ -2682,7 +2682,7 @@ void PlayerScript::OnMovieComplete(Player* /*player*/, uint32 /*movieId*/)
 {
 }
 
-AccountScript::AccountScript(char const* name)
+AccountScript::AccountScript(char const* name) noexcept
     : ScriptObject(name)
 {
     ScriptRegistry<AccountScript>::Instance()->AddScript(this);
@@ -2712,7 +2712,7 @@ void AccountScript::OnFailedPasswordChange(uint32 /*accountId*/)
 {
 }
 
-GuildScript::GuildScript(char const* name)
+GuildScript::GuildScript(char const* name) noexcept
     : ScriptObject(name)
 {
     ScriptRegistry<GuildScript>::Instance()->AddScript(this);
@@ -2764,7 +2764,7 @@ void GuildScript::OnBankEvent(Guild* /*guild*/, uint8 /*eventType*/, uint8 /*tab
 {
 }
 
-GroupScript::GroupScript(char const* name)
+GroupScript::GroupScript(char const* name) noexcept
     : ScriptObject(name)
 {
     ScriptRegistry<GroupScript>::Instance()->AddScript(this);
@@ -2790,7 +2790,7 @@ void GroupScript::OnDisband(Group* /*group*/)
 {
 }
 
-WorldStateScript::WorldStateScript(char const* name)
+WorldStateScript::WorldStateScript(char const* name) noexcept
     : ScriptObject(name)
 {
     ScriptRegistry<WorldStateScript>::Instance()->AddScript(this);

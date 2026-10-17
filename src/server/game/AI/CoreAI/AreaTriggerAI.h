@@ -29,7 +29,7 @@ class TC_GAME_API AreaTriggerAI
         AreaTrigger* const at;
 
     public:
-        explicit AreaTriggerAI(AreaTrigger* a);
+        explicit AreaTriggerAI(AreaTrigger* a) noexcept;
         virtual ~AreaTriggerAI();
 
         virtual void OnCreate() { }

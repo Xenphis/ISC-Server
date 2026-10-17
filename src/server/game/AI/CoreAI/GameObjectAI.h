@@ -35,7 +35,7 @@ class TC_GAME_API GameObjectAI
         GameObject* const me;
 
     public:
-        explicit GameObjectAI(GameObject* go) : me(go) { }
+        explicit GameObjectAI(GameObject* go) noexcept : me(go) { }
         virtual ~GameObjectAI() { }
 
         virtual void UpdateAI(uint32 /*diff*/) { }

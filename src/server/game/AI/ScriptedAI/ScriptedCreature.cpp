@@ -129,7 +129,7 @@ void SummonList::DoActionImpl(int32 action, StorageType& summons, uint16 max)
     }
 }
 
-ScriptedAI::ScriptedAI(Creature* creature) : CreatureAI(creature), IsFleeing(false), _isCombatMovementAllowed(true)
+ScriptedAI::ScriptedAI(Creature* creature) noexcept : CreatureAI(creature), IsFleeing(false), _isCombatMovementAllowed(true)
 {
     _isHeroic = me->GetMap()->IsHeroic();
     _difficulty = Difficulty(me->GetMap()->GetSpawnMode());
@@ -505,7 +505,7 @@ void ScriptedAI::DoAddEvent(Milliseconds timer, BasicEvent* event, WorldObject* 
 }
 
 // BossAI - for instanced bosses
-BossAI::BossAI(Creature* creature, uint32 bossId) : ScriptedAI(creature), instance(creature->GetInstanceScript()), summons(creature), _bossId(bossId)
+BossAI::BossAI(Creature* creature, uint32 bossId) noexcept : ScriptedAI(creature), instance(creature->GetInstanceScript()), summons(creature), _bossId(bossId)
 {
     if (instance)
         SetBoundary(instance->GetBossBoundary(bossId));
@@ -637,7 +637,7 @@ void BossAI::_DespawnAtEvade(Seconds delayToRespawn /*= 30s*/, Creature* who /*=
 }
 
 // WorldBossAI - for non-instanced bosses
-WorldBossAI::WorldBossAI(Creature* creature) : ScriptedAI(creature), summons(creature) { }
+WorldBossAI::WorldBossAI(Creature* creature) noexcept : ScriptedAI(creature), summons(creature) { }
 
 void WorldBossAI::_Reset()
 {

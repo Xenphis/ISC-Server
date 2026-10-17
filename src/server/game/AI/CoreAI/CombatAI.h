@@ -81,7 +81,7 @@ struct TC_GAME_API ArcherAI : public CreatureAI
 struct TC_GAME_API TurretAI : public CreatureAI
 {
     public:
-        explicit TurretAI(Creature* creature);
+        explicit TurretAI(Creature* creature) noexcept;
         bool CanAIAttack(Unit const* who) const override;
         void AttackStart(Unit* who) override;
         void UpdateAI(uint32 diff) override;
@@ -98,7 +98,7 @@ struct TC_GAME_API TurretAI : public CreatureAI
 struct TC_GAME_API VehicleAI : public CreatureAI
 {
     public:
-        explicit VehicleAI(Creature* creature);
+        explicit VehicleAI(Creature* creature) noexcept;
 
         void UpdateAI(uint32 diff) override;
         void MoveInLineOfSight(Unit*) override { }

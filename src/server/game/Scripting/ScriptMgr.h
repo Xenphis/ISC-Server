@@ -176,7 +176,7 @@ class TC_GAME_API ScriptObject
 
     protected:
 
-        ScriptObject(char const* name);
+        ScriptObject(char const* name) noexcept;
         virtual ~ScriptObject();
 
     private:
@@ -203,7 +203,7 @@ class TC_GAME_API ServerScript : public ScriptObject
 {
     protected:
 
-        explicit ServerScript(char const* name);
+        explicit ServerScript(char const* name) noexcept;
 
     public:
 
@@ -233,7 +233,7 @@ class TC_GAME_API WorldScript : public ScriptObject
 {
     protected:
 
-        explicit WorldScript(char const* name);
+        explicit WorldScript(char const* name) noexcept;
 
     public:
 
@@ -266,7 +266,7 @@ class TC_GAME_API FormulaScript : public ScriptObject
 {
     protected:
 
-        explicit FormulaScript(char const* name);
+        explicit FormulaScript(char const* name) noexcept;
 
     public:
 
@@ -299,7 +299,7 @@ class TC_GAME_API MapScript
 
     protected:
 
-        explicit MapScript(MapEntry const* mapEntry);
+        explicit MapScript(MapEntry const* mapEntry) noexcept;
 
     public:
 
@@ -330,14 +330,14 @@ class TC_GAME_API WorldMapScript : public ScriptObject, public MapScript<Map>
 {
     protected:
 
-        explicit WorldMapScript(char const* name, uint32 mapId);
+        explicit WorldMapScript(char const* name, uint32 mapId) noexcept;
 };
 
 class TC_GAME_API InstanceMapScript : public ScriptObject, public MapScript<InstanceMap>
 {
     protected:
 
-        explicit InstanceMapScript(char const* name, uint32 mapId);
+        explicit InstanceMapScript(char const* name, uint32 mapId) noexcept;
 
     public:
 
@@ -349,14 +349,14 @@ class TC_GAME_API BattlegroundMapScript : public ScriptObject, public MapScript<
 {
     protected:
 
-        explicit BattlegroundMapScript(char const* name, uint32 mapId);
+        explicit BattlegroundMapScript(char const* name, uint32 mapId) noexcept;
 };
 
 class TC_GAME_API ItemScript : public ScriptObject
 {
     protected:
 
-        explicit ItemScript(char const* name);
+        explicit ItemScript(char const* name) noexcept;
 
     public:
 
@@ -380,7 +380,7 @@ class TC_GAME_API UnitScript : public ScriptObject
 {
     protected:
 
-        explicit UnitScript(char const* name);
+        explicit UnitScript(char const* name) noexcept;
 
     public:
         // Called when a unit deals healing to another unit
@@ -403,7 +403,7 @@ class TC_GAME_API CreatureScript : public ScriptObject
 {
     protected:
 
-        explicit CreatureScript(char const* name);
+        explicit CreatureScript(char const* name) noexcept;
 
     public:
         // Called when a CreatureAI object is needed for the creature.
@@ -414,7 +414,7 @@ class TC_GAME_API GameObjectScript : public ScriptObject
 {
     protected:
 
-        explicit GameObjectScript(char const* name);
+        explicit GameObjectScript(char const* name) noexcept;
 
     public:
 
@@ -426,7 +426,7 @@ class TC_GAME_API AreaTriggerScript : public ScriptObject
 {
     protected:
 
-        explicit AreaTriggerScript(char const* name);
+        explicit AreaTriggerScript(char const* name) noexcept;
 
     public:
 
@@ -452,7 +452,7 @@ class TC_GAME_API BattlefieldScript : public ScriptObject
 {
     protected:
 
-        explicit BattlefieldScript(char const* name);
+        explicit BattlefieldScript(char const* name) noexcept;
 
     public:
 
@@ -463,7 +463,7 @@ class TC_GAME_API BattlegroundScript : public ScriptObject
 {
     protected:
 
-        explicit BattlegroundScript(char const* name);
+        explicit BattlegroundScript(char const* name) noexcept;
 
     public:
 
@@ -475,7 +475,7 @@ class TC_GAME_API OutdoorPvPScript : public ScriptObject
 {
     protected:
 
-        explicit OutdoorPvPScript(char const* name);
+        explicit OutdoorPvPScript(char const* name) noexcept;
 
     public:
 
@@ -487,7 +487,7 @@ class TC_GAME_API CommandScript : public ScriptObject
 {
     protected:
 
-        explicit CommandScript(char const* name);
+        explicit CommandScript(char const* name) noexcept;
 
     public:
 
@@ -499,7 +499,7 @@ class TC_GAME_API WeatherScript : public ScriptObject
 {
     protected:
 
-        explicit WeatherScript(char const* name);
+        explicit WeatherScript(char const* name) noexcept;
 
     public:
 
@@ -513,7 +513,7 @@ class TC_GAME_API AuctionHouseScript : public ScriptObject
 {
     protected:
 
-        explicit AuctionHouseScript(char const* name);
+        explicit AuctionHouseScript(char const* name) noexcept;
 
     public:
 
@@ -534,7 +534,7 @@ class TC_GAME_API ConditionScript : public ScriptObject
 {
     protected:
 
-        explicit ConditionScript(char const* name);
+        explicit ConditionScript(char const* name) noexcept;
 
     public:
 
@@ -546,7 +546,7 @@ class TC_GAME_API VehicleScript : public ScriptObject
 {
     protected:
 
-        explicit VehicleScript(char const* name);
+        explicit VehicleScript(char const* name) noexcept;
 
     public:
 
@@ -573,7 +573,7 @@ class TC_GAME_API DynamicObjectScript : public ScriptObject
 {
     protected:
 
-        explicit DynamicObjectScript(char const* name);
+        explicit DynamicObjectScript(char const* name) noexcept;
 
     public:
 
@@ -584,7 +584,7 @@ class TC_GAME_API TransportScript : public ScriptObject
 {
     protected:
 
-        explicit TransportScript(char const* name);
+        explicit TransportScript(char const* name) noexcept;
 
     public:
 
@@ -607,7 +607,7 @@ class TC_GAME_API AchievementCriteriaScript : public ScriptObject
 {
     protected:
 
-        explicit AchievementCriteriaScript(char const* name);
+        explicit AchievementCriteriaScript(char const* name) noexcept;
 
     public:
 
@@ -619,7 +619,7 @@ class TC_GAME_API PlayerScript : public ScriptObject
 {
     protected:
 
-        explicit PlayerScript(char const* name);
+        explicit PlayerScript(char const* name) noexcept;
 
     public:
 
@@ -726,7 +726,7 @@ class TC_GAME_API AccountScript : public ScriptObject
 {
     protected:
 
-        explicit AccountScript(char const* name);
+        explicit AccountScript(char const* name) noexcept;
 
     public:
 
@@ -753,7 +753,7 @@ class TC_GAME_API GuildScript : public ScriptObject
 {
     protected:
 
-        explicit GuildScript(char const* name);
+        explicit GuildScript(char const* name) noexcept;
 
     public:
 
@@ -794,7 +794,7 @@ class TC_GAME_API GroupScript : public ScriptObject
 {
     protected:
 
-        explicit GroupScript(char const* name);
+        explicit GroupScript(char const* name) noexcept;
 
     public:
 
@@ -818,7 +818,7 @@ class TC_GAME_API WorldStateScript : public ScriptObject
 {
     protected:
 
-        explicit WorldStateScript(char const* name);
+        explicit WorldStateScript(char const* name) noexcept;
 
     public:
 

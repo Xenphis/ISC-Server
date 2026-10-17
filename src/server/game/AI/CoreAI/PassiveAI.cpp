@@ -19,17 +19,17 @@
 #include "Creature.h"
 #include "MovementDefines.h"
 
-PassiveAI::PassiveAI(Creature* creature) : CreatureAI(creature)
+PassiveAI::PassiveAI(Creature* creature) noexcept : CreatureAI(creature)
 {
     creature->SetReactState(REACT_PASSIVE);
 }
 
-PossessedAI::PossessedAI(Creature* creature) : CreatureAI(creature)
+PossessedAI::PossessedAI(Creature* creature) noexcept : CreatureAI(creature)
 {
     creature->SetReactState(REACT_PASSIVE);
 }
 
-NullCreatureAI::NullCreatureAI(Creature* creature) : CreatureAI(creature)
+NullCreatureAI::NullCreatureAI(Creature* creature) noexcept : CreatureAI(creature)
 {
     creature->SetReactState(REACT_PASSIVE);
 }

@@ -97,7 +97,7 @@ class TC_GAME_API CreatureAI : public UnitAI
             EVADE_REASON_OTHER,             // anything else
         };
 
-        explicit CreatureAI(Creature* creature);
+        explicit CreatureAI(Creature* creature) noexcept;
 
         virtual ~CreatureAI();
 

@@ -26,7 +26,7 @@ class Totem;
 class TC_GAME_API TotemAI : public NullCreatureAI
 {
     public:
-        explicit TotemAI(Creature* creature);
+        explicit TotemAI(Creature* creature) noexcept;
 
         void AttackStart(Unit* victim) override;
 

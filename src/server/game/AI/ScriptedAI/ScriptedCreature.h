@@ -132,7 +132,7 @@ class TC_GAME_API DummyEntryCheckPredicate
 struct TC_GAME_API ScriptedAI : public CreatureAI
 {
     public:
-        explicit ScriptedAI(Creature* creature);
+        explicit ScriptedAI(Creature* creature) noexcept;
         virtual ~ScriptedAI() { }
 
         // *************
@@ -313,7 +313,7 @@ struct TC_GAME_API ScriptedAI : public CreatureAI
 class TC_GAME_API BossAI : public ScriptedAI
 {
     public:
-        BossAI(Creature* creature, uint32 bossId);
+        explicit BossAI(Creature* creature, uint32 bossId) noexcept;
         virtual ~BossAI() { }
 
         InstanceScript* const instance;
@@ -358,7 +358,7 @@ class TC_GAME_API BossAI : public ScriptedAI
 class TC_GAME_API WorldBossAI : public ScriptedAI
 {
     public:
-        WorldBossAI(Creature* creature);
+        explicit WorldBossAI(Creature* creature) noexcept;
         virtual ~WorldBossAI() { }
 
         void JustSummoned(Creature* summon) override;

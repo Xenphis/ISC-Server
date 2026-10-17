@@ -158,7 +158,7 @@ typedef std::map<uint32 /*entry*/, uint32 /*type*/> ObjectInfoMap;
 class TC_GAME_API InstanceScript : public ZoneScript
 {
     public:
-        explicit InstanceScript(InstanceMap* map);
+        explicit InstanceScript(InstanceMap* map) noexcept;
 
         virtual ~InstanceScript() { }
 

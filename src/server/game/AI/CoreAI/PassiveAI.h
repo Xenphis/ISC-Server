@@ -23,7 +23,7 @@
 class TC_GAME_API PassiveAI : public CreatureAI
 {
     public:
-        explicit PassiveAI(Creature* creature);
+        explicit PassiveAI(Creature* creature) noexcept;
 
         void MoveInLineOfSight(Unit*) override { }
         void AttackStart(Unit*) override { }
@@ -35,7 +35,7 @@ class TC_GAME_API PassiveAI : public CreatureAI
 class TC_GAME_API PossessedAI : public CreatureAI
 {
     public:
-        explicit PossessedAI(Creature* creature);
+        explicit PossessedAI(Creature* creature) noexcept;
 
         void MoveInLineOfSight(Unit*) override { }
         void AttackStart(Unit* target) override;
@@ -53,7 +53,7 @@ class TC_GAME_API PossessedAI : public CreatureAI
 class TC_GAME_API NullCreatureAI : public CreatureAI
 {
     public:
-        explicit NullCreatureAI(Creature* creature);
+        explicit NullCreatureAI(Creature* creature) noexcept;
 
         void MoveInLineOfSight(Unit*) override { }
         void AttackStart(Unit*) override { }
