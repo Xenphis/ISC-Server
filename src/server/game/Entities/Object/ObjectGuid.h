@@ -47,18 +47,32 @@ enum TypeID
 
 enum TypeMask
 {
-    TYPEMASK_OBJECT         = 0x0001,
-    TYPEMASK_ITEM           = 0x0002,
-    TYPEMASK_CONTAINER      = 0x0004,                       // TYPEMASK_ITEM | 0x0004
-    TYPEMASK_UNIT           = 0x0008,                       // creature
-    TYPEMASK_PLAYER         = 0x0010,
-    TYPEMASK_GAMEOBJECT     = 0x0020,
-    TYPEMASK_DYNAMICOBJECT  = 0x0040,
-    TYPEMASK_CORPSE         = 0x0080,
-    TYPEMASK_AREATRIGGER    = 0x0100,                       // server-only, never sent to 3.3.5 clients
+    TYPEMASK_OBJECT         = 1 << TYPEID_OBJECT,
+    TYPEMASK_ITEM           = 1 << TYPEID_ITEM,
+    TYPEMASK_CONTAINER      = 1 << TYPEID_CONTAINER,        // TYPEMASK_ITEM | 0x0004
+    TYPEMASK_UNIT           = 1 << TYPEID_UNIT,             // creature
+    TYPEMASK_PLAYER         = 1 << TYPEID_PLAYER,
+    TYPEMASK_GAMEOBJECT     = 1 << TYPEID_GAMEOBJECT,
+    TYPEMASK_DYNAMICOBJECT  = 1 << TYPEID_DYNAMICOBJECT,
+    TYPEMASK_CORPSE         = 1 << TYPEID_CORPSE,
+    TYPEMASK_AREATRIGGER    = 1 << TYPEID_AREATRIGGER,      // server-only, never sent to 3.3.5 clients
 
     TYPEMASK_SEER           = TYPEMASK_UNIT | TYPEMASK_PLAYER | TYPEMASK_DYNAMICOBJECT,
     TYPEMASK_WORLDOBJECT    = TYPEMASK_UNIT | TYPEMASK_GAMEOBJECT | TYPEMASK_DYNAMICOBJECT | TYPEMASK_CORPSE | TYPEMASK_AREATRIGGER
+};
+
+// type mask of every object type, indexed by TypeID (a derived type includes the masks of its base types)
+inline constexpr std::array<uint32, TYPEID_AREATRIGGER + 1> ObjectTypeMask =
+{
+    TYPEMASK_OBJECT,
+    TYPEMASK_OBJECT | TYPEMASK_ITEM,
+    TYPEMASK_OBJECT | TYPEMASK_ITEM | TYPEMASK_CONTAINER,
+    TYPEMASK_OBJECT | TYPEMASK_UNIT,
+    TYPEMASK_OBJECT | TYPEMASK_UNIT | TYPEMASK_PLAYER,
+    TYPEMASK_OBJECT | TYPEMASK_GAMEOBJECT,
+    TYPEMASK_OBJECT | TYPEMASK_DYNAMICOBJECT,
+    TYPEMASK_OBJECT | TYPEMASK_CORPSE,
+    TYPEMASK_OBJECT | TYPEMASK_AREATRIGGER
 };
 
 enum class HighGuid

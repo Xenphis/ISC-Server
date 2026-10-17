@@ -92,7 +92,7 @@ class TC_GAME_API Object
         virtual void ReplaceAllDynamicFlags([[maybe_unused]] uint32 flag) { }
 
         TypeID GetTypeId() const { return m_objectTypeId; }
-        bool isType(uint16 mask) const { return (mask & m_objectType) != 0; }
+        bool isType(uint32 mask) const { return (mask & ObjectTypeMask[m_objectTypeId]) != 0; }
 
         virtual void BuildCreateUpdateBlockForPlayer(UpdateData* data, Player* target) const;
         void SendUpdateToPlayer(Player* player);
@@ -238,7 +238,6 @@ class TC_GAME_API Object
         void BuildMovementUpdate(ByteBuffer* data, uint16 flags) const;
         virtual void BuildValuesUpdate(uint8 updatetype, ByteBuffer* data, Player const* target) const;
 
-        uint16 m_objectType;
 
         TypeID m_objectTypeId;
         uint16 m_updateFlag;

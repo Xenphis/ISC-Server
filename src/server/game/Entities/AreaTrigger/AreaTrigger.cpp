@@ -31,7 +31,6 @@ constexpr uint32 AREATRIGGER_CHECK_INTERVAL = 250;      // ms between two unit e
 AreaTrigger::AreaTrigger() : WorldObject(false), _template(nullptr), _caster(nullptr), _spellId(0),
     _duration(-1), _checkTimer(0), _isRemoved(false)
 {
-    m_objectType |= TYPEMASK_AREATRIGGER;
     m_objectTypeId = TYPEID_AREATRIGGER;
 
     // never sent to clients, no update fields beyond the Object base block

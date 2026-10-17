@@ -64,7 +64,6 @@ constexpr float VisibilityDistances[AsUnderlyingType(VisibilityDistanceType::Max
 Object::Object() : m_scriptRef(this, NoopObjectDeleter())
 {
     m_objectTypeId      = TYPEID_OBJECT;
-    m_objectType        = TYPEMASK_OBJECT;
     m_updateFlag        = UPDATEFLAG_NONE;
 
     m_uint32Values      = nullptr;
@@ -111,7 +110,7 @@ void Object::_Create(ObjectGuid const& guid)
     if (!m_uint32Values) _InitValues();
 
     SetGuidValue(OBJECT_FIELD_GUID, guid);
-    SetUInt32Value(OBJECT_FIELD_TYPE, m_objectType);
+    SetUInt32Value(OBJECT_FIELD_TYPE, ObjectTypeMask[m_objectTypeId]);
     m_PackGUID.Set(guid);
 }
 
@@ -893,7 +892,7 @@ void Object::ApplyModFlag64(uint16 index, uint64 flag, bool apply)
 
 bool Object::PrintIndexError(uint32 index, bool set) const
 {
-    TC_LOG_ERROR("misc", "Attempt to {} non-existing value field: {} (count: {}) for object typeid: {} type mask: {}", (set ? "set value to" : "get value from"), index, m_valuesCount, GetTypeId(), m_objectType);
+    TC_LOG_ERROR("misc", "Attempt to {} non-existing value field: {} (count: {}) for object typeid: {} type mask: {}", (set ? "set value to" : "get value from"), index, m_valuesCount, GetTypeId(), ObjectTypeMask[m_objectTypeId]);
 
     // ASSERT must fail after function call
     return false;
