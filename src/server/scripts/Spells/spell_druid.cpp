@@ -241,7 +241,7 @@ class spell_dru_eclipse : public AuraScript
             return false;
 
         // Reduced lunar proc chance (60% of normal)
-        if (!roll_chance_i(60))
+        if (!roll_chance(60))
             return false;
 
         return _lunarProcCooldownEnd <= GameTime::Now();
@@ -1159,7 +1159,7 @@ class spell_dru_revitalize : public AuraScript
     void HandleProc(AuraEffect const* aurEff, ProcEventInfo& eventInfo)
     {
         PreventDefaultAction();
-        if (!roll_chance_i(aurEff->GetAmount()))
+        if (!roll_chance(aurEff->GetAmount()))
             return;
 
         Unit* target = eventInfo.GetActionTarget();
@@ -1480,7 +1480,7 @@ class spell_dru_t3_2p_bonus : public AuraScript
 
     bool CheckProc(ProcEventInfo& /*eventInfo*/)
     {
-        if (!roll_chance_i(50))
+        if (!roll_chance(50))
             return false;
         return true;
     }
@@ -1636,7 +1636,7 @@ class spell_dru_item_t6_trinket : public AuraScript
         } else
             return;
 
-        if (roll_chance_i(chance))
+        if (roll_chance(chance))
             eventInfo.GetActor()->CastSpell(nullptr, spellId, aurEff);
     }
 

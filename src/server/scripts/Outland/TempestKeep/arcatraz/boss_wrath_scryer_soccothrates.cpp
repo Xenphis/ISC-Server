@@ -145,7 +145,7 @@ struct boss_wrath_scryer_soccothrates : public BossAI
     void OnSpellCast(SpellInfo const* spell) override
     {
         if (spell->Id == SPELL_KNOCK_AWAY)
-            if (roll_chance_i(50))
+            if (roll_chance(50))
                 Talk(SAY_KNOCK_AWAY);
     }
 

@@ -103,15 +103,15 @@ struct boss_anetheron : public BossAI
         switch (spellInfo->Id)
         {
             case SPELL_SLEEP:
-                if (roll_chance_i(30))
+                if (roll_chance(30))
                     Talk(SAY_SLEEP);
                 break;
             case SPELL_INFERNO:
-                if (roll_chance_i(30))
+                if (roll_chance(30))
                     Talk(SAY_INFERNO);
                 break;
             case SPELL_CARRION_SWARM:
-                if (roll_chance_i(30))
+                if (roll_chance(30))
                     Talk(SAY_SWARM);
                 break;
             default:

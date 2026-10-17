@@ -485,12 +485,12 @@ class spell_warl_drain_soul : public AuraScript
         Unit* target = GetTarget();
         if (caster && caster->GetTypeId() == TYPEID_PLAYER && caster->ToPlayer()->isHonorOrXPTarget(target))
         {
-            if (roll_chance_i(20))
+            if (roll_chance(20))
             {
                 caster->CastSpell(caster, SPELL_WARLOCK_CREATE_SOULSHARD, aurEff);
                 // Glyph of Drain Soul - chance to create an additional Soul Shard
                 if (AuraEffect* aur = caster->GetAuraEffect(SPELL_WARLOCK_GLYPH_OF_DRAIN_SOUL_AURA, EFFECT_0))
-                    if (roll_chance_i(aur->GetMiscValue()))
+                    if (roll_chance(aur->GetMiscValue()))
                         caster->CastSpell(caster, SPELL_WARLOCK_GLYPH_OF_DRAIN_SOUL_PROC, aur);
             }
         }
@@ -1236,7 +1236,7 @@ class spell_warl_soul_leech : public AuraScript
         caster->CastSpell(nullptr, selfSpellId, aurEff);
         caster->CastSpell(nullptr, petSpellId, aurEff);
 
-        if (roll_chance_i(impSoulLeech->GetAmount()))
+        if (roll_chance(impSoulLeech->GetAmount()))
             caster->CastSpell(nullptr, SPELL_REPLENISHMENT, aurEff);
     }
 

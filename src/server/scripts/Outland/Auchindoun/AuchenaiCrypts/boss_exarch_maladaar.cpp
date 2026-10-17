@@ -141,11 +141,11 @@ struct boss_exarch_maladaar : public BossAI
         switch (spellInfo->Id)
         {
             case SPELL_STOLEN_SOUL:
-                if (roll_chance_i(25))
+                if (roll_chance(25))
                     Talk(SAY_SOUL_CLEAVE);
                 break;
             case SPELL_SOUL_SCREAM:
-                if (roll_chance_i(25))
+                if (roll_chance(25))
                     Talk(SAY_ROAR);
                 break;
             default:

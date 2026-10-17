@@ -137,7 +137,7 @@ struct npc_disciple_of_naralex : public ScriptedAI
         _combatEvents.ScheduleEvent(EVENT_SLEEP, 5s, 10s);
         _combatEvents.ScheduleEvent(EVENT_DRUIDS_POTION, 5s, 10s);
 
-        if (roll_chance_i(30))
+        if (roll_chance(30))
             Talk(SAY_AGGRO, who);
     }
 

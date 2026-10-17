@@ -136,7 +136,7 @@ struct boss_warlord_kalithresh : public BossAI
 
     void KilledUnit(Unit* /*victim*/) override
     {
-        if (roll_chance_i(50))
+        if (roll_chance(50))
             Talk(SAY_SLAY);
         else
             DoPlaySoundToSet(me, SOUND_ID_SLAY);

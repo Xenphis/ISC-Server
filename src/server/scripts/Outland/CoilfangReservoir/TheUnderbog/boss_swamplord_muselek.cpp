@@ -252,7 +252,7 @@ struct boss_swamplord_muselek : public BossAI
                     DoCastSelf(SPELL_MOVE_AWAY_PRIMER);
 
                     // Not always? Or wrong place? This is based only on one cast in sniff, need more info
-                    if (roll_chance_i(50))
+                    if (roll_chance(50))
                         DoCastSelf(SPELL_DETERRENCE);
                     break;
                 case EVENT_COMBAT_SEQUENCE_3:

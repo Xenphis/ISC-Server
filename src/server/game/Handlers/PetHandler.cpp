@@ -203,7 +203,7 @@ void WorldSession::HandlePetActionHelper(Unit* pet, ObjectGuid guid1, uint32 spe
                                 AI->AttackStart(TargetUnit);
 
                             // 10% chance to play special pet attack talk, else growl
-                            if (pet->IsPet() && pet->ToPet()->getPetType() == SUMMON_PET && pet != TargetUnit && roll_chance_i(10))
+                            if (pet->IsPet() && pet->ToPet()->getPetType() == SUMMON_PET && pet != TargetUnit && roll_chance(10))
                                 pet->SendPetActionSound(PET_ACTION_ATTACK);
                             else
                             {
@@ -336,7 +336,7 @@ void WorldSession::HandlePetActionHelper(Unit* pet, ObjectGuid guid1, uint32 spe
 
                 // 10% chance to play special pet attack talk, else growl
                 // actually this only seems to happen on special spells, fire shield for imp, torment for voidwalker, but it's stupid to check every spell
-                if (pet->IsPet() && pet->ToPet()->getPetType() == SUMMON_PET && pet != unit_target && roll_chance_i(10))
+                if (pet->IsPet() && pet->ToPet()->getPetType() == SUMMON_PET && pet != unit_target && roll_chance(10))
                     pet->SendPetActionSound(PET_ACTION_SPECIAL_SPELL);
                 else
                 {
@@ -798,7 +798,7 @@ void WorldSession::HandlePetCastSpellOpcode(WorldPackets::Spells::PetCastSpell& 
             {
                 // 10% chance to play special pet attack sound, else growl
                 // actually this only seems to happen on special spells, fire shield for imp, torment for voidwalker, but it's stupid to check every spell
-                if (pet->getPetType() == SUMMON_PET && roll_chance_i(10))
+                if (pet->getPetType() == SUMMON_PET && roll_chance(10))
                     pet->SendPetActionSound(PET_ACTION_SPECIAL_SPELL);
                 else
                     pet->SendPetAIReaction(petCastSpell.PetGUID);

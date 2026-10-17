@@ -271,7 +271,7 @@ struct npc_shadowmoon_channeler : public ScriptedAI
 
         Talk(SAY_AGGRO_1);
 
-        if (roll_chance_i(15))
+        if (roll_chance(15))
             Talk(SAY_AGGRO_2);
 
         _scheduler

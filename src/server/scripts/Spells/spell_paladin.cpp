@@ -434,7 +434,7 @@ class spell_pal_divine_purpose : public AuraScript
 
     bool CheckProc(AuraEffect const* aurEff, ProcEventInfo& /*eventInfo*/)
     {
-        return roll_chance_i(aurEff->GetAmount());
+        return roll_chance(aurEff->GetAmount());
     }
 
     void HandleProc(AuraEffect const* /*aurEff*/, ProcEventInfo& eventInfo)
@@ -1163,7 +1163,7 @@ class spell_pal_item_t6_trinket : public AuraScript
         // Holy Light & Flash of Light
         if (spellInfo->SpellFamilyFlags[0] & 0xC0000000)
         {
-            if (!roll_chance_i(15))
+            if (!roll_chance(15))
                 return false;
 
             _triggeredSpellId = SPELL_PALADIN_ENDURING_LIGHT;
@@ -1172,7 +1172,7 @@ class spell_pal_item_t6_trinket : public AuraScript
         // Judgements
         else if (spellInfo->SpellFamilyFlags[0] & 0x00800000)
         {
-            if (!roll_chance_i(50))
+            if (!roll_chance(50))
                 return false;
 
             _triggeredSpellId = SPELL_PALADIN_ENDURING_JUDGEMENT;

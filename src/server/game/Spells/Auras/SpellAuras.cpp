@@ -1642,7 +1642,7 @@ void Aura::HandleAuraSpecificMods(AuraApplication const* aurApp, Unit* caster, b
                         // effect on aura target
                         if (AuraEffect const* aurEff = aura->GetEffect(1))
                         {
-                            if (!roll_chance_i(aurEff->GetAmount()))
+                            if (!roll_chance(aurEff->GetAmount()))
                                 break;
 
                             int32 triggeredSpellId = 0;
@@ -2130,7 +2130,7 @@ uint8 Aura::GetProcEffectMask(AuraApplication* aurApp, ProcEventInfo& eventInfo,
         }
     }
 
-    if (roll_chance_f(CalcProcChance(*procEntry, eventInfo)))
+    if (roll_chance(CalcProcChance(*procEntry, eventInfo)))
         return procEffectMask;
 
     return 0;

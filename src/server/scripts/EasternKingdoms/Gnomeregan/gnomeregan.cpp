@@ -565,7 +565,7 @@ class spell_collecting_fallout : public SpellScriptLoader
             void OnLaunch(SpellEffIndex effIndex)
             {
                 // estimated 25% chance of success
-                if (roll_chance_i(25))
+                if (roll_chance(25))
                     _spellFail = false;
                 else
                     PreventHitDefaultEffect(effIndex);

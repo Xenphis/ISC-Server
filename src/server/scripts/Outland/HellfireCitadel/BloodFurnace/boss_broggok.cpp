@@ -227,7 +227,7 @@ struct BroggokPrisionerBaseAI : public ScriptedAI
 
         ScheduleEvents();
 
-        if (roll_chance_i(15))
+        if (roll_chance(15))
             Talk(SAY_PRISONER_AGGRO);
     }
 

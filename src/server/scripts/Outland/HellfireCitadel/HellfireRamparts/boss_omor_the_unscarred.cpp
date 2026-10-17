@@ -95,7 +95,7 @@ struct boss_omor_the_unscarred : public BossAI
         switch (spellInfo->Id)
         {
             case SPELL_SUMMON_FIENDISH_HOUND:
-                if (roll_chance_i(30))
+                if (roll_chance(30))
                     Talk(SAY_SUMMON);
                 break;
             case SPELL_DEMONIC_SHIELD:

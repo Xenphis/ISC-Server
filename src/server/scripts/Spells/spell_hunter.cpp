@@ -508,7 +508,7 @@ class spell_hun_improved_mend_pet : public AuraScript
 
     bool CheckProc(ProcEventInfo& /*eventInfo*/)
     {
-        return roll_chance_i(GetEffect(EFFECT_0)->GetAmount());
+        return roll_chance(GetEffect(EFFECT_0)->GetAmount());
     }
 
     void HandleProc(AuraEffect const* aurEff, ProcEventInfo& /*eventInfo*/)
@@ -538,7 +538,7 @@ class spell_hun_invigoration : public SpellScript
     {
         if (Unit* unitTarget = GetHitUnit())
             if (AuraEffect* aurEff = unitTarget->GetDummyAuraEffect(SPELLFAMILY_HUNTER, 3487, 0))
-                if (roll_chance_i(aurEff->GetAmount()))
+                if (roll_chance(aurEff->GetAmount()))
                     unitTarget->CastSpell(unitTarget, SPELL_HUNTER_INVIGORATION_TRIGGERED, true);
     }
 
@@ -630,7 +630,7 @@ class spell_hun_lock_and_load : public AuraScript
         if (!spellInfo || !(spellInfo->GetSchoolMask() & SPELL_SCHOOL_MASK_FROST))
             return false;
 
-        return roll_chance_i(aurEff->GetAmount());
+        return roll_chance(aurEff->GetAmount());
     }
 
     bool CheckPeriodicProc(AuraEffect const* aurEff, ProcEventInfo& eventInfo)
@@ -638,7 +638,7 @@ class spell_hun_lock_and_load : public AuraScript
         if (!(eventInfo.GetTypeMask() & PROC_FLAG_DONE_PERIODIC))
             return false;
 
-        return roll_chance_i(aurEff->GetAmount());
+        return roll_chance(aurEff->GetAmount());
     }
 
     void HandleProc(ProcEventInfo& eventInfo)

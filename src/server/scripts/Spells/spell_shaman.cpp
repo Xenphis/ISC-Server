@@ -411,7 +411,7 @@ class spell_sha_earthbind_totem : public AuraScript
             return;
         if (Player* owner = GetCaster()->GetCharmerOrOwnerPlayerOrPlayerItself())
             if (AuraEffect* aur = owner->GetDummyAuraEffect(SPELLFAMILY_SHAMAN, 2289, 0))
-                if (roll_chance_i(aur->GetBaseAmount()))
+                if (roll_chance(aur->GetBaseAmount()))
                     GetTarget()->CastSpell(nullptr, SPELL_SHAMAN_TOTEM_EARTHEN_POWER, true);
     }
 
@@ -425,7 +425,7 @@ class spell_sha_earthbind_totem : public AuraScript
         // Storm, Earth and Fire
         if (AuraEffect* aurEff = owner->GetAuraEffectOfRankedSpell(SPELL_SHAMAN_STORM_EARTH_AND_FIRE, EFFECT_1))
         {
-            if (roll_chance_i(aurEff->GetAmount()))
+            if (roll_chance(aurEff->GetAmount()))
                 GetCaster()->CastSpell(GetCaster(), SPELL_SHAMAN_TOTEM_EARTHBIND_EARTHGRAB, false);
         }
     }
@@ -488,7 +488,7 @@ class spell_sha_earthliving_weapon : public AuraScript
             if (eventInfo.GetActionTarget()->HasAuraState(AURA_STATE_HEALTHLESS_35_PERCENT))
                 chance += aurEff->GetAmount();
 
-        return roll_chance_i(chance);
+        return roll_chance(chance);
     }
 
     void Register() override
@@ -673,7 +673,7 @@ class spell_sha_frozen_power : public AuraScript
     {
         PreventDefaultAction();
 
-        if (!roll_chance_i(aurEff->GetAmount()))
+        if (!roll_chance(aurEff->GetAmount()))
             return;
 
         Unit* caster = eventInfo.GetActor();
@@ -902,7 +902,7 @@ class spell_sha_imp_water_shield : public AuraScript
         else if (spellInfo->SpellFamilyFlags[0] & 0x00000100)
             chance = 30;
 
-        if (!roll_chance_i(chance))
+        if (!roll_chance(chance))
             return false;
 
         return true;
@@ -962,7 +962,7 @@ class spell_sha_lightning_overload : public AuraScript
             // A maxed LO would have a 33% / 3 = 11% chance to proc of each target.
             // LO chance was already "accounted" at the proc chance roll, now need to divide the chance by [Max_Number_of_Targets]
             float chance = 100.0f / spellInfo->GetEffect(EFFECT_0).ChainTargets;
-            if (!roll_chance_f(chance))
+            if (!roll_chance(chance))
                 return;
 
             spellId = sSpellMgr->GetSpellWithRank(SPELL_SHAMAN_CHAIN_LIGHTNING_OVERLOAD_R1, spellInfo->GetRank());
@@ -1096,7 +1096,7 @@ class spell_sha_item_t6_trinket : public AuraScript
         else
             return;
 
-        if (roll_chance_i(chance))
+        if (roll_chance(chance))
             eventInfo.GetActor()->CastSpell(nullptr, spellId, aurEff);
     }
 
@@ -1216,7 +1216,7 @@ class spell_sha_maelstrom_weapon : public AuraScript
 
         Unit* caster = GetUnitOwner();
         AuraEffect const* aurEff = caster->GetAuraEffect(SPELL_SHAMAN_T10_ENHANCEMENT_4P_BONUS, EFFECT_0);
-        if (!aurEff || !roll_chance_i(aurEff->GetAmount()))
+        if (!aurEff || !roll_chance(aurEff->GetAmount()))
             return;
 
         caster->CastSpell(nullptr, SPELL_SHAMAN_MAELSTROM_POWER, aurEff);

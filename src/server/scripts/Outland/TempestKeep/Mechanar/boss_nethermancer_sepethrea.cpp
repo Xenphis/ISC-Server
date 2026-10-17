@@ -89,7 +89,7 @@ struct boss_nethermancer_sepethrea : public BossAI
     void OnSpellCast(SpellInfo const* spellInfo) override
     {
         if (spellInfo->Id == SPELL_DRAGONS_BREATH)
-            if (roll_chance_i(50))
+            if (roll_chance(50))
                 Talk(SAY_DRAGONS_BREATH);
     }
 

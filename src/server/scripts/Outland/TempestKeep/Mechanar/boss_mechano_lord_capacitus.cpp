@@ -99,11 +99,11 @@ struct boss_mechano_lord_capacitus : public BossAI
         switch (spellInfo->Id)
         {
             case SPELL_DAMAGE_SHIELD:
-                if (roll_chance_i(30))
+                if (roll_chance(30))
                     Talk(SAY_DAMAGE_SHIELD);
                 break;
             case SPELL_MAGIC_SHIELD:
-                if (roll_chance_i(30))
+                if (roll_chance(30))
                     Talk(SAY_MAGIC_SHIELD);
                 break;
             default:
@@ -118,13 +118,13 @@ struct boss_mechano_lord_capacitus : public BossAI
             case SPELL_DAMAGE_SHIELD:
                 if (!me->HasAura(SPELL_TRIGGER_DAMAGE_SHIELD))
                     DoCastSelf(SPELL_TRIGGER_DAMAGE_SHIELD, true);
-                if (roll_chance_i(30))
+                if (roll_chance(30))
                     Talk(SAY_DAMAGE_SHIELD);
                 break;
             case SPELL_MAGIC_SHIELD:
                 if (!me->HasAura(SPELL_TRIGGER_MAGIC_SHIELD))
                     DoCastSelf(SPELL_TRIGGER_MAGIC_SHIELD, true);
-                if (roll_chance_i(30))
+                if (roll_chance(30))
                     Talk(SAY_MAGIC_SHIELD);
                 break;
             default:

@@ -167,11 +167,11 @@ struct boss_archimonde : public BossAI
         switch (spellInfo->Id)
         {
             case SPELL_AIR_BURST:
-                if (roll_chance_i(50))
+                if (roll_chance(50))
                     Talk(SAY_AIR_BURST);
                 break;
             case SPELL_DOOMFIRE_STRIKE:
-                if (roll_chance_i(50))
+                if (roll_chance(50))
                     Talk(SAY_DOOMFIRE);
                 break;
             case SPELL_HAND_OF_DEATH:

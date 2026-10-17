@@ -122,11 +122,11 @@ struct boss_dalliah_the_doomsayer : public BossAI
     void OnSpellCast(SpellInfo const* spell) override
     {
         if (spell->Id == SPELL_WHIRLWIND)
-            if (roll_chance_i(30))
+            if (roll_chance(30))
                 Talk(SAY_WHIRLWIND);
 
         if (spell->Id == sSpellMgr->GetSpellIdForDifficulty(SPELL_HEAL, me))
-            if (roll_chance_i(50))
+            if (roll_chance(50))
                 Talk(SAY_HEAL);
     }
 

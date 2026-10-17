@@ -320,7 +320,7 @@ struct npc_coilfang_ambusher : public ScriptedAI
 
     void JustEngagedWith(Unit* /*who*/) override
     {
-        if (roll_chance_i(25))
+        if (roll_chance(25))
             Talk(SAY_AGGRO);
 
         _scheduler
@@ -386,7 +386,7 @@ struct npc_coilfang_guardian : public ScriptedAI
 
     void JustEngagedWith(Unit* /*who*/) override
     {
-        if (roll_chance_i(25))
+        if (roll_chance(25))
             Talk(SAY_AGGRO);
 
         _scheduler
@@ -429,7 +429,7 @@ struct go_strange_pool : public GameObjectAI
 
     bool OnGossipHello(Player* player) override
     {
-        if (roll_chance_i(25))
+        if (roll_chance(25))
         {
             if (Creature* trigger = GetClosestCreatureWithEntry(me, NPC_WORLD_TRIGGER_NOT_IMMUNE_PC, 50.0f))
                 trigger->CastSpell(player, SPELL_LURKER_SPAWN_TRIGGER);

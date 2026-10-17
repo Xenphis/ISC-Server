@@ -288,7 +288,7 @@ struct npc_vrykul_skeleton : public ScriptedAI
                     break;
                 case EVENT_BONE_ARMOR:
                     /// It is unclear how exactly this ability is used
-                    if (roll_chance_i(50))
+                    if (roll_chance(50))
                         DoCastSelf(SPELL_BONE_ARMOR);
                     _events.Repeat(20s, 30s);
                     break;

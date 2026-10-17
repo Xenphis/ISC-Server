@@ -837,19 +837,19 @@ struct boss_kaelthas : public BossAI
                     std::vector<Creature*> triggersGroup1;
                     GetCreatureListWithOptionsInGrid(triggersGroup1, me, 150.0f, { .StringId = "KaelthasPureNetherBeamTriggerGroup1" });
                     for (Creature* trigger : triggersGroup1)
-                        if (roll_chance_i(30))
+                        if (roll_chance(30))
                             trigger->CastSpell(trigger, SPELL_PURE_NETHER_BEAM_SCRIPT_1);
 
                     std::vector<Creature*> triggersGroup2;
                     GetCreatureListWithOptionsInGrid(triggersGroup2, me, 150.0f, { .StringId = "KaelthasPureNetherBeamTriggerGroup2" });
                     for (Creature* trigger : triggersGroup2)
-                        if (roll_chance_i(20))
+                        if (roll_chance(20))
                             trigger->CastSpell(trigger, SPELL_PURE_NETHER_BEAM_SCRIPT_2);
 
                     std::vector<Creature*> triggersGroup3;
                     GetCreatureListWithOptionsInGrid(triggersGroup3, me, 150.0f, { .StringId = "KaelthasPureNetherBeamTriggerGroup3" });
                     for (Creature* trigger : triggersGroup3)
-                        if (roll_chance_i(30))
+                        if (roll_chance(30))
                             trigger->CastSpell(trigger, SPELL_PURE_NETHER_BEAM_SCRIPT_3);
 
                     specialEvents.Repeat(400ms);
@@ -1640,7 +1640,7 @@ class spell_kaelthas_remote_toy : public AuraScript
 
     void HandlePeriodic(AuraEffect const* /*aurEff*/)
     {
-        if (roll_chance_i(50))
+        if (roll_chance(50))
             GetTarget()->CastSpell(GetTarget(), SPELL_REMOTE_TOY_STUN, true);
     }
 

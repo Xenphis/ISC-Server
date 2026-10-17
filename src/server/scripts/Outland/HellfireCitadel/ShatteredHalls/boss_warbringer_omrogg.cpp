@@ -421,7 +421,7 @@ class spell_omrogg_burning_maul : public AuraScript
     {
         /// @todo: This requires additional research. Is it handled correctly? Isn't it too over-powered?
         /// That's a lot of damage if all melee attacks are successful so we cast it not always for now. No ProcCategoryRecovery for both spells
-        if (roll_chance_i(30))
+        if (roll_chance(30))
             GetTarget()->CastSpell(nullptr, SPELL_BLAST_WAVE);
     }
 

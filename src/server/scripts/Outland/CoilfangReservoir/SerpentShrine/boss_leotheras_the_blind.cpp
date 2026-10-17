@@ -682,7 +682,7 @@ class spell_leotheras_the_blind_whirlwind_effect : public SpellScript
         {
             if (eff->GetTickNumber() != spellInfo->GetMaxTicks())
             {
-                if (roll_chance_i(50))
+                if (roll_chance(50))
                 {
                     caster->GetThreatManager().ResetAllThreat();
                     if (Unit* target = caster->AI()->SelectTarget(SelectTargetMethod::Random, 0, 0.0f, true))

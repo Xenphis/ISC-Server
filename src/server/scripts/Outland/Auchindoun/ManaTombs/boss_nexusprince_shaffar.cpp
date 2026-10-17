@@ -122,7 +122,7 @@ struct boss_nexusprince_shaffar : public BossAI
     void OnSpellCast(SpellInfo const* spellInfo) override
     {
         if (spellInfo->Id == SPELL_SUMMON_ETHEREAL_BEACON)
-            if (roll_chance_i(50))
+            if (roll_chance(50))
                 Talk(SAY_SUMMON);
     }
 

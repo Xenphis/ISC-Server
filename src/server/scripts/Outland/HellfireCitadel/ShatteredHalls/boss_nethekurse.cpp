@@ -341,7 +341,7 @@ struct npc_fel_orc_convert : public ScriptedAI
 
     void JustEngagedWith(Unit* /*who*/) override
     {
-        if (roll_chance_i(15))
+        if (roll_chance(15))
             Talk(SAY_PEON_AGGRO);
 
         _scheduler.Schedule(5s, 10s, [this](TaskContext task)
@@ -365,18 +365,18 @@ struct npc_fel_orc_convert : public ScriptedAI
         switch (spellInfo->Id)
         {
             case SPELL_PEON_SHADOW_SEAR:
-                if (roll_chance_i(30))
+                if (roll_chance(30))
                     Talk(SAY_PEON_SHADOW_SEAR);
                 break;
             case SPELL_PEON_DEATH_COIL:
-                if (roll_chance_i(30))
+                if (roll_chance(30))
                 {
                     Talk(SAY_PEON_DEATH_COIL);
                     DoPlaySoundToSet(me, SOUND_ID_ROAR);
                 }
                 break;
             case SPELL_PEON_TARGET_FISSURES:
-                if (roll_chance_i(30))
+                if (roll_chance(30))
                     Talk(SAY_PEON_SHADOW_FISSURE);
                 break;
             default:

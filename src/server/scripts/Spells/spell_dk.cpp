@@ -1903,7 +1903,7 @@ private:
     void Absorb(AuraEffect* /*aurEff*/, DamageInfo & dmgInfo, uint32 & absorbAmount)
     {
         // You have a chance equal to your Parry chance
-        if ((dmgInfo.GetDamageType() == SPELL_DIRECT_DAMAGE) && roll_chance_f(GetTarget()->GetFloatValue(PLAYER_PARRY_PERCENTAGE)))
+        if ((dmgInfo.GetDamageType() == SPELL_DIRECT_DAMAGE) && roll_chance(GetTarget()->GetFloatValue(PLAYER_PARRY_PERCENTAGE)))
             absorbAmount = CalculatePct(dmgInfo.GetDamage(), absorbPct);
     }
 
@@ -1975,7 +1975,7 @@ class spell_dk_threat_of_thassarian : public AuraScript
     {
         PreventDefaultAction();
 
-        if (!roll_chance_i(aurEff->GetAmount()))
+        if (!roll_chance(aurEff->GetAmount()))
             return;
 
         SpellInfo const* spellInfo = eventInfo.GetSpellInfo();
@@ -2120,7 +2120,7 @@ class spell_dk_wandering_plague : public AuraScript
 
     bool CheckProc(ProcEventInfo& eventInfo)
     {
-        if (!roll_chance_f(eventInfo.GetActor()->GetUnitCriticalChanceAgainst(BASE_ATTACK, eventInfo.GetActionTarget())))
+        if (!roll_chance(eventInfo.GetActor()->GetUnitCriticalChanceAgainst(BASE_ATTACK, eventInfo.GetActionTarget())))
             return false;
 
         DamageInfo* damageInfo = eventInfo.GetDamageInfo();

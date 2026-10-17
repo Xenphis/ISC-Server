@@ -79,11 +79,11 @@ struct boss_rage_winterchill : public BossAI
         switch (spellInfo->Id)
         {
             case SPELL_FROST_NOVA:
-                if (roll_chance_i(30))
+                if (roll_chance(30))
                     Talk(SAY_NOVA);
                 break;
             case SPELL_DEATH_AND_DECAY:
-                if (roll_chance_i(30))
+                if (roll_chance(30))
                     Talk(SAY_DECAY);
                 break;
             default:

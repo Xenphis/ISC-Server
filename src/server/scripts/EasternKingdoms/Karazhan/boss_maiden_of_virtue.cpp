@@ -74,7 +74,7 @@ struct boss_maiden_of_virtue : public BossAI
 
     void KilledUnit(Unit* /*victim*/) override
     {
-        if (roll_chance_i(50))
+        if (roll_chance(50))
             Talk(SAY_SLAY);
     }
 

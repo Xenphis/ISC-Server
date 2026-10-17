@@ -676,7 +676,7 @@ struct npc_shadow_image : public ScriptedAI
                 // Not sure where exactly this should be called. What is known is it is called not always,
                 // before Dark Strike, in both scenarios with Dark Strike. What should be checked is the exact place where it should be called.
                 // Also looks like it is called every time before first Dark Strike, but that should be re-checked
-                if (roll_chance_i(50))
+                if (roll_chance(50))
                     AttackRandomTarget();
                 break;
             default:

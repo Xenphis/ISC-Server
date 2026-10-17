@@ -190,7 +190,7 @@ struct boss_ragnaros : public BossAI
         switch (spellInfo->Id)
         {
             case SPELL_MIGHT_OF_RAGNAROS:
-                if (roll_chance_i(50))
+                if (roll_chance(50))
                     Talk(SAY_MIGHT);
                 break;
             case SPELL_WRATH_OF_RAGNAROS:

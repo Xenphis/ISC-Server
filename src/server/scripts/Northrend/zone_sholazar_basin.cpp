@@ -684,7 +684,7 @@ class spell_sholazar_despawn_fruit_tosser : public SpellScript
             case 2: spellId = SPELL_PAPAYA_FALLS_TO_GROUND; break;
         }
         // sometimes, if you're lucky, you get a dwarf
-        if (roll_chance_i(5))
+        if (roll_chance(5))
             spellId = SPELL_TRIGGER_SPAWN_DWARF;
 
         GetHitUnit()->CastSpell(GetCaster(), spellId);

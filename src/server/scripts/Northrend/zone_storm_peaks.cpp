@@ -1037,7 +1037,7 @@ class spell_fatal_strike : public SpellScript
         if (AuraEffect const* aurEff = GetCaster()->GetAuraEffect(SPELL_PRY_JAWS_OPEN, EFFECT_0))
             chance = aurEff->GetAmount();
 
-        if (!roll_chance_i(chance))
+        if (!roll_chance(chance))
         {
             GetCaster()->GetAI()->DoAction(ACTION_FATAL_STRIKE_MISS);
             return;
@@ -1135,7 +1135,7 @@ class spell_storm_peaks_bear_flank_master : public SpellScript
 
     void HandleScript(SpellEffIndex /*effIndex*/)
     {
-        GetHitUnit()->CastSpell(GetHitUnit(), roll_chance_i(20) ? SPELL_CREATE_BEAR_FLANK : SPELL_BEAR_FLANK_FAIL);
+        GetHitUnit()->CastSpell(GetHitUnit(), roll_chance(20) ? SPELL_CREATE_BEAR_FLANK : SPELL_BEAR_FLANK_FAIL);
     }
 
     void Register() override

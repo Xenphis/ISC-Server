@@ -535,7 +535,7 @@ struct boss_illidan_stormrage : public BossAI
             case GROUP_PHASE_2:
                 events.ScheduleEvent(EVENT_FIREBALL, 1s, 8s, group);
                 events.ScheduleEvent(EVENT_EYE_BLAST, 1s, 30s, group);
-                if (roll_chance_i(50))
+                if (roll_chance(50))
                     events.ScheduleEvent(EVENT_DARK_BARRAGE, 1s, 20s, group);
                 break;
             case GROUP_PHASE_3:

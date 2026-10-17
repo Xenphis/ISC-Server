@@ -341,7 +341,7 @@ class spell_gen_aura_of_fear : public AuraScript
     void PeriodicTick(AuraEffect const* aurEff)
     {
         PreventDefaultAction();
-        if (!roll_chance_i(GetSpellInfo()->ProcChance))
+        if (!roll_chance(GetSpellInfo()->ProcChance))
             return;
 
         GetTarget()->CastSpell(nullptr, aurEff->GetSpellEffectInfo().TriggerSpell, true);
@@ -2015,7 +2015,7 @@ class spell_gen_gnomish_transporter : public SpellScript
 
     void HandleDummy(SpellEffIndex /* effIndex */)
     {
-        GetCaster()->CastSpell(GetCaster(), roll_chance_i(50) ? SPELL_TRANSPORTER_SUCCESS : SPELL_TRANSPORTER_FAILURE, true);
+        GetCaster()->CastSpell(GetCaster(), roll_chance(50) ? SPELL_TRANSPORTER_SUCCESS : SPELL_TRANSPORTER_FAILURE, true);
     }
 
     void Register() override
@@ -2474,7 +2474,7 @@ class spell_gen_mounted_charge : public SpellScript
                 }
 
                 // If target isn't a training dummy there's a chance of failing the charge
-                if (!target->IsCharmedOwnedByPlayerOrPlayer() && roll_chance_f(12.5f))
+                if (!target->IsCharmedOwnedByPlayerOrPlayer() && roll_chance(12.5f))
                     spellId = SPELL_CHARGE_MISS_EFFECT;
 
                 if (Unit* vehicle = GetCaster()->GetVehicleBase())
@@ -2603,7 +2603,7 @@ class spell_gen_netherbloom : public SpellScript
         if (Unit* target = GetHitUnit())
         {
             // 25% chance of casting a random buff
-            if (roll_chance_i(75))
+            if (roll_chance(75))
                 return;
 
             // triggered spells are 28703 to 28707
@@ -2647,7 +2647,7 @@ class spell_gen_nightmare_vine : public SpellScript
         if (Unit* target = GetHitUnit())
         {
             // 25% chance of casting Nightmare Pollen
-            if (roll_chance_i(25))
+            if (roll_chance(25))
                 target->CastSpell(target, SPELL_NIGHTMARE_POLLEN, true);
         }
     }
@@ -3401,7 +3401,7 @@ class spell_gen_spectator_cheer_trigger : public SpellScript
 
     void HandleDummy(SpellEffIndex /*effIndex*/)
     {
-        if (roll_chance_i(40))
+        if (roll_chance(40))
             GetCaster()->HandleEmoteCommand(Trinity::Containers::SelectRandomContainerElement(EmoteArray));
     }
 
@@ -3903,7 +3903,7 @@ private:
     void HandleScript(SpellEffIndex /*effIndex*/)
     {
         // Same for all spells
-        if (!roll_chance_i(20))
+        if (!roll_chance(20))
             return;
 
         if (Creature* target = GetHitCreature())

@@ -308,7 +308,7 @@ struct boss_alar : public BossAI
                         _isFirstPlatform = false;
 
                         // We are leaving a small chance to stay on the first platform
-                        if (roll_chance_i(80))
+                        if (roll_chance(80))
                             ++_currentPlatform;
                     }
                     else
@@ -319,20 +319,20 @@ struct boss_alar : public BossAI
                         me->SetReactState(REACT_PASSIVE);
 
                         // Else, move either to platform or to center
-                        if (roll_chance_i(80))
+                        if (roll_chance(80))
                         {
                             DoMoveToPlatform();
 
                             if (_currentPlatform == 3)
                             {
                                 // If we are on the last platform, we are leaving a small chance to stay on it
-                                if (roll_chance_i(80))
+                                if (roll_chance(80))
                                     _currentPlatform = 0;
                             }
                             else
                             {
                                 // If we are not on the last platform, we leave a small chance to stay on current
-                                if (roll_chance_i(80))
+                                if (roll_chance(80))
                                     ++_currentPlatform;
                             }
 

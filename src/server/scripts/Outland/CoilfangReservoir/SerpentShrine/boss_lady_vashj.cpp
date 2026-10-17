@@ -278,11 +278,11 @@ struct boss_lady_vashj : public BossAI
         switch (spellInfo->Id)
         {
             case SPELL_SHOOT:
-                if (roll_chance_i(10))
+                if (roll_chance(10))
                     Talk(SAY_BOWSHOT);
                 break;
             case SPELL_MULTI_SHOT:
-                if (roll_chance_i(50))
+                if (roll_chance(50))
                     Talk(SAY_BOWSHOT);
                 break;
             default:

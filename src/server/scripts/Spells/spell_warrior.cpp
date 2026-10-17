@@ -361,7 +361,7 @@ class spell_warr_extra_proc : public AuraScript
         if (!bonusAurEff)
             return;
 
-        if (!roll_chance_i(bonusAurEff->GetAmount()))
+        if (!roll_chance(bonusAurEff->GetAmount()))
             return;
 
         target->CastSpell(nullptr, SPELL_WARRIOR_EXTRA_CHARGE, aurEff);

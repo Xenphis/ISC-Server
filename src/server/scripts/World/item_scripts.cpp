@@ -200,7 +200,7 @@ class item_generic_limit_chance_above_60 : public ItemScript
                 float const failureChance = (victim->GetLevel() - 60) * lvlPenaltyFactor;
 
                 // base ppm chance was already rolled, only roll success chance
-                return !roll_chance_f(failureChance);
+                return !roll_chance(failureChance);
             }
 
             return true;

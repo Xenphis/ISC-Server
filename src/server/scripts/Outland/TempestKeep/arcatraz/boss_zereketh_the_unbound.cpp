@@ -66,7 +66,7 @@ struct boss_zereketh_the_unbound : public BossAI
     void OnSpellCast(SpellInfo const* spellInfo) override
     {
         if (spellInfo->Id == sSpellMgr->GetSpellIdForDifficulty(SPELL_SHADOW_NOVA, me))
-            if (roll_chance_i(50))
+            if (roll_chance(50))
                 Talk(SAY_SHADOW_NOVA);
     }
 

@@ -255,7 +255,7 @@ class spell_pri_body_and_soul : public AuraScript
     {
         PreventDefaultAction();
 
-        if (roll_chance_i(aurEff->GetAmount()))
+        if (roll_chance(aurEff->GetAmount()))
             eventInfo.GetActor()->CastSpell(eventInfo.GetActor(), SPELL_PRIEST_BODY_AND_SOUL_POISON_TRIGGER, aurEff);
     }
 
@@ -562,7 +562,7 @@ class spell_pri_imp_shadowform : public AuraScript
     void HandleProc(AuraEffect const* aurEff, ProcEventInfo& eventInfo)
     {
         PreventDefaultAction();
-        if (roll_chance_i(aurEff->GetAmount()))
+        if (roll_chance(aurEff->GetAmount()))
             eventInfo.GetActor()->RemoveMovementImpairingAuras(true);
     }
 
@@ -594,7 +594,7 @@ class spell_pri_improved_spirit_tap : public AuraScript
                 spellInfo->IsRankOf(sSpellMgr->AssertSpellInfo(SPELL_PRIEST_MIND_BLAST_R1)))
                 return true;
             else if (spellInfo->Id == SPELL_PRIEST_MIND_FLAY_DAMAGE)
-                return roll_chance_i(50);
+                return roll_chance(50);
         }
 
         return false;

@@ -528,7 +528,7 @@ class spell_mage_fire_frost_ward : public spell_mage_incanters_absorbtion_base_A
         {
             int32 chance = talentAurEff->GetSpellInfo()->GetEffect(EFFECT_1).CalcValue(); // SPELL_EFFECT_DUMMY with NO_TARGET
 
-            if (roll_chance_i(chance))
+            if (roll_chance(chance))
             {
                 int32 bp = dmgInfo.GetDamage();
                 dmgInfo.AbsorbDamage(bp);
@@ -633,7 +633,7 @@ class spell_mage_gen_extra_effects : public AuraScript
 
         // Proc chance is unknown, we'll just use dummy aura amount
         if (AuraEffect const* aurEff = caster->GetAuraEffect(SPELL_MAGE_T8_4P_BONUS, EFFECT_0))
-            if (roll_chance_i(aurEff->GetAmount()))
+            if (roll_chance(aurEff->GetAmount()))
                 return false;
 
         return true;
@@ -743,7 +743,7 @@ class spell_mage_hot_streak : public AuraScript
                 return;
 
             // roll chance
-            if (!roll_chance_i(aurEff->GetAmount()))
+            if (!roll_chance(aurEff->GetAmount()))
                 return;
 
             Unit* caster = eventInfo.GetActor();
@@ -797,7 +797,7 @@ class spell_mage_ice_barrier : public spell_mage_incanters_absorbtion_base_AuraS
         if (aurEff->GetAmount() <= 0)
             if (Unit* caster = GetCaster())
                 if (AuraEffect* dummy = caster->GetDummyAuraEffect(SPELLFAMILY_MAGE, SPELL_ICON_MAGE_SHATTERED_BARRIER, EFFECT_0))
-                    if (roll_chance_i(dummy->GetSpellInfo()->ProcChance))
+                    if (roll_chance(dummy->GetSpellInfo()->ProcChance))
                         caster->CastSpell(GetTarget(), SPELL_MAGE_SHATTERED_BARRIER, aurEff);
     }
 
@@ -1040,7 +1040,7 @@ class spell_mage_missile_barrage : public AuraScript
             return true;
 
         // Rest of spells have half chance
-        return roll_chance_i(50);
+        return roll_chance(50);
     }
 
     void Register() override
@@ -1068,7 +1068,7 @@ class spell_mage_missile_barrage_proc : public AuraScript
 
         // Proc chance is unknown, we'll just use dummy aura amount
         if (AuraEffect const* aurEff = caster->GetAuraEffect(SPELL_MAGE_T8_4P_BONUS, EFFECT_0))
-            if (roll_chance_i(aurEff->GetAmount()))
+            if (roll_chance(aurEff->GetAmount()))
                 return false;
 
         return true;

@@ -700,7 +700,7 @@ public:
 
             if (uiHealingWaveTimer <= uiDiff)
             {
-                bool bChance = roll_chance_i(50);
+                bool bChance = roll_chance(50);
 
                 if (!bChance)
                 {

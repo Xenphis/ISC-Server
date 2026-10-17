@@ -468,7 +468,7 @@ struct boss_nefarian : public BossAI
 
     void KilledUnit(Unit* victim) override
     {
-        if (roll_chance_i(20))
+        if (roll_chance(20))
             return;
 
         Talk(SAY_SLAY, victim);

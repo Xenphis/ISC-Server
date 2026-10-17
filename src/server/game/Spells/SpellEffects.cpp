@@ -469,7 +469,7 @@ void Spell::EffectSchoolDMG()
                         {
                             // Mind Trauma
                             int32 const chance = (*i)->GetSpellInfo()->GetEffect(EFFECT_1).CalcValue(unitCaster);
-                            if (roll_chance_i(chance))
+                            if (roll_chance(chance))
                                 unitCaster->CastSpell(unitTarget, 48301, true);
                             break;
                         }
@@ -534,7 +534,7 @@ void Spell::EffectSchoolDMG()
                                     {
                                         uint32 chance = (*iter)->GetSpellInfo()->GetEffect(EFFECT_2).CalcValue(unitCaster);
 
-                                        if (chance && roll_chance_i(chance))
+                                        if (chance && roll_chance(chance))
                                             needConsume = false;
 
                                         break;
@@ -1408,7 +1408,7 @@ void Spell::DoCreateItem(uint32 itemId)
     uint32 perfectItemType = itemId;
     // get perfection capability and chance
     if (CanCreatePerfectItem(player, m_spellInfo->Id, perfectCreateChance, perfectItemType))
-        if (roll_chance_f(perfectCreateChance)) // if the roll succeeds...
+        if (roll_chance(perfectCreateChance)) // if the roll succeeds...
             newitemid = perfectItemType;        // the perfect item replaces the regular one
 
     /* == gem perfection handling over == */
@@ -1424,7 +1424,7 @@ void Spell::DoCreateItem(uint32 itemId)
     // get the chance and maximum number for creating extra items
     if (CanCreateExtraItems(player, m_spellInfo->Id, additionalCreateChance, additionalMaxNum))
         // roll with this chance till we roll not to create or we create the max num
-        while (roll_chance_f(additionalCreateChance) && items_count <= additionalMaxNum)
+        while (roll_chance(additionalCreateChance) && items_count <= additionalMaxNum)
             ++items_count;
 
     // really will be created more items
@@ -3164,7 +3164,7 @@ void Spell::EffectWeaponDmg()
                 // Annihilation
                 if (AuraEffect const* aurEff = unitCaster->GetDummyAuraEffect(SPELLFAMILY_DEATHKNIGHT, 2710, EFFECT_0))
                     // Do not consume diseases if roll sucesses
-                    if (roll_chance_i(aurEff->GetAmount()))
+                    if (roll_chance(aurEff->GetAmount()))
                         consumeDiseases = false;
 
                 float bonusPct = m_spellInfo->GetEffect(EFFECT_2).CalcValue() * unitTarget->GetDiseasesByCaster(unitCaster->GetGUID(), consumeDiseases) / 2.0f;
@@ -3890,7 +3890,7 @@ void Spell::EffectInebriate()
 
     player->SetDrunkValue(currentDrunk, m_CastItem ? m_CastItem->GetEntry() : 0);
 
-    if (currentDrunk == 100 && drunkMod > 0 && roll_chance_i(25))
+    if (currentDrunk == 100 && drunkMod > 0 && roll_chance(25))
         player->CastSpell(player, 67468, false);    // Drunken Vomit
 }
 
@@ -4469,7 +4469,7 @@ void Spell::EffectDispelMechanic()
         Aura* aura = itr->second;
         if (!aura->GetApplicationOfTarget(unitTarget->GetGUID()))
             continue;
-        if (roll_chance_i(aura->CalcDispelChance(unitTarget, !unitTarget->IsFriendlyTo(m_caster))))
+        if (roll_chance(aura->CalcDispelChance(unitTarget, !unitTarget->IsFriendlyTo(m_caster))))
             if ((aura->GetSpellInfo()->GetAllEffectsMechanicMask() & (1 << mechanic)))
                 dispel_list.emplace_back(aura->GetId(), aura->GetCasterGUID());
     }

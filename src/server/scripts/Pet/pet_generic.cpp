@@ -244,7 +244,7 @@ class spell_pet_gen_lich_pet_periodic_emote : public AuraScript
         // Effect of 70050 is overlapped by effect of 69683 but not instantly (69683 is a series of spell casts, takes longer to execute).
         // However, for some reason emote is not played if creature is idle and only if creature is moving or is already rooted.
         // For now it's scripted manually in script below to play emote always.
-        if (roll_chance_i(50))
+        if (roll_chance(50))
             GetTarget()->CastSpell(GetTarget(), SPELL_LICH_PET_EMOTE, true);
     }
 
@@ -440,7 +440,7 @@ class spell_gen_elwynn_lamb : public AuraScript
     void HandlePeriodic(AuraEffect const* /*aurEff*/)
     {
         // Based on WotLK Classic sniffs (3.4.3 52237).
-        if (!GetTarget()->IsOutdoors() || !roll_chance_i(5))
+        if (!GetTarget()->IsOutdoors() || !roll_chance(5))
             PreventDefaultAction();
     }
 

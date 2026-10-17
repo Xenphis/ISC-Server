@@ -103,7 +103,7 @@ struct boss_watchkeeper_gargolmar : public BossAI
         switch (spellInfo->Id)
         {
             case SPELL_SURGE:
-                if (roll_chance_i(50))
+                if (roll_chance(50))
                     Talk(SAY_SURGE);
                 break;
             case SPELL_REQUEST_HEAL:
