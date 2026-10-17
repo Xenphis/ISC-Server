@@ -2277,7 +2277,7 @@ public:
 
             uint32 duration = uint32(GetSpellInfo()->GetDuration());
 
-            TempSummon* summon = originalCaster->GetMap()->SummonCreature(entry, *GetHitDest(), properties, duration, originalCaster, GetSpellInfo()->Id);
+            TempSummon* summon = originalCaster->GetMap()->SummonCreature(entry, *GetHitDest(), properties, Milliseconds(duration), originalCaster, GetSpellInfo()->Id);
             if (!summon)
                 return;
 

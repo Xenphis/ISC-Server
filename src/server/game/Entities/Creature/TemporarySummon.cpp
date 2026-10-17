@@ -29,7 +29,7 @@
 
 TempSummon::TempSummon(SummonPropertiesEntry const* properties, WorldObject* owner, bool isWorldObject) :
 Creature(isWorldObject), m_Properties(properties), m_type(TEMPSUMMON_MANUAL_DESPAWN),
-m_timer(0), m_lifetime(0), m_canFollowOwner(true)
+m_timer(0ms), m_lifetime(0ms), m_canFollowOwner(true)
 {
     if (owner)
         m_summonerGUID = owner->GetGUID();
@@ -65,6 +65,8 @@ void TempSummon::Update(uint32 diff)
 {
     Creature::Update(diff);
 
+    Milliseconds msDiff = Milliseconds(diff);
+
     if (m_deathState == DEAD)
     {
         UnSummon();
@@ -77,26 +79,26 @@ void TempSummon::Update(uint32 diff)
             break;
         case TEMPSUMMON_TIMED_DESPAWN:
         {
-            if (m_timer <= diff)
+            if (m_timer <= msDiff)
             {
                 UnSummon();
                 return;
             }
 
-            m_timer -= diff;
+            m_timer -= msDiff;
             break;
         }
         case TEMPSUMMON_TIMED_DESPAWN_OUT_OF_COMBAT:
         {
             if (!IsInCombat())
             {
-                if (m_timer <= diff)
+                if (m_timer <= msDiff)
                 {
                     UnSummon();
                     return;
                 }
 
-                m_timer -= diff;
+                m_timer -= msDiff;
             }
             else if (m_timer != m_lifetime)
                 m_timer = m_lifetime;
@@ -108,13 +110,13 @@ void TempSummon::Update(uint32 diff)
         {
             if (m_deathState == CORPSE)
             {
-                if (m_timer <= diff)
+                if (m_timer <= msDiff)
                 {
                     UnSummon();
                     return;
                 }
 
-                m_timer -= diff;
+                m_timer -= msDiff;
             }
             break;
         }
@@ -139,13 +141,13 @@ void TempSummon::Update(uint32 diff)
 
             if (!IsInCombat())
             {
-                if (m_timer <= diff)
+                if (m_timer <= msDiff)
                 {
                     UnSummon();
                     return;
                 }
                 else
-                    m_timer -= diff;
+                    m_timer -= msDiff;
             }
             else if (m_timer != m_lifetime)
                 m_timer = m_lifetime;
@@ -155,13 +157,13 @@ void TempSummon::Update(uint32 diff)
         {
             if (!IsInCombat() && IsAlive())
             {
-                if (m_timer <= diff)
+                if (m_timer <= msDiff)
                 {
                     UnSummon();
                     return;
                 }
                 else
-                    m_timer -= diff;
+                    m_timer -= msDiff;
             }
             else if (m_timer != m_lifetime)
                 m_timer = m_lifetime;
@@ -174,7 +176,7 @@ void TempSummon::Update(uint32 diff)
     }
 }
 
-void TempSummon::InitStats(uint32 duration)
+void TempSummon::InitStats(Milliseconds duration)
 {
     ASSERT(!IsPet());
 
@@ -182,7 +184,7 @@ void TempSummon::InitStats(uint32 duration)
     m_lifetime = duration;
 
     if (m_type == TEMPSUMMON_MANUAL_DESPAWN)
-        m_type = (duration == 0) ? TEMPSUMMON_DEAD_DESPAWN : TEMPSUMMON_TIMED_DESPAWN;
+        m_type = (duration == 0ms) ? TEMPSUMMON_DEAD_DESPAWN : TEMPSUMMON_TIMED_DESPAWN;
 
     Unit* owner = GetSummonerUnit();
 
@@ -306,7 +308,7 @@ std::string TempSummon::GetDebugInfo() const
     sstr << Creature::GetDebugInfo() << "\n"
         << std::boolalpha
         << "TempSummonType: " << std::to_string(GetSummonType()) << " Summoner: " << GetSummonerGUID().ToString()
-        << "Timer: " << GetTimer();
+        << "Timer: " << GetTimer().count() << "ms";
     return sstr.str();
 }
 
@@ -318,7 +320,7 @@ Minion::Minion(SummonPropertiesEntry const* properties, Unit* owner, bool isWorl
     m_followAngle = PET_FOLLOW_ANGLE;
 }
 
-void Minion::InitStats(uint32 duration)
+void Minion::InitStats(Milliseconds duration)
 {
     TempSummon::InitStats(duration);
 
@@ -387,7 +389,7 @@ Guardian::Guardian(SummonPropertiesEntry const* properties, Unit* owner, bool is
     }
 }
 
-void Guardian::InitStats(uint32 duration)
+void Guardian::InitStats(Milliseconds duration)
 {
     Minion::InitStats(duration);
 
@@ -425,7 +427,7 @@ Puppet::Puppet(SummonPropertiesEntry const* properties, Unit* owner)
     m_unitTypeMask |= UNIT_MASK_PUPPET;
 }
 
-void Puppet::InitStats(uint32 duration)
+void Puppet::InitStats(Milliseconds duration)
 {
     Minion::InitStats(duration);
     SetLevel(GetOwner()->GetLevel());

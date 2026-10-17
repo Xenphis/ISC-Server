@@ -38,7 +38,7 @@ class TC_GAME_API TempSummon : public Creature
         explicit TempSummon(SummonPropertiesEntry const* properties, WorldObject* owner, bool isWorldObject);
         virtual ~TempSummon() { }
         void Update(uint32 time) override;
-        virtual void InitStats(uint32 lifetime);
+        virtual void InitStats(Milliseconds duration);
         virtual void InitSummon();
         void UpdateObjectVisibilityOnCreate() override;
         virtual void UnSummon(uint32 msTime = 0);
@@ -51,7 +51,7 @@ class TC_GAME_API TempSummon : public Creature
         GameObject* GetSummonerGameObject() const;
         ObjectGuid GetSummonerGUID() const { return m_summonerGUID; }
         TempSummonType GetSummonType() const { return m_type; }
-        uint32 GetTimer() const { return m_timer; }
+        Milliseconds GetTimer() const { return m_timer; }
         bool CanFollowOwner() const { return m_canFollowOwner; }
         void SetCanFollowOwner(bool can) { m_canFollowOwner = can; }
         SummonPropertiesEntry const* const m_Properties;
@@ -59,8 +59,8 @@ class TC_GAME_API TempSummon : public Creature
         std::string GetDebugInfo() const override;
     private:
         TempSummonType m_type;
-        uint32 m_timer;
-        uint32 m_lifetime;
+        Milliseconds m_timer;
+        Milliseconds m_lifetime;
         ObjectGuid m_summonerGUID;
         bool m_canFollowOwner;
 };
@@ -69,7 +69,7 @@ class TC_GAME_API Minion : public TempSummon
 {
     public:
         Minion(SummonPropertiesEntry const* properties, Unit* owner, bool isWorldObject);
-        void InitStats(uint32 duration) override;
+        void InitStats(Milliseconds duration) override;
         void RemoveFromWorld() override;
         void setDeathState(DeathState s) override;
         Unit* GetOwner() const { return m_owner; }
@@ -95,7 +95,7 @@ class TC_GAME_API Guardian : public Minion
 {
     public:
         Guardian(SummonPropertiesEntry const* properties, Unit* owner, bool isWorldObject);
-        void InitStats(uint32 duration) override;
+        void InitStats(Milliseconds duration) override;
         bool InitStatsForLevel(uint8 level);
         void InitSummon() override;
 
@@ -121,7 +121,7 @@ class TC_GAME_API Puppet : public Minion
 {
     public:
         Puppet(SummonPropertiesEntry const* properties, Unit* owner);
-        void InitStats(uint32 duration) override;
+        void InitStats(Milliseconds duration) override;
         void InitSummon() override;
         void Update(uint32 time) override;
 };
