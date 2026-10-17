@@ -626,6 +626,14 @@ Field const& ResultSet::operator[](std::size_t index) const
     return _currentRow[index];
 }
 
+QueryResultFieldMetadata const& ResultSet::GetFieldMetadata(Trinity::DB::FieldLookupByAliasKey const& alias) const
+{
+    auto itr = _fieldIndexByAlias.find(alias);
+    ASSERT(itr != _fieldIndexByAlias.end(), "Column alias %s not found in query result", std::string(alias.Alias).c_str());
+    ASSERT(itr->second != Trinity::DB::FieldAliasAmbiguous, "Column alias %s is used by more than one column in query, give the columns different aliases", std::string(alias.Alias).c_str());
+    return _fieldMetadata[itr->second];
+}
+
 Field const& ResultSet::operator[](Trinity::DB::FieldLookupByAliasKey const& alias) const
 {
     auto itr = _fieldIndexByAlias.find(alias);
@@ -651,6 +659,14 @@ Field const& PreparedResultSet::operator[](std::size_t index) const
     ASSERT(m_rowPosition < m_rowCount);
     ASSERT(index < std::size_t(m_fieldCount));
     return m_rows[std::size_t(m_rowPosition) * m_fieldCount + index];
+}
+
+QueryResultFieldMetadata const& PreparedResultSet::GetFieldMetadata(Trinity::DB::FieldLookupByAliasKey const& alias) const
+{
+    auto itr = m_fieldIndexByAlias.find(alias);
+    ASSERT(itr != m_fieldIndexByAlias.end(), "Column alias %s not found in query result", std::string(alias.Alias).c_str());
+    ASSERT(itr->second != Trinity::DB::FieldAliasAmbiguous, "Column alias %s is used by more than one column in query, give the columns different aliases", std::string(alias.Alias).c_str());
+    return m_fieldMetadata[itr->second];
 }
 
 Field const& PreparedResultSet::operator[](Trinity::DB::FieldLookupByAliasKey const& alias) const
