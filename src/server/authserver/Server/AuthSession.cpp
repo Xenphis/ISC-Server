@@ -725,7 +725,10 @@ bool AuthSession::HandleRealmList()
     LoginDatabasePreparedStatement* stmt = LoginDatabase.GetPreparedStatement(LOGIN_SEL_REALM_CHARACTER_COUNTS);
     stmt->setUInt32(0, _accountInfo.Id);
 
-    QueueQuery(LoginDatabase.AsyncQuery(stmt).WithPreparedCallback(std::bind(&AuthSession::RealmListCallback, this, std::placeholders::_1)));
+    QueueQuery(LoginDatabase.AsyncQuery(stmt).WithPreparedCallback([this](PreparedQueryResult result)
+    {
+        RealmListCallback(std::move(result));
+    }));
     _status = STATUS_WAITING_FOR_REALM_LIST;
     return true;
 }

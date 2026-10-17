@@ -267,7 +267,10 @@ void WorldSession::HandleCharEnumOpcode(WorldPackets::Character::EnumCharacters&
     stmt->setUInt8(0, PET_SAVE_AS_CURRENT);
     stmt->setUInt32(1, GetAccountId());
 
-    _queryProcessor.AddCallback(CharacterDatabase.AsyncQuery(stmt).WithPreparedCallback(std::bind(&WorldSession::HandleCharEnum, this, std::placeholders::_1)));
+    _queryProcessor.AddCallback(CharacterDatabase.AsyncQuery(stmt).WithPreparedCallback([this](PreparedQueryResult result)
+    {
+        HandleCharEnum(std::move(result));
+    }));
 }
 
 void WorldSession::HandleCharCreateOpcode(WorldPackets::Character::CreateCharacter& charCreate)

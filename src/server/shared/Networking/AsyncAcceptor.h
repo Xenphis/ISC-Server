@@ -40,7 +40,7 @@ class AsyncAcceptor
 public:
     AsyncAcceptor(Asio::IoContext& ioContext, std::string const& bindIp, uint16 port) :
         _acceptor(ioContext), _endpoint(make_address(bindIp), port),
-        _socket(ioContext), _closed(false), _socketFactory(std::bind(&AsyncAcceptor::DefeaultSocketFactory, this))
+        _socket(ioContext), _closed(false), _socketFactory([this] { return DefeaultSocketFactory(); })
     {
     }
 

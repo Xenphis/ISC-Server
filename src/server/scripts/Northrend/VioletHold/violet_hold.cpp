@@ -925,8 +925,10 @@ struct violet_hold_trashAI : public EscortAI
         if (!UpdateVictim())
             return;
 
-        _scheduler.Update(diff,
-            std::bind(&EscortAI::DoMeleeAttackIfReady, this));
+        _scheduler.Update(diff, [this]
+        {
+            DoMeleeAttackIfReady();
+        });
     }
 
     virtual void ScheduledTasks() { }
