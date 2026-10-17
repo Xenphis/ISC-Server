@@ -22,6 +22,7 @@
 #include "Unit.h"
 #include "PathGenerator.h"
 #include "Transport.h"
+#include <algorithm>
 
 namespace Movement
 {

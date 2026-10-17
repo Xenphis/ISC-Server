@@ -25,6 +25,7 @@
 #include "World.h"
 #include <boost/asio/buffer.hpp>
 #include <boost/asio/read_until.hpp>
+#include <algorithm>
 #include <memory>
 #include <thread>
 

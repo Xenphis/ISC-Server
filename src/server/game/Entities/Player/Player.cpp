@@ -115,6 +115,7 @@
 #include "WorldSession.h"
 #include "WorldStateMgr.h"
 #include "WorldStatePackets.h"
+#include <algorithm>
 
 #define ZONE_UPDATE_INTERVAL (1*IN_MILLISECONDS)
 

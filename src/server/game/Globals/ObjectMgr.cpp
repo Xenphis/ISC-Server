@@ -56,6 +56,7 @@
 #include "Util.h"
 #include "Vehicle.h"
 #include "World.h"
+#include <algorithm>
 
 ScriptMapMap sEventScripts;
 

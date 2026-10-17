@@ -23,6 +23,7 @@
 #include "Group.h"
 #include "LFGMgr.h"
 #include "Log.h"
+#include <algorithm>
 
 namespace lfg
 {

@@ -21,6 +21,7 @@
 #include "UpdateFields.h"
 #include "ByteBuffer.h"
 #include "Errors.h"
+#include <algorithm>
 
 class UpdateMask
 {

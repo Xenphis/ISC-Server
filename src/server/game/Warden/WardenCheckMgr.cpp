@@ -23,6 +23,7 @@
 #include "Log.h"
 #include "Warden.h"
 #include "World.h"
+#include <algorithm>
 
 WardenCheckMgr::WardenCheckMgr() { }
 

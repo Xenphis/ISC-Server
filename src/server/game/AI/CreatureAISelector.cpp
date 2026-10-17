@@ -27,6 +27,7 @@
 
 #include "Log.h"
 #include "ScriptMgr.h"
+#include <algorithm>
 
 namespace FactorySelector
 {

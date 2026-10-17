@@ -30,6 +30,7 @@
 #include "ObjectMgr.h"
 #include "Player.h"
 #include "World.h"
+#include <algorithm>
 
 bool WorldSession::CanOpenMailBox(ObjectGuid guid)
 {

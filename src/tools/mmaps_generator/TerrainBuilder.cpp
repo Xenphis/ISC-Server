@@ -26,6 +26,7 @@
 #include "Util.h"
 #include "VMapFactory.h"
 #include "VMapManager2.h"
+#include <algorithm>
 #include <map>
 
 uint32 GetLiquidFlags(uint32 liquidId);

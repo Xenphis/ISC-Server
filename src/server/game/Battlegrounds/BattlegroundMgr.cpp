@@ -45,6 +45,7 @@
 #include "Player.h"
 #include "World.h"
 #include "WorldPacket.h"
+#include <algorithm>
 
 bool BattlegroundTemplate::IsArena() const
 {

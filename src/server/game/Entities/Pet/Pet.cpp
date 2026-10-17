@@ -39,6 +39,7 @@
 #include "WorldPacket.h"
 #include "WorldSession.h"
 #include "ZoneScript.h"
+#include <algorithm>
 
 #define PET_XP_FACTOR 0.05f
 

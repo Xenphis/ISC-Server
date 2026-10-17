@@ -33,6 +33,7 @@
 #include "Unit.h"
 #include "WaypointDefines.h"
 #include "WaypointManager.h"
+#include <algorithm>
 
 #define TC_SAI_IS_BOOLEAN_VALID(e, value) \
 { \

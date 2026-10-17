@@ -28,6 +28,7 @@
 #include "Log.h"
 #include "SmartEnum.h"
 #include "World.h"
+#include <algorithm>
 
 AuctionBotConfig::AuctionBotConfig() : _itemsPerCycleBoost(1000), _itemsPerCycleNormal(20), _configUint32Values(), _configBoolValues(), _configFloatValues()
 {

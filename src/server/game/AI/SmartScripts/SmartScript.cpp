@@ -43,6 +43,7 @@
 #include "WaypointManager.h"
 #include "WorldSession.h"
 #include <G3D/Quat.h>
+#include <algorithm>
 
 SmartScript::SmartScript()
 {

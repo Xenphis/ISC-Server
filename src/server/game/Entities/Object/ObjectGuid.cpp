@@ -21,6 +21,7 @@
 #include "Log.h"
 #include "Util.h"
 #include "World.h"
+#include <algorithm>
 #include <charconv>
 
 ObjectGuid const ObjectGuid::Empty = ObjectGuid();

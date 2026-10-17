@@ -22,6 +22,7 @@
 #include "StringConvert.h"
 #include "Util.h"
 #include <boost/locale/date_time_facet.hpp>
+#include <algorithm>
 #include <chrono>
 #include <memory>
 #include <unordered_map>

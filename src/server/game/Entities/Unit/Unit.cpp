@@ -86,6 +86,7 @@
 #include "World.h"
 #include "WorldPacket.h"
 #include "WorldSession.h"
+#include <algorithm>
 #include <cmath>
 
 float baseMoveSpeed[MAX_MOVE_TYPE] =

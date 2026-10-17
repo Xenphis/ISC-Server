@@ -31,6 +31,7 @@
 #include "Spell.h"
 #include "SpellAuraDefines.h"
 #include "SpellInfo.h"
+#include <algorithm>
 
 bool IsPrimaryProfessionSkill(uint32 skill)
 {

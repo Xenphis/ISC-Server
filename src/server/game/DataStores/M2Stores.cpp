@@ -23,6 +23,7 @@
 #include "Timer.h"
 #include <boost/filesystem/path.hpp>
 #include <G3D/Vector4.h>
+#include <algorithm>
 #include <fstream>
 
 typedef std::vector<FlyByCamera> FlyByCameraCollection;

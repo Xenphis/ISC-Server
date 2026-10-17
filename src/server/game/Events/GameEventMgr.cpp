@@ -30,6 +30,7 @@
 #include "Player.h"
 #include "World.h"
 #include "WorldStatePackets.h"
+#include <algorithm>
 
 GameEventMgr* GameEventMgr::instance()
 {

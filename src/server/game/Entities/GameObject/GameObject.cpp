@@ -46,6 +46,7 @@
 #include <G3D/Box.h>
 #include <G3D/CoordinateFrame.h>
 #include <G3D/Quat.h>
+#include <algorithm>
 
 void GameObjectTemplate::InitializeQueryData()
 {

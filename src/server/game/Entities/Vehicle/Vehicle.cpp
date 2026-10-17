@@ -32,6 +32,7 @@
 #include "SpellAuraEffects.h"
 #include "TemporarySummon.h"
 #include "Unit.h"
+#include <algorithm>
 
 Vehicle::Vehicle(Unit* unit, VehicleEntry const* vehInfo, uint32 creatureEntry) :
 UsableSeatNum(0), _me(unit), _vehicleInfo(vehInfo), _creatureEntry(creatureEntry), _status(STATUS_NONE)

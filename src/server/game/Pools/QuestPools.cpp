@@ -23,6 +23,7 @@
 #include "QuestDef.h"
 #include "Timer.h"
 #include "Transaction.h"
+#include <algorithm>
 #include <unordered_map>
 #include <unordered_set>
 

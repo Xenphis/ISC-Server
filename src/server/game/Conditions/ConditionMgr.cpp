@@ -34,6 +34,7 @@
 #include "SpellAuras.h"
 #include "SpellMgr.h"
 #include "World.h"
+#include <algorithm>
 
 char const* const ConditionMgr::StaticSourceTypeData[CONDITION_SOURCE_TYPE_MAX] =
 {

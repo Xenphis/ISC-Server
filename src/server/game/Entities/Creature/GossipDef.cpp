@@ -24,6 +24,7 @@
 #include "QuestPackets.h"
 #include "World.h"
 #include "WorldSession.h"
+#include <algorithm>
 
 GossipMenu::GossipMenu()
 {

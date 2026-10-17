@@ -25,6 +25,7 @@
 #include "Player.h"
 #include "StringConvert.h"
 #include "World.h"
+#include <algorithm>
 #include <fstream>
 #include <sstream>
 

@@ -55,6 +55,7 @@
 #include "WorldStateMgr.h"
 #include "WorldStatePackets.h"
 #include <boost/heap/fibonacci_heap.hpp>
+#include <algorithm>
 #include <unordered_set>
 #include <vector>
 

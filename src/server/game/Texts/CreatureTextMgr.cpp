@@ -28,6 +28,7 @@
 #include "MiscPackets.h"
 #include "ObjectMgr.h"
 #include "World.h"
+#include <algorithm>
 
 class CreatureTextBuilder
 {

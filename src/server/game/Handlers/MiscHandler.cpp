@@ -53,6 +53,7 @@
 #include "WhoPackets.h"
 #include "World.h"
 #include "WorldPacket.h"
+#include <algorithm>
 #include <cstdarg>
 #include <zlib.h>
 

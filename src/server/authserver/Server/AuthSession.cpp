@@ -34,6 +34,7 @@
 #include "Util.h"
 #include <boost/endian/arithmetic.hpp>
 #include <boost/lexical_cast.hpp>
+#include <algorithm>
 
 using boost::endian::little_uint16_t;
 using boost::endian::little_uint32_t;

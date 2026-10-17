@@ -61,6 +61,7 @@
 #include "WorldSocket.h"
 #include <boost/circular_buffer.hpp>
 #include <zlib.h>
+#include <algorithm>
 
 namespace {
 

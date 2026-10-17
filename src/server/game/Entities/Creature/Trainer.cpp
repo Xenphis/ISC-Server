@@ -21,6 +21,7 @@
 #include "Player.h"
 #include "SpellInfo.h"
 #include "SpellMgr.h"
+#include <algorithm>
 
 namespace Trainer
 {

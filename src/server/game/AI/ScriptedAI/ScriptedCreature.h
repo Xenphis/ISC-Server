@@ -24,6 +24,7 @@
 #include "DBCEnums.h"
 #include "EventMap.h"
 #include "TaskScheduler.h"
+#include <algorithm>
 
 class InstanceScript;
 
