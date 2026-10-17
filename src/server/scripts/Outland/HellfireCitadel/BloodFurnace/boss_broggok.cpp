@@ -374,8 +374,6 @@ private:
 // 30914, 38462 - Poison
 class spell_broggok_poison_cloud : public AuraScript
 {
-    PrepareAuraScript(spell_broggok_poison_cloud);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ spellInfo->GetEffect(EFFECT_0).TriggerSpell });

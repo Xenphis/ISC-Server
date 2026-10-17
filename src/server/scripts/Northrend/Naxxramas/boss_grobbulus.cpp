@@ -184,8 +184,6 @@ private:
 // 28169 - Mutating Injection
 class spell_grobbulus_mutating_injection : public AuraScript
 {
-    PrepareAuraScript(spell_grobbulus_mutating_injection);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MUTATING_EXPLOSION, SPELL_POISON_CLOUD });
@@ -213,8 +211,6 @@ class spell_grobbulus_mutating_injection : public AuraScript
 // 28158, 54362 - Poison
 class spell_grobbulus_poison_cloud : public AuraScript
 {
-    PrepareAuraScript(spell_grobbulus_poison_cloud);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ spellInfo->GetEffect(EFFECT_0).TriggerSpell });

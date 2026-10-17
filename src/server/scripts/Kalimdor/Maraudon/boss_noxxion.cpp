@@ -80,8 +80,6 @@ private:
 // 21708 - Summon Noxxion's Spawns
 class spell_noxxion_summon_spawns : public AuraScript
 {
-    PrepareAuraScript(spell_noxxion_summon_spawns);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SUMMON_SPAWNS });

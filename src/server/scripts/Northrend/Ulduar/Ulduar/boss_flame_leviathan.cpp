@@ -1501,8 +1501,6 @@ class achievement_orbit_uary : public AchievementCriteriaScript
 // 62399 - Overload Circuit
 class spell_overload_circuit : public AuraScript
 {
-    PrepareAuraScript(spell_overload_circuit);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SYSTEMS_SHUTDOWN });
@@ -1527,8 +1525,6 @@ class spell_overload_circuit : public AuraScript
 // 62292 - Blaze
 class spell_tar_blaze : public AuraScript
 {
-    PrepareAuraScript(spell_tar_blaze);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ spellInfo->GetEffect(EFFECT_0).TriggerSpell });
@@ -1559,8 +1555,6 @@ class spell_load_into_catapult : public SpellScriptLoader
 
         class spell_load_into_catapult_AuraScript : public AuraScript
         {
-            PrepareAuraScript(spell_load_into_catapult_AuraScript);
-
             void OnApply(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
             {
                 Unit* owner = GetOwner()->ToUnit();
@@ -1605,8 +1599,6 @@ class spell_auto_repair : public SpellScriptLoader
 
         class spell_auto_repair_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_auto_repair_SpellScript);
-
             void CheckCooldownForTarget(SpellMissInfo missInfo)
             {
                 if (missInfo != SPELL_MISS_NONE)
@@ -1670,8 +1662,6 @@ class spell_systems_shutdown : public SpellScriptLoader
 
         class spell_systems_shutdown_AuraScript : public AuraScript
         {
-            PrepareAuraScript(spell_systems_shutdown_AuraScript);
-
             void OnApply(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
             {
                 Creature* owner = GetOwner()->ToCreature();
@@ -1753,8 +1743,6 @@ class spell_pursue : public SpellScriptLoader
 
         class spell_pursue_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_pursue_SpellScript);
-
         private:
             // EFFECT #0 - select target
             void FilterTargets(std::list<WorldObject*>& targets)
@@ -1801,7 +1789,6 @@ class spell_vehicle_throw_passenger : public SpellScriptLoader
 
         class spell_vehicle_throw_passenger_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_vehicle_throw_passenger_SpellScript);
             void HandleScript(SpellEffIndex /*effIndex*/)
             {
                 Spell* baseSpell = GetSpell();

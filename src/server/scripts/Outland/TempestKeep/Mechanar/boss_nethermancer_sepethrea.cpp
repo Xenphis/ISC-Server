@@ -219,8 +219,6 @@ private:
 // 35314 - Arcane Blast
 class spell_nethermancer_sepethrea_arcane_blast : public SpellScript
 {
-    PrepareSpellScript(spell_nethermancer_sepethrea_arcane_blast);
-
     void HandleAfterHit()
     {
         if (GetCaster()->CanHaveThreatList())
@@ -236,8 +234,6 @@ class spell_nethermancer_sepethrea_arcane_blast : public SpellScript
 // 35268, 39346 - Inferno
 class spell_nethermancer_sepethrea_inferno : public AuraScript
 {
-    PrepareAuraScript(spell_nethermancer_sepethrea_inferno);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_INFERNO_DAMAGE });

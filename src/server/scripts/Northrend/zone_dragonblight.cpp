@@ -468,8 +468,6 @@ struct npc_wyrmrest_defender : public VehicleAI
 // 49213 - Defending Wyrmrest Temple: Character Script Cast From Gossip
 class spell_dragonblight_defending_wyrmrest_temple_cast_from_gossip : public SpellScript
 {
-    PrepareSpellScript(spell_dragonblight_defending_wyrmrest_temple_cast_from_gossip);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SUMMON_WYRMREST_DEFENDER });
@@ -489,8 +487,6 @@ class spell_dragonblight_defending_wyrmrest_temple_cast_from_gossip : public Spe
 // 49370 - Wyrmrest Defender: Destabilize Azure Dragonshrine Effect
 class spell_dragonblight_defending_wyrmrest_temple_dummy : public SpellScript
 {
-    PrepareSpellScript(spell_dragonblight_defending_wyrmrest_temple_dummy);
-
     void HandleDummy(SpellEffIndex /*effIndex*/)
     {
         if (GetHitCreature())
@@ -525,8 +521,6 @@ enum WarsongBattleStandard
 // 47304 - Warsong Battle Standard
 class spell_dragonblight_warsong_battle_standard : public SpellScript
 {
-    PrepareSpellScript(spell_dragonblight_warsong_battle_standard);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return sObjectMgr->GetBroadcastText(TEXT_TAUNT_1) &&
@@ -562,8 +556,6 @@ enum MysteryOfTheInfinite
 // 49686 - Mystery of the Infinite: Script Effect Player Cast Mirror Image
 class spell_dragonblight_moti_mirror_image_script_effect : public SpellScript
 {
-    PrepareSpellScript(spell_dragonblight_moti_mirror_image_script_effect);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MIRROR_IMAGE_AURA });
@@ -583,8 +575,6 @@ class spell_dragonblight_moti_mirror_image_script_effect : public SpellScript
 // 50020 - Mystery of the Infinite: Hourglass cast See Invis on Master
 class spell_dragonblight_moti_hourglass_cast_see_invis_on_master : public SpellScript
 {
-    PrepareSpellScript(spell_dragonblight_moti_hourglass_cast_see_invis_on_master);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ uint32(spellInfo->GetEffect(EFFECT_0).CalcValue()) });
@@ -617,8 +607,6 @@ enum TheChainGunAndYou
 // 49550 - Call Out Injured Soldier
 class spell_dragonblight_call_out_injured_soldier : public SpellScript
 {
-    PrepareSpellScript(spell_dragonblight_call_out_injured_soldier);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return sObjectMgr->GetBroadcastText(TEXT_CALL_OUT_1) && sObjectMgr->GetBroadcastText(TEXT_CALL_OUT_2);
@@ -657,8 +645,6 @@ enum TortureTheTorturer
 // 48603 - High Executor's Branding Iron
 class spell_dragonblight_high_executor_branding_iron : public SpellScript
 {
-    PrepareSpellScript(spell_dragonblight_high_executor_branding_iron);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_TORTURER_KILL_CREDIT, SPELL_BRANDING_IRON_IMPACT });
@@ -720,8 +706,6 @@ enum ThePerfectDissemblance
 // 48692 - The Perfect Dissemblance: Quest Completion Script
 class spell_dragonblight_cancel_banshees_magic_mirror : public SpellScript
 {
-    PrepareSpellScript(spell_dragonblight_cancel_banshees_magic_mirror);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_BANSHEES_MAGIC_MIRROR });
@@ -751,8 +735,6 @@ enum AFallFromGrace
 // 48762 - A Fall from Grace: Scarlet Raven Priest Image - Master
 class spell_dragonblight_scarlet_raven_priest_image_master : public SpellScript
 {
-    PrepareSpellScript(spell_dragonblight_scarlet_raven_priest_image_master);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_PRIEST_IMAGE_FEMALE, SPELL_PRIEST_IMAGE_MALE });
@@ -773,8 +755,6 @@ class spell_dragonblight_scarlet_raven_priest_image_master : public SpellScript
 // 48769 - A Fall from Grace: Quest Completion Script
 class spell_dragonblight_cancel_scarlet_raven_priest_image : public SpellScript
 {
-    PrepareSpellScript(spell_dragonblight_cancel_scarlet_raven_priest_image);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_PRIEST_IMAGE_FEMALE, SPELL_PRIEST_IMAGE_MALE });
@@ -808,8 +788,6 @@ enum BombardTheBallistae
 // 48347 - Bombard the Ballistae: FX Master
 class spell_dragonblight_bombard_the_ballistae_fx_master : public SpellScript
 {
-    PrepareSpellScript(spell_dragonblight_bombard_the_ballistae_fx_master);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -857,8 +835,6 @@ enum ProjectionsAndPlans
 // 47097 - Surge Needle Teleporter
 class spell_dragonblight_surge_needle_teleporter : public SpellScript
 {
-    PrepareSpellScript(spell_dragonblight_surge_needle_teleporter);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_TELE_MOONREST_GARDENS, SPELL_TELE_SURGE_NEEDLE });
@@ -895,8 +871,6 @@ class spell_dragonblight_surge_needle_teleporter : public SpellScript
 // 50252 - Blood Draw
 class spell_dragonblight_fill_blood_unholy_frost_gem : public SpellScript
 {
-    PrepareSpellScript(spell_dragonblight_fill_blood_unholy_frost_gem);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ uint32(spellInfo->GetEffect(EFFECT_0).CalcValue()) });
@@ -925,8 +899,6 @@ enum MessyBusiness
 // 47435 - Scrape Corrosive Spit
 class spell_dragonblight_scrape_corrosive_spit : public SpellScript
 {
-    PrepareSpellScript(spell_dragonblight_scrape_corrosive_spit);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_CORROSIVE_SPIT });
@@ -946,8 +918,6 @@ class spell_dragonblight_scrape_corrosive_spit : public SpellScript
 // 47447 - Corrosive Spit
 class spell_dragonblight_corrosive_spit : public AuraScript
 {
-    PrepareAuraScript(spell_dragonblight_corrosive_spit);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ uint32(spellInfo->GetEffect(EFFECT_0).CalcValue()) });
@@ -987,8 +957,6 @@ enum TheFocusOnTheBeach
 // 47393 - The Focus on the Beach: Quest Completion Script
 class spell_dragonblight_focus_on_the_beach_quest_completion_script : public SpellScript
 {
-    PrepareSpellScript(spell_dragonblight_focus_on_the_beach_quest_completion_script);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_LEY_LINE_INFORMATION_01 });
@@ -1017,8 +985,6 @@ enum AtopTheWoodlands
 // 47615 - Atop the Woodlands: Quest Completion Script
 class spell_dragonblight_atop_the_woodlands_quest_completion_script : public SpellScript
 {
-    PrepareSpellScript(spell_dragonblight_atop_the_woodlands_quest_completion_script);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_LEY_LINE_INFORMATION_02 });
@@ -1047,8 +1013,6 @@ enum TheEndOfTheLine
 // 47638 - The End of the Line: Quest Completion Script
 class spell_dragonblight_end_of_the_line_quest_completion_script : public SpellScript
 {
-    PrepareSpellScript(spell_dragonblight_end_of_the_line_quest_completion_script);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_LEY_LINE_INFORMATION_03 });
@@ -1077,8 +1041,6 @@ enum SpiritualInsight
 // 47190 - Toalu'u's Spiritual Incense
 class spell_dragonblight_toaluus_spiritual_incense : public AuraScript
 {
-    PrepareAuraScript(spell_dragonblight_toaluus_spiritual_incense);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SPIRITUAL_INSIGHT });
@@ -1107,8 +1069,6 @@ enum TheSacredAndTheCorrupt
 // 70653 - Lich King Zap Player
 class spell_dragonblight_lich_king_zap_player : public SpellScript
 {
-    PrepareSpellScript(spell_dragonblight_lich_king_zap_player);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_KNOCKDOWN });

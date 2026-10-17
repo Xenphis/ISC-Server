@@ -560,8 +560,6 @@ class spell_collecting_fallout : public SpellScriptLoader
 
         class spell_collecting_fallout_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_collecting_fallout_SpellScript);
-
             void OnLaunch(SpellEffIndex effIndex)
             {
                 // estimated 25% chance of success

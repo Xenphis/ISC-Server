@@ -715,8 +715,6 @@ struct npc_frostbrood_skytalon : public VehicleAI
 // 55288 - It's All Fun and Games: The Ocular On Death
 class spell_icecrown_the_ocular_on_death : public SpellScript
 {
-    PrepareSpellScript(spell_icecrown_the_ocular_on_death);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ uint32(spellInfo->GetEffect(EFFECT_0).CalcValue()) });
@@ -741,8 +739,6 @@ class spell_icecrown_the_ocular_on_death : public SpellScript
 // 66411 - Summon Tualiq Proxy
 class spell_icecrown_summon_tualiq_proxy : public SpellScript
 {
-    PrepareSpellScript(spell_icecrown_summon_tualiq_proxy);
-
     void SetDest(SpellDestination& dest)
     {
         Position const offset = { 0.0f, 0.0f, 30.0f, 0.0f };
@@ -768,8 +764,6 @@ enum BreakfastOfChampions
 // 66512 - Pound Drum
 class spell_icecrown_pound_drum : public SpellScript
 {
-    PrepareSpellScript(spell_icecrown_pound_drum);
-
     bool Validate(SpellInfo const* /*spell*/) override
     {
         return ValidateSpellInfo({ SPELL_SUMMON_DEEP_JORMUNGAR, SPELL_STORMFORGED_MOLE_MACHINE });
@@ -809,8 +803,6 @@ std::array<uint32, 4> const ChumTheWaterSummonSpells =
 // 66741 - Chum the Water
 class spell_icecrown_chum_the_water : public SpellScript
 {
-    PrepareSpellScript(spell_icecrown_chum_the_water);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(ChumTheWaterSummonSpells);
@@ -843,8 +835,6 @@ enum ThroughTheEye
 // 25732 - Through the Eye: Eye of the Lich King
 class spell_icecrown_through_the_eye_the_eye_of_the_lk : public AuraScript
 {
-    PrepareAuraScript(spell_icecrown_through_the_eye_the_eye_of_the_lk);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SUMMON_IMAGE_OF_VARDMADRA, SPELL_SUMMON_IMAGE_OF_SHADOW_CULTIST }) &&
@@ -874,8 +864,6 @@ class spell_icecrown_through_the_eye_the_eye_of_the_lk : public AuraScript
 // 57884 - Through the Eye: Kill Credit to Master
 class spell_icecrown_through_the_eye_kill_credit_to_master : public SpellScript
 {
-    PrepareSpellScript(spell_icecrown_through_the_eye_kill_credit_to_master);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_USING_THE_EYE_OF_THE_LK });
@@ -899,8 +887,6 @@ class spell_icecrown_through_the_eye_kill_credit_to_master : public SpellScript
 // 56515 - Summon Freed Crusader
 class spell_icecrown_summon_freed_crusader : public SpellScript
 {
-    PrepareSpellScript(spell_icecrown_summon_freed_crusader);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ uint32(spellInfo->GetEffect(EFFECT_0).CalcValue()) });
@@ -930,8 +916,6 @@ enum ArmyOfTheDamned
 // 58916 - Gift of the Lich King
 class spell_icecrown_gift_of_the_lich_king : public SpellScript
 {
-    PrepareSpellScript(spell_icecrown_gift_of_the_lich_king);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_GIFT_OF_THE_LICH_KING });
@@ -951,8 +935,6 @@ class spell_icecrown_gift_of_the_lich_king : public SpellScript
 // 58917 - Consume Minions
 class spell_icecrown_consume_minions : public SpellScript
 {
-    PrepareSpellScript(spell_icecrown_consume_minions);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_CONSUME_MINIONS });
@@ -981,8 +963,6 @@ enum LeaveOurMark
 // 23301 - Ebon Blade Banner
 class spell_icecrown_ebon_blade_banner : public SpellScript
 {
-    PrepareSpellScript(spell_icecrown_ebon_blade_banner);
-
     void HandleScript(SpellEffIndex /*effIndex*/)
     {
         if (Player* caster = GetCaster()->ToPlayer())
@@ -1007,8 +987,6 @@ enum TheHunterAndThePrince
 // 61752 - Illidan Kill Credit Master
 class spell_icecrown_illidan_kill_credit_master : public SpellScript
 {
-   PrepareSpellScript(spell_icecrown_illidan_kill_credit_master);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_ILLIDAN_KILL_CREDIT });
@@ -1045,8 +1023,6 @@ enum KingOfTheMountain
 // 59643 - Plant Horde Battle Standard
 class spell_icecrown_plant_battle_standard : public SpellScript
 {
-    PrepareSpellScript(spell_icecrown_plant_battle_standard);
-
     void HandleDummy(SpellEffIndex /*effIndex*/)
     {
         Unit* caster = GetCaster();
@@ -1074,8 +1050,6 @@ class spell_icecrown_plant_battle_standard : public SpellScript
 // 4336 - Jump Jets
 class spell_icecrown_jump_jets : public SpellScript
 {
-    PrepareSpellScript(spell_icecrown_jump_jets);
-
     void HandleCast()
     {
         Unit* caster = GetCaster();
@@ -1102,8 +1076,6 @@ enum BorrowedTechnology
 // 59318 - Grab Fake Soldier
 class spell_icecrown_grab_fake_soldier : public SpellScript
 {
-    PrepareSpellScript(spell_icecrown_grab_fake_soldier);
-
     bool Validate(SpellInfo const* /*spell*/) override
     {
         return ValidateSpellInfo({ SPELL_RIDE_FROST_WYRM });
@@ -1127,8 +1099,6 @@ class spell_icecrown_grab_fake_soldier : public SpellScript
 // 59303 - Summon Frost Wyrm
 class spell_icecrown_summon_frost_wyrm : public SpellScript
 {
-    PrepareSpellScript(spell_icecrown_summon_frost_wyrm);
-
     void SetDest(SpellDestination& dest)
     {
         // Adjust effect summon position
@@ -1149,8 +1119,6 @@ class spell_icecrown_summon_frost_wyrm : public SpellScript
 // 12601 - Second Chances: Summon Landgren's Soul Moveto Target Bunny
 class spell_icecrown_summon_soul_moveto_bunny : public SpellScript
 {
-    PrepareSpellScript(spell_icecrown_summon_soul_moveto_bunny);
-
     void SetDest(SpellDestination& dest)
     {
         // Adjust effect summon position
@@ -1176,8 +1144,6 @@ enum TheLastLineOfDefense
 // 57387 - Argent Cannon Assault
 class spell_icecrown_argent_cannon_assault : public SpellScript
 {
-    PrepareSpellScript(spell_icecrown_argent_cannon_assault);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_POWERING_UP_THE_CORE });
@@ -1198,8 +1164,6 @@ class spell_icecrown_argent_cannon_assault : public SpellScript
 // 57412 - Reckoning Bomb
 class spell_icecrown_cannons_target : public SpellScript
 {
-    PrepareSpellScript(spell_icecrown_cannons_target);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ static_cast<uint32>(spellInfo->GetEffect(EFFECT_0).CalcValue()) });
@@ -1223,8 +1187,6 @@ class spell_icecrown_cannons_target : public SpellScript
 
 class spell_icecrown_bested_trigger : public SpellScript
 {
-    PrepareSpellScript(spell_icecrown_bested_trigger);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ uint32(spellInfo->GetEffect(EFFECT_0).CalcValue()) });
@@ -1285,8 +1247,6 @@ enum ThatsAbominable
 // 59576 - Burst at the Seams
 class spell_icecrown_burst_at_the_seams_59576 : public SpellScript
 {
-    PrepareSpellScript(spell_icecrown_burst_at_the_seams_59576);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -1325,8 +1285,6 @@ class spell_icecrown_burst_at_the_seams_59576 : public SpellScript
 // 59579 - Burst at the Seams
 class spell_icecrown_burst_at_the_seams_59579 : public AuraScript
 {
-    PrepareAuraScript(spell_icecrown_burst_at_the_seams_59579);
-
     void HandleApply(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
     {
         Unit* target = GetTarget();
@@ -1369,8 +1327,6 @@ class spell_icecrown_burst_at_the_seams_59579 : public AuraScript
 // 52593 - Bloated Abomination Feign Death
 class spell_icecrown_bloated_abom_feign_death : public AuraScript
 {
-    PrepareAuraScript(spell_icecrown_bloated_abom_feign_death);
-
     void HandleApply(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
     {
         Unit* target = GetTarget();
@@ -1398,8 +1354,6 @@ class spell_icecrown_bloated_abom_feign_death : public AuraScript
 // 76245 - Area Restrict Abom
 class spell_icecrown_area_restrict_abom : public SpellScript
 {
-    PrepareSpellScript(spell_icecrown_area_restrict_abom);
-
     void HandleScript(SpellEffIndex /*effIndex*/)
     {
         if (Creature* creature = GetHitCreature()) {
@@ -1420,8 +1374,6 @@ class spell_icecrown_area_restrict_abom : public SpellScript
 // 60041 - Assign Geist Kill Credit to Master
 class spell_icecrown_assign_credit_to_master : public SpellScript
 {
-    PrepareSpellScript(spell_icecrown_assign_credit_to_master);
-
     void HandleScript(SpellEffIndex /*effIndex*/)
     {
         if (Unit* target = GetHitUnit())
@@ -1442,8 +1394,6 @@ class spell_icecrown_assign_credit_to_master : public SpellScript
 // 52510 - Burst at the Seams
 class spell_icecrown_burst_at_the_seams_52510 : public SpellScript
 {
-    PrepareSpellScript(spell_icecrown_burst_at_the_seams_52510);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -1517,8 +1467,6 @@ enum TheBoonOfAdal
 // 57787 - Forcecast Bridenbrad Ascension
 class spell_icecrown_forcecast_bridenbrad_ascension : public SpellScript
 {
-    PrepareSpellScript(spell_icecrown_forcecast_bridenbrad_ascension);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(

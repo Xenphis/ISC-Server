@@ -252,8 +252,6 @@ private:
 // 38196 - Vampiric Aura
 class spell_anetheron_vampiric_aura : public AuraScript
 {
-    PrepareAuraScript(spell_anetheron_vampiric_aura);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_VAMPIRIC_AURA_HEAL });
@@ -281,8 +279,6 @@ class spell_anetheron_vampiric_aura : public AuraScript
 // 31298 - Sleep
 class spell_anetheron_sleep : public SpellScript
 {
-    PrepareSpellScript(spell_anetheron_sleep);
-
     bool Load() override
     {
         return GetCaster()->IsUnit();

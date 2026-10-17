@@ -542,8 +542,6 @@ private:
 // 39142 - Drain World Tree Dummy
 class spell_archimonde_drain_world_tree_dummy : public SpellScript
 {
-    PrepareSpellScript(spell_archimonde_drain_world_tree_dummy);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_DRAIN_WORLD_TREE_VISUAL_2 });
@@ -563,8 +561,6 @@ class spell_archimonde_drain_world_tree_dummy : public SpellScript
 // 42201 - Eternal Silence
 class spell_archimonde_eternal_silence : public AuraScript
 {
-    PrepareAuraScript(spell_archimonde_eternal_silence);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_RESIDUE_OF_ETERNITY });

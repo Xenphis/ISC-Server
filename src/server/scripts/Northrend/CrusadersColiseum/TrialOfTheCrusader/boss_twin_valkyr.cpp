@@ -649,8 +649,6 @@ struct npc_bullet_controller : public ScriptedAI
 // 66149, 68396 - Bullet Controller Periodic
 class spell_bullet_controller : public AuraScript
 {
-    PrepareAuraScript(spell_bullet_controller);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SUMMON_PERIODIC_LIGHT, SPELL_SUMMON_PERIODIC_DARK });
@@ -678,8 +676,6 @@ class spell_bullet_controller : public AuraScript
 // 67590, 67602, 67603, 67604 - Powering Up
 class spell_powering_up : public SpellScript
 {
-    PrepareSpellScript(spell_powering_up);
-
     uint32 spellId = 0;
     uint32 poweringUp = 0;
 
@@ -725,8 +721,6 @@ class spell_powering_up : public SpellScript
 // 65684, 67176, 67177, 67178 - Dark Essence
 class spell_twin_valkyr_dark_essence : public AuraScript
 {
-    PrepareAuraScript(spell_twin_valkyr_dark_essence);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_LIGHT_ESSENCE });
@@ -746,8 +740,6 @@ class spell_twin_valkyr_dark_essence : public AuraScript
 // 65686, 67222, 67223, 67224 - Light Essence
 class spell_twin_valkyr_light_essence : public AuraScript
 {
-    PrepareAuraScript(spell_twin_valkyr_light_essence);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_DARK_ESSENCE });
@@ -768,8 +760,6 @@ class spell_twin_valkyr_light_essence : public AuraScript
 // 65686, 67222, 67223, 67224 - Light Essence
 class spell_valkyr_essences : public AuraScript
 {
-    PrepareAuraScript(spell_valkyr_essences);
-
 public:
     spell_valkyr_essences()
     {
@@ -859,8 +849,6 @@ private:
 // 65916, 67248, 67249, 67250 - Power of the Twins
 class spell_power_of_the_twins : public AuraScript
 {
-    PrepareAuraScript(spell_power_of_the_twins);
-
     bool Load() override
     {
         return GetCaster()->GetTypeId() == TYPEID_UNIT;

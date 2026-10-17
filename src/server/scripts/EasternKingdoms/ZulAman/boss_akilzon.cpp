@@ -239,8 +239,6 @@ private:
 // 44733 - Eagle Swoop Primer
 class spell_akilzon_eagle_swoop_primer : public SpellScript
 {
-    PrepareSpellScript(spell_akilzon_eagle_swoop_primer);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ uint32(spellInfo->GetEffect(EFFECT_0).CalcValue()) });
@@ -266,8 +264,6 @@ class spell_akilzon_eagle_swoop_primer : public SpellScript
 // 44735 - Electrical Overload Primer
 class spell_akilzon_electrical_overload_primer : public SpellScript
 {
-    PrepareSpellScript(spell_akilzon_electrical_overload_primer);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ uint32(spellInfo->GetEffect(EFFECT_0).CalcValue()) });
@@ -293,8 +289,6 @@ class spell_akilzon_electrical_overload_primer : public SpellScript
 // 43658 - Electrical Overload Graphic Pulse
 class spell_akilzon_electrical_overload : public SpellScript
 {
-    PrepareSpellScript(spell_akilzon_electrical_overload);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo(
@@ -340,8 +334,6 @@ class spell_akilzon_electrical_overload : public SpellScript
 // 43648 - Electrical Storm
 class spell_akilzon_electrical_storm : public SpellScript
 {
-    PrepareSpellScript(spell_akilzon_electrical_storm);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_ELECTRICAL_STORM_AURA, SPELL_TELEPORT_SELF });
@@ -371,8 +363,6 @@ class spell_akilzon_electrical_storm : public SpellScript
 // 43657 - Electrical Storm
 class spell_akilzon_electrical_storm_damage : public SpellScript
 {
-    PrepareSpellScript(spell_akilzon_electrical_storm_damage);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_ELECTRICAL_STORM_AURA });
@@ -392,8 +382,6 @@ class spell_akilzon_electrical_storm_damage : public SpellScript
 // 44006 - Teleport Self
 class spell_akilzon_teleport_self : public SpellScript
 {
-    PrepareSpellScript(spell_akilzon_teleport_self);
-
     void SetDest(SpellDestination& dest)
     {
         dest.RelocateOffset({ 0.0f, 0.0f, 10.0f, 0.0f });

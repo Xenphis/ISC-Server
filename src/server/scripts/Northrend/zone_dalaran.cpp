@@ -264,8 +264,6 @@ enum TeleportToDalaran
 // 54620 - Teleport Crystal: Teleport to Dalaran AICast Script
 class spell_dalaran_teleport_to_dalaran : public SpellScript
 {
-    PrepareSpellScript(spell_dalaran_teleport_to_dalaran);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_TELEPORT_TO_DALARAN });
@@ -290,8 +288,6 @@ enum TeleportToLakeWintergrasp
 // 58622 - Teleport to Lake Wintergrasp
 class spell_dalaran_teleport_to_lake_wintergrasp : public SpellScript
 {
-    PrepareSpellScript(spell_dalaran_teleport_to_lake_wintergrasp);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_TELEPORT_TO_LAKE_WINTERGRASP });

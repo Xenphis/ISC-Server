@@ -563,8 +563,6 @@ struct npc_flame_patch_alar : public ScriptedAI
 // 34229 - Flame Quills
 class spell_alar_flame_quills : public AuraScript
 {
-    PrepareAuraScript(spell_alar_flame_quills);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(FlameQuillsSpells);
@@ -600,8 +598,6 @@ class spell_alar_flame_quills : public AuraScript
 // 39555 - Ashtongue Ruse Master
 class spell_alar_ashtongue_ruse_master : public AuraScript
 {
-    PrepareAuraScript(spell_alar_ashtongue_ruse_master);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_ASHTONGUE_RUSE_DUMMY, SPELL_ASHTONGUE_RUSE_CREDIT });

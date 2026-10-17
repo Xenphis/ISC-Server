@@ -343,8 +343,6 @@ private:
 // 69051 - Mirrored Soul
 class spell_devourer_of_souls_mirrored_soul : public SpellScript
 {
-    PrepareSpellScript(spell_devourer_of_souls_mirrored_soul);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MIRRORED_SOUL_PROC_AURA });
@@ -365,8 +363,6 @@ class spell_devourer_of_souls_mirrored_soul : public SpellScript
 // 69023 - Mirrored Soul (Proc)
 class spell_devourer_of_souls_mirrored_soul_proc : public AuraScript
 {
-    PrepareAuraScript(spell_devourer_of_souls_mirrored_soul_proc);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MIRRORED_SOUL_DAMAGE });
@@ -399,8 +395,6 @@ class spell_devourer_of_souls_mirrored_soul_proc : public AuraScript
 // 69048 - Mirrored Soul (Target Selector)
 class spell_devourer_of_souls_mirrored_soul_target_selector : public SpellScript
 {
-    PrepareSpellScript(spell_devourer_of_souls_mirrored_soul_target_selector);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MIRRORED_SOUL_BUFF });

@@ -573,8 +573,6 @@ private:
 // 45141 - Burn
 class spell_brutallus_burn_primer : public SpellScript
 {
-    PrepareSpellScript(spell_brutallus_burn_primer);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_BURN_DAMAGE });
@@ -596,8 +594,6 @@ class spell_brutallus_burn_primer : public SpellScript
 // 45151 - Burn
 class spell_brutallus_burn_ally : public SpellScript
 {
-    PrepareSpellScript(spell_brutallus_burn_ally);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_BURN_DAMAGE });
@@ -619,8 +615,6 @@ class spell_brutallus_burn_ally : public SpellScript
 // 46394 - Burn
 class spell_brutallus_burn : public AuraScript
 {
-    PrepareAuraScript(spell_brutallus_burn);
-
     void HandleEffectPeriodicUpdate(AuraEffect* aurEff)
     {
         if (aurEff->GetTickNumber() % 11 == 0)
@@ -636,8 +630,6 @@ class spell_brutallus_burn : public AuraScript
 // 45185 - Stomp
 class spell_brutallus_stomp : public SpellScript
 {
-    PrepareSpellScript(spell_brutallus_stomp);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_BURN_DAMAGE });
@@ -657,8 +649,6 @@ class spell_brutallus_stomp : public SpellScript
 // 46609 - Freeze
 class spell_brutallus_freeze : public SpellScript
 {
-    PrepareSpellScript(spell_brutallus_freeze);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_FREEZE_OBJECT });
@@ -688,8 +678,6 @@ class spell_brutallus_freeze : public SpellScript
 // 46637 - Break Ice
 class spell_brutallus_break_ice : public AuraScript
 {
-    PrepareAuraScript(spell_brutallus_break_ice);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_BREAK_ICE_OBJECT, SPELL_BREAK_ICE_KNOCK_BACK });

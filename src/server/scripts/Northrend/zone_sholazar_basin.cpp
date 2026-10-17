@@ -275,8 +275,6 @@ enum KickWhatKick
 // 51330 - Shoot RJR
 class spell_sholazar_shoot_rjr : public SpellScript
 {
-    PrepareSpellScript(spell_sholazar_shoot_rjr);
-
     SpellCastResult CheckCast()
     {
         if (Unit* target = GetExplTargetUnit())
@@ -373,8 +371,6 @@ enum TheLifewardensWrath
 // 51957 - Call of the Lifewarden
 class spell_sholazar_call_of_the_lifewarden : public SpellScript
 {
-    PrepareSpellScript(spell_sholazar_call_of_the_lifewarden);
-
     void HandleSendEvent(SpellEffIndex effIndex)
     {
         PreventHitDefaultEffect(effIndex);
@@ -395,8 +391,6 @@ class spell_sholazar_call_of_the_lifewarden : public SpellScript
 // 51318 - Freya Dummy
 class spell_sholazar_freya_dummy : public SpellScript
 {
-    PrepareSpellScript(spell_sholazar_freya_dummy);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -440,8 +434,6 @@ enum ReturnedSevenfold
 // 51854 - Deathbolt
 class spell_sholazar_deathbolt : public SpellScript
 {
-    PrepareSpellScript(spell_sholazar_deathbolt);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -481,8 +473,6 @@ enum BurningToHelp
 // 52308 - Take Sputum Sample
 class spell_sholazar_take_sputum_sample : public SpellScript
 {
-    PrepareSpellScript(spell_sholazar_take_sputum_sample);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo(
@@ -515,8 +505,6 @@ class spell_sholazar_take_sputum_sample : public SpellScript
 // 52306 - Sputum Collected
 class spell_sholazar_sputum_collected : public SpellScript
 {
-    PrepareSpellScript(spell_sholazar_sputum_collected);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_HYDRA_SPUTUM });
@@ -551,8 +539,6 @@ enum ACleansingSong
 // 52941 - Song of Cleansing
 class spell_sholazar_song_of_cleansing : public SpellScript
 {
-    PrepareSpellScript(spell_sholazar_song_of_cleansing);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -600,8 +586,6 @@ enum StrengthOfTheTempest
 // 53062 - Lightning Strike
 class spell_sholazar_lightning_strike : public SpellScript
 {
-    PrepareSpellScript(spell_sholazar_lightning_strike);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_CREATE_POWER_OF_THE_TEMPEST });
@@ -625,8 +609,6 @@ class spell_sholazar_lightning_strike : public SpellScript
 // 51071 - Flight to Sholazar (Missile Warning)
 class spell_sholazar_flight_to_sholazar : public SpellScript
 {
-    PrepareSpellScript(spell_sholazar_flight_to_sholazar);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return sObjectMgr->GetBroadcastText(uint32(spellInfo->GetEffect(EFFECT_0).CalcValue()));
@@ -662,8 +644,6 @@ enum SomeMakeLemonadeSomeMakeLiquor
 // 51840 - Despawn Fruit Tosser
 class spell_sholazar_despawn_fruit_tosser : public SpellScript
 {
-    PrepareSpellScript(spell_sholazar_despawn_fruit_tosser);
-
     bool Validate(SpellInfo const* /*spellEntry*/) override
     {
         return ValidateSpellInfo(
@@ -708,8 +688,6 @@ enum SalvagingLifesStength
 // 54190 - Lifeblood Dummy
 class spell_sholazar_lifeblood_dummy : public SpellScript
 {
-    PrepareSpellScript(spell_sholazar_lifeblood_dummy);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ uint32(spellInfo->GetEffect(EFFECT_0).CalcValue()) }) &&
@@ -745,8 +723,6 @@ enum AMammothUndertaking
 // 51656 - Mount Mammoth Cue
 class spell_sholazar_mount_mammoth_cue : public SpellScript
 {
-    PrepareSpellScript(spell_sholazar_mount_mammoth_cue);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_RIDE_SHATTERTUSK_MAMMOTH });

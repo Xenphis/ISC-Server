@@ -861,8 +861,6 @@ struct npc_shadowsword_fury_mage : public ShadowswordBaseAI
 // 46041 - Summon Blood Elves Periodic
 class spell_muru_summon_blood_elves_periodic : public AuraScript
 {
-    PrepareAuraScript(spell_muru_summon_blood_elves_periodic);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SUMMON_BLOOD_ELVES_SCRIPT });
@@ -888,8 +886,6 @@ class spell_muru_summon_blood_elves_periodic : public AuraScript
 // 46050 - Summon Blood Elves Script
 class spell_muru_summon_blood_elves_script : public SpellScript
 {
-    PrepareSpellScript(spell_muru_summon_blood_elves_script);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -921,8 +917,6 @@ class spell_muru_summon_blood_elves_script : public SpellScript
 // 45996 - Darkness
 class spell_muru_darkness : public AuraScript
 {
-    PrepareAuraScript(spell_muru_darkness);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(SummonDarkFiendSpells);
@@ -947,8 +941,6 @@ class spell_muru_darkness : public AuraScript
 // 45934 - Dark Fiend
 class spell_muru_dark_fiend_magic : public AuraScript
 {
-    PrepareAuraScript(spell_muru_dark_fiend_magic);
-
     void AfterRemove(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
     {
         if (GetTargetApplication()->GetRemoveMode() != AURA_REMOVE_BY_ENEMY_SPELL)
@@ -967,8 +959,6 @@ class spell_muru_dark_fiend_magic : public AuraScript
 // 46205 - Transform Visual Missile Periodic
 class spell_muru_transform_visual_missile_periodic : public AuraScript
 {
-    PrepareAuraScript(spell_muru_transform_visual_missile_periodic);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_TRANSFORM_VISUAL_MISSILE_1, SPELL_TRANSFORM_VISUAL_MISSILE_2 });
@@ -988,8 +978,6 @@ class spell_muru_transform_visual_missile_periodic : public AuraScript
 // 45978 - Summon Void Sentinel Summoner
 class spell_muru_summon_void_sentinel_summoner : public SpellScript
 {
-    PrepareSpellScript(spell_muru_summon_void_sentinel_summoner);
-
     void SetDest(SpellDestination& dest)
     {
         Unit* caster = GetCaster();
@@ -1005,8 +993,6 @@ class spell_muru_summon_void_sentinel_summoner : public SpellScript
 // 46284 - Negative Energy Periodic
 class spell_muru_negative_energy_periodic : public AuraScript
 {
-    PrepareAuraScript(spell_muru_negative_energy_periodic);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ spellInfo->GetEffect(EFFECT_0).TriggerSpell });
@@ -1030,8 +1016,6 @@ class spell_muru_negative_energy_periodic : public AuraScript
 // 46289 - Negative Energy
 class spell_muru_negative_energy : public SpellScript
 {
-    PrepareSpellScript(spell_muru_negative_energy);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_NEGATIVE_ENERGY_DAMAGE });

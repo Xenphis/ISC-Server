@@ -249,8 +249,6 @@ private:
 // 35284 - Summon Nether Wraiths
 class spell_pathaleon_summon_nether_wraiths : public SpellScript
 {
-    PrepareSpellScript(spell_pathaleon_summon_nether_wraiths);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(

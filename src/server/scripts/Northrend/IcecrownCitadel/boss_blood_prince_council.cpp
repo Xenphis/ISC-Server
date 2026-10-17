@@ -1101,8 +1101,6 @@ private:
 // 71806 - Glittering Sparks
 class spell_taldaram_glittering_sparks : public SpellScript
 {
-    PrepareSpellScript(spell_taldaram_glittering_sparks);
-
     void HandleScript(SpellEffIndex effIndex)
     {
         PreventHitDefaultEffect(effIndex);
@@ -1119,8 +1117,6 @@ class spell_taldaram_glittering_sparks : public SpellScript
    72040 - Conjure Empowered Flame */
 class spell_taldaram_summon_flame_ball : public SpellScript
 {
-    PrepareSpellScript(spell_taldaram_summon_flame_ball);
-
     void HandleScript(SpellEffIndex effIndex)
     {
         PreventHitDefaultEffect(effIndex);
@@ -1137,8 +1133,6 @@ class spell_taldaram_summon_flame_ball : public SpellScript
    55947 - Flame Sphere Death Effect */
 class spell_taldaram_flame_ball_visual : public AuraScript
 {
-    PrepareAuraScript(spell_taldaram_flame_ball_visual);
-
     bool Load() override
     {
         if (GetCaster()->GetEntry() == NPC_BALL_OF_FLAME || GetCaster()->GetEntry() == NPC_BALL_OF_INFERNO_FLAME)
@@ -1179,8 +1173,6 @@ class spell_taldaram_flame_ball_visual : public AuraScript
    72784 - Ball of Flames Proc */
 class spell_taldaram_ball_of_inferno_flame : public SpellScript
 {
-    PrepareSpellScript(spell_taldaram_ball_of_inferno_flame);
-
     void ModAuraStack()
     {
         if (Aura* aur = GetHitAura())
@@ -1195,8 +1187,6 @@ class spell_taldaram_ball_of_inferno_flame : public SpellScript
 
 class spell_taldaram_ball_of_inferno_flame_aura : public AuraScript
 {
-    PrepareAuraScript(spell_taldaram_ball_of_inferno_flame_aura);
-
     void HandleStackDrop(ProcEventInfo& /*eventInfo*/)
     {
         ModStackAmount(-1);
@@ -1211,8 +1201,6 @@ class spell_taldaram_ball_of_inferno_flame_aura : public AuraScript
 // 72080 - Kinetic Bomb
 class spell_valanar_kinetic_bomb : public SpellScript
 {
-    PrepareSpellScript(spell_valanar_kinetic_bomb);
-
     void SetDest(SpellDestination& dest)
     {
         Position const offset = { 0.0f, 0.0f, 20.0f, 0.0f };
@@ -1227,8 +1215,6 @@ class spell_valanar_kinetic_bomb : public SpellScript
 
 class spell_valanar_kinetic_bomb_aura : public AuraScript
 {
-    PrepareAuraScript(spell_valanar_kinetic_bomb_aura);
-
     bool Validate(SpellInfo const* /*spell*/) override
     {
         return ValidateSpellInfo({ SPELL_KINETIC_BOMB_EXPLOSION, SPELL_KINETIC_BOMB_VISUAL });
@@ -1258,8 +1244,6 @@ class spell_valanar_kinetic_bomb_aura : public AuraScript
 // 72087 - Kinetic Bomb Knockback
 class spell_valanar_kinetic_bomb_knockback : public SpellScript
 {
-    PrepareSpellScript(spell_valanar_kinetic_bomb_knockback);
-
     void KnockIntoAir(SpellMissInfo missInfo)
     {
         if (missInfo != SPELL_MISS_NONE)
@@ -1278,8 +1262,6 @@ class spell_valanar_kinetic_bomb_knockback : public SpellScript
 // 72054 - Kinetic Bomb Visual
 class spell_valanar_kinetic_bomb_absorb : public AuraScript
 {
-    PrepareAuraScript(spell_valanar_kinetic_bomb_absorb);
-
     void OnAbsorb(AuraEffect* aurEff, DamageInfo& dmgInfo, uint32& absorbAmount)
     {
         absorbAmount = CalculatePct(dmgInfo.GetDamage(), aurEff->GetAmount());
@@ -1296,8 +1278,6 @@ class spell_valanar_kinetic_bomb_absorb : public AuraScript
 // 73001 - Shadow Prison
 class spell_blood_council_shadow_prison : public AuraScript
 {
-    PrepareAuraScript(spell_blood_council_shadow_prison);
-
     bool Validate(SpellInfo const* /*spell*/) override
     {
         return ValidateSpellInfo({ SPELL_SHADOW_PRISON_DAMAGE });
@@ -1318,8 +1298,6 @@ class spell_blood_council_shadow_prison : public AuraScript
 // 72999 - Shadow Prison
 class spell_blood_council_shadow_prison_damage : public SpellScript
 {
-    PrepareSpellScript(spell_blood_council_shadow_prison_damage);
-
     void AddExtraDamage(SpellEffIndex /*effIndex*/)
     {
         if (Aura* aur = GetHitUnit()->GetAura(GetSpellInfo()->Id))

@@ -1031,8 +1031,6 @@ private:
 // 70598 - Sindragosa's Fury
 class spell_sindragosa_s_fury : public SpellScript
 {
-    PrepareSpellScript(spell_sindragosa_s_fury);
-
     bool Load() override
     {
         // This script should execute only in Icecrown Citadel
@@ -1104,8 +1102,6 @@ class spell_sindragosa_s_fury : public SpellScript
 // 69762 - Unchained Magic
 class spell_sindragosa_unchained_magic : public SpellScript
 {
-    PrepareSpellScript(spell_sindragosa_unchained_magic);
-
     void FilterTargets(std::list<WorldObject*>& targets)
     {
         std::vector<WorldObject*> healers;
@@ -1176,8 +1172,6 @@ class spell_sindragosa_unchained_magic : public SpellScript
 // 73061, 73062, 73063, 73064 - Frost Breath
 class spell_sindragosa_frost_breath : public SpellScript
 {
-    PrepareSpellScript(spell_sindragosa_frost_breath);
-
     void HandleInfusion()
     {
         Player* target = GetHitPlayer();
@@ -1211,8 +1205,6 @@ class spell_sindragosa_frost_breath : public SpellScript
 // 69766 - Instability
 class spell_sindragosa_instability : public AuraScript
 {
-    PrepareAuraScript(spell_sindragosa_instability);
-
     bool Validate(SpellInfo const* /*spell*/) override
     {
         return ValidateSpellInfo({ SPELL_BACKLASH });
@@ -1238,8 +1230,6 @@ class spell_sindragosa_instability : public AuraScript
 // 70126 - Frost Beacon
 class spell_sindragosa_frost_beacon : public AuraScript
 {
-    PrepareAuraScript(spell_sindragosa_frost_beacon);
-
     bool Validate(SpellInfo const* /*spell*/) override
     {
         return ValidateSpellInfo({ SPELL_ICE_TOMB_DAMAGE });
@@ -1261,8 +1251,6 @@ class spell_sindragosa_frost_beacon : public AuraScript
 // 70157 - Ice Tomb (Trap)
 class spell_sindragosa_ice_tomb_trap : public AuraScript
 {
-    PrepareAuraScript(spell_sindragosa_ice_tomb_trap);
-
     bool Validate(SpellInfo const* /*spell*/) override
     {
         if (!sObjectMgr->GetCreatureTemplate(NPC_ICE_TOMB))
@@ -1334,8 +1322,6 @@ private:
 // 70117 - Icy Grip
 class spell_sindragosa_icy_grip : public SpellScript
 {
-    PrepareSpellScript(spell_sindragosa_icy_grip);
-
     bool Validate(SpellInfo const* /*spell*/) override
     {
         return ValidateSpellInfo({ SPELL_ICY_GRIP_JUMP });
@@ -1376,8 +1362,6 @@ class MysticBuffetTargetFilter
 // 70127, 72528, 72529, 72530 - Mystic Buffet
 class spell_sindragosa_mystic_buffet : public SpellScript
 {
-    PrepareSpellScript(spell_sindragosa_mystic_buffet);
-
     void FilterTargets(std::list<WorldObject*>& targets)
     {
         targets.remove_if(MysticBuffetTargetFilter(GetCaster()));
@@ -1392,8 +1376,6 @@ class spell_sindragosa_mystic_buffet : public SpellScript
 // 71376 - Icy Blast
 class spell_rimefang_icy_blast : public SpellScript
 {
-    PrepareSpellScript(spell_rimefang_icy_blast);
-
     bool Validate(SpellInfo const* /*spell*/) override
     {
         return ValidateSpellInfo({ SPELL_ICY_BLAST_AREA });
@@ -1432,8 +1414,6 @@ class OrderWhelpTargetSelector
 // 71357 - Order Whelp
 class spell_frostwarden_handler_order_whelp : public SpellScript
 {
-    PrepareSpellScript(spell_frostwarden_handler_order_whelp);
-
     bool Validate(SpellInfo const* /*spell*/) override
     {
         return ValidateSpellInfo({ SPELL_FOCUS_FIRE });
@@ -1475,8 +1455,6 @@ class spell_frostwarden_handler_order_whelp : public SpellScript
 // 71350 - Focus Fire
 class spell_frostwarden_handler_focus_fire : public SpellScript
 {
-    PrepareSpellScript(spell_frostwarden_handler_focus_fire);
-
     void HandleScript(SpellEffIndex effIndex)
     {
         PreventHitDefaultEffect(effIndex);
@@ -1492,8 +1470,6 @@ class spell_frostwarden_handler_focus_fire : public SpellScript
 
 class spell_frostwarden_handler_focus_fire_aura : public AuraScript
 {
-    PrepareAuraScript(spell_frostwarden_handler_focus_fire_aura);
-
     void PeriodicTick(AuraEffect const* /*aurEff*/)
     {
         PreventDefaultAction();
@@ -1513,8 +1489,6 @@ class spell_frostwarden_handler_focus_fire_aura : public AuraScript
 // 69712 - Ice Tomb (Target)
 class spell_sindragosa_ice_tomb_target : public SpellScript
 {
-    PrepareSpellScript(spell_sindragosa_ice_tomb_target);
-
     void FilterTargets(std::list<WorldObject*>& unitList)
     {
         Unit* caster = GetCaster();

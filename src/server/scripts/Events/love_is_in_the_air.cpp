@@ -35,8 +35,6 @@ enum SpellsPicnic
 // 45102 - Romantic Picnic
 class spell_love_is_in_the_air_romantic_picnic : public AuraScript
 {
-    PrepareAuraScript(spell_love_is_in_the_air_romantic_picnic);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -124,8 +122,6 @@ std::array<uint32, 8> const CreateHeartCandySpells =
 // 26678 - Create Heart Candy
 class spell_love_is_in_the_air_create_heart_candy : public SpellScript
 {
-    PrepareSpellScript(spell_love_is_in_the_air_create_heart_candy);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(CreateHeartCandySpells);
@@ -154,8 +150,6 @@ enum SomethingStinks
 // 71507 - Heavily Perfumed
 class spell_love_is_in_the_air_heavily_perfumed : public AuraScript
 {
-    PrepareAuraScript(spell_love_is_in_the_air_heavily_perfumed);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ uint32(spellInfo->GetEffect(EFFECT_0).CalcValue()) });
@@ -175,8 +169,6 @@ class spell_love_is_in_the_air_heavily_perfumed : public AuraScript
 // 71508 - Recently Analyzed
 class spell_love_is_in_the_air_recently_analyzed : public AuraScript
 {
-    PrepareAuraScript(spell_love_is_in_the_air_recently_analyzed);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_HEAVILY_PERFUMED });
@@ -201,8 +193,6 @@ class spell_love_is_in_the_air_recently_analyzed : public AuraScript
 // 69438 - Sample Satisfaction
 class spell_love_is_in_the_air_sample_satisfaction : public AuraScript
 {
-    PrepareAuraScript(spell_love_is_in_the_air_sample_satisfaction);
-
     void OnPeriodic(AuraEffect const* /*aurEff*/)
     {
         if (roll_chance(30))
@@ -230,8 +220,6 @@ enum PilferingPerfume
 // 71450 - Crown Parcel Service Uniform
 class spell_love_is_in_the_air_service_uniform : public AuraScript
 {
-    PrepareAuraScript(spell_love_is_in_the_air_service_uniform);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ uint32(spellInfo->GetEffect(EFFECT_0).CalcValue()) });
@@ -265,8 +253,6 @@ class spell_love_is_in_the_air_service_uniform : public AuraScript
 // 71539 - Crown Chemical Co. Supplies
 class spell_love_is_in_the_air_cancel_service_uniform : public SpellScript
 {
-    PrepareSpellScript(spell_love_is_in_the_air_cancel_service_uniform);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SERVICE_UNIFORM });
@@ -291,8 +277,6 @@ class spell_love_is_in_the_air_cancel_service_uniform : public SpellScript
 // 68530 - Cologne Immune
 class spell_love_is_in_the_air_perfume_cologne_immune : public SpellScript
 {
-    PrepareSpellScript(spell_love_is_in_the_air_perfume_cologne_immune);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo(

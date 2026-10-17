@@ -76,8 +76,6 @@ enum SummonArcaneFiends
 // 32348 - Summon Arcane Fiends
 class spell_mana_tombs_summon_arcane_fiends : public SpellScript
 {
-    PrepareSpellScript(spell_mana_tombs_summon_arcane_fiends);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(

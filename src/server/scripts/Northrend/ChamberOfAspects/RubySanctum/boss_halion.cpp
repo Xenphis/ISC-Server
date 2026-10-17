@@ -1294,8 +1294,6 @@ private:
 // 74641 - Meteor Strike
 class spell_halion_meteor_strike_marker : public AuraScript
 {
-    PrepareAuraScript(spell_halion_meteor_strike_marker);
-
     void OnRemove(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
     {
         if (!GetCaster())
@@ -1316,8 +1314,6 @@ class spell_halion_meteor_strike_marker : public AuraScript
 // 74562 - Fiery Combustion
 class spell_halion_combustion_consumption : public AuraScript
 {
-    PrepareAuraScript(spell_halion_combustion_consumption);
-
 public:
     spell_halion_combustion_consumption(uint32 spellID) : AuraScript(), _markSpell(spellID) { }
 
@@ -1360,8 +1356,6 @@ private:
 // 74803 - Consumption Periodic
 class spell_halion_combustion_consumption_periodic : public AuraScript
 {
-    PrepareAuraScript(spell_halion_combustion_consumption_periodic);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ spellInfo->GetEffect(EFFECT_0).TriggerSpell });
@@ -1393,8 +1387,6 @@ class spell_halion_combustion_consumption_periodic : public AuraScript
 // 74795 - Mark of Consumption
 class spell_halion_marks : public AuraScript
 {
-    PrepareAuraScript(spell_halion_marks);
-
 public:
     spell_halion_marks(uint32 summonSpell, uint32 removeSpell) : AuraScript(),
         _summonSpellId(summonSpell), _removeSpellId(removeSpell) { }
@@ -1441,8 +1433,6 @@ private:
 // 74800 - Soul Consumption
 class spell_halion_damage_aoe_summon : public SpellScript
 {
-    PrepareSpellScript(spell_halion_damage_aoe_summon);
-
     void HandleSummon(SpellEffIndex effIndex)
     {
         PreventHitDefaultEffect(effIndex);
@@ -1467,8 +1457,6 @@ class spell_halion_damage_aoe_summon : public SpellScript
 // 74807 - Twilight Realm
 class spell_halion_twilight_realm_handlers : public AuraScript
 {
-    PrepareAuraScript(spell_halion_twilight_realm_handlers);
-
 public:
     spell_halion_twilight_realm_handlers(uint32 beforeHitSpell, bool isApplyHandler) : AuraScript(),
         _isApply(isApplyHandler), _beforeHitSpellId(beforeHitSpell)
@@ -1516,8 +1504,6 @@ private:
 // 75396 - Clear Debuffs
 class spell_halion_clear_debuffs : public SpellScript
 {
-    PrepareSpellScript(spell_halion_clear_debuffs);
-
     bool Validate(SpellInfo const* /*spell*/) override
     {
         return ValidateSpellInfo({ SPELL_CLEAR_DEBUFFS, SPELL_TWILIGHT_REALM });
@@ -1553,8 +1539,6 @@ class TwilightCutterSelector
 // 74769, 77844, 77845, 77846 - Twilight Cutter
 class spell_halion_twilight_cutter : public SpellScript
 {
-    PrepareSpellScript(spell_halion_twilight_cutter);
-
     void RemoveNotBetween(std::list<WorldObject*>& unitList)
     {
         if (unitList.empty())
@@ -1580,8 +1564,6 @@ class spell_halion_twilight_cutter : public SpellScript
 // 74808 - Twilight Phasing
 class spell_halion_twilight_phasing : public SpellScript
 {
-    PrepareSpellScript(spell_halion_twilight_phasing);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SUMMON_TWILIGHT_PORTAL });
@@ -1603,8 +1585,6 @@ class spell_halion_twilight_phasing : public SpellScript
 // 74805 - Summon Exit Portals
 class spell_halion_summon_exit_portals : public SpellScript
 {
-    PrepareSpellScript(spell_halion_summon_exit_portals);
-
     void SetDest0(SpellDestination& dest)
     {
         Position const offset = { 0.0f, 20.0f, 0.0f, 0.0f };
@@ -1627,8 +1607,6 @@ class spell_halion_summon_exit_portals : public SpellScript
 // 75880 - Spawn Living Embers
 class spell_halion_spawn_living_embers : public SpellScript
 {
-    PrepareSpellScript(spell_halion_spawn_living_embers);
-
     void SelectMeteorFlames(std::list<WorldObject*>& unitList)
     {
         if (!unitList.empty())
@@ -1650,8 +1628,6 @@ class spell_halion_spawn_living_embers : public SpellScript
 // 75886, 75887 - Blazing Aura
 class spell_halion_blazing_aura : public SpellScript
 {
-    PrepareSpellScript(spell_halion_blazing_aura);
-
     void HandleScript(SpellEffIndex effIndex)
     {
         PreventHitDefaultEffect(effIndex);

@@ -149,8 +149,6 @@ enum SPSpells
 // 17950 - Shadow Portal
 class spell_shadow_portal : public SpellScript
 {
-    PrepareSpellScript(spell_shadow_portal);
-
     bool Load() override
     {
         _instance = GetCaster()->GetInstanceScript();
@@ -257,8 +255,6 @@ enum ScriptEventId
 // 17863, 17939, 17943, 17944, 17946, 17948 - Shadow Portal
 class spell_shadow_portal_rooms : public SpellScript
 {
-    PrepareSpellScript(spell_shadow_portal_rooms);
-
     bool Load() override
     {
         _instance = GetCaster()->GetInstanceScript();

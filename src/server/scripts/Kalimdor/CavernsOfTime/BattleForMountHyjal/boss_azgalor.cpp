@@ -206,8 +206,6 @@ private:
 // 31347 - Doom
 class spell_azgalor_doom : public SpellScript
 {
-    PrepareSpellScript(spell_azgalor_doom);
-
     bool Load() override
     {
         return GetCaster()->IsUnit();

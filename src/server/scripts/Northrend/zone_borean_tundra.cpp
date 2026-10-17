@@ -885,8 +885,6 @@ enum BloodsporeRuination
 // 45997 - Bloodspore Ruination
 class spell_q11719_bloodspore_ruination_45997 : public SpellScript
 {
-    PrepareSpellScript(spell_q11719_bloodspore_ruination_45997);
-
     void HandleEffect(SpellEffIndex /*effIndex*/)
     {
         if (Unit* caster = GetCaster())
@@ -983,8 +981,6 @@ static constexpr std::array<uint32, 5> BlasterTargetSpells = { SPELL_BIGGER_2, S
 // 45668 - Crafty's Ultra-Advanced Proto-Typical Shortening Blaster
 class spell_borean_tundra_shortening_blaster : public SpellScript
 {
-    PrepareSpellScript(spell_borean_tundra_shortening_blaster);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(BlasterCasterSpells) && ValidateSpellInfo(BlasterTargetSpells);
@@ -1008,8 +1004,6 @@ class spell_borean_tundra_shortening_blaster : public SpellScript
 // 45691 - Hah... : Magnataur On Death 1
 class spell_borean_tundra_magnataur_on_death_1 : public SpellScript
 {
-    PrepareSpellScript(spell_borean_tundra_magnataur_on_death_1);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(BlasterTargetSpells) && ValidateSpellInfo({ SPELL_MAGNATAUR_KILL_CREDIT, SPELL_MAGNATAUR_ON_DEATH_2 });
@@ -1041,8 +1035,6 @@ class spell_borean_tundra_magnataur_on_death_1 : public SpellScript
 // 45685 - Hah... : Magnataur On Death 2
 class spell_borean_tundra_magnataur_on_death_2 : public SpellScript
 {
-    PrepareSpellScript(spell_borean_tundra_magnataur_on_death_2);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(BlasterTargetSpells);
@@ -1081,8 +1073,6 @@ std::array<uint32, 3> const CocoonSummonSpells =
 // 45516 - Nerub'ar Web Random Unit (Not On Quest, Script Effect)
 class spell_borean_tundra_nerubar_web_random_unit_not_on_quest : public SpellScript
 {
-    PrepareSpellScript(spell_borean_tundra_nerubar_web_random_unit_not_on_quest);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ uint32(spellInfo->GetEffect(EFFECT_0).CalcValue()) });
@@ -1102,8 +1092,6 @@ class spell_borean_tundra_nerubar_web_random_unit_not_on_quest : public SpellScr
 // 45515 - Nerub'ar Web Random Unit (Not On Quest, Dummy)
 class spell_borean_tundra_nerubar_web_random_unit_not_on_quest_dummy : public SpellScript
 {
-    PrepareSpellScript(spell_borean_tundra_nerubar_web_random_unit_not_on_quest_dummy);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(CocoonSummonSpells) && ValidateSpellInfo({ SPELL_FREED_SOLDIER_DEBUFF });
@@ -1128,8 +1116,6 @@ class spell_borean_tundra_nerubar_web_random_unit_not_on_quest_dummy : public Sp
 // 45535 - Nerub'ar Web Random Unit (On Quest, Dummy)
 class spell_borean_tundra_nerubar_web_random_unit_on_quest_dummy : public SpellScript
 {
-    PrepareSpellScript(spell_borean_tundra_nerubar_web_random_unit_on_quest_dummy);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(CocoonSummonSpells) && ValidateSpellInfo({ SPELL_FREED_SOLDIER_DEBUFF, SPELL_FREED_WARSONG_PEON });
@@ -1156,8 +1142,6 @@ class spell_borean_tundra_nerubar_web_random_unit_on_quest_dummy : public SpellS
 // 45522 - Dispel Freed Soldier Debuff
 class spell_borean_tundra_dispel_freed_soldier_debuff : public SpellScript
 {
-    PrepareSpellScript(spell_borean_tundra_dispel_freed_soldier_debuff);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ uint32(spellInfo->GetEffect(EFFECT_0).CalcValue()) });
@@ -1193,8 +1177,6 @@ enum BringEmBackAlive
 // 45877 - Deliver Kodo
 class spell_borean_tundra_deliver_kodo : public SpellScript
 {
-    PrepareSpellScript(spell_borean_tundra_deliver_kodo);
-
     bool Validate(SpellInfo const* /*spell*/) override
     {
         return ValidateSpellInfo({ SPELL_KODO_DELIVERED });
@@ -1215,8 +1197,6 @@ class spell_borean_tundra_deliver_kodo : public SpellScript
 // 48204 - Kodo Delivered
 class spell_borean_tundra_kodo_delivered : public SpellScript
 {
-    PrepareSpellScript(spell_borean_tundra_kodo_delivered);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return sObjectMgr->GetBroadcastText(TEXT_DELIVERED_1) &&
@@ -1271,8 +1251,6 @@ enum TheArtOfPersuasion
 // 45634 - Neural Needle
 class spell_borean_tundra_neural_needle : public SpellScript
 {
-    PrepareSpellScript(spell_borean_tundra_neural_needle);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_NEURAL_NEEDLE_IMPACT });
@@ -1325,8 +1303,6 @@ class spell_borean_tundra_neural_needle : public SpellScript
 // 48252 - Prototype Neural Needle
 class spell_borean_tundra_prototype_neural_needle : public SpellScript
 {
-    PrepareSpellScript(spell_borean_tundra_prototype_neural_needle);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_PROTOTYPE_NEURAL_NEEDLE_IMPACT });
@@ -1383,8 +1359,6 @@ enum PrisonBreak
 // 45449 - Arcane Prisoner Rescue
 class spell_borean_tundra_arcane_prisoner_rescue : public SpellScript
 {
-    PrepareSpellScript(spell_borean_tundra_arcane_prisoner_rescue);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SUMMON_ARCANE_PRISONER_1, SPELL_SUMMON_ARCANE_PRISONER_2 });
@@ -1414,8 +1388,6 @@ enum WeaknessToLightning
 // 46444 - Weakness to Lightning: Cast on Master Script Effect
 class spell_borean_tundra_weakness_to_lightning_cast_on_master : public SpellScript
 {
-    PrepareSpellScript(spell_borean_tundra_weakness_to_lightning_cast_on_master);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ uint32(spellInfo->GetEffect(EFFECT_0).CalcValue()) });
@@ -1435,8 +1407,6 @@ class spell_borean_tundra_weakness_to_lightning_cast_on_master : public SpellScr
 // 46446 - Weakness to Lightning: Cancel Power of the Storm Aura
 class spell_borean_tundra_weakness_to_lightning_cancel_aura : public SpellScript
 {
-    PrepareSpellScript(spell_borean_tundra_weakness_to_lightning_cancel_aura);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_POWER_OF_THE_STORM_ITEM });
@@ -1456,8 +1426,6 @@ class spell_borean_tundra_weakness_to_lightning_cancel_aura : public SpellScript
 // 46550 - Weakness to Lightning: On Quest Complete
 class spell_borean_tundra_weakness_to_lightning_on_quest_complete : public SpellScript
 {
-    PrepareSpellScript(spell_borean_tundra_weakness_to_lightning_on_quest_complete);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_POWER_OF_THE_STORM });
@@ -1481,8 +1449,6 @@ class spell_borean_tundra_weakness_to_lightning_on_quest_complete : public Spell
 // 45958 - Signal Alliance
 class spell_borean_tundra_signal_alliance : public SpellScript
 {
-    PrepareSpellScript(spell_borean_tundra_signal_alliance);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo(
@@ -1527,8 +1493,6 @@ enum MasterAndServant
 // 46023 - The Ultrasonic Screwdriver
 class spell_borean_tundra_ultrasonic_screwdriver : public SpellScript
 {
-    PrepareSpellScript(spell_borean_tundra_ultrasonic_screwdriver);
-
     bool Load() override
     {
         return GetCaster()->GetTypeId() == TYPEID_PLAYER && GetCastItem();
@@ -1601,8 +1565,6 @@ static constexpr std::array<uint32, 8> DropLandMineSpells =
 // 45750 - Land Mine Barrier
 class spell_borean_tundra_land_mine_barrier : public SpellScript
 {
-    PrepareSpellScript(spell_borean_tundra_land_mine_barrier);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(DropLandMineSpells);
@@ -1633,8 +1595,6 @@ enum RescuingEvanor
 // 45992 - Taxi - Amber Ledge to Beryl Point Platform
 class spell_borean_tundra_taxi_amber_ledge_to_beryl_point_platform : public AuraScript
 {
-    PrepareAuraScript(spell_borean_tundra_taxi_amber_ledge_to_beryl_point_platform);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_AMBER_LEDGE_TO_BERYL_POINT });
@@ -1663,8 +1623,6 @@ enum SpringingTheTrap
 // 46813 - Taxi - Coldarra Ledge to Transitus Shield
 class spell_borean_tundra_taxi_coldarra_ledge_to_transitus_shield : public AuraScript
 {
-    PrepareAuraScript(spell_borean_tundra_taxi_coldarra_ledge_to_transitus_shield);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_COLDARRA_TO_TRANSITUS });
@@ -1693,8 +1651,6 @@ enum ReCursive
 // 45980 - Re-Cursive Transmatter Injection
 class spell_borean_tundra_re_cursive_transmatter_injection : public SpellScript
 {
-    PrepareSpellScript(spell_borean_tundra_re_cursive_transmatter_injection);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SUMMON_FIZZCRANK_SURVIVOR });
@@ -1727,8 +1683,6 @@ enum DrakeHunt
 // 46607 - Drake Harpoon
 class spell_borean_tundra_drake_harpoon : public AuraScript
 {
-    PrepareAuraScript(spell_borean_tundra_drake_harpoon);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_RED_DRAGONBLOOD });
@@ -1749,8 +1703,6 @@ class spell_borean_tundra_drake_harpoon : public AuraScript
 // 46620 - Red Dragonblood
 class spell_borean_tundra_red_dragonblood : public AuraScript
 {
-    PrepareAuraScript(spell_borean_tundra_red_dragonblood);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_CAPTURE_TRIGGER });
@@ -1774,8 +1726,6 @@ class spell_borean_tundra_red_dragonblood : public AuraScript
 // 46691 - Drake Hatchling Subdued
 class spell_borean_tundra_drake_hatchling_subdued : public AuraScript
 {
-    PrepareAuraScript(spell_borean_tundra_drake_hatchling_subdued);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_DRAKE_TURN_IN });
@@ -1808,8 +1758,6 @@ class spell_borean_tundra_drake_hatchling_subdued : public AuraScript
 // 46693 - Strip Auras
 class spell_borean_tundra_strip_auras : public SpellScript
 {
-    PrepareSpellScript(spell_borean_tundra_strip_auras);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_DRAKE_HATCHLING_SUBDUED, SPELL_ROPE_BEAM });
@@ -1834,8 +1782,6 @@ class spell_borean_tundra_strip_auras : public SpellScript
 // 45625 - Arcane Chains: Character Force Cast
 class spell_borean_tundra_arcane_chains_character_force_cast : public SpellScript
 {
-    PrepareSpellScript(spell_borean_tundra_arcane_chains_character_force_cast);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ uint32(spellInfo->GetEffect(EFFECT_0).CalcValue()) });
@@ -1855,8 +1801,6 @@ class spell_borean_tundra_arcane_chains_character_force_cast : public SpellScrip
 // 45651 - Abduction: Quest Completion
 class spell_borean_tundra_abduction_quest_completion : public SpellScript
 {
-    PrepareSpellScript(spell_borean_tundra_abduction_quest_completion);
-
     void HandleScript(SpellEffIndex /*effIndex*/)
     {
         if (Creature* creature = GetHitUnit()->ToCreature())

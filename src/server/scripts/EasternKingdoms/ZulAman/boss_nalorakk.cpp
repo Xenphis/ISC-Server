@@ -402,8 +402,6 @@ private:
 // 44019 - Surge
 class spell_nalorakk_surge : public SpellScript
 {
-    PrepareSpellScript(spell_nalorakk_surge);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SURGE_CHARGE, SPELL_SURGE_HASTE });
@@ -433,8 +431,6 @@ class spell_nalorakk_surge : public SpellScript
 // 42377 - Shape of the Bear
 class spell_nalorakk_shape : public AuraScript
 {
-    PrepareAuraScript(spell_nalorakk_shape);
-
     void AfterApply(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
     {
         if (Creature* target = GetTarget()->ToCreature())

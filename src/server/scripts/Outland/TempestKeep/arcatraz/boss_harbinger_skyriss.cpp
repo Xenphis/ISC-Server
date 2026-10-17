@@ -316,8 +316,6 @@ private:
 // 36930 - 33% Health
 class spell_harbinger_skyriss_health : public SpellScript
 {
-    PrepareSpellScript(spell_harbinger_skyriss_health);
-
     void HandleScript(SpellEffIndex /*effIndex*/)
     {
         GetCaster()->SetHealth(GetCaster()->CountPctFromMaxHealth(uint32(GetEffectValue())));

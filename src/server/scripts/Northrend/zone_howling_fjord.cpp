@@ -218,8 +218,6 @@ enum GuideOurSights
 // 43080 - Quest - Howling Fjord - Guide Our Sights - FX Master
 class spell_fjord_guide_our_sights_fx_master : public SpellScript
 {
-    PrepareSpellScript(spell_fjord_guide_our_sights_fx_master);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -258,8 +256,6 @@ enum SomeAssemblyRequired
 // 43393 - Ping Master
 class spell_fjord_mindless_abomination_ping_master : public SpellScript
 {
-    PrepareSpellScript(spell_fjord_mindless_abomination_ping_master);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MINDLESS_ABOMINATION_CONTROL });
@@ -279,8 +275,6 @@ class spell_fjord_mindless_abomination_ping_master : public SpellScript
 // 42268 - Quest - Mindless Abomination Explosion FX Master
 class spell_fjord_mindless_abomination_explosion_fx_master : public SpellScript
 {
-    PrepareSpellScript(spell_fjord_mindless_abomination_explosion_fx_master);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -361,8 +355,6 @@ std::array<uint32, 11> const CocoonSummonSpells =
 // 43288 - Rivenwood Captives: Player Not On Quest
 class spell_fjord_rivenwood_captives_not_on_quest : public SpellScript
 {
-    PrepareSpellScript(spell_fjord_rivenwood_captives_not_on_quest);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(CocoonSummonSpells);
@@ -382,8 +374,6 @@ class spell_fjord_rivenwood_captives_not_on_quest : public SpellScript
 // 43287 - Rivenwood Captives: Player On Quest
 class spell_fjord_rivenwood_captives_on_quest : public SpellScript
 {
-    PrepareSpellScript(spell_fjord_rivenwood_captives_on_quest);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(CocoonSummonSpells) && ValidateSpellInfo({ SPELL_SUMMON_FREED_MIST_WHISPER_SCOUT });
@@ -424,8 +414,6 @@ enum TheCleansing
 // 43365 - The Cleansing: Shrine Cast
 class spell_fjord_the_cleansing_shrine_cast : public SpellScript
 {
-    PrepareSpellScript(spell_fjord_the_cleansing_shrine_cast);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_RECENT_MEDITATION, SPELL_CLEANSING_SOUL }) &&
@@ -463,8 +451,6 @@ class spell_fjord_the_cleansing_shrine_cast : public SpellScript
 // 43351 - Cleansing Soul
 class spell_fjord_the_cleansing_cleansing_soul : public AuraScript
 {
-    PrepareAuraScript(spell_fjord_the_cleansing_cleansing_soul);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SUMMON_INNER_TURMOIL, SPELL_RECENT_MEDITATION });
@@ -493,8 +479,6 @@ class spell_fjord_the_cleansing_cleansing_soul : public AuraScript
 // 50217 - The Cleansing: Script Effect Player Cast Mirror Image
 class spell_fjord_the_cleansing_mirror_image_script_effect : public SpellScript
 {
-    PrepareSpellScript(spell_fjord_the_cleansing_mirror_image_script_effect);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MIRROR_IMAGE_AURA });
@@ -514,8 +498,6 @@ class spell_fjord_the_cleansing_mirror_image_script_effect : public SpellScript
 // 50238 - The Cleansing: Your Inner Turmoil's On Death Cast on Master
 class spell_fjord_the_cleansing_on_death_cast_on_master : public SpellScript
 {
-    PrepareSpellScript(spell_fjord_the_cleansing_on_death_cast_on_master);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ uint32(spellInfo->GetEffect(EFFECT_0).CalcValue()) });
@@ -547,8 +529,6 @@ enum TheWayToHisHeart
 // 21014 - Anuniaq's Net
 class spell_fjord_the_way_to_his_heart_anuniaq_net : public SpellScript
 {
-    PrepareSpellScript(spell_fjord_the_way_to_his_heart_anuniaq_net);
-
     bool Validate(SpellInfo const* /*spell*/) override
     {
         return ValidateSpellInfo({ SPELL_CREATE_TASTY_REEF_FISH, SPELL_FISHED_UP_REEF_SHARK });
@@ -569,8 +549,6 @@ class spell_fjord_the_way_to_his_heart_anuniaq_net : public SpellScript
 // 44455 - The Way to His Heart...: Character Script Effect Reverse Cast
 class spell_fjord_the_way_to_his_heart_reverse_cast : public SpellScript
 {
-    PrepareSpellScript(spell_fjord_the_way_to_his_heart_reverse_cast);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ uint32(spellInfo->GetEffect(EFFECT_0).CalcValue()) });
@@ -590,8 +568,6 @@ class spell_fjord_the_way_to_his_heart_reverse_cast : public SpellScript
 // 44462 - The Way to His Heart...: Cast Quest Complete on Master
 class spell_fjord_the_way_to_his_heart_quest_complete : public SpellScript
 {
-    PrepareSpellScript(spell_fjord_the_way_to_his_heart_quest_complete);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ uint32(spellInfo->GetEffect(EFFECT_0).CalcValue()) });
@@ -623,8 +599,6 @@ enum BringDownThoseShields
 // 50133 - Scourging Crystal Controller
 class spell_fjord_scourging_crystal_controller : public SpellScript
 {
-    PrepareSpellScript(spell_fjord_scourging_crystal_controller);
-
     bool Validate(SpellInfo const* /*spellEntry*/) override
     {
         return ValidateSpellInfo({ SPELL_FORCE_SHIELD_ARCANE_PURPLE_X3, SPELL_SCOURGING_CRYSTAL_CONTROLLER });
@@ -666,8 +640,6 @@ enum ApplyHeatAndStir
 // 43972 - Mixing Blood
 class spell_fjord_mixing_blood : public SpellScript
 {
-    PrepareSpellScript(spell_fjord_mixing_blood);
-
     void HandleEffect(SpellEffIndex /*effIndex*/)
     {
         if (Unit* caster = GetCaster())
@@ -684,8 +656,6 @@ class spell_fjord_mixing_blood : public SpellScript
 // 43375 - Mixing Vrykul Blood
 class spell_fjord_mixing_vrykul_blood : public SpellScript
 {
-    PrepareSpellScript(spell_fjord_mixing_vrykul_blood);
-
     void HandleDummy(SpellEffIndex /*effIndex*/)
     {
         if (Unit* caster = GetCaster())
@@ -716,8 +686,6 @@ class spell_fjord_mixing_vrykul_blood : public SpellScript
 // 43376 - Failed Mix
 class spell_fjord_failed_mix_concoction_1 : public SpellScript
 {
-    PrepareSpellScript(spell_fjord_failed_mix_concoction_1);
-
     void HandleEffect(SpellEffIndex /*effIndex*/)
     {
         if (Unit* caster = GetCaster())
@@ -734,8 +702,6 @@ class spell_fjord_failed_mix_concoction_1 : public SpellScript
 // 43378 - Failed Mix
 class spell_fjord_failed_mix_concoction_2 : public SpellScript
 {
-    PrepareSpellScript(spell_fjord_failed_mix_concoction_2);
-
     void HandleEffect(SpellEffIndex /*effIndex*/)
     {
         if (Unit* caster = GetCaster())
@@ -761,8 +727,6 @@ enum TheExplorersLeagueOutpost
 // 51221 - Taxi to Explorers' League Outpost
 class spell_fjord_taxi_to_explorers_league_outpost : public AuraScript
 {
-    PrepareAuraScript(spell_fjord_taxi_to_explorers_league_outpost);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_TAXI_TO_EXPLORERS_LEAGUE });
@@ -792,8 +756,6 @@ enum InWorgsClothing
 // 43369 - Worg Disguise
 class spell_fjord_worg_disguise : public AuraScript
 {
-    PrepareAuraScript(spell_fjord_worg_disguise);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_WORG_DISGUISE_DUMMY });
@@ -819,8 +781,6 @@ class spell_fjord_worg_disguise : public AuraScript
 // 68347 - Worg Disguise
 class spell_fjord_worg_disguise_dummy : public AuraScript
 {
-    PrepareAuraScript(spell_fjord_worg_disguise_dummy);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_WORG_DISGUISE });
@@ -849,8 +809,6 @@ enum TowersOfCertainDoomHorde
 // 49625 - Brave's Flare
 class spell_fjord_braves_flare : public SpellScript
 {
-    PrepareSpellScript(spell_fjord_braves_flare);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_BRAVES_FLARE_EFFECT });
@@ -879,8 +837,6 @@ enum TowersOfCertainDoomAlliance
 // 49634 - Sergeant's Flare
 class spell_fjord_sergeants_flare : public SpellScript
 {
-    PrepareSpellScript(spell_fjord_sergeants_flare);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SERGEANTS_FLARE_EFFECT });

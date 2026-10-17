@@ -55,8 +55,6 @@ enum FeastOnSpells
    61788 - Feast On Stuffing */
 class spell_pilgrims_bounty_feast_on : public SpellScript
 {
-    PrepareSpellScript(spell_pilgrims_bounty_feast_on);
-
     void HandleDummy(SpellEffIndex /*effIndex*/)
     {
         Unit* caster = GetCaster();
@@ -118,8 +116,6 @@ enum TheTurkinator
 // 62014 - Turkey Tracker
 class spell_pilgrims_bounty_turkey_tracker : public SpellScript
 {
-    PrepareSpellScript(spell_pilgrims_bounty_turkey_tracker);
-
     bool Validate(SpellInfo const* /*spell*/) override
     {
         return ValidateSpellInfo({ SPELL_KILL_COUNTER_VISUAL, SPELL_KILL_COUNTER_VISUAL_MAX });
@@ -174,8 +170,6 @@ enum SpiritOfSharing
 
 class spell_pilgrims_bounty_well_fed : public SpellScript
 {
-    PrepareSpellScript(spell_pilgrims_bounty_well_fed);
-
     uint32 _triggeredSpellId;
 
 public:
@@ -263,8 +257,6 @@ enum BountifulTableMisc
    66262 - Pass The Sweet Potatoes */
 class spell_pilgrims_bounty_on_plate : public SpellScript
 {
-    PrepareSpellScript(spell_pilgrims_bounty_on_plate);
-
     uint32 _triggeredSpellId1;
     uint32 _triggeredSpellId2;
     uint32 _triggeredSpellId3;
@@ -369,8 +361,6 @@ private:
    61797 - Sweet Potatoes Server */
 class spell_pilgrims_bounty_a_serving_of : public AuraScript
 {
-    PrepareAuraScript(spell_pilgrims_bounty_a_serving_of);
-
     uint32 _triggeredSpellId;
 
 public:

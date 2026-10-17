@@ -289,8 +289,6 @@ enum AQ20Itch
 // 25185 - Itch
 class spell_ruins_of_ahnqiraj_itch : public AuraScript
 {
-    PrepareAuraScript(spell_ruins_of_ahnqiraj_itch);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_HIVEZARA_CATALYST });

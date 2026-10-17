@@ -166,8 +166,6 @@ class MarkOfFrostTargetSelector
 // 23183 - Mark of Frost - Triggered spell
 class spell_mark_of_frost : public SpellScript
 {
-    PrepareSpellScript(spell_mark_of_frost);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MARK_OF_FROST, SPELL_AURA_OF_FROST });

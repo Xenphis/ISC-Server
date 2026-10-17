@@ -154,8 +154,6 @@ private:
 // 19411, 20474 - Lava Bomb
 class spell_magmadar_lava_bomb : public SpellScript
 {
-    PrepareSpellScript(spell_magmadar_lava_bomb);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SUMMON_LAVA_BOMB_1, SPELL_SUMMON_LAVA_BOMB_2 });

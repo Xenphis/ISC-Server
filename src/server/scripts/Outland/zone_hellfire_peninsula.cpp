@@ -809,8 +809,6 @@ enum FelSpirits
 // 39190 - Send Vengeance
 class spell_hellfire_peninsula_send_vengeance : public SpellScript
 {
-    PrepareSpellScript(spell_hellfire_peninsula_send_vengeance);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SEND_VENGEANCE_TO_PLAYER });
@@ -832,8 +830,6 @@ class spell_hellfire_peninsula_send_vengeance : public SpellScript
 // 39202 - Send Vengeance to Player
 class spell_hellfire_peninsula_send_vengeance_to_player : public SpellScript
 {
-    PrepareSpellScript(spell_hellfire_peninsula_send_vengeance_to_player);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SUMMON_FEL_SPIRIT });
@@ -860,8 +856,6 @@ enum Translocation
 // 25652 - Translocate
 class spell_hellfire_peninsula_translocation_falcon_watch : public SpellScript
 {
-    PrepareSpellScript(spell_hellfire_peninsula_translocation_falcon_watch);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ _triggeredSpellId });
@@ -896,8 +890,6 @@ enum HelboarTheOtherWhiteMeat
 // 29200 - Purify Helboar Meat
 class spell_hellfire_peninsula_purify_helboar_meat : public SpellScript
 {
-    PrepareSpellScript(spell_hellfire_peninsula_purify_helboar_meat);
-
     bool Validate(SpellInfo const* /*spell*/) override
     {
         return ValidateSpellInfo({ SPELL_SUMMON_PURIFIED_HELBOAR_MEAT, SPELL_SUMMON_TOXIC_HELBOAR_MEAT });
@@ -926,8 +918,6 @@ enum TheEyesOfGrillok
 // 38554 - Absorb Eye of Grillok
 class spell_hellfire_peninsula_absorb_eye_of_grillok : public AuraScript
 {
-    PrepareAuraScript(spell_hellfire_peninsula_absorb_eye_of_grillok);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_EYE_OF_GRILLOK });
@@ -966,8 +956,6 @@ enum TheDemoniacScryer
 // 38708 - Demonaic Visitation
 class spell_hellfire_peninsula_demonaic_visitation : public AuraScript
 {
-    PrepareAuraScript(spell_hellfire_peninsula_demonaic_visitation);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SUMMON_DEMONAIC_VISITATION });

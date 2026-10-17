@@ -721,8 +721,6 @@ private:
    38140 - Summon Wave D Mob Trigger */
 class spell_lady_vashj_summon_wave_mob_trigger : public SpellScript
 {
-    PrepareSpellScript(spell_lady_vashj_summon_wave_mob_trigger);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -773,8 +771,6 @@ class spell_lady_vashj_summon_wave_mob_trigger : public SpellScript
 // 38494 - Summon Wave E Mob
 class spell_lady_vashj_summon_wave_e_mob_trigger : public SpellScript
 {
-    PrepareSpellScript(spell_lady_vashj_summon_wave_e_mob_trigger);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -799,8 +795,6 @@ class spell_lady_vashj_summon_wave_e_mob_trigger : public SpellScript
 // 38573 - Spore Drop Effect
 class spell_lady_vashj_spore_drop_effect : public SpellScript
 {
-    PrepareSpellScript(spell_lady_vashj_spore_drop_effect);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_TOXIC_SPORES });
@@ -826,8 +820,6 @@ class spell_lady_vashj_spore_drop_effect : public SpellScript
 // 39495 - Remove Tainted Cores
 class spell_lady_vashj_remove_tainted_cores : public SpellScript
 {
-    PrepareSpellScript(spell_lady_vashj_remove_tainted_cores);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_REMOVE_TAINTED_CORES_EFFECT });
@@ -847,8 +839,6 @@ class spell_lady_vashj_remove_tainted_cores : public SpellScript
 // 39496 - Remove Tainted Cores
 class spell_lady_vashj_remove_tainted_cores_effect : public SpellScript
 {
-    PrepareSpellScript(spell_lady_vashj_remove_tainted_cores_effect);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return sObjectMgr->GetItemTemplate(ITEM_TAINTED_CORE);

@@ -483,8 +483,6 @@ private:
 // 43538 - Set Health
 class spell_halazzi_set_health : public SpellScript
 {
-    PrepareSpellScript(spell_halazzi_set_health);
-
     void HandleScript(SpellEffIndex /*effIndex*/)
     {
         GetCaster()->SetHealth(GetCaster()->CountPctFromMaxHealth(GetEffectValue()));

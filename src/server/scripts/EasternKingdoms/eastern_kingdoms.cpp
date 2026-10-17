@@ -31,8 +31,6 @@ enum EasternKingdomsTranslocation
 // 34448 - Translocate
 class spell_eastern_kingdoms_duskwither_spire_up : public SpellScript
 {
-    PrepareSpellScript(spell_eastern_kingdoms_duskwither_spire_up);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_TRANSLOCATION_DUSKWITHER_SPIRE_UP });
@@ -52,8 +50,6 @@ class spell_eastern_kingdoms_duskwither_spire_up : public SpellScript
 // 34452 - Translocate
 class spell_eastern_kingdoms_duskwither_spire_down : public SpellScript
 {
-    PrepareSpellScript(spell_eastern_kingdoms_duskwither_spire_down);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_TRANSLOCATION_DUSKWITHER_SPIRE_DOWN });
@@ -73,8 +69,6 @@ class spell_eastern_kingdoms_duskwither_spire_down : public SpellScript
 // 35376 - Translocate
 class spell_eastern_kingdoms_silvermoon_to_undercity : public SpellScript
 {
-    PrepareSpellScript(spell_eastern_kingdoms_silvermoon_to_undercity);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_TRANSLOCATION_SILVERMOON_TO_UNDERCITY });
@@ -94,8 +88,6 @@ class spell_eastern_kingdoms_silvermoon_to_undercity : public SpellScript
 // 35727 - Translocate
 class spell_eastern_kingdoms_undercity_to_silvermoon : public SpellScript
 {
-    PrepareSpellScript(spell_eastern_kingdoms_undercity_to_silvermoon);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_TRANSLOCATION_UNDERCITY_TO_SILVERMOON });
@@ -124,8 +116,6 @@ enum DeadScarBombingRun
 // 45071 - Quest - Sunwell Daily - Dead Scar Bombing Run
 class spell_eastern_kingdoms_dead_scar_bombing_run : public SpellScript
 {
-    PrepareSpellScript(spell_eastern_kingdoms_dead_scar_bombing_run);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return sSoundEntriesStore.LookupEntry(SOUND_ID_BOMBING_RUN);
@@ -150,8 +140,6 @@ enum DawnbladeAttack
 // 45188 - Dawnblade Attack
 class spell_eastern_kingdoms_dawnblade_attack : public SpellScript
 {
-    PrepareSpellScript(spell_eastern_kingdoms_dawnblade_attack);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_DAWNBLADE_ATTACK });
@@ -180,8 +168,6 @@ enum BadlandsReagentRun
 // 9712 - Thaumaturgy Channel
 class spell_eastern_kingdoms_thaumaturgy_channel : public AuraScript
 {
-    PrepareAuraScript(spell_eastern_kingdoms_thaumaturgy_channel);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_THAUMATURGY_CHANNEL });

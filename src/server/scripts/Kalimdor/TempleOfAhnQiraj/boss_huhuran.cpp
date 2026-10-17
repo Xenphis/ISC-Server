@@ -149,8 +149,6 @@ private:
 // 26180 - Wyvern Sting
 class spell_huhuran_wyvern_sting : public AuraScript
 {
-    PrepareAuraScript(spell_huhuran_wyvern_sting);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_WYVERN_STING_DAMAGE });

@@ -549,8 +549,6 @@ struct npc_felmyst_trail : public ScriptedAI
 // 45661 - Encapsulate
 class spell_felmyst_encapsulate : public SpellScript
 {
-    PrepareSpellScript(spell_felmyst_encapsulate);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_ENCAPSULATE_EFFECT });

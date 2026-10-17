@@ -308,8 +308,6 @@ private:
 // 40251 - Shadow of Death
 class spell_teron_gorefiend_shadow_of_death : public AuraScript
 {
-    PrepareAuraScript(spell_teron_gorefiend_shadow_of_death);
-
     bool Validate(SpellInfo const* /*spell*/) override
     {
         return ValidateSpellInfo(
@@ -354,8 +352,6 @@ class spell_teron_gorefiend_shadow_of_death : public AuraScript
 // 40268 - Spiritual Vengeance
 class spell_teron_gorefiend_spiritual_vengeance : public AuraScript
 {
-    PrepareAuraScript(spell_teron_gorefiend_spiritual_vengeance);
-
     void OnRemove(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
     {
         GetTarget()->KillSelf();
@@ -370,8 +366,6 @@ class spell_teron_gorefiend_spiritual_vengeance : public AuraScript
 // 41999 - Shadow of Death Remove
 class spell_teron_gorefiend_shadow_of_death_remove : public SpellScript
 {
-    PrepareSpellScript(spell_teron_gorefiend_shadow_of_death_remove);
-
     bool Validate(SpellInfo const* /*spell*/) override
     {
         return ValidateSpellInfo(

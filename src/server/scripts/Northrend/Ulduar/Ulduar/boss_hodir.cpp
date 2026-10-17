@@ -966,8 +966,6 @@ private:
 // 62469 - Freeze
 class spell_hodir_freeze : public SpellScript
 {
-    PrepareSpellScript(spell_hodir_freeze);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ uint32(spellInfo->GetEffect(EFFECT_1).CalcValue()) });
@@ -987,8 +985,6 @@ class spell_hodir_freeze : public SpellScript
 // 61968 - Flash Freeze
 class spell_hodir_flash_freeze : public AuraScript
 {
-    PrepareAuraScript(spell_hodir_flash_freeze);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -1035,8 +1031,6 @@ class spell_hodir_flash_freeze : public AuraScript
 // 65272 - Shatter Chest
 class spell_hodir_shatter_chest : public AuraScript
 {
-    PrepareAuraScript(spell_hodir_shatter_chest);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SHATTER_CHEST_MISSILE });
@@ -1056,8 +1050,6 @@ class spell_hodir_shatter_chest : public AuraScript
 // 63545 - Icicle
 class spell_hodir_icicle : public SpellScript
 {
-    PrepareSpellScript(spell_hodir_icicle);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ uint32(spellInfo->GetEffect(EFFECT_0).CalcValue()) });
@@ -1084,8 +1076,6 @@ class spell_hodir_icicle : public SpellScript
 // 62477 - Icicle
 class spell_hodir_icicle_force_cast : public SpellScript
 {
-    PrepareSpellScript(spell_hodir_icicle_force_cast);
-
     void FilterTargets(std::list<WorldObject*>& targets)
     {
         Trinity::Containers::RandomResize(targets, GetCaster()->GetMap()->GetDifficultyID() == RAID_DIFFICULTY_10MAN_NORMAL ? 2 : 3);
@@ -1100,8 +1090,6 @@ class spell_hodir_icicle_force_cast : public SpellScript
 // 62038 - Biting Cold
 class spell_hodir_biting_cold_area_aura : public AuraScript
 {
-    PrepareAuraScript(spell_hodir_biting_cold_area_aura);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_TOASTY_FIRE_AREA_AURA, SPELL_BITING_COLD_PERIODIC });
@@ -1129,8 +1117,6 @@ class spell_hodir_biting_cold_area_aura : public AuraScript
 // 62039 - Biting Cold
 class spell_hodir_biting_cold_periodic : public AuraScript
 {
-    PrepareAuraScript(spell_hodir_biting_cold_periodic);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_BITING_COLD_DAMAGE });
@@ -1157,8 +1143,6 @@ class spell_hodir_biting_cold_periodic : public AuraScript
 // 63499 - Dispel Magic
 class spell_hodir_dispel_magic : public SpellScript
 {
-    PrepareSpellScript(spell_hodir_dispel_magic);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ uint32(spellInfo->GetEffect(EFFECT_1).CalcValue()) });
@@ -1179,8 +1163,6 @@ class spell_hodir_dispel_magic : public SpellScript
 // 62797 - Storm Cloud
 class spell_hodir_storm_cloud_primer : public SpellScript
 {
-    PrepareSpellScript(spell_hodir_storm_cloud_primer);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_STORM_CLOUD_EFFECT, SPELL_STORM_CLOUD_EFFECT_H });
@@ -1207,8 +1189,6 @@ class spell_hodir_storm_cloud_primer : public SpellScript
 // 64543 - Melt Ice
 class spell_hodir_melt_ice : public SpellScript
 {
-    PrepareSpellScript(spell_hodir_melt_ice);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ uint32(spellInfo->GetEffect(EFFECT_0).CalcValue()) });

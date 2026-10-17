@@ -1474,8 +1474,6 @@ enum TeleportToStratholme
 // 53435 - Teleport to CoT Stratholme Phase 4
 class spell_cos_teleport_to_cot_stratholme_phase_4 : public SpellScript
 {
-    PrepareSpellScript(spell_cos_teleport_to_cot_stratholme_phase_4);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_TELEPORT_TO_COT_STRATHOLME });

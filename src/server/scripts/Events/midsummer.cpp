@@ -37,8 +37,6 @@ enum TorchSpells
 // 45724 - Braziers Hit!
 class spell_midsummer_braziers_hit : public AuraScript
 {
-    PrepareAuraScript(spell_midsummer_braziers_hit);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -72,8 +70,6 @@ class spell_midsummer_braziers_hit : public AuraScript
 // 46074 - Remove Torches
 class spell_midsummer_remove_torches : public SpellScript
 {
-    PrepareSpellScript(spell_midsummer_remove_torches);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_TORCH_TOSSING_TRAINING, SPELL_TORCH_TOSSING_PRACTICE, SPELL_BRAZIERS_HIT });
@@ -97,8 +93,6 @@ class spell_midsummer_remove_torches : public SpellScript
 // 46630 - Torch Tossing Practice
 class spell_midsummer_torch_tossing_training_practice : public AuraScript
 {
-    PrepareAuraScript(spell_midsummer_torch_tossing_training_practice);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_BRAZIERS_HIT, SPELL_TARGET_DETECT_INVISIBILITY });
@@ -129,8 +123,6 @@ class spell_midsummer_torch_tossing_training_practice : public AuraScript
 // 45907 - Torch Target Picker
 class spell_midsummer_torch_target_picker : public SpellScript
 {
-    PrepareSpellScript(spell_midsummer_torch_target_picker);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_TARGET_INDICATOR_COSMETIC, SPELL_TARGET_INDICATOR });
@@ -152,8 +144,6 @@ class spell_midsummer_torch_target_picker : public SpellScript
 // 46054 - Torch Toss (land)
 class spell_midsummer_torch_toss_land : public SpellScript
 {
-    PrepareSpellScript(spell_midsummer_torch_toss_land);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_BRAZIERS_HIT });
@@ -184,8 +174,6 @@ enum RibbonPoleData
 // 29705, 29726, 29727 - Test Ribbon Pole Channel
 class spell_midsummer_test_ribbon_pole_channel : public AuraScript
 {
-    PrepareAuraScript(spell_midsummer_test_ribbon_pole_channel);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -229,8 +217,6 @@ class spell_midsummer_test_ribbon_pole_channel : public AuraScript
 // 45406 - Holiday - Midsummer, Ribbon Pole Periodic Visual
 class spell_midsummer_ribbon_pole_periodic_visual : public AuraScript
 {
-    PrepareAuraScript(spell_midsummer_ribbon_pole_periodic_visual);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -276,8 +262,6 @@ enum JugglingTorch
 // 45819 - Throw Torch
 class spell_midsummer_juggle_torch : public SpellScript
 {
-    PrepareSpellScript(spell_midsummer_juggle_torch);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({
@@ -333,8 +317,6 @@ class spell_midsummer_juggle_torch : public SpellScript
 // 45644 - Juggle Torch (Catch)
 class spell_midsummer_torch_catch : public SpellScript
 {
-    PrepareSpellScript(spell_midsummer_torch_catch);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_GIVE_TORCH });
@@ -370,8 +352,6 @@ enum FlingTorch
 // 46747 - Fling torch
 class spell_midsummer_fling_torch : public SpellScript
 {
-    PrepareSpellScript(spell_midsummer_fling_torch);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_FLING_TORCH_TRIGGERED, SPELL_FLING_TORCH_SHADOW });
@@ -393,8 +373,6 @@ class spell_midsummer_fling_torch : public SpellScript
 // 45669 - Fling Torch
 class spell_midsummer_fling_torch_triggered : public SpellScript
 {
-    PrepareSpellScript(spell_midsummer_fling_torch_triggered);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_JUGGLE_TORCH_MISSED });
@@ -422,8 +400,6 @@ class spell_midsummer_fling_torch_triggered : public SpellScript
 // 45671 - Juggle Torch (Catch, Quest)
 class spell_midsummer_fling_torch_catch : public SpellScript
 {
-    PrepareSpellScript(spell_midsummer_fling_torch_catch);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({
@@ -483,8 +459,6 @@ class spell_midsummer_fling_torch_catch : public SpellScript
 // 45676 - Juggle Torch (Quest, Missed)
 class spell_midsummer_fling_torch_missed : public SpellScript
 {
-    PrepareSpellScript(spell_midsummer_fling_torch_missed);
-
     void FilterTargets(std::list<WorldObject*>& targets)
     {
         // This spell only hits the caster
@@ -523,8 +497,6 @@ enum CleansingFlames
 // 46671 - Cleansing Flames
 class spell_midsummer_cleansing_flames : public SpellScript
 {
-    PrepareSpellScript(spell_midsummer_cleansing_flames);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ _triggeredSpell });
@@ -556,8 +528,6 @@ enum StampOutBonfire
 // 45458 - Holiday - Midsummer, Stamp Out Bonfire, Quest Complete
 class spell_midsummer_stamp_out_bonfire_quest_complete : public AuraScript
 {
-    PrepareAuraScript(spell_midsummer_stamp_out_bonfire_quest_complete);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_STAMP_OUT_BONFIRE_EVENT });
@@ -577,8 +547,6 @@ class spell_midsummer_stamp_out_bonfire_quest_complete : public AuraScript
 // 45443 - Stamp Out Bonfire, Event
 class spell_midsummer_stamp_out_bonfire_event : public SpellScript
 {
-    PrepareSpellScript(spell_midsummer_stamp_out_bonfire_event);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_STAMP_OUT_BONFIRE_ART_KIT, SPELL_STAMP_OUT_BONFIRE_DUMMY });

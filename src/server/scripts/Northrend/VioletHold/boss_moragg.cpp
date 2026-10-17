@@ -95,8 +95,6 @@ struct boss_moragg : public BossAI
 // 54442, 59524 - Ray of Suffering
 class spell_moragg_ray : public AuraScript
 {
-    PrepareAuraScript(spell_moragg_ray);
-
     void OnPeriodic(AuraEffect const* aurEff)
     {
         PreventDefaultAction();
@@ -118,8 +116,6 @@ class spell_moragg_ray : public AuraScript
 // 54396 - Optic Link
 class spell_moragg_optic_link : public AuraScript
 {
-    PrepareAuraScript(spell_moragg_optic_link);
-
     void OnPeriodic(AuraEffect const* aurEff)
     {
         if (Unit* caster = GetCaster())

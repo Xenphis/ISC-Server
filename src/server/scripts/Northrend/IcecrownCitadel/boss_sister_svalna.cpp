@@ -1436,8 +1436,6 @@ public:
 // 70053 - Revive Champion
 class spell_svalna_revive_champion : public SpellScript
 {
-    PrepareSpellScript(spell_svalna_revive_champion);
-
     void RemoveAliveTarget(std::list<WorldObject*>& targets)
     {
         targets.remove_if(ICCSvalnaAliveCheck());
@@ -1467,8 +1465,6 @@ class spell_svalna_revive_champion : public SpellScript
 // 71462 - Remove Spear
 class spell_svalna_remove_spear : public SpellScript
 {
-    PrepareSpellScript(spell_svalna_remove_spear);
-
     void HandleScript(SpellEffIndex effIndex)
     {
         PreventHitDefaultEffect(effIndex);

@@ -207,8 +207,6 @@ struct npc_pure_energy : public ScriptedAI
 // 44328 - Energy Feedback
 class spell_vexallus_energy_feedback : public AuraScript
 {
-    PrepareAuraScript(spell_vexallus_energy_feedback);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_ENERGY_FEEDBACK, SPELL_ENERGY_FEEDBACK_SCALE });
@@ -252,8 +250,6 @@ class spell_vexallus_energy_feedback : public AuraScript
 // 47108 - Clear Energy Feedback
 class spell_vexallus_clear_energy_feedback : public SpellScript
 {
-    PrepareSpellScript(spell_vexallus_clear_energy_feedback);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_ENERGY_FEEDBACK });

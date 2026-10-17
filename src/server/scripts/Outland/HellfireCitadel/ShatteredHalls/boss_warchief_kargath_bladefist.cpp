@@ -238,8 +238,6 @@ private:
 // 30738 - Blade Dance Targeting
 class spell_kargath_blade_dance_targeting : public SpellScript
 {
-    PrepareSpellScript(spell_kargath_blade_dance_targeting);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_BLADE_DANCE_CHARGE, SPELL_BLADE_DANCE });

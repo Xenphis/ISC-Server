@@ -193,8 +193,6 @@ private:
 // 54361, 59743 - Void Shift
 class spell_zuramat_void_shift : public AuraScript
 {
-    PrepareAuraScript(spell_zuramat_void_shift);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_VOID_SHIFTED });

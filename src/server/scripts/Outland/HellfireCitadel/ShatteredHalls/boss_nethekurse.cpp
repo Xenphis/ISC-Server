@@ -461,8 +461,6 @@ private:
 // 30745 - Target Fissures
 class spell_grand_warlock_nethekurse_target_fissures : public SpellScript
 {
-    PrepareSpellScript(spell_grand_warlock_nethekurse_target_fissures);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SHADOW_FISSURE_2 });

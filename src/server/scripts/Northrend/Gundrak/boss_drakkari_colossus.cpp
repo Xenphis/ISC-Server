@@ -421,8 +421,6 @@ private:
 // 54801 - Surge
 class spell_drakkari_colossus_surge : public SpellScript
 {
-    PrepareSpellScript(spell_drakkari_colossus_surge);
-
     bool Validate(SpellInfo const* /*spell*/) override
     {
         return ValidateSpellInfo({ SPELL_SURGE_VISUAL });

@@ -386,8 +386,6 @@ private:
 // 24314 - Threatening Gaze
 class spell_threatening_gaze : public AuraScript
 {
-    PrepareAuraScript(spell_threatening_gaze);
-
     void OnRemove(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
     {
         if (Unit* caster = GetCaster())

@@ -559,8 +559,6 @@ private:
 // 30693 - Call Nazan
 class spell_vazruden_call_nazan : public SpellScript
 {
-    PrepareSpellScript(spell_vazruden_call_nazan);
-
     void HandleScript(SpellEffIndex /*effIndex*/)
     {
         if (Creature* creature = GetHitCreature())
@@ -578,8 +576,6 @@ class spell_vazruden_call_nazan : public SpellScript
 // 34653, 36920 - Fireball
 class spell_vazruden_fireball : public SpellScript
 {
-    PrepareSpellScript(spell_vazruden_fireball);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SUMMON_LIQUID_FIRE, SPELL_SUMMON_LIQUID_FIRE_H });
@@ -599,8 +595,6 @@ class spell_vazruden_fireball : public SpellScript
 // 30926, 36921 - Cone of Fire
 class spell_vazruden_cone_of_fire : public SpellScript
 {
-    PrepareSpellScript(spell_vazruden_cone_of_fire);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SUMMON_LIQUID_FIRE_CONE });
@@ -620,8 +614,6 @@ class spell_vazruden_cone_of_fire : public SpellScript
 // 30717 - Summon Vazruden
 class spell_vazruden_summon_vazruden : public SpellScript
 {
-    PrepareSpellScript(spell_vazruden_summon_vazruden);
-
     void SetDest(SpellDestination& dest)
     {
         Unit* caster = GetCaster();

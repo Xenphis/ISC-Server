@@ -218,8 +218,6 @@ private:
 // 36142 - Whirlwind
 class spell_dalliah_the_doomsayer_whirlwind : public AuraScript
 {
-    PrepareAuraScript(spell_dalliah_the_doomsayer_whirlwind);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_DUMMY });

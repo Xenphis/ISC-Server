@@ -520,8 +520,6 @@ private:
 // 30541 - Blaze
 class spell_magtheridon_blaze_target : public SpellScript
 {
-    PrepareSpellScript(spell_magtheridon_blaze_target);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_BLAZE_SUMMON });
@@ -547,8 +545,6 @@ class spell_magtheridon_blaze_target : public SpellScript
 // 30576 - Quake
 class spell_magtheridon_quake_initial : public AuraScript
 {
-    PrepareAuraScript(spell_magtheridon_quake_initial);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_QUAKE_TARGET_SELECTOR });
@@ -568,8 +564,6 @@ class spell_magtheridon_quake_initial : public AuraScript
 // 30572 - Quake
 class spell_magtheridon_quake_target_selector : public SpellScript
 {
-    PrepareSpellScript(spell_magtheridon_quake_target_selector);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_QUAKE_KNOCK_BACK, SPELL_QUAKE_PERIODIC });
@@ -597,8 +591,6 @@ class spell_magtheridon_quake_target_selector : public SpellScript
 // 30629 - Debris
 class spell_magtheridon_debris : public SpellScript
 {
-    PrepareSpellScript(spell_magtheridon_debris);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_DEBRIS_SUMMON });
@@ -624,8 +616,6 @@ class spell_magtheridon_debris : public SpellScript
 // 30420 - Shadow Grasp
 class spell_magtheridon_shadow_grasp_cube : public SpellScript
 {
-    PrepareSpellScript(spell_magtheridon_shadow_grasp_cube);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MIND_EXHAUSTION, SPELL_SHADOW_GRASP });
@@ -650,8 +640,6 @@ class spell_magtheridon_shadow_grasp_cube : public SpellScript
 // 30410 - Shadow Grasp
 class spell_magtheridon_shadow_grasp : public AuraScript
 {
-    PrepareAuraScript(spell_magtheridon_shadow_grasp);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MIND_EXHAUSTION, SPELL_SHADOW_GRASP_VISUAL });
@@ -679,8 +667,6 @@ class spell_magtheridon_shadow_grasp : public AuraScript
 // 30166 - Shadow Grasp
 class spell_magtheridon_shadow_grasp_visual : public AuraScript
 {
-    PrepareAuraScript(spell_magtheridon_shadow_grasp_visual);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SHADOW_CAGE });

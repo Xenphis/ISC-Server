@@ -211,8 +211,6 @@ class ConflagrationTargetSelector
 // 74452 - Conflagration
 class spell_saviana_conflagration_init : public SpellScript
 {
-    PrepareSpellScript(spell_saviana_conflagration_init);
-
     bool Validate(SpellInfo const* /*spell*/) override
     {
         return ValidateSpellInfo({ SPELL_FLAME_BEACON, SPELL_CONFLAGRATION_2 });
@@ -243,8 +241,6 @@ class spell_saviana_conflagration_init : public SpellScript
 // 74455 - Conflagration
 class spell_saviana_conflagration_throwback : public SpellScript
 {
-    PrepareSpellScript(spell_saviana_conflagration_throwback);
-
     void HandleScript(SpellEffIndex effIndex)
     {
         PreventHitDefaultEffect(effIndex);

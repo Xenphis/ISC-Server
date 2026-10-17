@@ -203,8 +203,6 @@ private:
 // 38194 - Blink
 class spell_talon_king_ikiss_blink : public SpellScript
 {
-    PrepareSpellScript(spell_talon_king_ikiss_blink);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_BLINK_TELEPORT });

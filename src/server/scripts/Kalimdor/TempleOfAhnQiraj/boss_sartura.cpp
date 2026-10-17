@@ -204,8 +204,6 @@ private:
 // 26686 - Whirlwind
 class spell_sartura_whirlwind : public SpellScript
 {
-    PrepareSpellScript(spell_sartura_whirlwind);
-
     void HandleScript(SpellEffIndex /*effIndex*/)
     {
         Creature* caster = GetCaster()->ToCreature();

@@ -697,8 +697,6 @@ enum ChaosBreath
 // 36677 - Chaos Breath
 class spell_arcatraz_chaos_breath : public SpellScript
 {
-    PrepareSpellScript(spell_arcatraz_chaos_breath);
-
     static constexpr std::array<uint32, 8> PossibleSpells = { SPELL_NECROTIC_POISON, SPELL_CORROSIVE_POISON, SPELL_FEVERED_FATIGUE, SPELL_WITHERED_TOUCH, SPELL_SHRINK, SPELL_PIERCING_SHADOW, SPELL_WAVERING_WILL, SPELL_HEX };
 
     bool Validate(SpellInfo const* /*spellInfo*/) override
@@ -734,8 +732,6 @@ enum DeathCountRemover
 // 36660, 38820 - Death Count
 class spell_arcatraz_death_count : public AuraScript
 {
-    PrepareAuraScript(spell_arcatraz_death_count);
-
     bool Validate(SpellInfo const* /*spell*/) override
     {
         return ValidateSpellInfo({ SPELL_DEATH_COUNT_DAMAGE, SPELL_DEATH_COUNT_DAMAGE_H });

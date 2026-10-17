@@ -262,8 +262,6 @@ private:
 // 31531 - Summon Gnomes
 class spell_mekgineer_steamrigger_summon_gnomes : public AuraScript
 {
-    PrepareAuraScript(spell_mekgineer_steamrigger_summon_gnomes);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SUMMON_GNOME_1, SPELL_SUMMON_GNOME_2, SPELL_SUMMON_GNOME_3 });

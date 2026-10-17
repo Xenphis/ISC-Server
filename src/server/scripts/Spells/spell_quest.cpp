@@ -69,8 +69,6 @@ enum TamingTheBeast
 
 class spell_quest_taming_the_beast : public AuraScript
 {
-    PrepareAuraScript(spell_quest_taming_the_beast);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -140,8 +138,6 @@ class spell_quest_taming_the_beast : public AuraScript
 // 53099, 57896, 58418, 58420, 59064, 59065, 59439, 60900, 60940
 class spell_quest_portal_with_condition : public SpellScript
 {
-    PrepareSpellScript(spell_quest_portal_with_condition);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ uint32(spellInfo->GetEffect(EFFECT_0).CalcValue()) }) &&
@@ -186,8 +182,6 @@ enum TributeSpells
 // 24195 - Grom's Tribute
 class spell_quest_uther_grom_tribute : public SpellScript
 {
-    PrepareSpellScript(spell_quest_uther_grom_tribute);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -240,8 +234,6 @@ enum RelicOfTheEarthenRing
 // 66744 - Make Player Destroy Totems
 class spell_quest_make_player_destroy_totems : public SpellScript
 {
-    PrepareSpellScript(spell_quest_make_player_destroy_totems);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_TOTEM_OF_THE_EARTHEN_RING });

@@ -390,8 +390,6 @@ struct npc_son_of_flame : public ScriptedAI
 // 21908 - Lava Burst Randomizer
 class spell_ragnaros_lava_burst : public SpellScript
 {
-    PrepareSpellScript(spell_ragnaros_lava_burst);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(SummonLavaBurstSpells);
@@ -411,8 +409,6 @@ class spell_ragnaros_lava_burst : public SpellScript
 // 21108 - Summon Sons of Flame
 class spell_ragnaros_summon_sons_of_flame : public SpellScript
 {
-    PrepareSpellScript(spell_ragnaros_summon_sons_of_flame);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(SummonSonsOfFlameSpells);

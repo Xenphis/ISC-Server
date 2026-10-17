@@ -1701,8 +1701,6 @@ class spell_thorim_blizzard_effect : public SpellScriptLoader
 
         class spell_thorim_blizzard_effect_AuraScript : public AuraScript
         {
-            PrepareAuraScript(spell_thorim_blizzard_effect_AuraScript);
-
             bool CheckAreaTarget(Unit* target)
             {
                 /// @todo: fix this for all dynobj auras
@@ -1742,8 +1740,6 @@ class spell_thorim_frostbolt_volley : public SpellScriptLoader
 
         class spell_thorim_frostbolt_volley_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_thorim_frostbolt_volley_SpellScript);
-
             void FilterTargets(std::list<WorldObject*>& targets)
             {
                 targets.remove_if([](WorldObject* object) -> bool
@@ -1778,8 +1774,6 @@ class spell_thorim_charge_orb : public SpellScriptLoader
 
         class spell_thorim_charge_orb_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_thorim_charge_orb_SpellScript);
-
             bool Validate(SpellInfo const* /*spellInfo*/) override
             {
                 return ValidateSpellInfo({ SPELL_LIGHTNING_PILLAR_1 });
@@ -1824,8 +1818,6 @@ class spell_thorim_lightning_charge : public SpellScriptLoader
 
         class spell_thorim_lightning_charge_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_thorim_lightning_charge_SpellScript);
-
             bool Validate(SpellInfo const* /*spellInfo*/) override
             {
                 return ValidateSpellInfo({ SPELL_LIGHTNING_CHARGE });
@@ -1864,8 +1856,6 @@ class spell_thorim_arena_leap : public SpellScriptLoader
 
         class spell_thorim_arena_leap_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_thorim_arena_leap_SpellScript);
-
             bool Load() override
             {
                 return GetCaster()->GetTypeId() == TYPEID_UNIT;
@@ -1905,8 +1895,6 @@ class spell_thorim_stormhammer : public SpellScriptLoader
 
         class spell_thorim_stormhammer_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_thorim_stormhammer_SpellScript);
-
             bool Validate(SpellInfo const* /*spellInfo*/) override
             {
                 return ValidateSpellInfo({ SPELL_STORMHAMMER_BOOMERANG, SPELL_DEAFENING_THUNDER });
@@ -1963,8 +1951,6 @@ class spell_thorim_stormhammer_sif : public SpellScriptLoader
 
         class spell_thorim_stormhammer_sif_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_thorim_stormhammer_sif_SpellScript);
-
             bool Validate(SpellInfo const* /*spellInfo*/) override
             {
                 return ValidateSpellInfo({ SPELL_STORMHAMMER_BOOMERANG, SPELL_SIF_TRANSFORM });
@@ -2005,8 +1991,6 @@ class spell_thorim_stormhammer_boomerang : public SpellScriptLoader
 
         class spell_thorim_stormhammer_boomerang_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_thorim_stormhammer_boomerang_SpellScript);
-
             void RecoverHammer(SpellEffIndex /*effIndex*/)
             {
                 if (Unit* target = GetHitUnit())
@@ -2033,8 +2017,6 @@ class spell_thorim_runic_smash : public SpellScriptLoader
 
         class spell_thorim_runic_smash_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_thorim_runic_smash_SpellScript);
-
             bool Validate(SpellInfo const* /*spellInfo*/) override
             {
                 return ValidateSpellInfo({ SPELL_RUNIC_SMASH });
@@ -2087,8 +2069,6 @@ class spell_thorim_activate_lightning_orb_periodic : public SpellScriptLoader
 
         class spell_thorim_activate_lightning_orb_periodic_AuraScript : public AuraScript
         {
-            PrepareAuraScript(spell_thorim_activate_lightning_orb_periodic_AuraScript);
-
             InstanceScript* instance = nullptr;
 
             void PeriodicTick(AuraEffect const* /*aurEff*/)
@@ -2133,8 +2113,6 @@ class spell_thorim_activate_lightning_orb_periodic : public SpellScriptLoader
 // 62320 - Aura of Celerity
 class spell_thorim_aura_of_celerity : public AuraScript
 {
-    PrepareAuraScript(spell_thorim_aura_of_celerity);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_AURA_OF_CELERITY_VISUAL });

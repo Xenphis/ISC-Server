@@ -31,8 +31,6 @@ enum YouAreRakhlikhDemon
 // 27686 - Teleport to Razelikh (GROUP)
 class spell_blasted_lands_teleport_to_razelikh_group : public SpellScript
 {
-    PrepareSpellScript(spell_blasted_lands_teleport_to_razelikh_group);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_TELEPORT_TO_RAZELIKH_GROUP });

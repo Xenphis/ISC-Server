@@ -398,8 +398,6 @@ private:
 // 30598, 36056 - Burning Maul
 class spell_omrogg_burning_maul : public AuraScript
 {
-    PrepareAuraScript(spell_omrogg_burning_maul);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_BLAST_WAVE });
@@ -436,8 +434,6 @@ class spell_omrogg_burning_maul : public AuraScript
 // 30618 - Beatdown
 class spell_omrogg_beatdown : public SpellScript
 {
-    PrepareSpellScript(spell_omrogg_beatdown);
-
     bool Load() override
     {
         return GetCaster()->IsCreature();

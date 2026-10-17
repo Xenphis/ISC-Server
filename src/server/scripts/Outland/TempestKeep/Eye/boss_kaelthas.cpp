@@ -1537,8 +1537,6 @@ struct npc_nether_vapor : public ScriptedAI
 // 36797 - Mind Control
 class spell_kaelthas_mind_control : public SpellScript
 {
-    PrepareSpellScript(spell_kaelthas_mind_control);
-
     bool Load() override
     {
         return GetCaster()->IsUnit();
@@ -1558,8 +1556,6 @@ class spell_kaelthas_mind_control : public SpellScript
 
 class spell_kaelthas_mind_control_aura : public AuraScript
 {
-    PrepareAuraScript(spell_kaelthas_mind_control_aura);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MIND_CONTROL_2 });
@@ -1585,8 +1581,6 @@ class spell_kaelthas_mind_control_aura : public AuraScript
 // 36815 - Shock Barrier
 class spell_kaelthas_shock_barrier : public AuraScript
 {
-    PrepareAuraScript(spell_kaelthas_shock_barrier);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SHOCK_BARRIER_DAMAGE });
@@ -1608,8 +1602,6 @@ class spell_kaelthas_shock_barrier : public AuraScript
 // 36819 - Pyroblast
 class spell_kaelthas_pyroblast : public SpellScript
 {
-    PrepareSpellScript(spell_kaelthas_pyroblast);
-
     void FilterTargets(std::list<WorldObject*>& targets)
     {
         if (targets.empty())
@@ -1631,8 +1623,6 @@ class spell_kaelthas_pyroblast : public SpellScript
 // 37027 - Remote Toy
 class spell_kaelthas_remote_toy : public AuraScript
 {
-    PrepareAuraScript(spell_kaelthas_remote_toy);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_REMOTE_TOY_STUN });
@@ -1653,8 +1643,6 @@ class spell_kaelthas_remote_toy : public AuraScript
 // 35941 - Gravity Lapse
 class spell_kaelthas_gravity_lapse : public SpellScript
 {
-    PrepareSpellScript(spell_kaelthas_gravity_lapse);
-
 public:
     spell_kaelthas_gravity_lapse()
     {
@@ -1689,8 +1677,6 @@ private:
 // 34480 - Gravity Lapse
 class spell_kaelthas_gravity_lapse_periodic : public AuraScript
 {
-    PrepareAuraScript(spell_kaelthas_gravity_lapse_periodic);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_GRAVITY_LAPSE_KNOCK_BACK });
@@ -1712,8 +1698,6 @@ class spell_kaelthas_gravity_lapse_periodic : public AuraScript
 // 36730 - Flame Strike
 class spell_kaelthas_flame_strike : public AuraScript
 {
-    PrepareAuraScript(spell_kaelthas_flame_strike);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_FLAME_STRIKE_DAMAGE });
@@ -1733,8 +1717,6 @@ class spell_kaelthas_flame_strike : public AuraScript
 // 36976 - Summon Weapons
 class spell_kaelthas_summon_weapons : public SpellScript
 {
-    PrepareSpellScript(spell_kaelthas_summon_weapons);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(SummonWeaponsSpells);
@@ -1756,8 +1738,6 @@ class spell_kaelthas_summon_weapons : public SpellScript
 // 39497 - Remove Enchanted Weapons
 class spell_kaelthas_remove_weapons : public SpellScript
 {
-    PrepareSpellScript(spell_kaelthas_remove_weapons);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(RemoveWeaponsSpells);
@@ -1779,8 +1759,6 @@ class spell_kaelthas_remove_weapons : public SpellScript
 // 36091 - Kael Gaining Power
 class spell_kaelthas_gaining_power : public AuraScript
 {
-    PrepareAuraScript(spell_kaelthas_gaining_power);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_NETHERBEAM_1, SPELL_NETHERBEAM_2, SPELL_NETHERBEAM_3 }) &&
@@ -1833,8 +1811,6 @@ class spell_kaelthas_gaining_power : public AuraScript
 // 36092 - Kael Explodes
 class spell_kaelthas_explodes : public SpellScript
 {
-    PrepareSpellScript(spell_kaelthas_explodes);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_KAEL_GAINING_POWER, SPELL_NETHERBEAM_3 }) &&
@@ -1862,8 +1838,6 @@ class spell_kaelthas_explodes : public SpellScript
 // 36201, 36290, 36291 - Pure Nether Beam
 class spell_kaelthas_pure_nether_beam : public SpellScript
 {
-    PrepareSpellScript(spell_kaelthas_pure_nether_beam);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_PURE_NETHER_BEAM_1, SPELL_PURE_NETHER_BEAM_2, SPELL_PURE_NETHER_BEAM_3 }) &&
@@ -1894,8 +1868,6 @@ class spell_kaelthas_pure_nether_beam : public SpellScript
 // 36196, 36197, 36198 - Pure Nether Beam
 class spell_kaelthas_pure_nether_beam_visual : public SpellScript
 {
-    PrepareSpellScript(spell_kaelthas_pure_nether_beam_visual);
-
     void HandleDummy(SpellEffIndex /*effIndex*/)
     {
         GetHitUnit()->SendPlaySpellVisualKit(SPELL_VISUAL_KIT_1, 0);
@@ -1911,8 +1883,6 @@ class spell_kaelthas_pure_nether_beam_visual : public SpellScript
 // 35865 - Summon Nether Vapor
 class spell_kaelthas_summon_nether_vapor : public SpellScript
 {
-    PrepareSpellScript(spell_kaelthas_summon_nether_vapor);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(SummonNetherVaporSpells);
@@ -1934,8 +1904,6 @@ class spell_kaelthas_summon_nether_vapor : public SpellScript
 // 35861, 35862, 35863, 35864 - Summon Nether Vapor
 class spell_kaelthas_summon_nether_vapor_effect : public SpellScript
 {
-    PrepareSpellScript(spell_kaelthas_summon_nether_vapor_effect);
-
     void SetDest(SpellDestination& dest)
     {
         dest.RelocateOffset({ 0.0f, 0.0f, 5.0f });
@@ -1966,8 +1934,6 @@ class spell_kaelthas_summon_nether_vapor_effect : public SpellScript
 // 45960 - Nether Vapor Lightning
 class spell_kaelthas_nether_vapor_lightning : public AuraScript
 {
-    PrepareAuraScript(spell_kaelthas_nether_vapor_lightning);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ uint32(spellInfo->GetEffect(EFFECT_0).CalcValue()) });
@@ -1987,8 +1953,6 @@ class spell_kaelthas_nether_vapor_lightning : public AuraScript
 // 35869 - Nether Beam
 class spell_kaelthas_nether_beam : public SpellScript
 {
-    PrepareSpellScript(spell_kaelthas_nether_beam);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_NETHER_BEAM_CHAIN });

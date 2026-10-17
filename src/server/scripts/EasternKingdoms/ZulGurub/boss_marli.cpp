@@ -278,8 +278,6 @@ private:
 // 24083 - Hatch Eggs
 class spell_hatch_spiders : public SpellScript
 {
-    PrepareSpellScript(spell_hatch_spiders);
-
     void HandleObjectAreaTargetSelect(std::list<WorldObject*>& targets)
     {
         targets.sort(Trinity::ObjectDistanceOrderPred(GetCaster()));

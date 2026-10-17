@@ -207,8 +207,6 @@ private:
 // 39992 - Needle Spine Targeting
 class spell_najentus_needle_spine : public SpellScript
 {
-    PrepareSpellScript(spell_najentus_needle_spine);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_NEEDLE_SPINE });
@@ -234,8 +232,6 @@ class spell_najentus_needle_spine : public SpellScript
 // 39835 - Needle Spine
 class spell_najentus_needle_spine_explosion : public SpellScript
 {
-    PrepareSpellScript(spell_najentus_needle_spine_explosion);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_NEEDLE_SPINE_EXPLOSION });

@@ -84,8 +84,6 @@ enum PoisonousBlood
 // 24320 - Poisonous Blood
 class spell_zulgurub_poisonous_blood : public SpellScript
 {
-    PrepareSpellScript(spell_zulgurub_poisonous_blood);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_POISONOUS_BLOOD });
@@ -110,8 +108,6 @@ enum AxeFlurry
 // 24019 - Axe Flurry
 class spell_zulgurub_axe_flurry : public SpellScript
 {
-    PrepareSpellScript(spell_zulgurub_axe_flurry);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_AXE_FLURRY });

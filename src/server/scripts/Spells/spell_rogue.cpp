@@ -64,8 +64,6 @@ enum RogueSpells
 // 13877, 33735, (check 51211, 65956) - Blade Flurry
 class spell_rog_blade_flurry : public AuraScript
 {
-    PrepareAuraScript(spell_rog_blade_flurry);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_ROGUE_BLADE_FLURRY_EXTRA_ATTACK });
@@ -100,8 +98,6 @@ class spell_rog_blade_flurry : public AuraScript
 // -31228 - Cheat Death
 class spell_rog_cheat_death : public AuraScript
 {
-    PrepareAuraScript(spell_rog_cheat_death);
-
     uint32 absorbChance = 0;
 
     bool Validate(SpellInfo const* /*spellInfo*/) override
@@ -150,8 +146,6 @@ class spell_rog_cheat_death : public AuraScript
 // 31231 - Cheat Death
 class spell_rog_cheat_death_cooldown : public SpellScript
 {
-    PrepareSpellScript(spell_rog_cheat_death_cooldown);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_ROGUE_CHEATING_DEATH });
@@ -171,8 +165,6 @@ class spell_rog_cheat_death_cooldown : public SpellScript
 // -51664 - Cut to the Chase
 class spell_rog_cut_to_the_chase : public AuraScript
 {
-    PrepareAuraScript(spell_rog_cut_to_the_chase);
-
     void HandleProc(AuraEffect const* /*aurEff*/, ProcEventInfo& eventInfo)
     {
         PreventDefaultAction();
@@ -199,8 +191,6 @@ class spell_rog_cut_to_the_chase : public AuraScript
 // -51625 - Deadly Brew
 class spell_rog_deadly_brew : public AuraScript
 {
-    PrepareAuraScript(spell_rog_deadly_brew);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_ROGUE_CRIPPLING_POISON });
@@ -221,8 +211,6 @@ class spell_rog_deadly_brew : public AuraScript
 // -2818 - Deadly Poison
 class spell_rog_deadly_poison : public SpellScript
 {
-    PrepareSpellScript(spell_rog_deadly_poison);
-
     bool Load() override
     {
         // at this point CastItem must already be initialized
@@ -313,8 +301,6 @@ class spell_rog_killing_spree : public SpellScriptLoader
 
         class spell_rog_killing_spree_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_rog_killing_spree_SpellScript);
-
             void FilterTargets(std::list<WorldObject*>& targets)
             {
                 if (targets.empty() || GetCaster()->GetVehicleBase())
@@ -342,8 +328,6 @@ class spell_rog_killing_spree : public SpellScriptLoader
 
         class spell_rog_killing_spree_AuraScript : public AuraScript
         {
-            PrepareAuraScript(spell_rog_killing_spree_AuraScript);
-
             bool Validate(SpellInfo const* /*spellInfo*/) override
             {
                 return ValidateSpellInfo(
@@ -407,8 +391,6 @@ char constexpr const spell_rog_killing_spree::ScriptName[];
 // -31130 - Nerves of Steel
 class spell_rog_nerves_of_steel : public AuraScript
 {
-    PrepareAuraScript(spell_rog_nerves_of_steel);
-
 public:
     spell_rog_nerves_of_steel()
     {
@@ -449,8 +431,6 @@ private:
 template <uint32 RemoveSpellId>
 class spell_rog_overkill_mos : public AuraScript
 {
-    PrepareAuraScript(spell_rog_overkill_mos);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ RemoveSpellId });
@@ -481,8 +461,6 @@ class spell_rog_overkill_mos : public AuraScript
 // 14185 - Preparation
 class spell_rog_preparation : public SpellScript
 {
-    PrepareSpellScript(spell_rog_preparation);
-
     bool Load() override
     {
         return GetCaster()->GetTypeId() == TYPEID_PLAYER;
@@ -521,8 +499,6 @@ class spell_rog_preparation : public SpellScript
 // -51685 - Prey on the Weak
 class spell_rog_prey_on_the_weak : public AuraScript
 {
-    PrepareAuraScript(spell_rog_prey_on_the_weak);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_ROGUE_PREY_ON_THE_WEAK });
@@ -554,8 +530,6 @@ class spell_rog_prey_on_the_weak : public AuraScript
 // -31244 - Quick Recovery
 class spell_rog_quick_recovery : public AuraScript
 {
-    PrepareAuraScript(spell_rog_quick_recovery);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_ROGUE_QUICK_RECOVERY_ENERGY });
@@ -591,8 +565,6 @@ class spell_rog_rupture : public SpellScriptLoader
 
         class spell_rog_rupture_AuraScript : public AuraScript
         {
-            PrepareAuraScript(spell_rog_rupture_AuraScript);
-
             bool Load() override
             {
                 Unit* caster = GetCaster();
@@ -650,8 +622,6 @@ char constexpr const spell_rog_rupture::ScriptName[];
 // 56800 - Glyph of Backstab (dummy)
 class spell_rog_glyph_of_backstab : public AuraScript
 {
-    PrepareAuraScript(spell_rog_glyph_of_backstab);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_ROGUE_GLYPH_OF_BACKSTAB_TRIGGER });
@@ -677,8 +647,6 @@ class spell_rog_glyph_of_backstab_triggered : public SpellScriptLoader
 
         class spell_rog_glyph_of_backstab_triggered_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_rog_glyph_of_backstab_triggered_SpellScript);
-
             typedef spell_rog_rupture::spell_rog_rupture_AuraScript RuptureAuraScript;
 
             void HandleScript(SpellEffIndex effIndex)
@@ -728,8 +696,6 @@ class spell_rog_glyph_of_backstab_triggered : public SpellScriptLoader
 // -13983 - Setup
 class spell_rog_setup : public AuraScript
 {
-    PrepareAuraScript(spell_rog_setup);
-
     bool CheckProc(ProcEventInfo& eventInfo)
     {
         if (Player* target = GetTarget()->ToPlayer())
@@ -748,8 +714,6 @@ class spell_rog_setup : public AuraScript
 // 5938 - Shiv
 class spell_rog_shiv : public SpellScript
 {
-    PrepareSpellScript(spell_rog_shiv);
-
     bool Load() override
     {
         return GetCaster()->GetTypeId() == TYPEID_PLAYER;
@@ -776,8 +740,6 @@ class spell_rog_shiv : public SpellScript
 // 57934 - Tricks of the Trade
 class spell_rog_tricks_of_the_trade_aura : public AuraScript
 {
-    PrepareAuraScript(spell_rog_tricks_of_the_trade_aura);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -821,8 +783,6 @@ public:
 // 57934 - Tricks of the Trade
 class spell_rog_tricks_of_the_trade : public SpellScript
 {
-    PrepareSpellScript(spell_rog_tricks_of_the_trade);
-
     void DoAfterHit()
     {
         if (Aura* aura = GetHitAura())
@@ -844,8 +804,6 @@ class spell_rog_tricks_of_the_trade : public SpellScript
 // 59628 - Tricks of the Trade (Proc)
 class spell_rog_tricks_of_the_trade_proc : public AuraScript
 {
-    PrepareAuraScript(spell_rog_tricks_of_the_trade_proc);
-
     void HandleRemove(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
     {
         GetTarget()->GetThreatManager().UnregisterRedirectThreat(SPELL_ROGUE_TRICKS_OF_THE_TRADE);
@@ -860,8 +818,6 @@ class spell_rog_tricks_of_the_trade_proc : public AuraScript
 // -51698, 51700, 51701 - Honor Among Thieves
 class spell_rog_honor_among_thieves : public AuraScript
 {
-    PrepareAuraScript(spell_rog_honor_among_thieves);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo(
@@ -902,8 +858,6 @@ class spell_rog_honor_among_thieves : public AuraScript
 // 52916 - Honor Among Thieves (Proc)
 class spell_rog_honor_among_thieves_proc : public SpellScript
 {
-    PrepareSpellScript(spell_rog_honor_among_thieves_proc);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_ROGUE_HONOR_AMONG_THIEVES_PROC });
@@ -928,8 +882,6 @@ class spell_rog_honor_among_thieves_proc : public SpellScript
 
 class spell_rog_honor_among_thieves_proc_aura : public AuraScript
 {
-    PrepareAuraScript(spell_rog_honor_among_thieves_proc_aura);
-
     void HandleEffectApply(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
     {
         Unit* caster = GetCaster();
@@ -949,8 +901,6 @@ class spell_rog_honor_among_thieves_proc_aura : public AuraScript
 // 51662 - Hunger For Blood
 class spell_rog_hunger_for_blood : public SpellScript
 {
-    PrepareSpellScript(spell_rog_hunger_for_blood);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_ROGUE_HUNGER_FOR_BLOOD });
@@ -970,8 +920,6 @@ class spell_rog_hunger_for_blood : public SpellScript
 // -51627 - Turn the Tables
 class spell_rog_turn_the_tables : public AuraScript
 {
-    PrepareAuraScript(spell_rog_turn_the_tables);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ spellInfo->GetEffect(EFFECT_0).TriggerSpell });
@@ -997,8 +945,6 @@ class spell_rog_turn_the_tables : public AuraScript
 // -11327 - Vanish
 class spell_rog_vanish : public AuraScript
 {
-    PrepareAuraScript(spell_rog_vanish);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_ROGUE_STEALTH });

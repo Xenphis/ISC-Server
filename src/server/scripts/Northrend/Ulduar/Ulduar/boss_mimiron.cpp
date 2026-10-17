@@ -1710,8 +1710,6 @@ class spell_mimiron_bomb_bot : public SpellScriptLoader
 
         class spell_mimiron_bomb_bot_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_mimiron_bomb_bot_SpellScript);
-
             void HandleScript(SpellEffIndex /*effIndex*/)
             {
                 if (GetHitPlayer())
@@ -1750,8 +1748,6 @@ class spell_mimiron_clear_fires : public SpellScriptLoader
 
         class spell_mimiron_clear_fires_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_mimiron_clear_fires_SpellScript);
-
             void HandleDummy(SpellEffIndex /*effIndex*/)
             {
                 if (GetHitCreature())
@@ -1778,8 +1774,6 @@ class spell_mimiron_despawn_assault_bots : public SpellScriptLoader
 
         class spell_mimiron_despawn_assault_bots_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_mimiron_despawn_assault_bots_SpellScript);
-
             void HandleScript(SpellEffIndex /*effIndex*/)
             {
                 if (GetHitCreature())
@@ -1806,8 +1800,6 @@ class spell_mimiron_fire_search : public SpellScriptLoader
 
         class spell_mimiron_fire_search_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_mimiron_fire_search_SpellScript);
-
         public:
             spell_mimiron_fire_search_SpellScript()
             {
@@ -1877,8 +1869,6 @@ class spell_mimiron_fire_search : public SpellScriptLoader
 // 64444 - Magnetic Core Summon
 class spell_mimiron_magnetic_core_summon : public SpellScript
 {
-    PrepareSpellScript(spell_mimiron_magnetic_core_summon);
-
     void ModDest(SpellDestination& dest)
     {
         Unit* caster = GetCaster();
@@ -1902,8 +1892,6 @@ class spell_mimiron_magnetic_core : public SpellScriptLoader
 
         class spell_mimiron_magnetic_core_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_mimiron_magnetic_core_SpellScript);
-
             void FilterTargets(std::list<WorldObject*>& targets)
             {
                 targets.remove_if([](WorldObject* obj) { return obj->IsUnit() && (obj->ToUnit()->GetVehicleBase() || obj->ToUnit()->HasUnitFlag(UNIT_FLAG_NON_ATTACKABLE)); });
@@ -1922,8 +1910,6 @@ class spell_mimiron_magnetic_core : public SpellScriptLoader
 
         class spell_mimiron_magnetic_core_AuraScript : public AuraScript
         {
-            PrepareAuraScript(spell_mimiron_magnetic_core_AuraScript);
-
             bool Validate(SpellInfo const* /*spell*/) override
             {
                 return ValidateSpellInfo({ SPELL_MAGNETIC_CORE_VISUAL });
@@ -1975,8 +1961,6 @@ class spell_mimiron_napalm_shell : public SpellScriptLoader
 
         class spell_mimiron_napalm_shell_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_mimiron_napalm_shell_SpellScript);
-
             bool Validate(SpellInfo const* /*spell*/) override
             {
                 return ValidateSpellInfo({ SPELL_NAPALM_SHELL });
@@ -2024,8 +2008,6 @@ class spell_mimiron_p3wx2_laser_barrage : public SpellScriptLoader
 
         class spell_mimiron_p3wx2_laser_barrage_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_mimiron_p3wx2_laser_barrage_SpellScript);
-
             void OnHit(SpellEffIndex /*effIndex*/)
             {
                 GetCaster()->SetChannelObjectGuid(GetHitUnit()->GetGUID());
@@ -2051,8 +2033,6 @@ class spell_mimiron_plasma_blast : public SpellScriptLoader
 
         class spell_mimiron_plasma_blast_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_mimiron_plasma_blast_SpellScript);
-
             bool Validate(SpellInfo const* /*spell*/) override
             {
                 return ValidateSpellInfo({ SPELL_PLASMA_BLAST });
@@ -2089,8 +2069,6 @@ class spell_mimiron_proximity_explosion : public SpellScriptLoader
 
         class spell_mimiron_proximity_explosion_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_mimiron_proximity_explosion_SpellScript);
-
             void OnHit(SpellEffIndex /*effIndex*/)
             {
                 if (GetHitPlayer())
@@ -2125,8 +2103,6 @@ class spell_mimiron_proximity_mines : public SpellScriptLoader
 
         class spell_mimiron_proximity_mines_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_mimiron_proximity_mines_SpellScript);
-
             bool Validate(SpellInfo const* /*spell*/) override
             {
                 return ValidateSpellInfo({ SPELL_SUMMON_PROXIMITY_MINE });
@@ -2158,8 +2134,6 @@ class spell_mimiron_proximity_trigger : public SpellScriptLoader
 
         class spell_mimiron_proximity_trigger_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_mimiron_proximity_trigger_SpellScript);
-
             bool Validate(SpellInfo const* /*spell*/) override
             {
                 return ValidateSpellInfo({ SPELL_PROXIMITY_MINE_EXPLOSION });
@@ -2199,8 +2173,6 @@ class spell_mimiron_rapid_burst : public SpellScriptLoader
 
         class spell_mimiron_rapid_burst_AuraScript : public AuraScript
         {
-            PrepareAuraScript(spell_mimiron_rapid_burst_AuraScript);
-
             bool Validate(SpellInfo const* /*spell*/) override
             {
                 return ValidateSpellInfo({ SPELL_RAPID_BURST_LEFT, SPELL_RAPID_BURST_RIGHT });
@@ -2239,8 +2211,6 @@ class spell_mimiron_rocket_strike : public SpellScriptLoader
 
         class spell_mimiron_rocket_strike_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_mimiron_rocket_strike_SpellScript);
-
             bool Validate(SpellInfo const* /*spell*/) override
             {
                 return ValidateSpellInfo({ SPELL_SCRIPT_EFFECT_ROCKET_STRIKE });
@@ -2285,8 +2255,6 @@ class spell_mimiron_rocket_strike_damage : public SpellScriptLoader
 
         class spell_mimiron_rocket_strike_damage_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_mimiron_rocket_strike_damage_SpellScript);
-
             bool Validate(SpellInfo const* /*spell*/) override
             {
                 return ValidateSpellInfo({ SPELL_NOT_SO_FRIENDLY_FIRE });
@@ -2333,8 +2301,6 @@ class spell_mimiron_rocket_strike_target_select : public SpellScriptLoader
 
         class spell_mimiron_rocket_strike_target_select_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_mimiron_rocket_strike_target_select_SpellScript);
-
             bool Validate(SpellInfo const* /*spell*/) override
             {
                 return ValidateSpellInfo({ SPELL_SUMMON_ROCKET_STRIKE });
@@ -2384,8 +2350,6 @@ class spell_mimiron_self_repair : public SpellScriptLoader
 
         class spell_mimiron_self_repair_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_mimiron_self_repair_SpellScript);
-
             void HandleScript()
             {
                 if (GetCaster()->GetAI())
@@ -2413,8 +2377,6 @@ class spell_mimiron_spinning_up : public SpellScriptLoader
 
         class spell_mimiron_spinning_up_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_mimiron_spinning_up_SpellScript);
-
             void OnHit(SpellEffIndex /*effIndex*/)
             {
                 if (GetHitUnit() != GetCaster())
@@ -2441,8 +2403,6 @@ class spell_mimiron_summon_assault_bot : public SpellScriptLoader
 
         class spell_mimiron_summon_assault_bot_AuraScript : public AuraScript
         {
-            PrepareAuraScript(spell_mimiron_summon_assault_bot_AuraScript);
-
             bool Validate(SpellInfo const* /*spell*/) override
             {
                 return ValidateSpellInfo({ SPELL_SUMMON_ASSAULT_BOT });
@@ -2476,8 +2436,6 @@ class spell_mimiron_summon_assault_bot_target : public SpellScriptLoader
 
         class spell_mimiron_summon_assault_bot_target_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_mimiron_summon_assault_bot_target_SpellScript);
-
             bool Validate(SpellInfo const* /*spell*/) override
             {
                 return ValidateSpellInfo({ SPELL_SUMMON_ASSAULT_BOT_DUMMY });
@@ -2508,8 +2466,6 @@ class spell_mimiron_summon_fire_bot : public SpellScriptLoader
 
         class spell_mimiron_summon_fire_bot_AuraScript : public AuraScript
         {
-            PrepareAuraScript(spell_mimiron_summon_fire_bot_AuraScript);
-
             bool Validate(SpellInfo const* /*spell*/) override
             {
                 return ValidateSpellInfo({ SPELL_SUMMON_FIRE_BOT });
@@ -2543,8 +2499,6 @@ class spell_mimiron_summon_fire_bot_target : public SpellScriptLoader
 
         class spell_mimiron_summon_fire_bot_target_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_mimiron_summon_fire_bot_target_SpellScript);
-
             bool Validate(SpellInfo const* /*spell*/) override
             {
                 return ValidateSpellInfo({ SPELL_SUMMON_FIRE_BOT_DUMMY });
@@ -2575,8 +2529,6 @@ class spell_mimiron_summon_flames_spread : public SpellScriptLoader
 
         class spell_mimiron_summon_flames_spread_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_mimiron_summon_flames_spread_SpellScript);
-
             void FilterTargets(std::list<WorldObject*>& targets)
             {
                 if (targets.empty())
@@ -2612,8 +2564,6 @@ class spell_mimiron_summon_flames_spread : public SpellScriptLoader
 
         class spell_mimiron_summon_flames_spread_AuraScript : public AuraScript
         {
-            PrepareAuraScript(spell_mimiron_summon_flames_spread_AuraScript);
-
             bool Validate(SpellInfo const* /*spell*/) override
             {
                 return ValidateSpellInfo({ SPELL_SUMMON_FLAMES_SPREAD });
@@ -2647,8 +2597,6 @@ class spell_mimiron_summon_frost_bomb_target : public SpellScriptLoader
 
         class spell_mimiron_summon_frost_bomb_target_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_mimiron_summon_frost_bomb_target_SpellScript);
-
             bool Validate(SpellInfo const* /*spell*/) override
             {
                 return ValidateSpellInfo({ SPELL_SUMMON_FROST_BOMB });
@@ -2696,8 +2644,6 @@ class spell_mimiron_summon_junk_bot : public SpellScriptLoader
 
         class spell_mimiron_summon_junk_bot_AuraScript : public AuraScript
         {
-            PrepareAuraScript(spell_mimiron_summon_junk_bot_AuraScript);
-
             bool Validate(SpellInfo const* /*spell*/) override
             {
                 return ValidateSpellInfo({ SPELL_SUMMON_JUNK_BOT });
@@ -2731,8 +2677,6 @@ class spell_mimiron_summon_junk_bot_target : public SpellScriptLoader
 
         class spell_mimiron_summon_junk_bot_target_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_mimiron_summon_junk_bot_target_SpellScript);
-
             bool Validate(SpellInfo const* /*spell*/) override
             {
                 return ValidateSpellInfo({ SPELL_SUMMON_JUNK_BOT_DUMMY });
@@ -2763,8 +2707,6 @@ class spell_mimiron_weld : public SpellScriptLoader
 
         class spell_mimiron_weld_AuraScript : public AuraScript
         {
-            PrepareAuraScript(spell_mimiron_weld_AuraScript);
-
             void HandleTick(AuraEffect const* aurEff)
             {
                 Unit* caster = GetTarget();

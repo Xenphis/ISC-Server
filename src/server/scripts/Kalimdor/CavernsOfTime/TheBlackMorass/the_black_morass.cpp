@@ -289,8 +289,6 @@ struct npc_time_rift : public ScriptedAI
 // 31326 - Corrupt Medivh
 class spell_black_morass_corrupt_medivh : public AuraScript
 {
-    PrepareAuraScript(spell_black_morass_corrupt_medivh);
-
     void OnPeriodic(AuraEffect const* aurEff)
     {
         if (aurEff->GetTickNumber() % 3)
@@ -307,8 +305,6 @@ class spell_black_morass_corrupt_medivh : public AuraScript
 // 37853 - Corrupt Medivh
 class spell_black_morass_corrupt_medivh_aeonus : public AuraScript
 {
-    PrepareAuraScript(spell_black_morass_corrupt_medivh_aeonus);
-
     void OnPeriodic(AuraEffect const* /*aurEff*/)
     {
         if (InstanceScript* instance = GetTarget()->GetInstanceScript())
@@ -324,8 +320,6 @@ class spell_black_morass_corrupt_medivh_aeonus : public AuraScript
 // 31388 - Time Rift Channel Trigger
 class spell_black_morass_time_rift_channel_trigger : public SpellScript
 {
-    PrepareSpellScript(spell_black_morass_time_rift_channel_trigger);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_TIME_RIFT_CHANNEL });
@@ -347,8 +341,6 @@ class spell_black_morass_time_rift_channel_trigger : public SpellScript
 // 31550 - Banish Dragon Helper
 class spell_black_morass_banish_dragon_helper : public SpellScript
 {
-    PrepareSpellScript(spell_black_morass_banish_dragon_helper);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_DRAGON_HELPER_EFFECT });
@@ -368,8 +360,6 @@ class spell_black_morass_banish_dragon_helper : public SpellScript
 // 31322 - Close Time Rift Trigger
 class spell_black_morass_close_time_rift_trigger : public SpellScript
 {
-    PrepareSpellScript(spell_black_morass_close_time_rift_trigger);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_CLOSE_TIME_RIFT_EFFECT });
@@ -391,8 +381,6 @@ class spell_black_morass_close_time_rift_trigger : public SpellScript
 // 31323 - Close Time Rift Effect
 class spell_black_morass_close_time_rift_effect : public SpellScript
 {
-    PrepareSpellScript(spell_black_morass_close_time_rift_effect);
-
     void HandleScript(SpellEffIndex /*effIndex*/)
     {
         if (Creature* creature = GetHitUnit()->ToCreature())
@@ -408,8 +396,6 @@ class spell_black_morass_close_time_rift_effect : public SpellScript
 // 31320 - Time Rift Periodic
 class spell_black_morass_time_rift_periodic : public AuraScript
 {
-    PrepareAuraScript(spell_black_morass_time_rift_periodic);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(

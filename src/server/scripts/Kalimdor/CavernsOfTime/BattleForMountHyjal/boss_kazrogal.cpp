@@ -170,8 +170,6 @@ class MarkTargetFilter
 // 31447 - Mark of Kaz'rogal
 class spell_mark_of_kazrogal : public SpellScript
 {
-    PrepareSpellScript(spell_mark_of_kazrogal);
-
     void FilterTargets(std::list<WorldObject*>& targets)
     {
         targets.remove_if(MarkTargetFilter());
@@ -185,8 +183,6 @@ class spell_mark_of_kazrogal : public SpellScript
 
 class spell_mark_of_kazrogal_aura : public AuraScript
 {
-    PrepareAuraScript(spell_mark_of_kazrogal_aura);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MARK_OF_KAZROGAL_DMG });

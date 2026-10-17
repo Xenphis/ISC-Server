@@ -157,8 +157,6 @@ private:
 // 32291 - Focus Fire
 class spell_shirrak_focus_fire : public SpellScript
 {
-    PrepareSpellScript(spell_shirrak_focus_fire);
-
     void HandleAfterHit()
     {
         if (Creature* creature = GetCaster()->ToCreature())
@@ -174,8 +172,6 @@ class spell_shirrak_focus_fire : public SpellScript
 // 32301 - Ping Shirrak
 class spell_shirrak_ping_shirrak : public SpellScript
 {
-    PrepareSpellScript(spell_shirrak_ping_shirrak);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_FOCUS_FIRE_DUMMY });
@@ -195,8 +191,6 @@ class spell_shirrak_ping_shirrak : public SpellScript
 // 32264 - Inhibit Magic
 class spell_shirrak_inhibit_magic : public SpellScript
 {
-    PrepareSpellScript(spell_shirrak_inhibit_magic);
-
     void RemoveOldAura(SpellEffIndex /*effIndex*/)
     {
         GetHitUnit()->RemoveAurasDueToSpell(GetSpellInfo()->Id);

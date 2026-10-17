@@ -234,8 +234,6 @@ private:
 // 70827 - Ice Shards
 class spell_pos_ice_shards : public SpellScript
 {
-    PrepareSpellScript(spell_pos_ice_shards);
-
     bool Load() override
     {
         // This script should execute only in Pit of Saron

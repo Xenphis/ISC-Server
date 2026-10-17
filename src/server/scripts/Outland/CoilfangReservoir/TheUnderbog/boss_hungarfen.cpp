@@ -187,8 +187,6 @@ private:
 // 31693 - Putrid Mushroom Primer
 class spell_hungarfen_putrid_mushroom_primer : public SpellScript
 {
-    PrepareSpellScript(spell_hungarfen_putrid_mushroom_primer);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SUMMON_UNDERBOG_MUSHROOM });

@@ -31,8 +31,6 @@ enum SerpentshrineCavernMisc
 // 37025 - Coilfang Water
 class spell_serpent_shrine_coilfang_water : public AuraScript
 {
-    PrepareAuraScript(spell_serpent_shrine_coilfang_water);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_FRENZY_WATER_PERIODIC, SPELL_SCALDING_WATER });
@@ -70,8 +68,6 @@ class spell_serpent_shrine_coilfang_water : public AuraScript
 // 37280 - Frenzy Water
 class spell_serpent_shrine_frenzy_water : public AuraScript
 {
-    PrepareAuraScript(spell_serpent_shrine_frenzy_water);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_FRENZY_WATER_SUMMON });

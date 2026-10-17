@@ -183,8 +183,6 @@ private:
 // 25684 - Summon Mana Fiends
 class spell_moam_summon_mana_fiends : public SpellScript
 {
-    PrepareSpellScript(spell_moam_summon_mana_fiends);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -212,8 +210,6 @@ class spell_moam_summon_mana_fiends : public SpellScript
 // 25685 - Energize
 class spell_moam_energize : public AuraScript
 {
-    PrepareAuraScript(spell_moam_energize);
-
     void OnPeriodic(AuraEffect const* /*aurEff*/)
     {
         if (GetTarget()->GetPower(POWER_MANA) == GetTarget()->GetMaxPower(POWER_MANA))
@@ -229,8 +225,6 @@ class spell_moam_energize : public AuraScript
 // 25676 - Drain Mana
 class spell_moam_drain_mana : public SpellScript
 {
-    PrepareSpellScript(spell_moam_drain_mana);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_DRAIN_MANA_EFFECT });
@@ -260,8 +254,6 @@ class spell_moam_drain_mana : public SpellScript
 // 25755 - Drain Mana
 class spell_moam_drain_mana_effect : public SpellScript
 {
-    PrepareSpellScript(spell_moam_drain_mana_effect);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_DRAIN_MANA_VISUAL });

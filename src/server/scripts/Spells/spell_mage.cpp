@@ -111,8 +111,6 @@ class spell_mage_incanters_absorbtion_base_AuraScript : public AuraScript
 // -5143 - Arcane Missiles
 class spell_mage_arcane_missiles : public AuraScript
 {
-    PrepareAuraScript(spell_mage_arcane_missiles);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MAGE_T10_2P_BONUS, SPELL_MAGE_T10_2P_BONUS_EFFECT });
@@ -143,8 +141,6 @@ public:
 // -31571 - Arcane Potency
 class spell_mage_arcane_potency : public AuraScript
 {
-    PrepareAuraScript(spell_mage_arcane_potency);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -184,8 +180,6 @@ class spell_mage_arcane_potency : public AuraScript
 // -11113 - Blast Wave
 class spell_mage_blast_wave : public SpellScript
 {
-    PrepareSpellScript(spell_mage_blast_wave);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MAGE_GLYPH_OF_BLAST_WAVE });
@@ -206,8 +200,6 @@ class spell_mage_blast_wave : public SpellScript
 // -31641 - Blazing Speed
 class spell_mage_blazing_speed : public AuraScript
 {
-    PrepareAuraScript(spell_mage_blazing_speed);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MAGE_BLAZING_SPEED });
@@ -230,8 +222,6 @@ class spell_mage_blazing_speed : public AuraScript
 // 54748 - Burning Determination
 class spell_mage_burning_determination : public AuraScript
 {
-    PrepareAuraScript(spell_mage_burning_determination);
-
     bool CheckProc(ProcEventInfo& eventInfo)
     {
         if (SpellInfo const* spellInfo = eventInfo.GetSpellInfo())
@@ -250,8 +240,6 @@ class spell_mage_burning_determination : public AuraScript
 // -44449 - Burnout
 class spell_mage_burnout : public AuraScript
 {
-    PrepareAuraScript(spell_mage_burnout);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MAGE_BURNOUT });
@@ -288,8 +276,6 @@ class spell_mage_burnout : public AuraScript
 // 11958 - Cold Snap
 class spell_mage_cold_snap : public SpellScript
 {
-    PrepareSpellScript(spell_mage_cold_snap);
-
     bool Load() override
     {
         return GetCaster()->GetTypeId() == TYPEID_PLAYER;
@@ -314,8 +300,6 @@ class spell_mage_cold_snap : public SpellScript
 // 11129 - Combustion
 class spell_mage_combustion : public AuraScript
 {
-    PrepareAuraScript(spell_mage_combustion);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MAGE_COMBUSTION_PROC });
@@ -342,8 +326,6 @@ class spell_mage_combustion : public AuraScript
 // 28682 - Combustion proc
 class spell_mage_combustion_proc : public AuraScript
 {
-    PrepareAuraScript(spell_mage_combustion_proc);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MAGE_COMBUSTION });
@@ -363,8 +345,6 @@ class spell_mage_combustion_proc : public AuraScript
 // -31661 - Dragon's Breath
 class spell_mage_dragon_breath : public AuraScript
 {
-    PrepareAuraScript(spell_mage_dragon_breath);
-
     bool CheckProc(ProcEventInfo& eventInfo)
     {
         // Dont proc with Living Bomb explosion
@@ -383,8 +363,6 @@ class spell_mage_dragon_breath : public AuraScript
 // -11185 - Improved Blizzard
 class spell_mage_imp_blizzard : public AuraScript
 {
-    PrepareAuraScript(spell_mage_imp_blizzard);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MAGE_CHILLED });
@@ -407,8 +385,6 @@ class spell_mage_imp_blizzard : public AuraScript
 // 61062 - Improved Mana Gems
 class spell_mage_imp_mana_gems : public AuraScript
 {
-    PrepareAuraScript(spell_mage_imp_mana_gems);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MAGE_MANA_SURGE });
@@ -429,8 +405,6 @@ class spell_mage_imp_mana_gems : public AuraScript
 // -31656 - Empowered Fire
 class spell_mage_empowered_fire : public AuraScript
 {
-    PrepareAuraScript(spell_mage_empowered_fire);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MAGE_EMPOWERED_FIRE_PROC });
@@ -466,8 +440,6 @@ class spell_mage_empowered_fire : public AuraScript
 // 74396 - Fingers of Frost
 class spell_mage_fingers_of_frost : public AuraScript
 {
-    PrepareAuraScript(spell_mage_fingers_of_frost);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MAGE_FINGERS_OF_FROST_AURASTATE_AURA });
@@ -495,8 +467,6 @@ class spell_mage_fingers_of_frost : public AuraScript
 // -6143 - Frost Ward
 class spell_mage_fire_frost_ward : public spell_mage_incanters_absorbtion_base_AuraScript
 {
-    PrepareAuraScript(spell_mage_fire_frost_ward);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -552,8 +522,6 @@ class spell_mage_fire_frost_ward : public spell_mage_incanters_absorbtion_base_A
 // -44614 - Frostfire Bolt
 class spell_mage_frostfire_bolt : public AuraScript
 {
-    PrepareAuraScript(spell_mage_frostfire_bolt);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MAGE_PERMAFROST_AURA });
@@ -580,8 +548,6 @@ class spell_mage_frostfire_bolt : public AuraScript
 // 54646 - Focus Magic
 class spell_mage_focus_magic : public AuraScript
 {
-    PrepareAuraScript(spell_mage_focus_magic);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MAGE_FOCUS_MAGIC_PROC });
@@ -612,8 +578,6 @@ class spell_mage_focus_magic : public AuraScript
 // 57761 - Fireball!
 class spell_mage_gen_extra_effects : public AuraScript
 {
-    PrepareAuraScript(spell_mage_gen_extra_effects);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -657,8 +621,6 @@ class spell_mage_gen_extra_effects : public AuraScript
 // 56375 - Glyph of Polymorph
 class spell_mage_glyph_of_polymorph : public AuraScript
 {
-    PrepareAuraScript(spell_mage_glyph_of_polymorph);
-
     void HandleProc(AuraEffect const* /*aurEff*/, ProcEventInfo& eventInfo)
     {
         PreventDefaultAction();
@@ -677,8 +639,6 @@ class spell_mage_glyph_of_polymorph : public AuraScript
 // 56374 - Glyph of Icy Veins
 class spell_mage_glyph_of_icy_veins : public AuraScript
 {
-    PrepareAuraScript(spell_mage_glyph_of_icy_veins);
-
     void HandleProc(AuraEffect const* /*aurEff*/, ProcEventInfo& eventInfo)
     {
         PreventDefaultAction();
@@ -696,8 +656,6 @@ class spell_mage_glyph_of_icy_veins : public AuraScript
 // 56372 - Glyph of Ice Block
 class spell_mage_glyph_of_ice_block : public AuraScript
 {
-    PrepareAuraScript(spell_mage_glyph_of_ice_block);
-
     void HandleProc(AuraEffect const* /*aurEff*/, ProcEventInfo& eventInfo)
     {
         PreventDefaultAction();
@@ -721,8 +679,6 @@ class spell_mage_glyph_of_ice_block : public AuraScript
 // -44445 - Hot Streak
 class spell_mage_hot_streak : public AuraScript
 {
-    PrepareAuraScript(spell_mage_hot_streak);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MAGE_HOT_STREAK_PROC });
@@ -763,8 +719,6 @@ class spell_mage_hot_streak : public AuraScript
 // -11426 - Ice Barrier
 class spell_mage_ice_barrier : public spell_mage_incanters_absorbtion_base_AuraScript
 {
-    PrepareAuraScript(spell_mage_ice_barrier);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MAGE_SHATTERED_BARRIER });
@@ -812,8 +766,6 @@ class spell_mage_ice_barrier : public spell_mage_incanters_absorbtion_base_AuraS
 // 45438 - Ice Block
 class spell_mage_ice_block : public SpellScript
 {
-    PrepareSpellScript(spell_mage_ice_block);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ spellInfo->ExcludeCasterAuraSpell });
@@ -833,8 +785,6 @@ class spell_mage_ice_block : public SpellScript
 // -11119 - Ignite
 class spell_mage_ignite : public AuraScript
 {
-    PrepareAuraScript(spell_mage_ignite);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MAGE_IGNITE });
@@ -871,8 +821,6 @@ class spell_mage_ignite : public AuraScript
 // -44457 - Living Bomb
 class spell_mage_living_bomb : public AuraScript
 {
-    PrepareAuraScript(spell_mage_living_bomb);
-
     bool Validate(SpellInfo const* spell) override
     {
         return ValidateSpellInfo({ static_cast<uint32>(spell->GetEffect(EFFECT_1).CalcValue()) });
@@ -897,8 +845,6 @@ class spell_mage_living_bomb : public AuraScript
 // -29441 - Magic Absorption
 class spell_mage_magic_absorption : public AuraScript
 {
-    PrepareAuraScript(spell_mage_magic_absorption);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MAGE_MAGIC_ABSORPTION_MANA });
@@ -923,8 +869,6 @@ class spell_mage_magic_absorption : public AuraScript
 // -1463 - Mana Shield
 class spell_mage_mana_shield : public spell_mage_incanters_absorbtion_base_AuraScript
 {
-    PrepareAuraScript(spell_mage_mana_shield);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ SPELL_MAGE_ARCANE_SURGE }) &&
@@ -964,8 +908,6 @@ class spell_mage_mana_shield : public spell_mage_incanters_absorbtion_base_AuraS
 // -29074 - Master of Elements
 class spell_mage_master_of_elements : public AuraScript
 {
-    PrepareAuraScript(spell_mage_master_of_elements);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MAGE_MASTER_OF_ELEMENTS_ENERGIZE });
@@ -1005,8 +947,6 @@ class spell_mage_master_of_elements : public AuraScript
 // 55342 - Mirror Image
 class spell_mage_mirror_image : public AuraScript
 {
-    PrepareAuraScript(spell_mage_mirror_image);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ spellInfo->GetEffect(EFFECT_2).TriggerSpell });
@@ -1027,8 +967,6 @@ class spell_mage_mirror_image : public AuraScript
 // -44404 - Missile Barrage
 class spell_mage_missile_barrage : public AuraScript
 {
-    PrepareAuraScript(spell_mage_missile_barrage);
-
     bool CheckProc(ProcEventInfo& eventInfo)
     {
         SpellInfo const* spellInfo = eventInfo.GetSpellInfo();
@@ -1052,8 +990,6 @@ class spell_mage_missile_barrage : public AuraScript
 // 44401 - Missile Barrage
 class spell_mage_missile_barrage_proc : public AuraScript
 {
-    PrepareAuraScript(spell_mage_missile_barrage_proc);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MAGE_T10_2P_BONUS, SPELL_MAGE_T8_4P_BONUS });
@@ -1107,8 +1043,6 @@ class spell_mage_polymorph_cast_visual : public SpellScriptLoader
 
         class spell_mage_polymorph_cast_visual_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_mage_polymorph_cast_visual_SpellScript);
-
             static const uint32 PolymorphForms[6];
 
             bool Validate(SpellInfo const* /*spellInfo*/) override
@@ -1148,8 +1082,6 @@ const uint32 spell_mage_polymorph_cast_visual::spell_mage_polymorph_cast_visual_
 // 31687 - Summon Water Elemental
 class spell_mage_summon_water_elemental : public SpellScript
 {
-    PrepareSpellScript(spell_mage_summon_water_elemental);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(

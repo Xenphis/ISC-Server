@@ -197,8 +197,6 @@ private:
 // 27695 - Summon Bone Mages
 class spell_kormok_summon_bone_mages : public SpellScript
 {
-    PrepareSpellScript(spell_kormok_summon_bone_mages);
-
     bool Validate(SpellInfo const* /*spell*/) override
     {
         return ValidateSpellInfo(
@@ -235,8 +233,6 @@ class spell_kormok_summon_bone_mages : public SpellScript
 // 27687 - Summon Bone Minions
 class spell_kormok_summon_bone_minions : public SpellScript
 {
-    PrepareSpellScript(spell_kormok_summon_bone_minions);
-
     bool Validate(SpellInfo const* /*spell*/) override
     {
         return ValidateSpellInfo(

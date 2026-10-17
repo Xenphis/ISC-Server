@@ -121,8 +121,6 @@ struct boss_cyanigosa : public BossAI
 // 58694 - Arcane Vacuum
 class spell_cyanigosa_arcane_vacuum : public SpellScript
 {
-    PrepareSpellScript(spell_cyanigosa_arcane_vacuum);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SUMMON_PLAYER });

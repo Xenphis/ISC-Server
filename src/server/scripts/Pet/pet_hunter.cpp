@@ -144,8 +144,6 @@ private:
 // 57627 - Charge
 class spell_pet_charge : public AuraScript
 {
-    PrepareAuraScript(spell_pet_charge);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -180,8 +178,6 @@ class spell_pet_charge : public AuraScript
 // -53178 - Guard Dog
 class spell_pet_guard_dog : public AuraScript
 {
-    PrepareAuraScript(spell_pet_guard_dog);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_PET_GUARD_DOG_HAPPINESS });
@@ -222,8 +218,6 @@ class spell_pet_guard_dog : public AuraScript
 // -62764 - Silverback
 class spell_pet_silverback : public AuraScript
 {
-    PrepareAuraScript(spell_pet_silverback);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_PET_GUARD_DOG_HAPPINESS });
@@ -260,8 +254,6 @@ class spell_pet_silverback : public AuraScript
 // -61680 - Culling the Herd
 class spell_pet_culling_the_herd : public AuraScript
 {
-    PrepareAuraScript(spell_pet_culling_the_herd);
-
     bool CheckProc(ProcEventInfo& eventInfo)
     {
         // Claw, Bite and Smack share FamilyFlags with other spells

@@ -144,8 +144,6 @@ struct boss_the_black_stalker : public BossAI
 // 31704 - Levitate
 class spell_the_black_stalker_levitate : public SpellScript
 {
-    PrepareSpellScript(spell_the_black_stalker_levitate);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_LEVITATION_PULSE });
@@ -165,8 +163,6 @@ class spell_the_black_stalker_levitate : public SpellScript
 // 31701 - Levitation Pulse
 class spell_the_black_stalker_levitation_pulse : public SpellScript
 {
-    PrepareSpellScript(spell_the_black_stalker_levitation_pulse);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SOMEONE_GRAB_ME });
@@ -186,8 +182,6 @@ class spell_the_black_stalker_levitation_pulse : public SpellScript
 // 31702 - Someone Grab Me
 class spell_the_black_stalker_someone_grab_me : public SpellScript
 {
-    PrepareSpellScript(spell_the_black_stalker_someone_grab_me);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MAGNETIC_PULL, SPELL_SUSPENSION });
@@ -214,8 +208,6 @@ class spell_the_black_stalker_someone_grab_me : public SpellScript
 // 31703 - Magnetic Pull
 class spell_the_black_stalker_magnetic_pull : public SpellScript
 {
-    PrepareSpellScript(spell_the_black_stalker_magnetic_pull);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SUSPENSION_PRIMER });
@@ -235,8 +227,6 @@ class spell_the_black_stalker_magnetic_pull : public SpellScript
 // 38756 - Summon Spore Strider
 class spell_the_black_stalker_summon_spore_strider : public SpellScript
 {
-    PrepareSpellScript(spell_the_black_stalker_summon_spore_strider);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SUMMON_SPORE_STRIDER_EFFECT });

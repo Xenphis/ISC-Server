@@ -375,8 +375,6 @@ private:
 // 68965 - [DND] Lingering Fumes Targetting (starter)
 class spell_apothecary_lingering_fumes : public SpellScript
 {
-    PrepareSpellScript(spell_apothecary_lingering_fumes);
-
     void HandleAfterCast()
     {
         Unit* caster = GetCaster();
@@ -409,8 +407,6 @@ class spell_apothecary_lingering_fumes : public SpellScript
 // 68644 - [DND] Valentine Boss Validate Area
 class spell_apothecary_validate_area : public SpellScript
 {
-    PrepareSpellScript(spell_apothecary_validate_area);
-
     void FilterTargets(std::list<WorldObject*>& targets)
     {
         targets.remove_if(Trinity::UnitAuraCheck(true, SPELL_BUNNY_LOCKDOWN));
@@ -438,8 +434,6 @@ class spell_apothecary_validate_area : public SpellScript
 // 69038 - Throw Cologne
 class spell_apothecary_throw_cologne : public SpellScript
 {
-    PrepareSpellScript(spell_apothecary_throw_cologne);
-
     void HandleScript(SpellEffIndex /*effindex*/)
     {
         GetHitUnit()->CastSpell(GetHitUnit(), SPELL_COLOGNE_SPILL, true);
@@ -454,8 +448,6 @@ class spell_apothecary_throw_cologne : public SpellScript
 // 68966 - Throw Perfume
 class spell_apothecary_throw_perfume : public SpellScript
 {
-    PrepareSpellScript(spell_apothecary_throw_perfume);
-
     void HandleScript(SpellEffIndex /*effindex*/)
     {
         GetHitUnit()->CastSpell(GetHitUnit(), SPELL_PERFUME_SPILL, true);
@@ -470,8 +462,6 @@ class spell_apothecary_throw_perfume : public SpellScript
 // 68798 - Concentrated Alluring Perfume Spill
 class spell_apothecary_perfume_spill : public AuraScript
 {
-    PrepareAuraScript(spell_apothecary_perfume_spill);
-
     void OnPeriodic(AuraEffect const* /*aurEff*/)
     {
         GetTarget()->CastSpell(GetTarget(), SPELL_PERFUME_SPILL_DAMAGE, true);
@@ -486,8 +476,6 @@ class spell_apothecary_perfume_spill : public AuraScript
 // 68614 - Concentrated Irresistible Cologne Spill
 class spell_apothecary_cologne_spill : public AuraScript
 {
-    PrepareAuraScript(spell_apothecary_cologne_spill);
-
     void OnPeriodic(AuraEffect const* /*aurEff*/)
     {
         GetTarget()->CastSpell(GetTarget(), SPELL_COLOGNE_SPILL_DAMAGE, true);

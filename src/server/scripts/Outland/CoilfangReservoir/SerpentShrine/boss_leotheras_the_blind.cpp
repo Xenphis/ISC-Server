@@ -644,8 +644,6 @@ private:
 // 37640 - Whirlwind
 class spell_leotheras_the_blind_whirlwind_init : public SpellScript
 {
-    PrepareSpellScript(spell_leotheras_the_blind_whirlwind_init);
-
     void HandleAfterCast()
     {
         Creature* caster = GetCaster()->ToCreature();
@@ -666,8 +664,6 @@ class spell_leotheras_the_blind_whirlwind_init : public SpellScript
 // 37641 - Whirlwind
 class spell_leotheras_the_blind_whirlwind_effect : public SpellScript
 {
-    PrepareSpellScript(spell_leotheras_the_blind_whirlwind_effect);
-
     void HandleScript(SpellEffIndex /*effIndex*/)
     {
         Creature* caster = GetCaster()->ToCreature();
@@ -703,8 +699,6 @@ class spell_leotheras_the_blind_whirlwind_effect : public SpellScript
 // 37673 - Metamorphosis
 class spell_leotheras_the_blind_metamorphosis : public AuraScript
 {
-    PrepareAuraScript(spell_leotheras_the_blind_metamorphosis);
-
     void AfterApply(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
     {
         if (Creature* target = GetTarget()->ToCreature())
@@ -730,8 +724,6 @@ class spell_leotheras_the_blind_metamorphosis : public AuraScript
 // 37674 - Chaos Blast
 class spell_leotheras_the_blind_chaos_blast : public SpellScript
 {
-    PrepareSpellScript(spell_leotheras_the_blind_chaos_blast);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_CHAOS_BLAST_DAMAGE });
@@ -755,8 +747,6 @@ class spell_leotheras_the_blind_chaos_blast : public SpellScript
 // 37676 - Insidious Whisper
 class spell_leotheras_the_blind_insidious_whisper : public SpellScript
 {
-    PrepareSpellScript(spell_leotheras_the_blind_insidious_whisper);
-
 public:
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
@@ -787,8 +777,6 @@ private:
 
 class spell_leotheras_the_blind_insidious_whisper_aura : public AuraScript
 {
-    PrepareAuraScript(spell_leotheras_the_blind_insidious_whisper_aura);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(ForceReactionSpells) && ValidateSpellInfo({ SPELL_CONSUMING_MADNESS });
@@ -821,8 +809,6 @@ class spell_leotheras_the_blind_insidious_whisper_aura : public AuraScript
    37733 - Target 5 */
 class spell_leotheras_the_blind_summon_inner_demon : public SpellScript
 {
-    PrepareSpellScript(spell_leotheras_the_blind_summon_inner_demon);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SUMMON_INNER_DEMON });
@@ -842,8 +828,6 @@ class spell_leotheras_the_blind_summon_inner_demon : public SpellScript
 // 37750 - Clear Consuming Madness
 class spell_leotheras_the_blind_clear_consuming_madness : public SpellScript
 {
-    PrepareSpellScript(spell_leotheras_the_blind_clear_consuming_madness);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_INSIDIOUS_WHISPER, SPELL_CONSUMING_MADNESS });
@@ -864,8 +848,6 @@ class spell_leotheras_the_blind_clear_consuming_madness : public SpellScript
 // 37716 - Demon Link
 class spell_leotheras_the_blind_demon_link : public AuraScript
 {
-    PrepareAuraScript(spell_leotheras_the_blind_demon_link);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ spellInfo->GetEffect(EFFECT_0).TriggerSpell });

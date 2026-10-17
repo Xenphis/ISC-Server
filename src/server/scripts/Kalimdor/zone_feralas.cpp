@@ -28,8 +28,6 @@ enum GordunniTrapSpells
 // 19395 - Gordunni Trap
 class spell_gordunni_trap : public SpellScript
 {
-    PrepareSpellScript(spell_gordunni_trap);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_GORDUNNI_DIRT_MOUND_CHEST, SPELL_GORDUNNI_DIRT_MOUND_JUNK });

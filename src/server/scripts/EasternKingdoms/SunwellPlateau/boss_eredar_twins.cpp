@@ -699,8 +699,6 @@ private:
 // 45235 - Blaze
 class spell_eredar_twins_blaze : public SpellScript
 {
-    PrepareSpellScript(spell_eredar_twins_blaze);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_BLAZE_SUMMON });
@@ -720,8 +718,6 @@ class spell_eredar_twins_blaze : public SpellScript
 // 45343 - Dark Flame Aura
 class spell_eredar_twins_dark_flame_aura_shadow : public AuraScript
 {
-    PrepareAuraScript(spell_eredar_twins_dark_flame_aura_shadow);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -787,8 +783,6 @@ class spell_eredar_twins_dark_flame_aura_shadow : public AuraScript
 // 47300 - Dark Flame Aura
 class spell_eredar_twins_dark_flame_aura_fire : public AuraScript
 {
-    PrepareAuraScript(spell_eredar_twins_dark_flame_aura_fire);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(

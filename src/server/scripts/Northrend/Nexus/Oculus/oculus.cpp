@@ -378,8 +378,6 @@ private:
 // 49462 - Call Ruby Drake
 class spell_oculus_call_ruby_emerald_amber_drake : public SpellScript
 {
-    PrepareSpellScript(spell_oculus_call_ruby_emerald_amber_drake);
-
     void SetDest(SpellDestination& dest)
     {
         // Adjust effect summon position
@@ -398,8 +396,6 @@ class spell_oculus_call_ruby_emerald_amber_drake : public SpellScript
 // 49463 - Ride Ruby Drake Que
 class spell_oculus_ride_ruby_emerald_amber_drake_que : public AuraScript
 {
-    PrepareAuraScript(spell_oculus_ride_ruby_emerald_amber_drake_que);
-
     void HandlePeriodic(AuraEffect const* aurEff)
     {
         // caster of the triggered spell is wrong for an unknown reason, handle it here correctly
@@ -417,8 +413,6 @@ class spell_oculus_ride_ruby_emerald_amber_drake_que : public AuraScript
 // 50240 - Evasive Maneuvers
 class spell_oculus_evasive_maneuvers : public AuraScript
 {
-    PrepareAuraScript(spell_oculus_evasive_maneuvers);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_RUBY_EVASIVE_CHARGES });
@@ -441,8 +435,6 @@ class spell_oculus_evasive_maneuvers : public AuraScript
 // 49840 - Shock Lance
 class spell_oculus_shock_lance : public SpellScript
 {
-    PrepareSpellScript(spell_oculus_shock_lance);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_AMBER_SHOCK_CHARGE });
@@ -472,8 +464,6 @@ class spell_oculus_shock_lance : public SpellScript
 // 49838 - Stop Time
 class spell_oculus_stop_time : public AuraScript
 {
-    PrepareAuraScript(spell_oculus_stop_time);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_AMBER_SHOCK_CHARGE });
@@ -499,8 +489,6 @@ class spell_oculus_stop_time : public AuraScript
 // 49592 - Temporal Rift
 class spell_oculus_temporal_rift : public AuraScript
 {
-    PrepareAuraScript(spell_oculus_temporal_rift);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_AMBER_SHOCK_CHARGE });
@@ -533,8 +521,6 @@ class spell_oculus_temporal_rift : public AuraScript
 // 50341 - Touch the Nightmare
 class spell_oculus_touch_the_nightmare : public SpellScript
 {
-    PrepareSpellScript(spell_oculus_touch_the_nightmare);
-
     void HandleDamageCalc(SpellEffIndex /*effIndex*/)
     {
         SetHitDamage(int32(GetCaster()->CountPctFromMaxHealth(30)));
@@ -549,8 +535,6 @@ class spell_oculus_touch_the_nightmare : public SpellScript
 // 50344 - Dream Funnel
 class spell_oculus_dream_funnel : public AuraScript
 {
-    PrepareAuraScript(spell_oculus_dream_funnel);
-
     void HandleEffectCalcAmount(AuraEffect const* /*aurEff*/, int32& amount, bool& canBeRecalculated)
     {
         if (Unit* caster = GetCaster())

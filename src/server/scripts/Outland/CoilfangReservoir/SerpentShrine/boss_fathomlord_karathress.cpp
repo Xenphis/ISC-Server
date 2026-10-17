@@ -493,8 +493,6 @@ private:
 // 38358 - Tidal Surge
 class spell_fathomlord_karathress_tidal_surge : public SpellScript
 {
-    PrepareSpellScript(spell_fathomlord_karathress_tidal_surge);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_TIDAL_SURGE_EFFECT });
@@ -514,8 +512,6 @@ class spell_fathomlord_karathress_tidal_surge : public SpellScript
 // 38373 - The Beast Within
 class spell_fathomlord_karathress_the_beast_within : public SpellScript
 {
-    PrepareSpellScript(spell_fathomlord_karathress_the_beast_within);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_BESTIAL_WRATH });

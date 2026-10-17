@@ -128,8 +128,6 @@ private:
 // 19695 - Inferno
 class spell_baron_geddon_inferno : public AuraScript
 {
-    PrepareAuraScript(spell_baron_geddon_inferno);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_INFERNO_DMG });

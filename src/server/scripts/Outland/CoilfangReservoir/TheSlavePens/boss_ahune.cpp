@@ -817,8 +817,6 @@ struct go_ahune_ice_stone : public GameObjectAI
 // 45926 - Summoning Rhyme Aura
 class spell_ahune_summoning_rhyme_aura : public AuraScript
 {
-    PrepareAuraScript(spell_ahune_summoning_rhyme_aura);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_FORCE_WHISP_FLIGHT_MISSILE, SPELL_SUMMONING_RHYME_BONFIRE }) &&
@@ -878,8 +876,6 @@ class spell_ahune_summoning_rhyme_aura : public AuraScript
 // 45954 - Ahune's Shield
 class spell_ahune_ahunes_shield : public AuraScript
 {
-    PrepareAuraScript(spell_ahune_ahunes_shield);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SUMMON_COLDWEAVE, SPELL_SUMMON_FROSTWIND });
@@ -909,8 +905,6 @@ class spell_ahune_ahunes_shield : public AuraScript
 // 46430 - Synch Health
 class spell_ahune_synch_health : public SpellScript
 {
-    PrepareSpellScript(spell_ahune_synch_health);
-
     void HandleScript(SpellEffIndex /*effIndex*/)
     {
         GetHitUnit()->SetHealth(GetCaster()->GetHealth());
@@ -925,8 +919,6 @@ class spell_ahune_synch_health : public SpellScript
 // 46878 - Summon Ice Spear Delayer
 class spell_ahune_summon_ice_spear_delayer : public AuraScript
 {
-    PrepareAuraScript(spell_ahune_summon_ice_spear_delayer);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_ICE_SPEAR_KNOCKBACK });
@@ -947,8 +939,6 @@ class spell_ahune_summon_ice_spear_delayer : public AuraScript
 // 46371 - Ice Spear Control Aura
 class spell_ahune_ice_spear_control_aura : public AuraScript
 {
-    PrepareAuraScript(spell_ahune_ice_spear_control_aura);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_ICE_SPEAR_TARGET_PICKER });
@@ -968,8 +958,6 @@ class spell_ahune_ice_spear_control_aura : public AuraScript
 // 46372 - Ice Spear Target Picker
 class spell_ahune_ice_spear_target_picker : public SpellScript
 {
-    PrepareSpellScript(spell_ahune_ice_spear_target_picker);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SUMMON_ICE_SPEAR_BUNNY });
@@ -996,8 +984,6 @@ class spell_ahune_ice_spear_target_picker : public SpellScript
 // 46320 - Slippery Floor Ambient Periodic
 class spell_ahune_slippery_floor_periodic : public SpellScript
 {
-    PrepareSpellScript(spell_ahune_slippery_floor_periodic);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SLIPPERY_FLOOR_SLIP, SPELL_SLIPPERY_FLOOR_YOU_SLIPPED });
@@ -1022,8 +1008,6 @@ class spell_ahune_slippery_floor_periodic : public SpellScript
 // 46146 - Ahune Spanky Hands
 class spell_ahune_spanky_hands : public AuraScript
 {
-    PrepareAuraScript(spell_ahune_spanky_hands);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_COLD_SLAP });
@@ -1043,8 +1027,6 @@ class spell_ahune_spanky_hands : public AuraScript
 // 46843 - Minion Despawner
 class spell_ahune_minion_despawner : public AuraScript
 {
-    PrepareAuraScript(spell_ahune_minion_despawner);
-
     void AfterRemove(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
     {
         if (Creature* creature = GetTarget()->ToCreature())
@@ -1060,8 +1042,6 @@ class spell_ahune_minion_despawner : public AuraScript
 // 46398 - Ice Bombardment Dest Picker
 class spell_ahune_ice_bombardment_dest_picker : public SpellScript
 {
-    PrepareSpellScript(spell_ahune_ice_bombardment_dest_picker);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_ICE_BOMBARDMENT });
@@ -1081,8 +1061,6 @@ class spell_ahune_ice_bombardment_dest_picker : public SpellScript
 // 45964 - Find Opening Visual
 class spell_ahune_find_opening_visual : public SpellScript
 {
-    PrepareSpellScript(spell_ahune_find_opening_visual);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_FIND_OPENING_BEAM_END });
@@ -1102,8 +1080,6 @@ class spell_ahune_find_opening_visual : public SpellScript
 // 46333 - Find Opening Beam End
 class spell_ahune_find_opening_beam_end : public AuraScript
 {
-    PrepareAuraScript(spell_ahune_find_opening_beam_end);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_BEAM_ATTACK_AGAINST_AHUNE });
@@ -1123,8 +1099,6 @@ class spell_ahune_find_opening_beam_end : public AuraScript
 // 46735 - Spank - Force Bunny To Knock You To
 class spell_ahune_spank_force_bunny_to_knock_you_to : public SpellScript
 {
-    PrepareSpellScript(spell_ahune_spank_force_bunny_to_knock_you_to);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SPANK_KNOCK_TO });
@@ -1144,8 +1118,6 @@ class spell_ahune_spank_force_bunny_to_knock_you_to : public SpellScript
 // 46809 - Make Ahune's Ghost Burst
 class spell_ahune_make_ahunes_ghost_burst : public SpellScript
 {
-    PrepareSpellScript(spell_ahune_make_ahunes_ghost_burst);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return sObjectMgr->GetCreatureTemplate(NPC_GHOST_OF_AHUNE);

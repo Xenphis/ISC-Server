@@ -618,8 +618,6 @@ private:
 // 42577 - Zap
 class spell_zuljin_zap : public SpellScript
 {
-    PrepareSpellScript(spell_zuljin_zap);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_ZAP_DAMAGE });
@@ -639,8 +637,6 @@ class spell_zuljin_zap : public SpellScript
 // 42583 - Claw Rage
 class spell_zuljin_claw_rage : public SpellScript
 {
-    PrepareSpellScript(spell_zuljin_claw_rage);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_CLAW_RAGE_PERIODIC });
@@ -660,8 +656,6 @@ class spell_zuljin_claw_rage : public SpellScript
 // 43149 - Claw Rage
 class spell_zuljin_claw_rage_periodic : public AuraScript
 {
-    PrepareAuraScript(spell_zuljin_claw_rage_periodic);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ spellInfo->GetEffect(EFFECT_0).TriggerSpell });
@@ -696,8 +690,6 @@ class spell_zuljin_claw_rage_periodic : public AuraScript
 // 43152 - Lynx Rush
 class spell_zuljin_lynx_rush : public SpellScript
 {
-    PrepareSpellScript(spell_zuljin_lynx_rush);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_LYNX_RUSH_DAMAGE });

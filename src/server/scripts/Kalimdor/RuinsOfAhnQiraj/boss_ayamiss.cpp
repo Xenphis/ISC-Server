@@ -355,8 +355,6 @@ struct npc_hive_zara_swarmer : public ScriptedAI
 // 25725 - Paralyze
 class spell_ayamiss_paralyze : public SpellScript
 {
-    PrepareSpellScript(spell_ayamiss_paralyze);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SUMMON_LARVA_1, SPELL_SUMMON_LARVA_2 });
@@ -376,8 +374,6 @@ class spell_ayamiss_paralyze : public SpellScript
 // 25711 - Hive'Zara Swarmer Start Loop
 class spell_ayamiss_swarmer_start_loop : public SpellScript
 {
-    PrepareSpellScript(spell_ayamiss_swarmer_start_loop);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(SwarmerLoopSpells);
@@ -397,8 +393,6 @@ class spell_ayamiss_swarmer_start_loop : public SpellScript
 // 25830 - Hive'Zara Swarmer Teleport Trigger
 class spell_ayamiss_swarmer_teleport_trigger : public SpellScript
 {
-    PrepareSpellScript(spell_ayamiss_swarmer_teleport_trigger);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(SwarmerTeleportSpells);

@@ -193,8 +193,6 @@ struct boss_mechano_lord_capacitus : public BossAI
 // 39096 - Polarity Shift
 class spell_capacitus_polarity_shift : public SpellScript
 {
-    PrepareSpellScript(spell_capacitus_polarity_shift);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_POSITIVE_CHARGE_PERIODIC, SPELL_NEGATIVE_CHARGE_PERIODIC, SPELL_POSITIVE_CHARGE_STACK, SPELL_NEGATIVE_CHARGE_STACK });
@@ -241,8 +239,6 @@ private:
 // 39091 - Negative Charge
 class spell_capacitus_polarity_charge_periodic : public AuraScript
 {
-    PrepareAuraScript(spell_capacitus_polarity_charge_periodic);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_POSITIVE_CHARGE_STACK, SPELL_NEGATIVE_CHARGE_STACK });
@@ -265,8 +261,6 @@ class spell_capacitus_polarity_charge_periodic : public AuraScript
 // 39093 - Negative Charge
 class spell_capacitus_polarity_charge_damage : public SpellScript
 {
-    PrepareSpellScript(spell_capacitus_polarity_charge_damage);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(

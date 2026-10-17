@@ -174,8 +174,6 @@ private:
 // 25599 - Thundercrash
 class spell_rajaxx_thundercrash : public SpellScript
 {
-    PrepareSpellScript(spell_rajaxx_thundercrash);
-
     void HandleDamageCalc(SpellEffIndex /*effIndex*/)
     {
         int32 damage = GetHitUnit()->GetHealth() / 2;

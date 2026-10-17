@@ -188,8 +188,6 @@ private:
 // 35642 - Orbital Strike Target
 class spell_omor_the_unscarred_orbital_strike_target : public SpellScript
 {
-    PrepareSpellScript(spell_omor_the_unscarred_orbital_strike_target);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_ORBITAL_STRIKE_WHIP, SPELL_ORBITAL_STRIKE_KNOCK });
@@ -241,8 +239,6 @@ private:
 // 32185 - Orbital Strike
 class spell_omor_the_unscarred_orbital_strike_whip : public AuraScript
 {
-    PrepareAuraScript(spell_omor_the_unscarred_orbital_strike_whip);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ spellInfo->GetEffect(EFFECT_0).TriggerSpell });

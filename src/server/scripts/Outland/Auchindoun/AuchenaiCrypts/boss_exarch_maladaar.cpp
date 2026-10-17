@@ -376,8 +376,6 @@ private:
 // 32346 - Stolen Soul
 class spell_exarch_maladaar_stolen_soul : public SpellScript
 {
-    PrepareSpellScript(spell_exarch_maladaar_stolen_soul);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SUMMON_STOLEN_SOUL });
@@ -397,8 +395,6 @@ class spell_exarch_maladaar_stolen_soul : public SpellScript
 // 33326 - Stolen Soul Dispel
 class spell_exarch_maladaar_stolen_soul_dispel : public AuraScript
 {
-    PrepareAuraScript(spell_exarch_maladaar_stolen_soul_dispel);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_STOLEN_SOUL });

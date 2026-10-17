@@ -352,8 +352,6 @@ private:
 // 30940 - Burning Nova
 class spell_kelidan_the_breaker_burning_nova : public AuraScript
 {
-    PrepareAuraScript(spell_kelidan_the_breaker_burning_nova);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_VORTEX, SPELL_FIRE_NOVA, SPELL_FIRE_NOVA_H });

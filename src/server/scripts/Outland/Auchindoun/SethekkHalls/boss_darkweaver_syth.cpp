@@ -195,8 +195,6 @@ private:
 // 33595 - Summon Elementals
 class spell_darkweaver_syth_summon_elementals : public SpellScript
 {
-    PrepareSpellScript(spell_darkweaver_syth_summon_elementals);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(

@@ -477,8 +477,6 @@ enum TeleportThis
 // 38920 - Detonate Teleporter
 class spell_netherstorm_detonate_teleporter : public SpellScript
 {
-    PrepareSpellScript(spell_netherstorm_detonate_teleporter);
-
     bool Load() override
     {
         return GetCaster()->GetTypeId() == TYPEID_UNIT;
@@ -547,8 +545,6 @@ enum DeathblowToTheLegion
 // 35745 - Socrethar's Stone
 class spell_netherstorm_socrethars_stone : public SpellScript
 {
-    PrepareSpellScript(spell_netherstorm_socrethars_stone);
-
     bool Validate(SpellInfo const* /*spell*/) override
     {
         return ValidateSpellInfo({ SPELL_SOCRETHAR_TO_SEAT, SPELL_SOCRETHAR_FROM_SEAT });

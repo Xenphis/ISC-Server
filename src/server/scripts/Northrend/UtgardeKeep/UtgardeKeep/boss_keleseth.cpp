@@ -387,8 +387,6 @@ private:
 // 42672 - Frost Tomb
 class spell_keleseth_frost_tomb_periodic : public AuraScript
 {
-    PrepareAuraScript(spell_keleseth_frost_tomb_periodic);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_FROST_TOMB_SUMMON });
@@ -409,8 +407,6 @@ class spell_keleseth_frost_tomb_periodic : public AuraScript
 // 48400 - Frost Tomb
 class spell_keleseth_frost_tomb_channel : public AuraScript
 {
-    PrepareAuraScript(spell_keleseth_frost_tomb_channel);
-
     void AfterRemove(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
     {
         if (GetTargetApplication()->GetRemoveMode() != AURA_REMOVE_BY_DEATH)

@@ -36,8 +36,6 @@ enum CataclysmBreath
 // 46292 - Cataclysm Breath
 class spell_sunwell_plateau_cataclysm_breath : public SpellScript
 {
-    PrepareSpellScript(spell_sunwell_plateau_cataclysm_breath);
-
     static constexpr std::array<uint32, 8> PossibleSpells = { SPELL_CORROSIVE_POISON, SPELL_FEVERED_FATIGUE, SPELL_HEX, SPELL_NECROTIC_POISON, SPELL_PIERCING_SHADOW, SPELL_SHRINK, SPELL_WAVERING_WILL, SPELL_WITHERED_TOUCH };
 
     bool Validate(SpellInfo const* /*spellInfo*/) override

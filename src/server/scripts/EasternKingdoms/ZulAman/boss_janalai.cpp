@@ -556,8 +556,6 @@ private:
 // 43096 - Summon All Players
 class spell_janalai_summon_all_players : public SpellScript
 {
-    PrepareSpellScript(spell_janalai_summon_all_players);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SUMMON_ALL_PLAYERS_2 });
@@ -579,8 +577,6 @@ class spell_janalai_summon_all_players : public SpellScript
 // 42621 - Fire Bomb
 class spell_janalai_fire_bomb : public AuraScript
 {
-    PrepareAuraScript(spell_janalai_fire_bomb);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(SummonFireBombSpells);
@@ -614,8 +610,6 @@ class spell_janalai_fire_bomb : public AuraScript
 // 42471 - Hatch Eggs
 class spell_janalai_hatch_eggs : public SpellScript
 {
-    PrepareSpellScript(spell_janalai_hatch_eggs);
-
     void FilterTargets(std::list<WorldObject*>& targets)
     {
         if (Creature* caster = GetCaster()->ToCreature())

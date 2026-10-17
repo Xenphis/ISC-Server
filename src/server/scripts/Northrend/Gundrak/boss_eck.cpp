@@ -114,8 +114,6 @@ private:
 // 55814 - Eck Spit
 class spell_eck_spit : public AuraScript
 {
-    PrepareAuraScript(spell_eck_spit);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_ECK_RESIDUE });

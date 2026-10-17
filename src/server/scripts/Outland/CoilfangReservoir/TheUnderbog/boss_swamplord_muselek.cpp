@@ -435,8 +435,6 @@ private:
 // 31564 - Move Away Primer
 class spell_swamplord_muselek_move_away_primer : public SpellScript
 {
-    PrepareSpellScript(spell_swamplord_muselek_move_away_primer);
-
     void HandleDummy(SpellEffIndex /*effIndex*/)
     {
         GetCaster()->GetMotionMaster()->MovePoint(POINT_MOVE_AWAY, GetCaster()->GetNearPosition(frand(15.0f, 35.0f), frand(0.0f, 2.0f * float(M_PI))));

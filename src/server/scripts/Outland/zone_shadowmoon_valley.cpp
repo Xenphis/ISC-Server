@@ -1518,8 +1518,6 @@ class spell_unlocking_zuluheds_chains : public SpellScriptLoader
 
         class spell_unlocking_zuluheds_chains_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_unlocking_zuluheds_chains_SpellScript);
-
             void HandleAfterHit()
             {
                 if (Player* caster = GetCaster()->ToPlayer())
@@ -1610,8 +1608,6 @@ enum DissensionAmongstTheRanks
 // 38224 - Illidari Agent Illusion
 class spell_shadowmoon_illidari_agent_illusion : public AuraScript
 {
-    PrepareAuraScript(spell_shadowmoon_illidari_agent_illusion);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_ILLIDARI_DISGUISE_MALE, SPELL_ILLIDARI_DISGUISE_FEMALE });
@@ -1641,8 +1637,6 @@ class spell_shadowmoon_illidari_agent_illusion : public AuraScript
 // 38223 - Quest Credit: Crazed Colossus
 class spell_shadowmoon_quest_credit_crazed_colossus : public SpellScript
 {
-    PrepareSpellScript(spell_shadowmoon_quest_credit_crazed_colossus);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo(
@@ -1677,8 +1671,6 @@ enum ANecessaryDistraction
 // 37834 - Unbanish Azaloth
 class spell_shadowmoon_unbanish_azaloth : public SpellScript
 {
-    PrepareSpellScript(spell_shadowmoon_unbanish_azaloth);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_BANISH_AZALOTH });
@@ -1711,8 +1703,6 @@ enum FranklyItMakesNoSense
 // 37894 - Arcano-Scorp Control
 class spell_shadowmoon_arcano_scorp_control : public SpellScript
 {
-    PrepareSpellScript(spell_shadowmoon_arcano_scorp_control);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ _triggeredSpellId });

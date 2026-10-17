@@ -175,8 +175,6 @@ private:
 // 39288, 39289, 39290 - Kargath's Executioner
 class spell_kargath_executioner : public AuraScript
 {
-    PrepareAuraScript(spell_kargath_executioner);
-
     bool AreaCheck(Unit* target)
     {
         if (target->GetMap()->GetId() != 540)
@@ -199,8 +197,6 @@ class spell_kargath_executioner : public AuraScript
 // 39291 - Remove Kargath's Executioner
 class spell_remove_kargath_executioner : public SpellScript
 {
-    PrepareSpellScript(spell_remove_kargath_executioner);
-
     void HandleScript(SpellEffIndex /*effIndex*/)
     {
         Unit* target = GetCaster();

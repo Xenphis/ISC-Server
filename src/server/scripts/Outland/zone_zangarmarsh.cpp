@@ -36,8 +36,6 @@ enum AsTheCrowFlies
 // 31606 - Stormcrow Amulet
 class spell_zangarmarsh_stormcrow_amulet : public AuraScript
 {
-    PrepareAuraScript(spell_zangarmarsh_stormcrow_amulet);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_STORMCROW_SHAPE, SPELL_WHISPER_AURA_1 });
@@ -59,8 +57,6 @@ class spell_zangarmarsh_stormcrow_amulet : public AuraScript
 // 31773, 31774, 31775, 31776 - As the Crow Flies Whisper Aura
 class spell_zangarmarsh_whisper_aura : public AuraScript
 {
-    PrepareAuraScript(spell_zangarmarsh_whisper_aura);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_WHISPER_AURA_5 });

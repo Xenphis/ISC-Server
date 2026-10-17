@@ -807,8 +807,6 @@ struct boss_koragg : public MalacrassCompanionBaseAI
 // 43421 - Lifebloom
 class spell_malacrass_lifebloom : public AuraScript
 {
-    PrepareAuraScript(spell_malacrass_lifebloom);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_LIFEBLOOM_FINAL_HEAL });
@@ -831,8 +829,6 @@ class spell_malacrass_lifebloom : public AuraScript
 // 43498 - Siphon Soul
 class spell_malacrass_siphon_soul : public SpellScript
 {
-    PrepareSpellScript(spell_malacrass_siphon_soul);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SIPHON_SOUL_EFFECT });
@@ -875,8 +871,6 @@ private:
 // 43522 - Unstable Affliction
 class spell_malacrass_unstable_affliction : public AuraScript
 {
-    PrepareAuraScript(spell_malacrass_unstable_affliction);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_UNSTABLE_AFFL_DISPEL });
@@ -897,8 +891,6 @@ class spell_malacrass_unstable_affliction : public AuraScript
 // 43550 - Mind Control
 class spell_malacrass_mind_control : public SpellScript
 {
-    PrepareSpellScript(spell_malacrass_mind_control);
-
     void FilterTargets(std::list<WorldObject*>& targets)
     {
         // Target count - verified. Removing victim - guessed
@@ -915,8 +907,6 @@ class spell_malacrass_mind_control : public SpellScript
 // 61606 - Mark of Blood
 class spell_malacrass_mark_of_blood : public AuraScript
 {
-    PrepareAuraScript(spell_malacrass_mark_of_blood);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MARK_OF_BLOOD_HEAL });

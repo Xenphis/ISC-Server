@@ -29,8 +29,6 @@ enum AQ40TeleportSpells
 // 29182 - Teleport to Twin Emperors
 class spell_temple_of_ahnqiraj_teleport_to_twin_emperors : public SpellScript
 {
-    PrepareSpellScript(spell_temple_of_ahnqiraj_teleport_to_twin_emperors);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_TELEPORT_TO_TWIN_EMPS_EFFECT });
@@ -50,8 +48,6 @@ class spell_temple_of_ahnqiraj_teleport_to_twin_emperors : public SpellScript
 // 29188 - Teleport to Final Chamber
 class spell_temple_of_ahnqiraj_teleport_to_final_chamber : public SpellScript
 {
-    PrepareSpellScript(spell_temple_of_ahnqiraj_teleport_to_final_chamber);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_TELEPORT_TO_FINAL_CHAMBER_EFFECT });
@@ -76,8 +72,6 @@ enum AQ40Itch
 // 26077 - Itch
 class spell_temple_of_ahnqiraj_itch : public AuraScript
 {
-    PrepareAuraScript(spell_temple_of_ahnqiraj_itch);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_VEKNISS_CATALYST });

@@ -1226,8 +1226,6 @@ struct go_activation_crystal : public GameObjectAI
 // 58040 - Destroy Door Seal
 class spell_violet_hold_destroy_door_seal : public AuraScript
 {
-    PrepareAuraScript(spell_violet_hold_destroy_door_seal);
-
     bool Load() override
     {
         _instance = GetUnitOwner()->GetInstanceScript();
@@ -1253,8 +1251,6 @@ private:
 // 58008 - Portal Periodic
 class spell_violet_hold_portal_periodic : public AuraScript
 {
-    PrepareAuraScript(spell_violet_hold_portal_periodic);
-
     void PeriodicTick(AuraEffect const* aurEff)
     {
         PreventDefaultAction();
@@ -1271,8 +1267,6 @@ class spell_violet_hold_portal_periodic : public AuraScript
 // 62138 - Teleport to Inside Violet Hold
 class spell_violet_hold_teleport_player : public SpellScript
 {
-    PrepareSpellScript(spell_violet_hold_teleport_player);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_TELEPORT_PLAYER_EFFECT });

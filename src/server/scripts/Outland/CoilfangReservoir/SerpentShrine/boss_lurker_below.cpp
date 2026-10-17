@@ -448,8 +448,6 @@ struct go_strange_pool : public GameObjectAI
 // 37431 - Spout
 class spell_the_lurker_below_spout : public SpellScript
 {
-    PrepareSpellScript(spell_the_lurker_below_spout);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SPOUT_LEFT, SPELL_SPOUT_RIGHT });
@@ -474,8 +472,6 @@ class spell_the_lurker_below_spout : public SpellScript
 // 37430 - Spout
 class spell_the_lurker_below_spout_periodic : public AuraScript
 {
-    PrepareAuraScript(spell_the_lurker_below_spout_periodic);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ uint32(spellInfo->GetEffect(EFFECT_0).CalcValue()) });
@@ -513,8 +509,6 @@ class spell_the_lurker_below_spout_periodic : public AuraScript
 // 37433 - Spout
 class spell_the_lurker_below_spout_damage : public SpellScript
 {
-    PrepareSpellScript(spell_the_lurker_below_spout_damage);
-
     void FilterTargets(std::list<WorldObject*>& targets)
     {
         targets.remove_if([](WorldObject* target)

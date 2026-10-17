@@ -505,8 +505,6 @@ struct boss_lord_crispin_ference : public GuestBaseAI
 // 37870 - Garrote Remove
 class spell_moroes_garrote_remove : public AuraScript
 {
-    PrepareAuraScript(spell_moroes_garrote_remove);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_GARROTE });

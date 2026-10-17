@@ -695,8 +695,6 @@ struct boss_big_bad_wolf : public BossAI
 // 30769 - Pick Red Riding Hood
 class spell_opera_pick_red_riding_hood : public SpellScript
 {
-    PrepareSpellScript(spell_opera_pick_red_riding_hood);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_LITTLE_RED_RIDING_HOOD });
@@ -728,8 +726,6 @@ class spell_opera_pick_red_riding_hood : public SpellScript
 // 30768 - Little Red Riding Hood
 class spell_opera_little_red_riding_hood : public SpellScript
 {
-    PrepareSpellScript(spell_opera_little_red_riding_hood);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_PICNIC_BASKET_SMELL });
@@ -749,8 +745,6 @@ class spell_opera_little_red_riding_hood : public SpellScript
 // 30755 - Picnic Basket Smell
 class spell_opera_picnic_basket_smell : public AuraScript
 {
-    PrepareAuraScript(spell_opera_picnic_basket_smell);
-
     void AfterRemove(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
     {
         if (GetTargetApplication()->GetRemoveMode() == AURA_REMOVE_BY_EXPIRE && GetTarget()->IsCreature())

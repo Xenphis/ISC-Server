@@ -428,8 +428,6 @@ enum EluneCandle
 // 26374 - Elune's Candle
 class spell_lunar_festival_elune_candle : public SpellScript
 {
-    PrepareSpellScript(spell_lunar_festival_elune_candle);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -484,8 +482,6 @@ enum ElunesBlessing
 // 26393 - Elune's Blessing
 class spell_lunar_festival_elunes_blessing : public SpellScript
 {
-    PrepareSpellScript(spell_lunar_festival_elunes_blessing);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_ELUNES_BLESSING_QUEST_CREDIT });

@@ -88,8 +88,6 @@ enum HunterSpellIcons
 // 13161 - Aspect of the Beast
 class spell_hun_aspect_of_the_beast : public AuraScript
 {
-    PrepareAuraScript(spell_hun_aspect_of_the_beast);
-
     bool Load() override
     {
         return GetOwner()->GetTypeId() == TYPEID_PLAYER;
@@ -124,8 +122,6 @@ class spell_hun_aspect_of_the_beast : public AuraScript
 // 61669 - Aspect of the Beast
 class spell_hun_aspect_of_the_beast_pet : public AuraScript
 {
-    PrepareAuraScript(spell_hun_aspect_of_the_beast_pet);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_HUNTER_ASPECT_OF_THE_BEAST });
@@ -152,8 +148,6 @@ class spell_hun_aspect_of_the_beast_pet : public AuraScript
 // 34074 - Aspect of the Viper
 class spell_hun_ascpect_of_the_viper : public AuraScript
 {
-    PrepareAuraScript(spell_hun_ascpect_of_the_viper);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -205,8 +199,6 @@ class spell_hun_ascpect_of_the_viper : public AuraScript
 // 53209 - Chimera Shot
 class spell_hun_chimera_shot : public SpellScript
 {
-    PrepareSpellScript(spell_hun_chimera_shot);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_HUNTER_CHIMERA_SHOT_SERPENT, SPELL_HUNTER_CHIMERA_SHOT_VIPER, SPELL_HUNTER_CHIMERA_SHOT_SCORPID });
@@ -285,8 +277,6 @@ class spell_hun_chimera_shot : public SpellScript
 // -53256 - Cobra Strikes
 class spell_hun_cobra_strikes : public AuraScript
 {
-    PrepareAuraScript(spell_hun_cobra_strikes);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ spellInfo->GetEffect(EFFECT_0).TriggerSpell });
@@ -312,8 +302,6 @@ class spell_hun_cobra_strikes : public AuraScript
 // 53257 - Cobra Strikes (triggered spell)
 class spell_hun_cobra_strikes_triggered : public AuraScript
 {
-    PrepareAuraScript(spell_hun_cobra_strikes_triggered);
-
     void HandleStackDrop(AuraEffect const* /*aurEff*/, ProcEventInfo& /*eventInfo*/)
     {
         ModStackAmount(-1);
@@ -328,8 +316,6 @@ class spell_hun_cobra_strikes_triggered : public AuraScript
 // 781 - Disengage
 class spell_hun_disengage : public SpellScript
 {
-    PrepareSpellScript(spell_hun_disengage);
-
     SpellCastResult CheckCast()
     {
         Unit* caster = GetCaster();
@@ -348,8 +334,6 @@ class spell_hun_disengage : public SpellScript
 // 56841 - Glyph of Arcane Shot
 class spell_hun_glyph_of_arcane_shot : public AuraScript
 {
-    PrepareAuraScript(spell_hun_glyph_of_arcane_shot);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_HUNTER_GLYPH_OF_ARCANE_SHOT });
@@ -400,8 +384,6 @@ class spell_hun_glyph_of_arcane_shot : public AuraScript
 // 57870 - Glyph of Mend Pet
 class spell_hun_glyph_of_mend_pet : public AuraScript
 {
-    PrepareAuraScript(spell_hun_glyph_of_mend_pet);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_HUNTER_GLYPH_OF_MEND_PET_HAPPINESS });
@@ -422,8 +404,6 @@ class spell_hun_glyph_of_mend_pet : public AuraScript
 // -53301 - Explosive Shot
 class spell_hun_explosive_shot : public AuraScript
 {
-    PrepareAuraScript(spell_hun_explosive_shot);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_HUNTER_EXPLOSIVE_SHOT_DAMAGE });
@@ -448,8 +428,6 @@ class spell_hun_explosive_shot : public AuraScript
 // -53511 - Feeding Frenzy
 class spell_hun_feeding_frenzy : public AuraScript
 {
-    PrepareAuraScript(spell_hun_feeding_frenzy);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_HUNTER_FEEDING_FRENZY_BUFF_R1, SPELL_HUNTER_FEEDING_FRENZY_BUFF_R2 });
@@ -477,8 +455,6 @@ class spell_hun_feeding_frenzy : public AuraScript
 // -53290 - Hunting Party
 class spell_hun_hunting_party : public AuraScript
 {
-    PrepareAuraScript(spell_hun_hunting_party);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_REPLENISHMENT });
@@ -499,8 +475,6 @@ class spell_hun_hunting_party : public AuraScript
 // -19572 - Improved Mend Pet
 class spell_hun_improved_mend_pet : public AuraScript
 {
-    PrepareAuraScript(spell_hun_improved_mend_pet);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_HUNTER_IMPROVED_MEND_PET });
@@ -527,8 +501,6 @@ class spell_hun_improved_mend_pet : public AuraScript
 // 53412 - Invigoration
 class spell_hun_invigoration : public SpellScript
 {
-    PrepareSpellScript(spell_hun_invigoration);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_HUNTER_INVIGORATION_TRIGGERED });
@@ -551,8 +523,6 @@ class spell_hun_invigoration : public SpellScript
 // 58914 - Kill Command
 class spell_hun_kill_command_pet : public AuraScript
 {
-    PrepareAuraScript(spell_hun_kill_command_pet);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_HUNTER_KILL_COMMAND_HUNTER });
@@ -578,8 +548,6 @@ class spell_hun_kill_command_pet : public AuraScript
 // 53478 - Last Stand Pet
 class spell_hun_last_stand_pet : public SpellScript
 {
-    PrepareSpellScript(spell_hun_last_stand_pet);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_HUNTER_PET_LAST_STAND_TRIGGERED });
@@ -602,8 +570,6 @@ class spell_hun_last_stand_pet : public SpellScript
 // -56342 - Lock and Load
 class spell_hun_lock_and_load : public AuraScript
 {
-    PrepareAuraScript(spell_hun_lock_and_load);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -664,8 +630,6 @@ class spell_hun_lock_and_load : public AuraScript
 // 53271 - Masters Call
 class spell_hun_masters_call : public SpellScript
 {
-    PrepareSpellScript(spell_hun_masters_call);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo(
@@ -736,8 +700,6 @@ class spell_hun_masters_call : public SpellScript
 // 34477 - Misdirection
 class spell_hun_misdirection : public AuraScript
 {
-    PrepareAuraScript(spell_hun_misdirection);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_HUNTER_MISDIRECTION_PROC });
@@ -765,8 +727,6 @@ class spell_hun_misdirection : public AuraScript
 // 35079 - Misdirection (Proc)
 class spell_hun_misdirection_proc : public AuraScript
 {
-    PrepareAuraScript(spell_hun_misdirection_proc);
-
     void OnRemove(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
     {
         GetTarget()->GetThreatManager().UnregisterRedirectThreat(SPELL_HUNTER_MISDIRECTION);
@@ -781,8 +741,6 @@ class spell_hun_misdirection_proc : public AuraScript
 // 1742 - Pet Cower
 class spell_hun_pet_cower : public AuraScript
 {
-    PrepareAuraScript(spell_hun_pet_cower);
-
     void CalculateAmount(AuraEffect const* /*aurEff*/, int32& amount, bool& /*canBeRecalculated*/)
     {
         if (AuraEffect const* improvedCower = GetUnitOwner()->GetDummyAuraEffect(SPELLFAMILY_PET, SPELL_ICON_HUNTER_PET_IMPROVED_COWER, EFFECT_0))
@@ -798,8 +756,6 @@ class spell_hun_pet_cower : public AuraScript
 // 54044 - Pet Carrion Feeder
 class spell_hun_pet_carrion_feeder : public SpellScript
 {
-    PrepareSpellScript(spell_hun_pet_carrion_feeder);
-
     bool Load() override
     {
         if (!GetCaster()->IsPet())
@@ -844,8 +800,6 @@ class spell_hun_pet_carrion_feeder : public SpellScript
 // 55709 - Pet Heart of the Phoenix
 class spell_hun_pet_heart_of_the_phoenix : public SpellScript
 {
-    PrepareSpellScript(spell_hun_pet_heart_of_the_phoenix);
-
     bool Load() override
     {
         if (!GetCaster()->IsPet())
@@ -882,8 +836,6 @@ class spell_hun_pet_heart_of_the_phoenix : public SpellScript
 // -53234 - Piercing Shots
 class spell_hun_piercing_shots : public AuraScript
 {
-    PrepareAuraScript(spell_hun_piercing_shots);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_HUNTER_PIERCING_SHOTS });
@@ -925,8 +877,6 @@ class spell_hun_piercing_shots : public AuraScript
 // 56654, 58882 - Rapid Recuperation
 class spell_hun_rapid_recuperation : public AuraScript
 {
-    PrepareAuraScript(spell_hun_rapid_recuperation);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ spellInfo->GetEffect(EFFECT_0).TriggerSpell });
@@ -951,8 +901,6 @@ class spell_hun_rapid_recuperation : public AuraScript
 // -53228 - Rapid Recuperation (talent aura)
 class spell_hun_rapid_recuperation_trigger : public AuraScript
 {
-    PrepareAuraScript(spell_hun_rapid_recuperation_trigger);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -999,8 +947,6 @@ class spell_hun_rapid_recuperation_trigger : public AuraScript
 // 23989 - Readiness
 class spell_hun_readiness : public SpellScript
 {
-    PrepareSpellScript(spell_hun_readiness);
-
     bool Load() override
     {
         return GetCaster()->GetTypeId() == TYPEID_PLAYER;
@@ -1033,8 +979,6 @@ class spell_hun_readiness : public SpellScript
 // 53480 - Roar of Sacrifice
 class spell_hun_roar_of_sacrifice : public AuraScript
 {
-    PrepareAuraScript(spell_hun_roar_of_sacrifice);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_ROAR_OF_SACRIFICE_TRIGGERED });
@@ -1071,8 +1015,6 @@ class spell_hun_roar_of_sacrifice : public AuraScript
 // 37506 - Scatter Shot
 class spell_hun_scatter_shot : public SpellScript
 {
-    PrepareSpellScript(spell_hun_scatter_shot);
-
     bool Load() override
     {
         return GetCaster()->GetTypeId() == TYPEID_PLAYER;
@@ -1096,8 +1038,6 @@ class spell_hun_scatter_shot : public SpellScript
 // -53302 - Sniper Training
 class spell_hun_sniper_training : public AuraScript
 {
-    PrepareAuraScript(spell_hun_sniper_training);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_HUNTER_SNIPER_TRAINING_R1, SPELL_HUNTER_SNIPER_TRAINING_BUFF_R1 });
@@ -1142,8 +1082,6 @@ class spell_hun_sniper_training : public AuraScript
 // 1515 - Tame Beast
 class spell_hun_tame_beast : public SpellScript
 {
-    PrepareSpellScript(spell_hun_tame_beast);
-
     SpellCastResult CheckCast()
     {
         Player* caster = GetCaster()->ToPlayer();
@@ -1200,8 +1138,6 @@ class spell_hun_tame_beast : public SpellScript
 //  53434 - Call of the Wild
 class spell_hun_target_only_pet_and_owner : public SpellScript
 {
-    PrepareSpellScript(spell_hun_target_only_pet_and_owner);
-
     void FilterTargets(std::list<WorldObject*>& targets)
     {
         targets.clear();
@@ -1220,8 +1156,6 @@ class spell_hun_target_only_pet_and_owner : public SpellScript
 // -34497 - Thrill of the Hunt
 class spell_hun_thrill_of_the_hunt : public AuraScript
 {
-    PrepareAuraScript(spell_hun_thrill_of_the_hunt);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_HUNTER_THRILL_OF_THE_HUNT_MANA });
@@ -1269,8 +1203,6 @@ class spell_hun_thrill_of_the_hunt : public AuraScript
 // 67151 - Item - Hunter T9 4P Bonus (Steady Shot)
 class spell_hun_t9_4p_bonus : public AuraScript
 {
-    PrepareAuraScript(spell_hun_t9_4p_bonus);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_HUNTER_T9_4P_GREATNESS });
@@ -1301,8 +1233,6 @@ class spell_hun_t9_4p_bonus : public AuraScript
 // 60144 - Viper Attack Speed
 class spell_hun_viper_attack_speed : public AuraScript
 {
-    PrepareAuraScript(spell_hun_viper_attack_speed);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -1334,8 +1264,6 @@ class spell_hun_viper_attack_speed : public AuraScript
 // -19386 - Wyvern Sting
 class spell_hun_wyvern_sting : public AuraScript
 {
-    PrepareAuraScript(spell_hun_wyvern_sting);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(

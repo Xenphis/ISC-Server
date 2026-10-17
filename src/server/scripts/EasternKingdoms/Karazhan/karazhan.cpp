@@ -724,8 +724,6 @@ enum KarazhanCharge
 // 29320 - Charge
 class spell_karazhan_charge : public SpellScript
 {
-    PrepareSpellScript(spell_karazhan_charge);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_FEAR });

@@ -604,8 +604,6 @@ class go_kalecgos_spectral_rift : public GameObjectScript
 // 46732 - Tap Check
 class spell_kalecgos_tap_check : public SpellScript
 {
-    PrepareSpellScript(spell_kalecgos_tap_check);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ uint32(spellInfo->GetEffect(EFFECT_0).CalcValue()) });
@@ -640,8 +638,6 @@ class SpectralBlastSelector : NonTankTargetSelector
 // 44869 - Spectral Blast
 class spell_kalecgos_spectral_blast : public SpellScript
 {
-    PrepareSpellScript(spell_kalecgos_spectral_blast);
-
     bool Validate(SpellInfo const* /*spell*/) override
     {
         return ValidateSpellInfo(
@@ -677,8 +673,6 @@ class spell_kalecgos_spectral_blast : public SpellScript
 // 44811 - Spectral Realm
 class spell_kalecgos_spectral_realm_trigger : public SpellScript
 {
-    PrepareSpellScript(spell_kalecgos_spectral_realm_trigger);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -708,8 +702,6 @@ class spell_kalecgos_spectral_realm_trigger : public SpellScript
 // 46021 - Spectral Realm
 class spell_kalecgos_spectral_realm_aura : public AuraScript
 {
-    PrepareAuraScript(spell_kalecgos_spectral_realm_aura);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -737,8 +729,6 @@ class spell_kalecgos_spectral_realm_aura : public AuraScript
 // 45032, 45034 - Curse of Boundless Agony
 class spell_kalecgos_curse_of_boundless_agony : public AuraScript
 {
-    PrepareAuraScript(spell_kalecgos_curse_of_boundless_agony);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(

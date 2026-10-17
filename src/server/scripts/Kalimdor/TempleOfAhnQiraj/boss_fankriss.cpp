@@ -151,8 +151,6 @@ private:
 // 720, 731, 1121 - Entangle
 class spell_fankriss_entangle : public SpellScript
 {
-    PrepareSpellScript(spell_fankriss_entangle);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SPAWN_HATCHLING_1, SPELL_SPAWN_HATCHLING_2, SPELL_SPAWN_HATCHLING_3 });

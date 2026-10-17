@@ -258,8 +258,6 @@ private:
 // 19593 - Egg Explosion
 class spell_buru_egg_explosion : public SpellScript
 {
-    PrepareSpellScript(spell_buru_egg_explosion);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_EXPLOSION });
@@ -296,8 +294,6 @@ class spell_buru_egg_explosion : public SpellScript
 // 27027 - Cancel Creeping Plague
 class spell_buru_cancel_creeping_plague : public SpellScript
 {
-    PrepareSpellScript(spell_buru_cancel_creeping_plague);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_CREEPING_PLAGUE });

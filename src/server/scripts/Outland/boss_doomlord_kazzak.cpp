@@ -190,8 +190,6 @@ struct boss_doom_lord_kazzak : public WorldBossAI
 // 32960 - Mark of Kazzak
 class spell_doom_lord_kazzak_mark_of_kazzak : public AuraScript
 {
-    PrepareAuraScript(spell_doom_lord_kazzak_mark_of_kazzak);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_MARK_OF_KAZZAK_DAMAGE });
@@ -224,8 +222,6 @@ class spell_doom_lord_kazzak_mark_of_kazzak : public AuraScript
 // 21063 - Twisted Reflection
 class spell_doom_lord_kazzak_twisted_reflection : public AuraScript
 {
-    PrepareAuraScript(spell_doom_lord_kazzak_twisted_reflection);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_TWISTED_REFLECTION_HEAL });
@@ -250,8 +246,6 @@ class spell_doom_lord_kazzak_twisted_reflection : public AuraScript
 // 48473 - Capture Soul
 class spell_doom_lord_kazzak_capture_soul : public AuraScript
 {
-    PrepareAuraScript(spell_doom_lord_kazzak_capture_soul);
-
     void HandleProc(AuraEffect const* /*aurEff*/, ProcEventInfo& eventInfo)
     {
         if (Creature* actor = eventInfo.GetActor()->ToCreature())

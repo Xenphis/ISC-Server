@@ -311,8 +311,6 @@ private:
 // 38028 - Watery Grave
 class spell_morogrim_tidewalker_watery_grave : public SpellScript
 {
-    PrepareSpellScript(spell_morogrim_tidewalker_watery_grave);
-
 public:
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
@@ -344,8 +342,6 @@ private:
 // 37866 - Summon Water Globules
 class spell_morogrim_tidewalker_summon_water_globules : public SpellScript
 {
-    PrepareSpellScript(spell_morogrim_tidewalker_summon_water_globules);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(SummonWaterGlobulesSpells);

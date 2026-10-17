@@ -106,8 +106,6 @@ struct boss_pandemonius : public BossAI
 // 32325, 38760 - Void Blast
 class spell_pandemonius_void_blast : public SpellScript
 {
-    PrepareSpellScript(spell_pandemonius_void_blast);
-
     void TriggerNext()
     {
         int32 castIndex = GetCastIndex();

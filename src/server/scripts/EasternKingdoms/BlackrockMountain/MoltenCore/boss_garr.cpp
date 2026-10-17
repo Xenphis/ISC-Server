@@ -165,8 +165,6 @@ struct npc_firesworn : public ScriptedAI
 // 23487 - Separation Anxiety
 class spell_garr_separation_anxiety : public AuraScript
 {
-    PrepareAuraScript(spell_garr_separation_anxiety);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SEPARATION_ANXIETY_EFFECT });

@@ -92,8 +92,6 @@ enum MiscSpells
 // 23881 - Bloodthirst
 class spell_warr_bloodthirst : public SpellScript
 {
-    PrepareSpellScript(spell_warr_bloodthirst);
-
     void HandleDamage(SpellEffIndex /*effIndex*/)
     {
         uint32 APbonus = GetCaster()->GetTotalAttackPowerValue(BASE_ATTACK);
@@ -118,8 +116,6 @@ class spell_warr_bloodthirst : public SpellScript
 // 23880 - Bloodthirst (Heal)
 class spell_warr_bloodthirst_heal : public SpellScript
 {
-    PrepareSpellScript(spell_warr_bloodthirst_heal);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_WARRIOR_BLOODTHIRST_DAMAGE });
@@ -141,8 +137,6 @@ class spell_warr_bloodthirst_heal : public SpellScript
 // -100 - Charge
 class spell_warr_charge : public SpellScript
 {
-    PrepareSpellScript(spell_warr_charge);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_WARRIOR_JUGGERNAUT_CRIT_BONUS_TALENT, SPELL_WARRIOR_JUGGERNAUT_CRIT_BONUS_BUFF, SPELL_WARRIOR_CHARGE });
@@ -169,8 +163,6 @@ class spell_warr_charge : public SpellScript
 // 12809 - Concussion Blow
 class spell_warr_concussion_blow : public SpellScript
 {
-    PrepareSpellScript(spell_warr_concussion_blow);
-
     void HandleDummy(SpellEffIndex /*effIndex*/)
     {
         SetEffectValue(CalculatePct(GetCaster()->GetTotalAttackPowerValue(BASE_ATTACK), GetEffectInfo(EFFECT_2).CalcValue()));
@@ -185,8 +177,6 @@ class spell_warr_concussion_blow : public SpellScript
 // -58872 - Damage Shield
 class spell_warr_damage_shield : public AuraScript
 {
-    PrepareAuraScript(spell_warr_damage_shield);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_WARRIOR_DAMAGE_SHIELD_DAMAGE });
@@ -212,8 +202,6 @@ class spell_warr_damage_shield : public AuraScript
 // -12162 - Deep Wounds
 class spell_warr_deep_wounds : public SpellScript
 {
-    PrepareSpellScript(spell_warr_deep_wounds);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -253,8 +241,6 @@ class spell_warr_deep_wounds : public SpellScript
 // -12834 - Deep Wounds Aura
 class spell_warr_deep_wounds_aura : public AuraScript
 {
-    PrepareAuraScript(spell_warr_deep_wounds_aura);
-
     bool Validate(SpellInfo const* spellInfo) override
     {
         return ValidateSpellInfo({ spellInfo->GetEffect(EFFECT_0).TriggerSpell });
@@ -296,8 +282,6 @@ class spell_warr_deep_wounds_aura : public AuraScript
 // -5308 - Execute
 class spell_warr_execute : public SpellScript
 {
-    PrepareSpellScript(spell_warr_execute);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_WARRIOR_EXECUTE, SPELL_WARRIOR_GLYPH_OF_EXECUTION });
@@ -341,8 +325,6 @@ class spell_warr_execute : public SpellScript
 // -46913 - Bloodsurge
 class spell_warr_extra_proc : public AuraScript
 {
-    PrepareAuraScript(spell_warr_extra_proc);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -382,8 +364,6 @@ class spell_warr_extra_proc : public AuraScript
 // 58375 - Glyph of Blocking
 class spell_warr_glyph_of_blocking : public AuraScript
 {
-    PrepareAuraScript(spell_warr_glyph_of_blocking);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_WARRIOR_GLYPH_OF_BLOCKING });
@@ -405,8 +385,6 @@ class spell_warr_glyph_of_blocking : public AuraScript
 // 58387 - Glyph of Sunder Armor
 class spell_warr_glyph_of_sunder_armor : public AuraScript
 {
-    PrepareAuraScript(spell_warr_glyph_of_sunder_armor);
-
     void HandleEffectCalcSpellMod(AuraEffect const* aurEff, SpellModifier*& spellMod)
     {
         if (!spellMod)
@@ -430,8 +408,6 @@ class spell_warr_glyph_of_sunder_armor : public AuraScript
 // -59088 - Improved Spell Reflection
 class spell_warr_improved_spell_reflection : public AuraScript
 {
-    PrepareAuraScript(spell_warr_improved_spell_reflection);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_WARRIOR_IMPROVED_SPELL_REFLECTION_TRIGGER });
@@ -455,8 +431,6 @@ class spell_warr_improved_spell_reflection : public AuraScript
 // 3411 - Intervene
 class spell_warr_intervene : public SpellScript
 {
-    PrepareSpellScript(spell_warr_intervene);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_WARRIOR_INTERVENE_THREAT });
@@ -477,8 +451,6 @@ class spell_warr_intervene : public SpellScript
 // 5246 - Intimidating Shout
 class spell_warr_intimidating_shout : public SpellScript
 {
-    PrepareSpellScript(spell_warr_intimidating_shout);
-
     void FilterTargets(std::list<WorldObject*>& unitList)
     {
         unitList.remove(GetExplTargetWorldObject());
@@ -494,8 +466,6 @@ class spell_warr_intimidating_shout : public SpellScript
 // 70844 - Item - Warrior T10 Protection 4P Bonus
 class spell_warr_item_t10_prot_4p_bonus : public AuraScript
 {
-    PrepareAuraScript(spell_warr_item_t10_prot_4p_bonus);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_WARRIOR_STOICISM });
@@ -521,8 +491,6 @@ class spell_warr_item_t10_prot_4p_bonus : public AuraScript
 // 12975 - Last Stand
 class spell_warr_last_stand : public SpellScript
 {
-    PrepareSpellScript(spell_warr_last_stand);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_WARRIOR_LAST_STAND_TRIGGERED });
@@ -545,8 +513,6 @@ class spell_warr_last_stand : public SpellScript
 // 7384, 7887, 11584, 11585 - Overpower
 class spell_warr_overpower : public SpellScript
 {
-    PrepareSpellScript(spell_warr_overpower);
-
     void HandleEffect(SpellEffIndex /*effIndex*/)
     {
         uint32 spellId = 0;
@@ -572,8 +538,6 @@ class spell_warr_overpower : public SpellScript
 // -772 - Rend
 class spell_warr_rend : public AuraScript
 {
-    PrepareAuraScript(spell_warr_rend);
-
     void CalculateAmount(AuraEffect const* aurEff, int32& amount, bool& canBeRecalculated)
     {
         if (Unit* caster = GetCaster())
@@ -613,8 +577,6 @@ class spell_warr_rend : public AuraScript
 // 20230 - Retaliation
 class spell_warr_retaliation : public AuraScript
 {
-    PrepareAuraScript(spell_warr_retaliation);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_WARRIOR_RETALIATION_DAMAGE });
@@ -642,8 +604,6 @@ class spell_warr_retaliation : public AuraScript
 // -29834 - Second Wind
 class spell_warr_second_wind : public AuraScript
 {
-    PrepareAuraScript(spell_warr_second_wind);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -682,8 +642,6 @@ class spell_warr_second_wind : public AuraScript
 // 64380, 65941 - Shattering Throw
 class spell_warr_shattering_throw : public SpellScript
 {
-    PrepareSpellScript(spell_warr_shattering_throw);
-
     void HandleScript(SpellEffIndex effIndex)
     {
         PreventHitDefaultEffect(effIndex);
@@ -702,8 +660,6 @@ class spell_warr_shattering_throw : public SpellScript
 // -1464 - Slam
 class spell_warr_slam : public SpellScript
 {
-    PrepareSpellScript(spell_warr_slam);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_WARRIOR_SLAM });
@@ -727,8 +683,6 @@ class spell_warr_slam : public SpellScript
 // 12328, 18765, 35429 - Sweeping Strikes
 class spell_warr_sweeping_strikes : public AuraScript
 {
-    PrepareAuraScript(spell_warr_sweeping_strikes);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_WARRIOR_SWEEPING_STRIKES_EXTRA_ATTACK_1, SPELL_WARRIOR_SWEEPING_STRIKES_EXTRA_ATTACK_2 });
@@ -772,8 +726,6 @@ class spell_warr_sweeping_strikes : public AuraScript
 // -46951 - Sword and Board
 class spell_warr_sword_and_board : public AuraScript
 {
-    PrepareAuraScript(spell_warr_sword_and_board);
-
     void HandleProc(AuraEffect const* /*aurEff*/, ProcEventInfo& /*eventInfo*/)
     {
         // Remove cooldown on Shield Slam
@@ -793,8 +745,6 @@ class spell_warr_sword_and_board : public AuraScript
 // 28845 - Cheat Death
 class spell_warr_t3_prot_8p_bonus : public AuraScript
 {
-    PrepareAuraScript(spell_warr_t3_prot_8p_bonus);
-
     bool CheckProc(ProcEventInfo& eventInfo)
     {
         if (eventInfo.GetActionTarget()->HealthBelowPct(20))
@@ -817,8 +767,6 @@ class spell_warr_t3_prot_8p_bonus : public AuraScript
 // 50720 - Vigilance
 class spell_warr_vigilance : public AuraScript
 {
-    PrepareAuraScript(spell_warr_vigilance);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -879,8 +827,6 @@ class spell_warr_vigilance : public AuraScript
 // 59665 - Vigilance (Redirect Threat)
 class spell_warr_vigilance_redirect_threat : public SpellScript
 {
-    PrepareSpellScript(spell_warr_vigilance_redirect_threat);
-
     void CheckGlyph(SpellEffIndex /*effIndex*/)
     {
         if (Unit* warrior = GetHitUnit())
@@ -897,8 +843,6 @@ class spell_warr_vigilance_redirect_threat : public SpellScript
 // 50725 - Vigilance (Reset Taunt Cooldown)
 class spell_warr_vigilance_trigger : public SpellScript
 {
-    PrepareSpellScript(spell_warr_vigilance_trigger);
-
     void HandleScript(SpellEffIndex effIndex)
     {
         PreventHitDefaultEffect(effIndex);
@@ -917,8 +861,6 @@ class spell_warr_vigilance_trigger : public SpellScript
 // 21977 - Warrior's Wrath
 class spell_warr_warriors_wrath : public SpellScript
 {
-    PrepareSpellScript(spell_warr_warriors_wrath);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_WARRIOR_WARRIORS_WRATH });

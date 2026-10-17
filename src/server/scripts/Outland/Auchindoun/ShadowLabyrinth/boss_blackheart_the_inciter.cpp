@@ -259,8 +259,6 @@ private:
 // 33676 - Incite Chaos
 class spell_blackheart_incite_chaos : public SpellScript
 {
-    PrepareSpellScript(spell_blackheart_incite_chaos);
-
 public:
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
@@ -285,8 +283,6 @@ private:
 // 33684 - Incite Chaos
 class spell_blackheart_incite_chaos_charm : public AuraScript
 {
-    PrepareAuraScript(spell_blackheart_incite_chaos_charm);
-
     void AfterRemove(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
     {
         if (Unit* caster = GetCaster())

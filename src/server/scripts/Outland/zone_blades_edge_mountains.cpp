@@ -993,8 +993,6 @@ class spell_oscillating_field : public SpellScriptLoader
 
         class spell_oscillating_field_SpellScript : public SpellScript
         {
-            PrepareSpellScript(spell_oscillating_field_SpellScript);
-
             void HandleEffect(SpellEffIndex /*effIndex*/)
             {
                 if (Player* player = GetHitPlayer())
@@ -1026,8 +1024,6 @@ enum Scratches
 // 37028 - Dispelling Analysis
 class spell_bem_dispelling_analysis : public SpellScript
 {
-    PrepareSpellScript(spell_bem_dispelling_analysis);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_LASHHAN_CHANNELING });
@@ -1056,8 +1052,6 @@ enum ACurseUponBothOfYourClans
 // 32580 - Wicked Strong Fetish
 class spell_bem_wicked_strong_fetish : public SpellScript
 {
-    PrepareSpellScript(spell_bem_wicked_strong_fetish);
-
     void HandleScript(SpellEffIndex /*effIndex*/)
     {
         Unit* caster = GetCaster();
@@ -1107,8 +1101,6 @@ struct npc_q10720_marmot : public ScriptedAI
 // 38544 - Coax Marmot
 class spell_bem_coax_marmot : public AuraScript
 {
-    PrepareAuraScript(spell_bem_coax_marmot);
-
     void HandleEffectApply(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
     {
         // prevent loading the aura from db
@@ -1133,8 +1125,6 @@ class spell_bem_coax_marmot : public AuraScript
 // 38586 - [DND]Charm Rexxar's Rodent
 class spell_bem_charm_rexxars_rodent : public AuraScript
 {
-    PrepareAuraScript(spell_bem_charm_rexxars_rodent);
-
     void OnRemove(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
     {
         if (Unit* caster = GetCaster())
@@ -1153,8 +1143,6 @@ class spell_bem_charm_rexxars_rodent : public AuraScript
 // 38629 - Poison Keg
 class spell_bem_q10720_poison_keg : public SpellScript
 {
-    PrepareSpellScript(spell_bem_q10720_poison_keg);
-
     bool Validate(SpellInfo const* /*spellEntry*/) override
     {
         return ValidateSpellInfo(
@@ -1212,8 +1200,6 @@ enum BombingRun
 // 40109 - Knockdown Fel Cannon: The Bolt
 class spell_bem_kfc_the_bolt : public SpellScript
 {
-    PrepareSpellScript(spell_bem_kfc_the_bolt);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_FEL_FLAK_FIRE });
@@ -1233,8 +1219,6 @@ class spell_bem_kfc_the_bolt : public SpellScript
 // 40113 - Knockdown Fel Cannon: The Aggro Check Aura
 class spell_bem_aggro_check_aura : public AuraScript
 {
-    PrepareAuraScript(spell_bem_aggro_check_aura);
-
     void HandleTriggerSpell(AuraEffect const* /*aurEff*/)
     {
         if (Unit* target = GetTarget())
@@ -1251,8 +1235,6 @@ class spell_bem_aggro_check_aura : public AuraScript
 // 40112 - Knockdown Fel Cannon: The Aggro Check
 class spell_bem_aggro_check : public SpellScript
 {
-    PrepareSpellScript(spell_bem_aggro_check);
-
     void HandleDummy(SpellEffIndex /*effIndex*/)
     {
         if (Player* playerTarget = GetHitPlayer())
@@ -1270,8 +1252,6 @@ class spell_bem_aggro_check : public SpellScript
 // 40119 - Knockdown Fel Cannon: The Aggro Burst
 class spell_bem_aggro_burst : public AuraScript
 {
-    PrepareAuraScript(spell_bem_aggro_burst);
-
     void HandleEffectPeriodic(AuraEffect const* /*aurEff*/)
     {
         if (Unit* target = GetTarget())
@@ -1288,8 +1268,6 @@ class spell_bem_aggro_burst : public AuraScript
 // 40056 - Knockdown Fel Cannon: Choose Loc
 class spell_bem_choose_loc : public SpellScript
 {
-    PrepareSpellScript(spell_bem_choose_loc);
-
     void HandleDummy(SpellEffIndex /*effIndex*/)
     {
         Unit* caster = GetCaster();
@@ -1313,8 +1291,6 @@ class spell_bem_choose_loc : public SpellScript
 // 40160 - Throw Bomb
 class spell_bem_check_fly_mount : public SpellScript
 {
-    PrepareSpellScript(spell_bem_check_fly_mount);
-
     SpellCastResult CheckRequirement()
     {
         Unit* caster = GetCaster();
@@ -1345,8 +1321,6 @@ enum ApexisSwiftness
 // 40626 - Apexis Enlightenment
 class spell_bem_apexis_swiftness : public AuraScript
 {
-    PrepareAuraScript(spell_bem_apexis_swiftness);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo(
@@ -1393,8 +1367,6 @@ enum VisionGuide
 // 36587 - Vision Guide
 class spell_bem_vision_guide : public AuraScript
 {
-    PrepareAuraScript(spell_bem_vision_guide);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_VISION_GUIDE });
@@ -1423,8 +1395,6 @@ enum OnSpiritsWings
 // 38173 - Summon Spirit
 class spell_bem_summon_spirit : public SpellScript
 {
-    PrepareSpellScript(spell_bem_summon_spirit);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_REXXARS_BIRD_EFFECT });

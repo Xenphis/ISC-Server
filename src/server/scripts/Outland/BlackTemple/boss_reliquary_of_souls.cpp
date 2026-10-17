@@ -721,8 +721,6 @@ private:
 // 41350 - Aura of Desire
 class spell_reliquary_of_souls_aura_of_desire : public AuraScript
 {
-    PrepareAuraScript(spell_reliquary_of_souls_aura_of_desire);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_AURA_OF_DESIRE_DAMAGE });
@@ -755,8 +753,6 @@ class spell_reliquary_of_souls_aura_of_desire : public AuraScript
 // 41337 - Aura of Anger
 class spell_reliquary_of_souls_aura_of_anger : public AuraScript
 {
-    PrepareAuraScript(spell_reliquary_of_souls_aura_of_anger);
-
     void HandleEffectPeriodicUpdate(AuraEffect* aurEff)
     {
         if (AuraEffect* aurEff1 = aurEff->GetBase()->GetEffect(EFFECT_1))
@@ -773,8 +769,6 @@ class spell_reliquary_of_souls_aura_of_anger : public AuraScript
 // 28819 - Submerge Visual
 class spell_reliquary_of_souls_submerge : public AuraScript
 {
-    PrepareAuraScript(spell_reliquary_of_souls_submerge);
-
     void OnApply(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
     {
         GetTarget()->SetStandState(UNIT_STAND_STATE_SUBMERGED);
@@ -795,8 +789,6 @@ class spell_reliquary_of_souls_submerge : public AuraScript
 // 41376 - Spite
 class spell_reliquary_of_souls_spite : public AuraScript
 {
-    PrepareAuraScript(spell_reliquary_of_souls_spite);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SPITE_DAMAGE });
@@ -817,8 +809,6 @@ class spell_reliquary_of_souls_spite : public AuraScript
 // 41305 - Frenzy
 class spell_reliquary_of_souls_frenzy : public SpellScript
 {
-    PrepareSpellScript(spell_reliquary_of_souls_frenzy);
-
     void HandleAfterCast()
     {
         if (Creature* caster = GetCaster()->ToCreature())

@@ -157,8 +157,6 @@ struct boss_gruul : public BossAI
 // 33812 - Hurtful Strike Primer
 class spell_gruul_hurtful_strike_primer : public SpellScript
 {
-    PrepareSpellScript(spell_gruul_hurtful_strike_primer);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_HURTFUL_STRIKE });
@@ -211,8 +209,6 @@ class spell_gruul_hurtful_strike_primer : public SpellScript
 // 33525 - Ground Slam
 class spell_gruul_ground_slam : public SpellScript
 {
-    PrepareSpellScript(spell_gruul_ground_slam);
-
     bool Validate(SpellInfo const* /*spell*/) override
     {
         return ValidateSpellInfo({ SPELL_LOOK_AROUND, SPELL_SUMMON_RANDOM_TRACTOR });
@@ -247,8 +243,6 @@ class spell_gruul_ground_slam : public SpellScript
 // 33572 - Gronn Lord's Grasp
 class spell_gruul_gronn_lords_grasp : public AuraScript
 {
-    PrepareAuraScript(spell_gruul_gronn_lords_grasp);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_STONED });
@@ -269,8 +263,6 @@ class spell_gruul_gronn_lords_grasp : public AuraScript
 // 33965 - Look Around
 class spell_gruul_look_around : public AuraScript
 {
-    PrepareAuraScript(spell_gruul_look_around);
-
     bool Validate(SpellInfo const* /*spell*/) override
     {
         return ValidateSpellInfo({ SPELL_SHATTER });
@@ -295,8 +287,6 @@ class spell_gruul_look_around : public AuraScript
 // 33654 - Shatter
 class spell_gruul_shatter : public SpellScript
 {
-    PrepareSpellScript(spell_gruul_shatter);
-
     bool Validate(SpellInfo const* /*spell*/) override
     {
         return ValidateSpellInfo({ SPELL_STONED, SPELL_SHATTER_EFFECT });
@@ -318,8 +308,6 @@ class spell_gruul_shatter : public SpellScript
 // 33671 - Shatter
 class spell_gruul_shatter_effect : public SpellScript
 {
-    PrepareSpellScript(spell_gruul_shatter_effect);
-
     void CalculateDamage()
     {
         if (!GetHitUnit())

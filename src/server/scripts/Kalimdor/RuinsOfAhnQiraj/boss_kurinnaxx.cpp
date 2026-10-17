@@ -148,8 +148,6 @@ private:
 // 26524 - Sand Trap
 class spell_kurinnaxx_sand_trap : public SpellScript
 {
-    PrepareSpellScript(spell_kurinnaxx_sand_trap);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SAND_TRAP_EFFECT });

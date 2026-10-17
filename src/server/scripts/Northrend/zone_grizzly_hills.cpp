@@ -713,8 +713,6 @@ enum ShredderDelivery
 
 class spell_shredder_delivery : public SpellScript
 {
-    PrepareSpellScript(spell_shredder_delivery);
-
     bool Load() override
     {
         return GetCaster()->GetTypeId() == TYPEID_UNIT;
@@ -741,8 +739,6 @@ enum InfectedWorgenBite
 // 53094 - Infected Worgen Bite
 class spell_infected_worgen_bite : public AuraScript
 {
-    PrepareAuraScript(spell_infected_worgen_bite);
-
     void HandleAfterEffectApply(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
     {
         Unit* target = GetTarget();
@@ -839,8 +835,6 @@ enum WarheadSpells
 // 49107 - Vehicle: Warhead Fuse
 class spell_vehicle_warhead_fuse : public SpellScript
 {
-    PrepareSpellScript(spell_vehicle_warhead_fuse);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_WARHEAD_Z_CHECK, SPELL_WARHEAD_SEEKING_LUMBERSHIP, SPELL_WARHEAD_FUSE });
@@ -870,8 +864,6 @@ enum WarheadDenonate
 // 49250 - Detonate
 class spell_warhead_detonate : public SpellScript
 {
-    PrepareSpellScript(spell_warhead_detonate);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_PARACHUTE, SPELL_TORPEDO_EXPLOSION });
@@ -905,8 +897,6 @@ class spell_warhead_detonate : public SpellScript
 // 61678 - Z Check
 class spell_z_check : public AuraScript
 {
-    PrepareAuraScript(spell_z_check);
-
 public:
     spell_z_check()
     {
@@ -940,8 +930,6 @@ private:
 // 49181 - Warhead Fuse
 class spell_warhead_fuse : public AuraScript
 {
-    PrepareAuraScript(spell_warhead_fuse);
-
     void HandleOnEffectRemove(AuraEffect const* /*aurEff*/, AuraEffectHandleModes /*mode*/)
     {
         if (Unit* rocketUnit = GetTarget()->GetVehicleBase())
@@ -971,8 +959,6 @@ enum
 // 50439 - Script Cast Summon Image of Drakuru 05
 class spell_grizzly_hills_script_cast_summon_image_of_drakuru : public SpellScript
 {
-    PrepareSpellScript(spell_grizzly_hills_script_cast_summon_image_of_drakuru);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ _triggeredSpellId });
@@ -1006,8 +992,6 @@ enum EscapeFromSilverbrook
 // 48682 - Escape from Silverbrook - Periodic Dummy
 class spell_grizzly_hills_escape_from_silverbrook : public SpellScript
 {
-    PrepareSpellScript(spell_grizzly_hills_escape_from_silverbrook);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SUMMON_WORGEN });
@@ -1027,8 +1011,6 @@ class spell_grizzly_hills_escape_from_silverbrook : public SpellScript
 // 48681 - Summon Silverbrook Worgen
 class spell_grizzly_hills_escape_from_silverbrook_summon_worgen : public SpellScript
 {
-    PrepareSpellScript(spell_grizzly_hills_escape_from_silverbrook_summon_worgen);
-
     void ModDest(SpellDestination& dest)
     {
         float dist = GetEffectInfo(EFFECT_0).CalcRadius(GetCaster());
@@ -1051,8 +1033,6 @@ class spell_grizzly_hills_escape_from_silverbrook_summon_worgen : public SpellSc
 // 49285 - Hand Over Reins
 class spell_grizzly_hills_hand_over_reins : public SpellScript
 {
-    PrepareSpellScript(spell_grizzly_hills_hand_over_reins);
-
     void HandleScript(SpellEffIndex /*effIndex*/)
     {
         Creature* caster = GetCaster()->ToCreature();
@@ -1081,8 +1061,6 @@ enum SeeYouOnTheOtherSide
 // 47744 - Rage of Jin'arrak
 class spell_grizzly_hills_rage_of_jinarrak : public AuraScript
 {
-    PrepareAuraScript(spell_grizzly_hills_rage_of_jinarrak);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_SUMMON_YOUR_CORPSE, SPELL_ON_THE_OTHER_SIDE });
@@ -1104,8 +1082,6 @@ class spell_grizzly_hills_rage_of_jinarrak : public AuraScript
 // 61613 - Gan'jo Ressurection
 class spell_grizzly_hills_ganjo_ressurection : public SpellScript
 {
-    PrepareSpellScript(spell_grizzly_hills_ganjo_ressurection);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_ON_THE_OTHER_SIDE });
@@ -1134,8 +1110,6 @@ enum MakkiWintergale
 // 53288 - Flight - Onequah to Light's Breach
 class spell_grizzly_hills_flight_onequah_to_lights_breach : public AuraScript
 {
-    PrepareAuraScript(spell_grizzly_hills_flight_onequah_to_lights_breach);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_FLIGHT_ONEQUAH_TO_LIGHTS_BREACH });
@@ -1164,8 +1138,6 @@ enum SamuelClearbook
 // 53311 - Flight - Westfall to Light's Breach
 class spell_grizzly_hills_flight_westfall_to_lights_breach : public AuraScript
 {
-    PrepareAuraScript(spell_grizzly_hills_flight_westfall_to_lights_breach);
-
     bool Validate(SpellInfo const* /*spellInfo*/) override
     {
         return ValidateSpellInfo({ SPELL_FLIGHT_WESTFALL_TO_LIGHTS_BREACH });
