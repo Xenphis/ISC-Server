@@ -975,6 +975,7 @@ class TC_GAME_API ObjectMgr
         GameObjectOverride const* GetGameObjectOverride(ObjectGuid::LowType spawnId) const;
         CreatureAddon const* GetCreatureTemplateAddon(uint32 entry) const;
         CreatureMovementData const* GetCreatureMovementOverride(ObjectGuid::LowType spawnId) const;
+        CreatureStaticFlagsOverride const* GetCreatureStaticFlagsOverride(ObjectGuid::LowType spawnId, Difficulty difficultyId) const;
         ItemTemplate const* GetItemTemplate(uint32 entry) const;
         ItemTemplateContainer const& GetItemTemplateStore() const { return _itemTemplateStore; }
 
@@ -1155,6 +1156,7 @@ class TC_GAME_API ObjectMgr
         void LoadPlayerTotemModels();
         void LoadEquipmentTemplates();
         void LoadCreatureMovementOverrides();
+        void LoadCreatureStaticFlagsOverride();
         void LoadGameObjectLocales();
         void LoadGameObjects();
         void LoadSpawnGroupTemplates();
@@ -1668,6 +1670,7 @@ class TC_GAME_API ObjectMgr
         CreatureAddonContainer _creatureAddonStore;
         CreatureTemplateAddonContainer _creatureTemplateAddonStore;
         std::unordered_map<ObjectGuid::LowType, CreatureMovementData> _creatureMovementOverrides;
+        std::unordered_map<std::pair<ObjectGuid::LowType, Difficulty>, CreatureStaticFlagsOverride> _creatureStaticFlagsOverrideStore;
         GameObjectAddonContainer _gameObjectAddonStore;
         GameObjectQuestItemMap _gameObjectQuestItemStore;
         CreatureQuestItemMap _creatureQuestItemStore;

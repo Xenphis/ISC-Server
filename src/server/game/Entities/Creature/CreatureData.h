@@ -20,6 +20,7 @@
 
 #include "DBCEnums.h"
 #include "EnumFlag.h"
+#include "Optional.h"
 #include "SharedDefines.h"
 #include "SpawnData.h"
 #include "UnitDefines.h"
@@ -202,6 +203,11 @@ public:
     void ApplyFlag(CreatureStaticFlags2 flag, bool apply) { if (apply) _flags2 |= flag; else _flags2 &= ~flag; }
     void ApplyFlag(CreatureStaticFlags3 flag, bool apply) { if (apply) _flags3 |= flag; else _flags3 &= ~flag; }
     void ApplyFlag(CreatureStaticFlags4 flag, bool apply) { if (apply) _flags4 |= flag; else _flags4 &= ~flag; }
+
+    EnumFlag<CreatureStaticFlags> GetFlags() const { return _flags; }
+    EnumFlag<CreatureStaticFlags2> GetFlags2() const { return _flags2; }
+    EnumFlag<CreatureStaticFlags3> GetFlags3() const { return _flags3; }
+    EnumFlag<CreatureStaticFlags4> GetFlags4() const { return _flags4; }
 
 private:
     EnumFlag<CreatureStaticFlags> _flags;
@@ -525,6 +531,15 @@ struct CreatureAddon
     uint32 emote;
     std::vector<uint32> auras;
     VisibilityDistanceType visibilityDistanceType;
+};
+
+// `creature_static_flags_override` table
+struct CreatureStaticFlagsOverride
+{
+    Optional<CreatureStaticFlags> StaticFlags1;
+    Optional<CreatureStaticFlags2> StaticFlags2;
+    Optional<CreatureStaticFlags3> StaticFlags3;
+    Optional<CreatureStaticFlags4> StaticFlags4;
 };
 
 // Vendors

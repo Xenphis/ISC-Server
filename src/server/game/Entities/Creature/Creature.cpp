@@ -535,7 +535,7 @@ bool Creature::InitEntry(uint32 entry, CreatureData const* data /*= nullptr*/)
     for (uint8 i = 0; i < MAX_CREATURE_SPELLS; ++i)
         m_spells[i] = GetCreatureTemplate()->spells[i];
 
-    ApplyAllStaticFlags(cinfo->StaticFlags);
+    ApplyAllStaticFlags(GenerateStaticFlags(cinfo, GetSpawnId(), GetMap()->GetDifficultyID()));
 
     return true;
 }
@@ -668,6 +668,19 @@ void Creature::SetPhaseMask(uint32 newPhaseMask, bool update)
 
     if (update)
         UpdateObjectVisibility();
+}
+
+CreatureStaticFlagsHolder Creature::GenerateStaticFlags(CreatureTemplate const* creatureTemplate, ObjectGuid::LowType spawnId, Difficulty difficultyId) const
+{
+    CreatureStaticFlagsOverride const* staticFlagsOverride = sObjectMgr->GetCreatureStaticFlagsOverride(spawnId, difficultyId);
+    if (!staticFlagsOverride)
+        return creatureTemplate->StaticFlags;
+
+    return CreatureStaticFlagsHolder(
+        staticFlagsOverride->StaticFlags1.value_or(creatureTemplate->StaticFlags.GetFlags()),
+        staticFlagsOverride->StaticFlags2.value_or(creatureTemplate->StaticFlags.GetFlags2()),
+        staticFlagsOverride->StaticFlags3.value_or(creatureTemplate->StaticFlags.GetFlags3()),
+        staticFlagsOverride->StaticFlags4.value_or(creatureTemplate->StaticFlags.GetFlags4()));
 }
 
 void Creature::ApplyAllStaticFlags(CreatureStaticFlagsHolder const& flags)
