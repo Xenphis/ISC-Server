@@ -1495,7 +1495,7 @@ class spell_icc_soul_missile : public SpellScript
 {
     PrepareSpellScript(spell_icc_soul_missile);
 
-    void RelocateDest(SpellDestination& dest)
+    static void RelocateDest(SpellDestination& dest)
     {
         static Position const offset = { 0.0f, 0.0f, 200.0f, 0.0f };
         dest.RelocateOffset(offset);

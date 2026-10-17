@@ -5895,7 +5895,7 @@ void ObjectMgr::ValidateSpellScripts()
 
                 if (spellScript)
                 {
-                    spellScript->_Init(&spellScriptLoader->GetName(), spellEntry->Id);
+                    spellScript->_Init(spellScriptLoader->GetName(), spellEntry->Id);
                     spellScript->_Register();
 
                     if (!spellScript->_Validate(spellEntry))
@@ -5907,7 +5907,7 @@ void ObjectMgr::ValidateSpellScripts()
 
                 if (auraScript)
                 {
-                    auraScript->_Init(&spellScriptLoader->GetName(), spellEntry->Id);
+                    auraScript->_Init(spellScriptLoader->GetName(), spellEntry->Id);
                     auraScript->_Register();
 
                     if (!auraScript->_Validate(spellEntry))
