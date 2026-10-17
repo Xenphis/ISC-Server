@@ -50,9 +50,6 @@ bool FleeingMovementGenerator::Initialize(Unit* owner)
     if (!owner || !owner->IsAlive())
         return false;
 
-    // TODO: UNIT_FIELD_FLAGS should not be handled by generators
-    owner->SetUnitFlag(UNIT_FLAG_FLEEING);
-
     _path = nullptr;
     SetTargetLocation(owner);
     return true;
@@ -102,7 +99,6 @@ void FleeingMovementGenerator::Finalize(Unit* owner, bool active, bool/* movemen
 
     if (active)
     {
-        owner->RemoveUnitFlag(UNIT_FLAG_FLEEING);
         owner->ClearUnitState(UNIT_STATE_FLEEING_MOVE);
 
         if (owner->IsCreature())

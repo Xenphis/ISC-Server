@@ -170,8 +170,9 @@ class TC_GAME_API Creature : public Unit, public GridObject<Creature>, public Ma
 
         SpellSchoolMask GetMeleeDamageSchoolMask(WeaponAttackType /*attackType*/ = BASE_ATTACK, uint8 /*damageIndex*/ = 0) const override { return m_meleeDamageSchoolMask; }
         void SetMeleeDamageSchool(SpellSchools school) { m_meleeDamageSchoolMask = SpellSchoolMask(1 << school); }
-        bool CanMelee() const { return !_staticFlags.HasFlag(CREATURE_STATIC_FLAG_NO_MELEE_FLEE); }
-        void SetCanMelee(bool canMelee) { _staticFlags.ApplyFlag(CREATURE_STATIC_FLAG_NO_MELEE_FLEE, !canMelee); }
+        bool CanMelee() const { return !_staticFlags.HasFlag(CREATURE_STATIC_FLAG_NO_MELEE_FLEE) && !_staticFlags.HasFlag(CREATURE_STATIC_FLAG_4_NO_MELEE_APPROACH); }
+        void SetCanMelee(bool canMelee, bool fleeFromMelee = false);
+        void StartDefaultCombatMovement(Unit* victim, Optional<float> range = {}, Optional<float> angle = {});
 
         bool HasSpell(uint32 spellID) const override;
 
