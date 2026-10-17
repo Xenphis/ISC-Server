@@ -209,6 +209,6 @@ TC_GAME_API extern DBCStorage <WMOAreaTableEntry>            sWMOAreaTableStore;
 TC_GAME_API extern DBCStorage <WorldMapOverlayEntry>         sWorldMapOverlayStore;
 TC_GAME_API extern DBCStorage <WorldSafeLocsEntry>           sWorldSafeLocsStore;
 
-TC_GAME_API void LoadDBCStores(const std::string& dataPath);
+TC_GAME_API bool LoadDBCStores(const std::string& dataPath);
 
 #endif

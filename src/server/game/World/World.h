@@ -660,7 +660,7 @@ class TC_GAME_API World
             return lvl > 60 ? 300 + ((lvl - 60) * 75) / 10 : lvl * 5;
         }
 
-        void SetInitialWorldSettings();
+        bool SetInitialWorldSettings();
         void LoadConfigSettings(bool reload = false);
 
         void SendWorldText(uint32 string_id, ...);
@@ -838,7 +838,7 @@ class TC_GAME_API World
         AccountTypes m_allowedSecurityLevel;
         LocaleConstant m_defaultDbcLocale;                     // from config for one from loaded DBC locales
         uint32 m_availableDbcLocaleMask;                       // by loaded DBC
-        void DetectDBCLang();
+        bool DetectDBCLang();
         bool m_allowMovement;
         std::vector<std::string> _motd;
         std::string m_dataPath;

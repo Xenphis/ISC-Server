@@ -1601,7 +1601,7 @@ void World::LoadConfigSettings(bool reload)
 }
 
 /// Initialize the World
-void World::SetInitialWorldSettings()
+bool World::SetInitialWorldSettings()
 {
     if (uint32 realmId = sConfigMgr->GetIntDefault("RealmID", 0)) // 0 reserved for auth
         sLog->SetRealmId(realmId);
@@ -1641,7 +1641,7 @@ void World::SetInitialWorldSettings()
             !TerrainMgr::ExistMapAndVMap(530, -3961.64f, -13931.2f))))
     {
         TC_LOG_FATAL("server.loading", "Unable to load critical files - server shutting down !!!");
-        exit(1);
+        return false;
     }
 
     ///- Initialize pool manager
@@ -1654,7 +1654,7 @@ void World::SetInitialWorldSettings()
 
     TC_LOG_INFO("server.loading", "Loading Trinity strings...");
     if (!sObjectMgr->LoadTrinityStrings())
-        exit(1);                                            // Error message displayed in function already
+        return false;                                       // Error message displayed in function already
 
     ///- Update the realm entry in the database with the realm type from the config file
     //No SQL injection as values are treated as integers
@@ -1667,8 +1667,11 @@ void World::SetInitialWorldSettings()
 
     ///- Load the DBC files
     TC_LOG_INFO("server.loading", "Initialize data stores...");
-    LoadDBCStores(m_dataPath);
-    DetectDBCLang();
+    if (!LoadDBCStores(m_dataPath))
+        return false;
+
+    if (!DetectDBCLang())
+        return false;
 
     // Load cinematic cameras
     LoadM2Cameras(m_dataPath);
@@ -2287,9 +2290,10 @@ void World::SetInitialWorldSettings()
     TC_LOG_INFO("server.worldserver", "World initialized in {} minutes {} seconds", (startupDuration / 60000), ((startupDuration % 60000) / 1000));
 
     TC_METRIC_EVENT("events", "World initialized", "World initialized in " + std::to_string(startupDuration / 60000) + " minutes " + std::to_string((startupDuration % 60000) / 1000) + " seconds");
+    return true;
 }
 
-void World::DetectDBCLang()
+bool World::DetectDBCLang()
 {
     uint8 m_lang_confid = sConfigMgr->GetIntDefault("DBC.Locale", 255);
 
@@ -2320,8 +2324,8 @@ void World::DetectDBCLang()
 
     if (m_availableDbcLocaleMask == 0)
     {
-        TC_LOG_ERROR("server.loading", "Unable to determine your DBC Locale! (corrupt DBC?)");
-        exit(1);
+        TC_LOG_FATAL("server.loading", "Unable to determine your DBC Locale! (corrupt DBC?)");
+        return false;
     }
 
     if (default_locale != m_lang_confid && m_lang_confid < TOTAL_LOCALES &&
@@ -2333,6 +2337,7 @@ void World::DetectDBCLang()
     m_defaultDbcLocale = LocaleConstant(default_locale);
 
     TC_LOG_INFO("server.loading", "Using {} DBC Locale as default. All available DBC locales: {}", localeNames[m_defaultDbcLocale], availableLocalsStr.empty() ? "<none>" : availableLocalsStr);
+    return true;
 }
 
 void World::LoadAutobroadcasts()

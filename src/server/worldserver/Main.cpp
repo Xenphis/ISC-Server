@@ -322,7 +322,8 @@ int main(int argc, char** argv)
 
     // Initialize the World
     sSecretMgr->Initialize();
-    sWorld->SetInitialWorldSettings();
+    if (!sWorld->SetInitialWorldSettings())
+        return 1;
 
     std::shared_ptr<void> mapManagementHandle(nullptr, [](void*)
     {
@@ -344,12 +345,14 @@ int main(int argc, char** argv)
     std::shared_ptr<std::thread> soapThread;
     if (sConfigMgr->GetBoolDefault("SOAP.Enabled", false))
     {
-        soapThread.reset(new std::thread(TCSoapThread, sConfigMgr->GetStringDefault("SOAP.IP", "127.0.0.1"), uint16(sConfigMgr->GetIntDefault("SOAP.Port", 7878))),
-            [](std::thread* thr)
-        {
-            thr->join();
-            delete thr;
-        });
+        if (std::thread* soap = CreateSoapThread(sConfigMgr->GetStringDefault("SOAP.IP", "127.0.0.1"), uint16(sConfigMgr->GetIntDefault("SOAP.Port", 7878))))
+            soapThread.reset(soap, [](std::thread* thr)
+            {
+                thr->join();
+                delete thr;
+            });
+        else
+            return -1;
     }
 
     // Launch the worldserver listener socket
