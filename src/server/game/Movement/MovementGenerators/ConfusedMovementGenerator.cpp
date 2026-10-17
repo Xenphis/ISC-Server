@@ -33,6 +33,9 @@ ConfusedMovementGenerator<T>::ConfusedMovementGenerator() : _timer(0), _referenc
 }
 
 template<class T>
+ConfusedMovementGenerator<T>::~ConfusedMovementGenerator() = default;
+
+template<class T>
 MovementGeneratorType ConfusedMovementGenerator<T>::GetMovementGeneratorType() const
 {
     return CONFUSED_MOTION_TYPE;

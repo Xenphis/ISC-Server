@@ -30,6 +30,7 @@ class RandomMovementGenerator : public MovementGeneratorMedium<T, RandomMovement
 {
     public:
         explicit RandomMovementGenerator(float distance = 0.0f, Optional<Milliseconds> duration = {});
+        ~RandomMovementGenerator();
 
         MovementGeneratorType GetMovementGeneratorType() const override;
 

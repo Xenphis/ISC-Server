@@ -24,6 +24,7 @@
 #endif
 #include <vector>
 #include <algorithm>
+#include <type_traits>
 
 #ifdef _MSC_VER
 #   include <new>

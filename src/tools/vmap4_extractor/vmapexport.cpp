@@ -27,6 +27,7 @@
 #include "mpq_libmpq.h"
 #include <boost/filesystem/directory.hpp>
 #include <boost/filesystem/operations.hpp>
+#include <algorithm>
 #include <list>
 #include <map>
 #include <unordered_map>

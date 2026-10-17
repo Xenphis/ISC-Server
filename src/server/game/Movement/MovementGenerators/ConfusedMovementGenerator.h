@@ -29,6 +29,7 @@ class ConfusedMovementGenerator : public MovementGeneratorMedium<T, ConfusedMove
 {
     public:
         explicit ConfusedMovementGenerator();
+        ~ConfusedMovementGenerator();
 
         MovementGeneratorType GetMovementGeneratorType() const override;
 

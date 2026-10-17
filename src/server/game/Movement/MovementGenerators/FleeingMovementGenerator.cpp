@@ -35,6 +35,8 @@ FleeingMovementGenerator::FleeingMovementGenerator(ObjectGuid fleeTargetGUID) : 
     BaseUnitState = UNIT_STATE_FLEEING;
 }
 
+FleeingMovementGenerator::~FleeingMovementGenerator() = default;
+
 MovementGeneratorType FleeingMovementGenerator::GetMovementGeneratorType() const
 {
     return FLEEING_MOTION_TYPE;

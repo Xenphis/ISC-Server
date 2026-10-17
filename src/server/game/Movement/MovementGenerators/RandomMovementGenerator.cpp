@@ -37,6 +37,11 @@ RandomMovementGenerator<T>::RandomMovementGenerator(float distance, Optional<Mil
 template RandomMovementGenerator<Creature>::RandomMovementGenerator(float distance, Optional<Milliseconds> duration);
 
 template<class T>
+RandomMovementGenerator<T>::~RandomMovementGenerator() = default;
+
+template RandomMovementGenerator<Creature>::~RandomMovementGenerator();
+
+template<class T>
 MovementGeneratorType RandomMovementGenerator<T>::GetMovementGeneratorType() const
 {
     return RANDOM_MOTION_TYPE;

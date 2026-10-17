@@ -29,6 +29,7 @@ class FleeingMovementGenerator : public MovementGenerator
 {
     public:
         explicit FleeingMovementGenerator(ObjectGuid fleeTargetGUID);
+        ~FleeingMovementGenerator();
 
         MovementGeneratorType GetMovementGeneratorType() const override;
 
