@@ -294,8 +294,6 @@ struct FathomGuardBaseAI : public ScriptedAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 protected:

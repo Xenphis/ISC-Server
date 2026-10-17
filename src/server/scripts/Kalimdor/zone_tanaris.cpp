@@ -179,8 +179,6 @@ public:
 
                 return;
             }
-
-            DoMeleeAttackIfReady();
         }
 
         void OnQuestAccept(Player* player, Quest const* quest) override

@@ -300,8 +300,6 @@ struct BroggokPrisionerBaseAI : public ScriptedAI
 
         if (!UpdateVictim())
             return;
-
-        DoMeleeAttackIfReady();
     }
 
 protected:

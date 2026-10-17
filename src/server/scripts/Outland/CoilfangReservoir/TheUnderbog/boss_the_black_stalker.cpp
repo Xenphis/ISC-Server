@@ -127,8 +127,6 @@ struct boss_the_black_stalker : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
     void WaypointReached(uint32 waypointId, uint32 pathId) override

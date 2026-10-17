@@ -2074,6 +2074,81 @@ void Unit::HandleEmoteCommand(Emote emoteId)
     }
 }
 
+void Unit::DoMeleeAttackIfReady()
+{
+    if (!HasUnitState(UNIT_STATE_MELEE_ATTACKING))
+        return;
+
+    if (HasUnitState(UNIT_STATE_CHARGING))
+        return;
+
+    if (IsCreature() && !ToCreature()->CanMelee())
+        return;
+
+    if (HasUnitState(UNIT_STATE_CASTING))
+        return;
+
+    Unit* victim = GetVictim();
+    if (!victim)
+        return;
+
+    auto getAutoAttackError = [&]() -> Optional<AttackSwingErr>
+    {
+        if (!IsWithinMeleeRange(victim))
+            return AttackSwingErr::NotInRange;
+
+        // creatures do not need to face their victim, only players do
+        if (IsPlayer())
+        {
+            //120 degrees of radiant range
+            if (!HasInArc(2 * float(M_PI) / 3, victim))
+                return AttackSwingErr::BadFacing;
+
+            if (!IsValidAttackTarget(victim))
+                return AttackSwingErr::CantAttack;
+        }
+
+        return {};
+    };
+
+    if (isAttackReady(BASE_ATTACK))
+    {
+        Optional<AttackSwingErr> autoAttackError = getAutoAttackError();
+        if (!autoAttackError)
+        {
+            // prevent base and off attack in same time, delay attack at 0.2 sec
+            if (haveOffhandWeapon())
+                if (getAttackTimer(OFF_ATTACK) < ATTACK_DISPLAY_DELAY)
+                    setAttackTimer(OFF_ATTACK, ATTACK_DISPLAY_DELAY);
+
+            // do attack
+            AttackerStateUpdate(victim, BASE_ATTACK);
+            resetAttackTimer(BASE_ATTACK);
+        }
+        else
+            setAttackTimer(BASE_ATTACK, 100);
+
+        if (Player* attackerPlayer = ToPlayer())
+            attackerPlayer->SetAttackSwingError(autoAttackError);
+    }
+
+    if (haveOffhandWeapon() && isAttackReady(OFF_ATTACK))
+    {
+        if (!getAutoAttackError())
+        {
+            // prevent base and off attack in same time, delay attack at 0.2 sec
+            if (getAttackTimer(BASE_ATTACK) < ATTACK_DISPLAY_DELAY)
+                setAttackTimer(BASE_ATTACK, ATTACK_DISPLAY_DELAY);
+
+            // do attack
+            AttackerStateUpdate(victim, OFF_ATTACK);
+            resetAttackTimer(OFF_ATTACK);
+        }
+        else
+            setAttackTimer(OFF_ATTACK, 100);
+    }
+}
+
 void Unit::AttackerStateUpdate(Unit* victim, WeaponAttackType attType, bool extra)
 {
     if (HasUnitFlag(UNIT_FLAG_PACIFIED))
@@ -5547,14 +5622,8 @@ bool Unit::Attack(Unit* victim, bool meleeAttack)
 
     Creature* creature = ToCreature();
     // creatures cannot attack while evading
-    if (creature)
-    {
-        if (creature->IsInEvadeMode())
-            return false;
-
-        if (!creature->CanMelee())
-            meleeAttack = false;
-    }
+    if (creature && creature->IsInEvadeMode())
+        return false;
 
     // nobody can attack GM in GM-mode
     if (victim->GetTypeId() == TYPEID_PLAYER)
@@ -11047,7 +11116,6 @@ void Unit::SetControlled(bool apply, UnitState state)
             case UNIT_STATE_CONFUSED:
                 if (!HasUnitState(UNIT_STATE_STUNNED))
                 {
-                    ClearUnitState(UNIT_STATE_MELEE_ATTACKING);
                     SendMeleeAttackStop();
                     // SendAutoRepeatCancel ?
                     SetConfused(true);
@@ -11056,7 +11124,6 @@ void Unit::SetControlled(bool apply, UnitState state)
             case UNIT_STATE_FLEEING:
                 if (!HasUnitState(UNIT_STATE_STUNNED | UNIT_STATE_CONFUSED))
                 {
-                    ClearUnitState(UNIT_STATE_MELEE_ATTACKING);
                     SendMeleeAttackStop();
                     // SendAutoRepeatCancel ?
                     SetFeared(true);

@@ -86,7 +86,6 @@ struct boss_tuten_kash : public BossAI
                 return;
         }
 
-        DoMeleeAttackIfReady();
     }
 };
 

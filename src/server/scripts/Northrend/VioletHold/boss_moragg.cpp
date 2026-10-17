@@ -62,10 +62,7 @@ struct boss_moragg : public BossAI
         if (!UpdateVictim())
             return;
 
-        scheduler.Update(diff, [this]
-        {
-            DoMeleeAttackIfReady();
-        });
+        scheduler.Update(diff);
     }
 
     void ScheduleTasks() override

@@ -525,6 +525,7 @@ struct boss_malygos : public BossAI
         events.Reset();
         events.SetPhase(phase);
         _phase = phase;
+        me->SetCanMelee(phase != PHASE_THREE);
         if (setEvents)
             SetPhaseEvents();
     }
@@ -966,9 +967,6 @@ struct boss_malygos : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING) && _phase != PHASE_NOT_STARTED)
                 return;
         }
-
-        if (_phase != PHASE_THREE)
-            DoMeleeAttackIfReady();
     }
 
     void JustDied(Unit* /*killer*/) override
@@ -1293,8 +1291,6 @@ struct npc_nexus_lord : public ScriptedAI
                     break;
             }
         }
-
-        DoMeleeAttackIfReady();
     }
 
     void JustDied(Unit* /*killer*/) override

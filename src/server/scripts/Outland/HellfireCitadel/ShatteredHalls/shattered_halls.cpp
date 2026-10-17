@@ -165,8 +165,6 @@ struct boss_shattered_executioner : public BossAI
         }
         else
             cleaveTimer -= diff;
-
-        DoMeleeAttackIfReady();
     }
 private:
     uint32 cleaveTimer;

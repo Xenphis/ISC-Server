@@ -127,10 +127,7 @@ struct boss_hungarfen : public BossAI
         if (!UpdateVictim())
             return;
 
-        scheduler.Update(diff, [this]
-        {
-            DoMeleeAttackIfReady();
-        });
+        scheduler.Update(diff);
     }
 
 private:

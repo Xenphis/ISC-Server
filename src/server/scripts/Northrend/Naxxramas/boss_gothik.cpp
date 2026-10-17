@@ -643,7 +643,6 @@ struct npc_gothik_minion_livingtrainee : public npc_gothik_minion_baseAI
             DoCastAOE(SPELL_DEATH_PLAGUE);
             _deathPlagueTimer = urandms(5, 20);
         }
-        DoMeleeAttackIfReady();
     }
     uint32 _deathPlagueTimer;
 };
@@ -661,7 +660,6 @@ struct npc_gothik_minion_livingknight : public npc_gothik_minion_baseAI
             DoCastAOE(SPELL_SHADOW_MARK);
             _whirlwindTimer = urandms(15, 20);
         }
-        DoMeleeAttackIfReady();
     }
     uint32 _whirlwindTimer;
 };
@@ -679,8 +677,6 @@ struct npc_gothik_minion_livingrider : public npc_gothik_minion_baseAI
             DoCastAOE(SPELL_SHADOW_BOLT_VOLLEY);
             _boltVolleyTimer = urandms(10, 15);
         }
-        if (!me->HasUnitState(UNIT_STATE_CASTING))
-            DoMeleeAttackIfReady();
     }
     uint32 _boltVolleyTimer;
 };
@@ -698,7 +694,6 @@ struct npc_gothik_minion_spectraltrainee : public npc_gothik_minion_baseAI
             DoCastAOE(SPELL_ARCANE_EXPLOSION);
             _explosionTimer = 2 * IN_MILLISECONDS;
         }
-        DoMeleeAttackIfReady();
     }
     uint32 _explosionTimer;
 };
@@ -716,7 +711,6 @@ struct npc_gothik_minion_spectralknight : public npc_gothik_minion_baseAI
             DoCastAOE(SPELL_WHIRLWIND);
             _whirlwindTimer = urandms(20, 25);
         }
-        DoMeleeAttackIfReady();
     }
     uint32 _whirlwindTimer;
 };
@@ -769,8 +763,6 @@ struct npc_gothik_minion_spectralrider : public npc_gothik_minion_baseAI
             _drainTimer = urandms(10,15);
         }
 
-        if (!me->HasUnitState(UNIT_STATE_CASTING))
-            DoMeleeAttackIfReady();
     }
     uint32 _frenzyTimer, _drainTimer;
 };
@@ -788,7 +780,6 @@ struct npc_gothik_minion_spectralhorse : public npc_gothik_minion_baseAI
             DoCastAOE(SPELL_STOMP);
             _stompTimer = urandms(14, 18);
         }
-        DoMeleeAttackIfReady();
     }
     uint32 _stompTimer;
 };

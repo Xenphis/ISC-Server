@@ -368,8 +368,6 @@ struct boss_halion : public BossAI
                     break;
             }
         }
-
-        DoMeleeAttackIfReady();
     }
 
     void SetData(uint32 index, uint32 value) override
@@ -530,8 +528,6 @@ struct boss_twilight_halion : public BossAI
                     break;
             }
         }
-
-        DoMeleeAttackIfReady();
     }
 };
 

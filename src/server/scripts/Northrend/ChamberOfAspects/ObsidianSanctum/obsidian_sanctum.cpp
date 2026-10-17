@@ -452,8 +452,6 @@ struct npc_tenebron : public dummy_dragonAI
                     break;
             }
         }
-
-        DoMeleeAttackIfReady();
     }
 };
 
@@ -520,8 +518,6 @@ struct npc_shadron : public dummy_dragonAI
                     break;
             }
         }
-
-        DoMeleeAttackIfReady();
     }
 };
 
@@ -575,8 +571,6 @@ struct npc_vesperon : public dummy_dragonAI
                     break;
             }
         }
-
-        DoMeleeAttackIfReady();
     }
 };
 
@@ -643,14 +637,6 @@ struct npc_acolyte_of_shadron : public ScriptedAI
                 debuffTarget->RemoveAurasDueToSpell(SPELL_GIFT_OF_TWILIGTH_SHA);
     }
 
-    void UpdateAI(uint32 /*diff*/) override
-    {
-        if (!UpdateVictim())
-            return;
-
-        DoMeleeAttackIfReady();
-    }
-
 private:
     InstanceScript* instance;
 };
@@ -710,14 +696,6 @@ struct npc_acolyte_of_vesperon : public ScriptedAI
         instance->DoRemoveAurasDueToSpellOnPlayers(SPELL_TWILIGHT_TORMENT_VESP_ACO, true, true);
         instance->DoRemoveAurasDueToSpellOnPlayers(57935, true, true);
         instance->DoRemoveAurasDueToSpellOnPlayers(58835, true, true); // Components of spell Twilight Torment
-    }
-
-    void UpdateAI(uint32 /*diff*/) override
-    {
-        if (!UpdateVictim())
-            return;
-
-        DoMeleeAttackIfReady();
     }
 
 private:
@@ -911,8 +889,6 @@ struct npc_twilight_whelp : public ScriptedAI
             DoCastVictim(SPELL_FADE_ARMOR);
             events.ScheduleEvent(EVENT_FADE_ARMOR, 5s, 10s);
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:

@@ -155,10 +155,7 @@ void ScriptedAI::AttackStart(Unit* who)
 void ScriptedAI::UpdateAI(uint32 /*diff*/)
 {
     // Check if we have a current target
-    if (!UpdateVictim())
-        return;
-
-    DoMeleeAttackIfReady();
+    UpdateVictim();
 }
 
 void ScriptedAI::DoStartMovement(Unit* victim, float distance, float angle)
@@ -603,8 +600,6 @@ void BossAI::UpdateAI(uint32 diff)
         if (me->HasUnitState(UNIT_STATE_CASTING))
             return;
     }
-
-    DoMeleeAttackIfReady();
 }
 
 bool BossAI::CanAIAttack(Unit const* target) const
@@ -690,6 +685,4 @@ void WorldBossAI::UpdateAI(uint32 diff)
         if (me->HasUnitState(UNIT_STATE_CASTING))
             return;
     }
-
-    DoMeleeAttackIfReady();
 }

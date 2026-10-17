@@ -132,8 +132,6 @@ struct npc_pet_hunter_snake_trap : public ScriptedAI
             else
                 _spellTimer -= diff;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:

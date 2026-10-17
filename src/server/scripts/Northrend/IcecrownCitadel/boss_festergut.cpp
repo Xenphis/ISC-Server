@@ -256,8 +256,6 @@ struct boss_festergut : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
     void SetData(uint32 type, uint32 data) override
@@ -333,8 +331,6 @@ struct npc_stinky_icc : public ScriptedAI
                     break;
             }
         }
-
-        DoMeleeAttackIfReady();
     }
 
     void JustDied(Unit* /*killer*/) override

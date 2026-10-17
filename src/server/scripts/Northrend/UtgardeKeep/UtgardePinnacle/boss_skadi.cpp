@@ -307,8 +307,6 @@ struct boss_skadi : public BossAI
         {
             if (!UpdateVictim())
                 return;
-
-            DoMeleeAttackIfReady();
         }
     }
 
@@ -499,10 +497,7 @@ struct npc_skadi_trashAI : public ScriptedAI
     {
         UpdateVictim();
 
-        _scheduler.Update(diff, [this]
-        {
-            DoMeleeAttackIfReady();
-        });
+        _scheduler.Update(diff);
     }
 
     virtual void ScheduleTasks() = 0;

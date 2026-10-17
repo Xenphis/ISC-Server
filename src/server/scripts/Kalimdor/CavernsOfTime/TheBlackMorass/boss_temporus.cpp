@@ -144,7 +144,6 @@ struct boss_temporus : public BossAI
                 return;
         }
 
-        DoMeleeAttackIfReady();
     }
 };
 

@@ -195,10 +195,7 @@ struct boss_ichoron : public BossAI
             _isFrenzy = true;
         }
 
-        scheduler.Update(diff, [this]
-        {
-            DoMeleeAttackIfReady();
-        });
+        scheduler.Update(diff);
     }
 
     void ScheduleTasks() override

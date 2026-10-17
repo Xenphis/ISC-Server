@@ -191,7 +191,6 @@ struct boss_aeonus : public BossAI
                 return;
         }
 
-        DoMeleeAttackIfReady();
     }
 };
 

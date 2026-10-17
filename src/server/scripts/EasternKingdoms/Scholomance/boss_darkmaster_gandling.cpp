@@ -122,7 +122,6 @@ struct boss_darkmaster_gandling : public BossAI
                 return;
         }
 
-        DoMeleeAttackIfReady();
     }
 };
 

@@ -121,8 +121,6 @@ class boss_general_angerforge : public CreatureScript
                             break;
                     }
                 }
-
-                DoMeleeAttackIfReady();
             }
 
         private:

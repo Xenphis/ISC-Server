@@ -489,10 +489,7 @@ public:
                 } else uiTimer -= uiDiff;
             }
 
-            if (!UpdateVictim())
-                return;
-
-            DoMeleeAttackIfReady();
+            UpdateVictim();
         }
 
         void JustSummoned(Creature* summon) override
@@ -529,14 +526,6 @@ public:
             if (Unit* summon = me->ToTempSummon()->GetSummonerUnit())
                 if (Creature* creature = summon->ToCreature())
                     creature->AI()->SetData(2, 1);
-        }
-
-        void UpdateAI(uint32 /*diff*/) override
-        {
-            if (!UpdateVictim())
-                return;
-
-            DoMeleeAttackIfReady();
         }
 
         void JustDied(Unit* /*killer*/) override

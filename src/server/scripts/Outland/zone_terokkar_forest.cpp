@@ -146,8 +146,6 @@ public:
                 DoCast(me, SPELL_PULVERIZE);
                 Pulverize_Timer = 9000;
             } else Pulverize_Timer -= diff;
-
-            DoMeleeAttackIfReady();
         }
     };
 };

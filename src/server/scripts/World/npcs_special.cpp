@@ -249,8 +249,7 @@ public:
                     ResetFlagTimer -= diff;
             }
 
-            if (UpdateVictim())
-                DoMeleeAttackIfReady();
+            UpdateVictim();
         }
 
         void ReceiveEmote(Player* player, uint32 emote) override

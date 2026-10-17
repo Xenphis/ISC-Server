@@ -732,8 +732,6 @@ struct npc_risen_archmage : public ScriptedAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:
@@ -784,8 +782,6 @@ struct npc_blazing_skeleton : public ScriptedAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:
@@ -841,8 +837,6 @@ struct npc_suppresser : public ScriptedAI
                     break;
             }
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:
@@ -858,14 +852,6 @@ struct npc_blistering_zombie : public ScriptedAI
     void JustDied(Unit* /*killer*/) override
     {
         DoCastSelf(SPELL_ACID_BURST, true);
-    }
-
-    void UpdateAI(uint32 /*diff*/) override
-    {
-        if (!UpdateVictim())
-            return;
-
-        DoMeleeAttackIfReady();
     }
 };
 
@@ -910,8 +896,6 @@ struct npc_gluttonous_abomination : public ScriptedAI
                     break;
             }
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:

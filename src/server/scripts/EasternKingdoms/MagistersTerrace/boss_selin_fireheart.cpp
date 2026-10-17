@@ -237,8 +237,6 @@ struct boss_selin_fireheart : public BossAI
                     events.ScheduleEvent(EVENT_DRAIN_CRYSTAL, 20s, 25s, 0, PHASE_NORMAL);
             }
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:

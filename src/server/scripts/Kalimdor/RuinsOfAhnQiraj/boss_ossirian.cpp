@@ -289,8 +289,6 @@ class boss_ossirian : public CreatureScript
                             break;
                     }
                 }
-
-                DoMeleeAttackIfReady();
             }
         };
 

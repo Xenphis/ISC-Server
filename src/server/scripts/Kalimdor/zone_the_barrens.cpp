@@ -221,8 +221,6 @@ public:
 
             if (!UpdateVictim())
                 return;
-
-            DoMeleeAttackIfReady();
         }
 
         void ReceiveEmote(Player* /*player*/, uint32 emote) override

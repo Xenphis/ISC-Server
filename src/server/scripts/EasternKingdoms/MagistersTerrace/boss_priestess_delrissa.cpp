@@ -316,8 +316,6 @@ struct boss_priestess_delrissa : public ScriptedAI
 
             SWPainTimer = 10000;
         } else SWPainTimer -= diff;
-
-        DoMeleeAttackIfReady();
     }
 };
 
@@ -478,6 +476,7 @@ struct boss_kagani_nightstrike : public boss_priestess_lackey_commonAI
     {
         Initialize();
         me->SetVisible(true);
+        me->SetCanMelee(true);
 
         boss_priestess_lackey_commonAI::Reset();
     }
@@ -501,6 +500,7 @@ struct boss_kagani_nightstrike : public boss_priestess_lackey_commonAI
                 AddThreat(unit, 1000.0f);
 
             InVanish = true;
+            me->SetCanMelee(false);
             Vanish_Timer = 30000;
             Wait_Timer = 10000;
         } else Vanish_Timer -= diff;
@@ -513,6 +513,7 @@ struct boss_kagani_nightstrike : public boss_priestess_lackey_commonAI
                 DoCastVictim(SPELL_KIDNEY_SHOT, true);
                 me->SetVisible(true);       // ...? Hacklike
                 InVanish = false;
+                me->SetCanMelee(true);
             } else Wait_Timer -= diff;
         }
 
@@ -533,9 +534,6 @@ struct boss_kagani_nightstrike : public boss_priestess_lackey_commonAI
             DoCastVictim(SPELL_EVISCERATE);
             Eviscerate_Timer = 4000;
         } else Eviscerate_Timer -= diff;
-
-        if (!InVanish)
-            DoMeleeAttackIfReady();
     }
 };
 
@@ -627,8 +625,6 @@ struct boss_ellris_duskhallow : public boss_priestess_lackey_commonAI
 
             Fear_Timer = 10000;
         } else Fear_Timer -= diff;
-
-        DoMeleeAttackIfReady();
     }
 };
 
@@ -680,8 +676,6 @@ struct boss_eramas_brightblaze : public boss_priestess_lackey_commonAI
             DoCastVictim(SPELL_SNAP_KICK);
             Snap_Kick_Timer  = 4500;
         } else Snap_Kick_Timer -= diff;
-
-        DoMeleeAttackIfReady();
     }
 };
 
@@ -802,8 +796,6 @@ struct boss_yazzai : public boss_priestess_lackey_commonAI
 
             Blink_Timer = 8000;
         } else Blink_Timer -= diff;
-
-        DoMeleeAttackIfReady();
     }
 };
 
@@ -913,8 +905,6 @@ struct boss_warlord_salaris : public boss_priestess_lackey_commonAI
             DoCastVictim(SPELL_FRIGHTENING_SHOUT);
             Frightening_Shout_Timer = 18000;
         } else Frightening_Shout_Timer -= diff;
-
-        DoMeleeAttackIfReady();
     }
 };
 
@@ -1003,8 +993,6 @@ struct boss_garaxxas : public boss_priestess_lackey_commonAI
                     Freezing_Trap_Timer = 15000;
                 }
             } else Freezing_Trap_Timer -= diff;
-
-            DoMeleeAttackIfReady();
         }
         else
         {
@@ -1117,8 +1105,6 @@ struct boss_apoko : public boss_priestess_lackey_commonAI
             DoCast(me, SPELL_LESSER_HEALING_WAVE);
             Healing_Wave_Timer = 5000;
         } else Healing_Wave_Timer -= diff;
-
-        DoMeleeAttackIfReady();
     }
 };
 
@@ -1208,8 +1194,6 @@ struct boss_zelfan : public boss_priestess_lackey_commonAI
             DoCast(me, SPELL_HIGH_EXPLOSIVE_SHEEP);
             High_Explosive_Sheep_Timer = 65000;
         } else High_Explosive_Sheep_Timer -= diff;
-
-        DoMeleeAttackIfReady();
     }
 };
 

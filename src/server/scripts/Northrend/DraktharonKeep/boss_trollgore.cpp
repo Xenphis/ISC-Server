@@ -173,8 +173,6 @@ struct boss_trollgore : public BossAI
             if (ConsumeAura && ConsumeAura->GetStackAmount() > 9)
                 _consumptionJunction = false;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:

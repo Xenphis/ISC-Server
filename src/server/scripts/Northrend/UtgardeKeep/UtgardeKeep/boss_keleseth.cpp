@@ -192,8 +192,6 @@ struct boss_keleseth : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:
@@ -235,6 +233,7 @@ struct npc_vrykul_skeleton : public ScriptedAI
             {
                 me->SetReactState(REACT_PASSIVE);
                 me->SetUnitFlag(UNIT_FLAG_UNINTERACTIBLE);
+                me->SetCanMelee(false);
                 me->SetStandState(UNIT_STAND_STATE_DEAD);
 
                 _events.Reset();
@@ -296,6 +295,7 @@ struct npc_vrykul_skeleton : public ScriptedAI
                     DoCastSelf(SPELL_SHADOW_FISSURE);
                     DoCastSelf(SPELL_FULL_HEAL);
                     me->RemoveUnitFlag(UNIT_FLAG_UNINTERACTIBLE);
+                    me->SetCanMelee(true);
                     me->SetStandState(UNIT_STAND_STATE_STAND);
                     Talk(EMOTE_RISES);
                     _events.ScheduleEvent(EVENT_RESURRECT_2, 1s);
@@ -313,8 +313,6 @@ struct npc_vrykul_skeleton : public ScriptedAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:

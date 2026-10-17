@@ -103,6 +103,7 @@ public:
                     DoCastSelf(SPELL_ARCANE_INTELLECT);
 
                 channeling = false;
+                me->SetCanMelee(true);
                 eventProgress = 0;
                 spawnerCount  = 0;
                 me->SetNpcFlag(UNIT_NPC_FLAG_QUESTGIVER);
@@ -145,6 +146,7 @@ public:
             if (type == WAYPOINT_MOTION_TYPE && id == POINT_REACH_IDOL)
             {
                 channeling = true;
+                me->SetCanMelee(false);
                 events.ScheduleEvent(EVENT_CHANNEL, 2s);
             }
         }
@@ -239,8 +241,6 @@ public:
                         break;
                 }
             }
-            if (!channeling)
-                DoMeleeAttackIfReady();
         }
 
     private:
@@ -352,7 +352,6 @@ public:
                         break;
                 }
             }
-            DoMeleeAttackIfReady();
         }
 
     private:

@@ -206,8 +206,6 @@ struct boss_dalliah_the_doomsayer : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:

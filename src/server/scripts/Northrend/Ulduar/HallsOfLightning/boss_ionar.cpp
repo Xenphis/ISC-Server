@@ -261,8 +261,6 @@ struct boss_ionar : public BossAI
 
             DoCast(me, SPELL_DISPERSE, false);
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:

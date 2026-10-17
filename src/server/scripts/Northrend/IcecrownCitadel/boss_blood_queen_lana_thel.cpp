@@ -461,8 +461,6 @@ struct boss_blood_queen_lana_thel : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
     bool WasVampire(ObjectGuid guid) const

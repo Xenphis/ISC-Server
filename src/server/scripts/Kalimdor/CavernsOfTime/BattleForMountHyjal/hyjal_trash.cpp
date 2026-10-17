@@ -195,7 +195,6 @@ hyjal_trashAI::hyjal_trashAI(Creature* creature) : EscortAI(creature)
     useFlyPath = false;
     damageTaken = 0;
     memset(DummyTarget, 0, sizeof(DummyTarget));
-    Reset();
 }
 
 void hyjal_trashAI::DamageTaken(Unit* done_by, uint32& damage, DamageEffectType /*damageType*/, SpellInfo const* /*spellInfo = nullptr*/)
@@ -531,7 +530,6 @@ public:
                 DoCastVictim(SPELL_FLAME_BUFFET, true);
                 FlameBuffetTimer = 7000;
             } else FlameBuffetTimer -= diff;
-            DoMeleeAttackIfReady();
         }
     };
 
@@ -634,7 +632,6 @@ public:
                 DoCastVictim(SPELL_KNOCKDOWN);
                 KnockDownTimer = 15000 + rand32() % 10000;
             } else KnockDownTimer -= diff;
-            DoMeleeAttackIfReady();
         }
     };
 
@@ -736,8 +733,6 @@ public:
             } else FrenzyTimer -= diff;
             if (!UpdateVictim())
                 return;
-
-            DoMeleeAttackIfReady();
         }
     };
 
@@ -872,8 +867,6 @@ public:
                 DoCastVictim(SPELL_SHADOW_BOLT);
                 ShadowBoltTimer = 20000 + rand32() % 10000;
             } else ShadowBoltTimer -= diff;
-
-            DoMeleeAttackIfReady();
         }
     };
 
@@ -989,7 +982,6 @@ public:
                 DoCast(me, SPELL_ANTI_MAGIC_SHELL);
                 ShellTimer = 50000 + rand32() % 10000;
             } else ShellTimer -= diff;
-            DoMeleeAttackIfReady();
         }
     };
 
@@ -1080,7 +1072,6 @@ public:
                 DoCastVictim(SPELL_WEB);
                 WebTimer = 20000 + rand32() % 5000;
             } else WebTimer -= diff;
-            DoMeleeAttackIfReady();
         }
     };
 
@@ -1171,7 +1162,6 @@ public:
                 DoCastVictim(SPELL_MANA_BURN);
                 ManaBurnTimer = 9000 + rand32() % 5000;
             } else ManaBurnTimer -= diff;
-            DoMeleeAttackIfReady();
         }
     };
 
@@ -1514,7 +1504,6 @@ public:
                 me->CastSpell(me->GetVictim(), SPELL_EXPLODING_SHOT, args);
                 ExplodeTimer = 5000 + rand32() % 5000;
             } else ExplodeTimer -= diff;
-            DoMeleeAttackIfReady();
         }
     };
 

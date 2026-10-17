@@ -237,8 +237,6 @@ public:
                         break;
                 }
             }
-
-            DoMeleeAttackIfReady();
         }
 
         void DoAction(int32 param) override
@@ -402,8 +400,6 @@ public:
                             break;
                     }
                 }
-
-                DoMeleeAttackIfReady();
             }
 
             if (HasEscortState(STATE_ESCORT_NONE))

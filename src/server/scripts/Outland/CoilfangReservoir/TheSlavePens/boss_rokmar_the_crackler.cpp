@@ -105,8 +105,6 @@ struct boss_rokmar_the_crackler : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:

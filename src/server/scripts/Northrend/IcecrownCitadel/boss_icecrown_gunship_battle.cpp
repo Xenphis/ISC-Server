@@ -1078,12 +1078,13 @@ struct npc_high_overlord_saurfang_igb : public ScriptedAI
             }
         }
 
-        if (me->IsWithinMeleeRange(me->GetVictim()))
-            DoMeleeAttackIfReady();
-        else if (me->isAttackReady())
+        if (!me->IsWithinMeleeRange(me->GetVictim()))
         {
-            DoCastVictim(SPELL_RENDING_THROW);
-            me->resetAttackTimer();
+            if (me->isAttackReady())
+            {
+                DoCastVictim(SPELL_RENDING_THROW);
+                me->resetAttackTimer();
+            }
         }
     }
 
@@ -1338,12 +1339,13 @@ struct npc_muradin_bronzebeard_igb : public ScriptedAI
             }
         }
 
-        if (me->IsWithinMeleeRange(me->GetVictim()))
-            DoMeleeAttackIfReady();
-        else if (me->isAttackReady())
+        if (!me->IsWithinMeleeRange(me->GetVictim()))
         {
-            DoCastVictim(SPELL_RENDING_THROW);
-            me->resetAttackTimer();
+            if (me->isAttackReady())
+            {
+                DoCastVictim(SPELL_RENDING_THROW);
+                me->resetAttackTimer();
+            }
         }
     }
 
@@ -1487,8 +1489,6 @@ struct npc_gunship_boarding_addAI : public gunship_npc_AI
 
         if (!HasAttackablePlayerNearby())
             TriggerBurningPitch();
-
-        DoMeleeAttackIfReady();
     }
 
     bool CanAIAttack(Unit const* target) const override
@@ -1568,8 +1568,6 @@ struct npc_gunship_boarding_leader : public npc_gunship_boarding_addAI
                     break;
             }
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:

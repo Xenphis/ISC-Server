@@ -82,8 +82,8 @@ void CompanionAI::UpdateAI(uint32 diff)
     if (!IsRecruited() || !me->IsAlive())
         return;
 
-    if (me->IsEngaged() && UpdateVictim())
-        DoMeleeAttackIfReady();
+    if (me->IsEngaged())
+        UpdateVictim();
 
     if (_checkTimer > diff)
     {

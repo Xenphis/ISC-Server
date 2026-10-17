@@ -349,10 +349,7 @@ struct boss_volazj : public BossAI
             me->RemoveAurasDueToSpell(INSANITY_VISUAL);
         }
 
-        scheduler.Update(diff, [this]
-        {
-            DoMeleeAttackIfReady();
-        });
+        scheduler.Update(diff);
     }
 
     void JustDied(Unit* killer) override
@@ -758,10 +755,7 @@ struct npc_twisted_visage : public ScriptedAI
         if (!UpdateVictim())
             return;
 
-        _scheduler.Update(diff, [this]
-        {
-            DoMeleeAttackIfReady();
-        });
+        _scheduler.Update(diff);
     }
 
 private:

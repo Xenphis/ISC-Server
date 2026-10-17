@@ -1478,8 +1478,6 @@ public:
                     SetHoldState(false);
 
                 } else uiFight_duration -= diff;
-
-                DoMeleeAttackIfReady();
             }
         }
 

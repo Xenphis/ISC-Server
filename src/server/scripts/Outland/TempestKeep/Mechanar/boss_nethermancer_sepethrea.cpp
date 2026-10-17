@@ -151,8 +151,6 @@ struct boss_nethermancer_sepethrea : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 };
 
@@ -208,8 +206,6 @@ struct npc_raging_flames : public ScriptedAI
             return;
 
         _scheduler.Update(diff);
-
-        DoMeleeAttackIfReady();
     }
 
 private:

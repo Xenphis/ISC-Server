@@ -172,8 +172,6 @@ struct boss_watchkeeper_gargolmar : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:

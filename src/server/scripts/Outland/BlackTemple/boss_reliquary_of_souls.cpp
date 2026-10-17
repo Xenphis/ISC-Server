@@ -378,8 +378,6 @@ struct boss_essence_of_suffering : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 private:
     bool _dead;
@@ -484,8 +482,6 @@ struct boss_essence_of_desire : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 private:
     bool _dead;
@@ -583,8 +579,6 @@ struct boss_essence_of_anger : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:
@@ -646,8 +640,6 @@ struct npc_enslaved_soul : public ScriptedAI
             return;
 
         _scheduler.Update(diff);
-
-        DoMeleeAttackIfReady();
     }
 
 private:

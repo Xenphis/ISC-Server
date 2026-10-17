@@ -278,8 +278,6 @@ struct boss_wrath_scryer_soccothrates : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:

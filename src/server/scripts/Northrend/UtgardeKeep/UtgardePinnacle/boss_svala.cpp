@@ -154,11 +154,15 @@ struct boss_svala : public BossAI
         _Reset();
 
         if (_introCompleted)
+        {
             events.SetPhase(NORMAL);
+            me->SetCanMelee(true);
+        }
         else
         {
             events.SetPhase(IDLE);
             me->SetUnitFlag(UNIT_FLAG_NON_ATTACKABLE);
+            me->SetCanMelee(false);
         }
 
         me->SetDisableGravity(false);
@@ -190,6 +194,7 @@ struct boss_svala : public BossAI
         {
             events.SetPhase(INTRO);
             me->SetUnitFlag(UNIT_FLAG_NON_ATTACKABLE);
+            me->SetCanMelee(false);
 
             if (GameObject* mirror = instance->GetGameObject(DATA_UTGARDE_MIRROR))
                 mirror->SetGoState(GO_STATE_READY);
@@ -233,10 +238,8 @@ struct boss_svala : public BossAI
             _sacrificed = true;
             events.SetPhase(SACRIFICING);
             events.ScheduleEvent(EVENT_RITUAL_PREPARATION, 0s, 0, SACRIFICING);
+            me->SetCanMelee(false);
         }
-
-        if (events.IsInPhase(NORMAL))
-            DoMeleeAttackIfReady();
 
         while (uint32 eventId = events.ExecuteEvent())
         {
@@ -328,6 +331,7 @@ struct boss_svala : public BossAI
                         arthas->DespawnOrUnsummon();
                     _arthasGUID.Clear();
                     events.SetPhase(NORMAL);
+                    me->SetCanMelee(true);
                     _introCompleted = true;
                     if (Unit* target = me->SelectNearestPlayer(100.0f))
                         AttackStart(target);
@@ -372,6 +376,7 @@ struct boss_svala : public BossAI
                 case EVENT_FINISH_RITUAL:
                     me->SetDisableGravity(false);
                     me->SetReactState(REACT_AGGRESSIVE);
+                    me->SetCanMelee(true);
                     events.SetPhase(NORMAL);
                     events.ScheduleEvent(EVENT_SINISTER_STRIKE, 7s, 0, NORMAL);
                     events.ScheduleEvent(EVENT_CALL_FLAMES, 10s, 20s, 0, NORMAL);
@@ -533,8 +538,6 @@ struct npc_scourge_hulk : public ScriptedAI
         }
         else
             volatileInfection -= diff;
-
-        DoMeleeAttackIfReady();
     }
 
 private:

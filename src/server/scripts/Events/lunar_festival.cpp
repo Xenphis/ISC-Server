@@ -379,8 +379,6 @@ struct npc_omen : public ScriptedAI
                 events.ScheduleEvent(EVENT_CAST_STARFALL, 14s, 16s);
                 break;
         }
-
-        DoMeleeAttackIfReady();
     }
 };
 

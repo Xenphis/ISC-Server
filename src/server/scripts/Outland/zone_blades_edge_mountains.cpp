@@ -222,8 +222,6 @@ public:
                 DoCastVictim(SPELL_ARCANE_BLAST);
                 ArcaneBlast_Timer = 2500 + rand32() % 5000;
             } else ArcaneBlast_Timer -= diff;
-
-            DoMeleeAttackIfReady();
         }
     };
 

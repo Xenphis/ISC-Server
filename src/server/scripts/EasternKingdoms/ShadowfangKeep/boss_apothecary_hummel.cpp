@@ -266,8 +266,6 @@ struct boss_apothecary_hummel : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
     void OnQuestReward(Player* /*player*/, Quest const* quest, uint32 /*opt*/) override
@@ -364,8 +362,6 @@ struct npc_apothecary_baxter : public npc_apothecary_genericAI
                     break;
             }
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:

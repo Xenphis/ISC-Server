@@ -193,8 +193,6 @@ struct boss_pathaleon_the_calculator : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:

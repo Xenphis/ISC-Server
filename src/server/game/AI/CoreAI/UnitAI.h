@@ -245,7 +245,8 @@ class TC_GAME_API UnitAI
 
         virtual bool ShouldSparWith(Unit const* /*target*/) const { return false; }
 
-        void DoMeleeAttackIfReady();
+        // Melee is handled by Unit::DoMeleeAttackIfReady (called from Creature::Update and Player::Update), kept as a no-op for scripts
+        void DoMeleeAttackIfReady() { }
         bool DoSpellAttackIfReady(uint32 spellId);
 
         static AISpellInfoType* AISpellInfo;

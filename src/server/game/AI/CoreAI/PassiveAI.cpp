@@ -22,6 +22,7 @@
 PassiveAI::PassiveAI(Creature* creature) noexcept : CreatureAI(creature)
 {
     creature->SetReactState(REACT_PASSIVE);
+    creature->SetCanMelee(false);
 }
 
 PossessedAI::PossessedAI(Creature* creature) noexcept : CreatureAI(creature)
@@ -32,6 +33,7 @@ PossessedAI::PossessedAI(Creature* creature) noexcept : CreatureAI(creature)
 NullCreatureAI::NullCreatureAI(Creature* creature) noexcept : CreatureAI(creature)
 {
     creature->SetReactState(REACT_PASSIVE);
+    creature->SetCanMelee(false);
 }
 
 int32 NullCreatureAI::Permissible(Creature const* creature)
@@ -62,8 +64,6 @@ void PossessedAI::UpdateAI(uint32 /*diff*/)
     {
         if (!me->IsValidAttackTarget(me->GetVictim()))
             me->AttackStop();
-        else
-            DoMeleeAttackIfReady();
     }
 }
 

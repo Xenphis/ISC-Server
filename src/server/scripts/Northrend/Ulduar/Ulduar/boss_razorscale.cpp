@@ -656,9 +656,6 @@ struct boss_razorscale : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        if (events.IsInPhase(PHASE_PERMA_GROUND))
-            DoMeleeAttackIfReady();
     }
 
 private:
@@ -1302,8 +1299,6 @@ struct npc_darkrune_watcher : public ScriptedAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:
@@ -1369,8 +1364,6 @@ struct npc_darkrune_guardian : public ScriptedAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:
@@ -1436,8 +1429,6 @@ struct npc_darkrune_sentinel : public ScriptedAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:

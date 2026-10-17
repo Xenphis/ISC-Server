@@ -324,8 +324,6 @@ struct boss_high_astromancer_solarian : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:

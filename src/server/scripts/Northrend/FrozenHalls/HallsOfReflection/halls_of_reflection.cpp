@@ -1162,8 +1162,6 @@ class npc_jaina_or_sylvanas_escape_hor : public CreatureScript
                             break;
                     }
                 }
-
-                DoMeleeAttackIfReady();
             }
 
         private:
@@ -1350,8 +1348,6 @@ class npc_the_lich_king_escape_hor : public CreatureScript
                             break;
                     }
                 }
-
-                DoMeleeAttackIfReady();
             }
 
         private:
@@ -1560,8 +1556,6 @@ class npc_ghostly_priest : public CreatureScript
                     default:
                         break;
                 }
-
-                DoMeleeAttackIfReady();
             }
         };
 
@@ -1635,8 +1629,6 @@ class npc_phantom_mage : public CreatureScript
                     default:
                         break;
                 }
-
-                DoMeleeAttackIfReady();
             }
         };
 
@@ -1728,8 +1720,6 @@ class npc_shadowy_mercenary : public CreatureScript
                     default:
                         break;
                 }
-
-                DoMeleeAttackIfReady();
             }
         };
 
@@ -1782,8 +1772,6 @@ class npc_spectral_footman : public CreatureScript
                     default:
                         break;
                 }
-
-                DoMeleeAttackIfReady();
             }
         };
 
@@ -1844,8 +1832,6 @@ class npc_tortured_rifleman : public CreatureScript
                     default:
                         break;
                 }
-
-                DoMeleeAttackIfReady();
             }
         };
 
@@ -1944,7 +1930,6 @@ class npc_frostsworn_general : public CreatureScript
                             break;
                     }
                 }
-                DoMeleeAttackIfReady();
             }
 
             void SummonClones()
@@ -2018,8 +2003,6 @@ class npc_spiritual_reflection : public CreatureScript
                     default:
                         break;
                 }
-
-                DoMeleeAttackIfReady();
             }
 
         private:
@@ -2233,8 +2216,6 @@ class npc_raging_ghoul : public CreatureScript
                     default:
                         break;
                 }
-
-                DoMeleeAttackIfReady();
             }
         };
 
@@ -2303,8 +2284,6 @@ class npc_risen_witch_doctor : public CreatureScript
                     default:
                         break;
                 }
-
-                DoMeleeAttackIfReady();
             }
         };
 
@@ -2355,8 +2334,6 @@ class npc_lumbering_abomination : public CreatureScript
                     default:
                         break;
                 }
-
-                DoMeleeAttackIfReady();
             }
         };
 
@@ -2696,8 +2673,6 @@ class npc_quel_delar_sword : public CreatureScript
                                 break;
                         }
                     }
-
-                    DoMeleeAttackIfReady();
                 }
             }
 

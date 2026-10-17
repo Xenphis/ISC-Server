@@ -436,10 +436,7 @@ public:
         if (events.IsInPhase(PHASE_THADDIUS) && !me->HasUnitState(UNIT_STATE_CASTING) && me->isAttackReady())
         {
             if (me->IsWithinMeleeRange(me->GetVictim()))
-            {
                 ballLightningEnabled = false;
-                DoMeleeAttackIfReady();
-            }
             else if (ballLightningUnlocked)
                 if (Unit* target = SelectTarget(SelectTargetMethod::Random))
                     DoCast(target, SPELL_BALL_LIGHTNING);
@@ -639,9 +636,6 @@ public:
         }
         else
             powerSurgeTimer -= uiDiff;
-
-        if (!isFeignDeath)
-            DoMeleeAttackIfReady();
     }
 
 private:
@@ -881,8 +875,6 @@ public:
             staticFieldTimer = 6 * IN_MILLISECONDS;
         }
         else staticFieldTimer -= uiDiff;
-
-        DoMeleeAttackIfReady();
     }
 
 private:

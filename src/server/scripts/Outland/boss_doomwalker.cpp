@@ -150,7 +150,6 @@ struct boss_doomwalker : public ScriptedAI
                     break;
             }
         }
-        DoMeleeAttackIfReady();
     }
 
     private:

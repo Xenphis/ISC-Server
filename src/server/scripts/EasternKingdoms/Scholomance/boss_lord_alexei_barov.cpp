@@ -84,8 +84,6 @@ struct boss_lord_alexei_barov : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 };
 

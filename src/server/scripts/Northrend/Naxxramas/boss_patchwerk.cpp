@@ -172,8 +172,6 @@ struct boss_patchwerk : public BossAI
             Talk(EMOTE_FRENZY);
             _enraged = true;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:

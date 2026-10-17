@@ -885,8 +885,6 @@ void hyjalAI::UpdateAI(uint32 diff)
             } else SpellTimer[i] -= diff;
         }
     }
-
-    DoMeleeAttackIfReady();
 }
 
 void hyjalAI::JustDied(Unit* /*killer*/)

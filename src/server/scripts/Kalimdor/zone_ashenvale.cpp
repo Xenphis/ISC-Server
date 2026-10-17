@@ -324,7 +324,6 @@ public:
                     }
                     return;
                 }
-                DoMeleeAttackIfReady();
             }
 
     private:

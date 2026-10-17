@@ -219,8 +219,6 @@ struct boss_baltharus_the_warborn : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:
@@ -300,8 +298,6 @@ struct npc_baltharus_the_warborn_clone : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 };
 

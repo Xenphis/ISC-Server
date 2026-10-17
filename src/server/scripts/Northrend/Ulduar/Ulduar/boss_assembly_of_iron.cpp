@@ -270,8 +270,6 @@ class boss_steelbreaker : public CreatureScript
                     if (me->HasUnitState(UNIT_STATE_CASTING))
                         return;
                 }
-
-                DoMeleeAttackIfReady();
             }
         };
 
@@ -438,8 +436,6 @@ class boss_runemaster_molgeim : public CreatureScript
                     if (me->HasUnitState(UNIT_STATE_CASTING))
                         return;
                 }
-
-                DoMeleeAttackIfReady();
             }
         };
 
@@ -653,8 +649,6 @@ class boss_stormcaller_brundir : public CreatureScript
                     if (me->HasUnitState(UNIT_STATE_CASTING))
                         return;
                 }
-
-                DoMeleeAttackIfReady();
             }
 
             private:

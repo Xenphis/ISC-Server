@@ -327,8 +327,6 @@ struct boss_devourer_of_souls : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:

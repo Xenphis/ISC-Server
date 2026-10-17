@@ -112,8 +112,6 @@ struct boss_doctor_theolen_krastinov : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:

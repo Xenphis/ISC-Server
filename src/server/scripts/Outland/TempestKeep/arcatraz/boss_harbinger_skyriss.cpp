@@ -235,7 +235,6 @@ struct boss_harbinger_skyriss : public BossAI
                 return;
         }
 
-        DoMeleeAttackIfReady();
     }
 
 private:

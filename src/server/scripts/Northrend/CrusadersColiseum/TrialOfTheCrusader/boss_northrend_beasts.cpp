@@ -320,8 +320,6 @@ struct boss_northrend_beastsAI : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 };
 
@@ -442,6 +440,7 @@ struct npc_snobold_vassal : public ScriptedAI
                 break;
             case ACTION_ACTIVE_SNOBOLD:
                 _mountedOnPlayer = true;
+                me->SetCanMelee(true);
                 break;
             default:
                 break;
@@ -467,6 +466,7 @@ struct npc_snobold_vassal : public ScriptedAI
         if (gormok && gormok->IsAlive())
         {
             me->AttackStop();
+            me->SetCanMelee(false);
             _targetGUID.Clear();
             _mountedOnPlayer = false;
             _events.CancelEvent(EVENT_BATTER);
@@ -488,6 +488,7 @@ struct npc_snobold_vassal : public ScriptedAI
             _events.CancelEvent(EVENT_CHECK_MOUNT);
             _events.CancelEvent(EVENT_FIRE_BOMB);
             me->AttackStop();
+            me->SetCanMelee(true);
             SetCombatMovement(true);
             _gormokDead = true;
             if (Unit* target = SelectTarget(SelectTargetMethod::Random, 0, 0.0f, true))
@@ -548,10 +549,6 @@ struct npc_snobold_vassal : public ScriptedAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        // do melee attack only if is in player back or if gormok is dead.
-        if (_mountedOnPlayer || _gormokDead)
-            DoMeleeAttackIfReady();
     }
 
 private:
@@ -666,6 +663,7 @@ struct boss_jormungarAI : public boss_northrend_beastsAI
     {
         Initialize();
         boss_northrend_beastsAI::Reset();
+        me->SetCanMelee(true);
     }
 
     void JustSummoned(Creature* summoned) override
@@ -757,6 +755,7 @@ struct boss_jormungarAI : public boss_northrend_beastsAI
             events.ScheduleEvent(EVENT_EMERGE, 6s, 0, PHASE_SUBMERGED);
             me->SetUnitFlag(UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_UNINTERACTIBLE);
         }
+        me->SetCanMelee(false);
         me->GetMotionMaster()->MovePoint(0, ToCCommonLoc[1].GetPositionX() + frand(-40.0f, 40.0f), ToCCommonLoc[1].GetPositionY() + frand(-40.0f, 40.0f), ToCCommonLoc[1].GetPositionZ() + me->GetCollisionHeight());
     }
 
@@ -778,6 +777,7 @@ struct boss_jormungarAI : public boss_northrend_beastsAI
         {
             me->SetControlled(true, UNIT_STATE_ROOT);
             me->SetDisplayId(modelStationary);
+            me->SetCanMelee(false);
             DoCastSelf(SPELL_GROUND_VISUAL_1, true);
             events.SetPhase(PHASE_STATIONARY);
         }
@@ -786,6 +786,7 @@ struct boss_jormungarAI : public boss_northrend_beastsAI
             if (Unit* target = me->GetVictim())
                 me->GetMotionMaster()->MoveChase(target);
             me->SetDisplayId(modelMobile);
+            me->SetCanMelee(true);
             events.SetPhase(PHASE_MOBILE);
         }
         wasMobile = !wasMobile;
@@ -801,6 +802,7 @@ struct boss_jormungarAI : public boss_northrend_beastsAI
                 {
                     instance->DoCloseDoorOrButton(instance->GetGuidData(DATA_MAIN_GATE));
                     me->SetImmuneToPC(false);
+                    me->SetCanMelee(true);
                     events.SetPhase(PHASE_MOBILE);
                     me->SetReactState(REACT_AGGRESSIVE);
                     DoZoneInCombat();
@@ -864,9 +866,7 @@ struct boss_jormungarAI : public boss_northrend_beastsAI
                 return;
         }
 
-        if (events.IsInPhase(PHASE_MOBILE))
-            DoMeleeAttackIfReady();
-        else
+        if (!events.IsInPhase(PHASE_MOBILE))
             DoCastVictim(spitSpell);
     }
 

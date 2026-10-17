@@ -278,6 +278,7 @@ struct boss_felmyst : public BossAI
                 break;
         }
         phase = NextPhase;
+        me->SetCanMelee(phase == PHASE_GROUND);
     }
 
     void HandleFlightSequence()
@@ -456,7 +457,6 @@ struct boss_felmyst : public BossAI
                     EnterPhase(PHASE_FLIGHT);
                     break;
                 default:
-                    DoMeleeAttackIfReady();
                     break;
             }
         }

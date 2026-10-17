@@ -235,8 +235,6 @@ public:
                         break;
                 }
             }
-
-            DoMeleeAttackIfReady();
         }
 
         void OnQuestReward(Player* player, Quest const* quest, uint32 /*opt*/) override

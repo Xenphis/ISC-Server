@@ -1713,11 +1713,8 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
         void SendLogXPGain(uint32 GivenXP, Unit* victim, uint32 BonusXP, bool recruitAFriend = false, float group_rate=1.0f) const;
 
         // notifiers
-        void SendAttackSwingCantAttack() const;
         void SendAttackSwingCancelAttack() const;
-        void SendAttackSwingDeadTarget() const;
-        void SendAttackSwingNotInRange() const;
-        void SendAttackSwingBadFacingAttack() const;
+        void SetAttackSwingError(Optional<AttackSwingErr> err);
         void SendAutoRepeatCancel(Unit* target);
         void SendExplorationExperience(uint32 Area, uint32 Experience) const;
 
@@ -2450,7 +2447,7 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
         uint32 m_titanGripWeaponSubclasses;
         uint32 m_titanGripArmorSubclasses;
         uint32 m_titanGripPenaltySpellId;
-        uint8 m_swingErrorMsg;
+        Optional<AttackSwingErr> m_swingErrorMsg;
         float m_ammoDPS;
 
         ////////////////////Rest System/////////////////////

@@ -480,8 +480,6 @@ struct boss_hodir : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:
@@ -617,7 +615,10 @@ protected:
 // 33330 - Battle-Priest Gina
 struct npc_hodir_priest : public CoolestFriendBaseAI
 {
-    npc_hodir_priest(Creature* creature) : CoolestFriendBaseAI(creature) { }
+    npc_hodir_priest(Creature* creature) : CoolestFriendBaseAI(creature)
+    {
+        me->SetCanMelee(false); // DoSpellAttackIfReady
+    }
 
     void ScheduleEvents() override
     {
@@ -652,7 +653,10 @@ struct npc_hodir_priest : public CoolestFriendBaseAI
 // 33332 - Spiritwalker Tara
 struct npc_hodir_shaman : public CoolestFriendBaseAI
 {
-    npc_hodir_shaman(Creature* creature) : CoolestFriendBaseAI(creature) { }
+    npc_hodir_shaman(Creature* creature) : CoolestFriendBaseAI(creature)
+    {
+        me->SetCanMelee(false); // DoSpellAttackIfReady
+    }
 
     void ScheduleEvents() override
     {
@@ -676,7 +680,10 @@ struct npc_hodir_shaman : public CoolestFriendBaseAI
 // 33333 - Kar Greycloud
 struct npc_hodir_druid : public CoolestFriendBaseAI
 {
-    npc_hodir_druid(Creature* creature) : CoolestFriendBaseAI(creature) { }
+    npc_hodir_druid(Creature* creature) : CoolestFriendBaseAI(creature)
+    {
+        me->SetCanMelee(false); // DoSpellAttackIfReady
+    }
 
     void JustAppeared() override
     {
@@ -706,7 +713,10 @@ struct npc_hodir_druid : public CoolestFriendBaseAI
 // 33331 - Amira Blazeweaver
 struct npc_hodir_mage : public CoolestFriendBaseAI
 {
-    npc_hodir_mage(Creature* creature) : CoolestFriendBaseAI(creature) { }
+    npc_hodir_mage(Creature* creature) : CoolestFriendBaseAI(creature)
+    {
+        me->SetCanMelee(false); // DoSpellAttackIfReady
+    }
 
     void ScheduleEvents() override
     {

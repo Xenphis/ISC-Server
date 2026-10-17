@@ -321,8 +321,6 @@ struct boss_majordomo : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
     bool OnGossipSelect(Player* player, uint32 menuId, uint32 /*gossipListId*/) override

@@ -418,8 +418,6 @@ struct boss_vazruden_the_herald : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:

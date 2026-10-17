@@ -117,8 +117,6 @@ struct boss_grobbulus : public BossAI
                     break;
             }
         }
-
-        DoMeleeAttackIfReady();
     }
 };
 
@@ -172,8 +170,6 @@ struct npc_fallout_slime : public ScriptedAI
 
         if (!UpdateVictim())
             return;
-
-        DoMeleeAttackIfReady();
     }
 
 private:

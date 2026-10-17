@@ -343,7 +343,6 @@ struct npc_tallhorn_stag : public ScriptedAI
         }
         if (!UpdateVictim())
             return;
-        DoMeleeAttackIfReady();
     }
     private:
         uint8 _phase;
@@ -460,14 +459,6 @@ struct npc_wounded_skirmisher : public ScriptedAI
             }
         }
     }
-
-    void UpdateAI(uint32 /*diff*/) override
-    {
-        if (!UpdateVictim())
-            return;
-
-        DoMeleeAttackIfReady();
-    }
     private:
         Milliseconds _despawnTimer;
 };
@@ -551,7 +542,6 @@ struct npc_venture_co_straggler : public ScriptedAI
 
         if (!UpdateVictim())
             return;
-        DoMeleeAttackIfReady();
     }
 
     void SpellHit(WorldObject* caster, SpellInfo const* spellInfo) override

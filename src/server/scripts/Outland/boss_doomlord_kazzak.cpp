@@ -182,8 +182,6 @@ struct boss_doom_lord_kazzak : public WorldBossAI
                     break;
             }
         }
-
-        DoMeleeAttackIfReady();
     }
 };
 

@@ -109,8 +109,6 @@ class boss_emperor_dagran_thaurissan : public CreatureScript
                             break;
                     }
                 }
-
-                DoMeleeAttackIfReady();
             }
 
         private:

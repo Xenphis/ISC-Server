@@ -530,8 +530,6 @@ class boss_freya : public CreatureScript
                         }
                     }
                 }
-
-                DoMeleeAttackIfReady();
             }
 
             // Check if all Trio NPCs are dead - achievement check
@@ -809,8 +807,6 @@ class boss_elder_brightleaf : public CreatureScript
                     if (me->HasUnitState(UNIT_STATE_CASTING))
                         return;
                 }
-
-                DoMeleeAttackIfReady();
             }
 
             void DoAction(int32 action) override
@@ -918,8 +914,6 @@ class boss_elder_stonebark : public CreatureScript
                     if (me->HasUnitState(UNIT_STATE_CASTING))
                         return;
                 }
-
-                DoMeleeAttackIfReady();
             }
 
             void DoAction(int32 action) override
@@ -1012,8 +1006,6 @@ class boss_elder_ironbranch : public CreatureScript
                     if (me->HasUnitState(UNIT_STATE_CASTING))
                         return;
                 }
-
-                DoMeleeAttackIfReady();
             }
 
             void DoAction(int32 action) override
@@ -1083,8 +1075,6 @@ class npc_detonating_lasher : public CreatureScript
                 }
                 else
                     changeTargetTimer -= diff;
-
-                DoMeleeAttackIfReady();
             }
 
         private:
@@ -1141,8 +1131,6 @@ class npc_ancient_water_spirit : public CreatureScript
                 }
                 else
                     tidalWaveTimer -= diff;
-
-                DoMeleeAttackIfReady();
             }
 
             void JustDied(Unit* /*killer*/) override
@@ -1215,8 +1203,6 @@ class npc_storm_lasher : public CreatureScript
                 }
                 else
                     stormboltTimer -= diff;
-
-                DoMeleeAttackIfReady();
             }
 
             void JustDied(Unit* /*killer*/) override
@@ -1264,8 +1250,6 @@ class npc_snaplasher : public CreatureScript
 
                 if (!me->HasAura(SPELL_BARK_AURA))
                     DoCast(SPELL_HARDENED_BARK);
-
-                DoMeleeAttackIfReady();
             }
 
             void JustDied(Unit* /*killer*/) override
@@ -1350,8 +1334,6 @@ class npc_ancient_conservator : public CreatureScript
                 }
                 else
                     natureFuryTimer -= diff;
-
-                DoMeleeAttackIfReady();
             }
 
         private:

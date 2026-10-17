@@ -80,8 +80,6 @@ class boss_ambassador_flamelash : public CreatureScript
                             break;
                     }
                 }
-
-                DoMeleeAttackIfReady();
             }
 
         private:

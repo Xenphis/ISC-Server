@@ -122,7 +122,6 @@ struct boss_mordresh_fire_eye : public BossAI
                 return;
         }
 
-        DoMeleeAttackIfReady();
     }
 };
 

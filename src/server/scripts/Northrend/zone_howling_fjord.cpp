@@ -101,8 +101,6 @@ struct npc_daegarn : public ScriptedAI
 
         if (!UpdateVictim())
             return;
-
-        DoMeleeAttackIfReady();
     }
 
     void JustSummoned(Creature* summon) override

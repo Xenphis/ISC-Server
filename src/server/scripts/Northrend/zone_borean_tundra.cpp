@@ -716,8 +716,6 @@ struct npc_thassarian : public ScriptedAI
 
         if (!UpdateVictim())
             return;
-
-        DoMeleeAttackIfReady();
     }
 
     void JustDied(Unit* /*killer*/) override
@@ -860,7 +858,6 @@ struct npc_counselor_talbot : public ScriptedAI
                 }
             }
         }
-        DoMeleeAttackIfReady();
     }
 
     void JustDied(Unit* /*killer*/) override
