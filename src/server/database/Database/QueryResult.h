@@ -20,7 +20,17 @@
 
 #include "Define.h"
 #include "DatabaseEnvFwd.h"
+#include <limits>
+#include <string>
+#include <string_view>
+#include <unordered_map>
 #include <vector>
+
+namespace Trinity::DB
+{
+// index stored for a column alias that appears more than once in a query, such an alias cannot be used to access fields by name
+inline constexpr std::size_t FieldAliasAmbiguous = std::numeric_limits<std::size_t>::max();
+}
 
 class TC_DATABASE_API ResultSet
 {
@@ -34,11 +44,13 @@ class TC_DATABASE_API ResultSet
 
         Field* Fetch() const { return _currentRow; }
         Field const& operator[](std::size_t index) const;
+        Field const& operator[](std::string_view const& alias) const;
 
         QueryResultFieldMetadata const& GetFieldMetadata(std::size_t index) const;
 
     protected:
         std::vector<QueryResultFieldMetadata> _fieldMetadata;
+        std::unordered_map<std::string_view, std::size_t> _fieldIndexByAlias;
         uint64 _rowCount;
         Field* _currentRow;
         uint32 _fieldCount;
@@ -64,11 +76,13 @@ class TC_DATABASE_API PreparedResultSet
 
         Field* Fetch() const;
         Field const& operator[](std::size_t index) const;
+        Field const& operator[](std::string_view const& alias) const;
 
         QueryResultFieldMetadata const& GetFieldMetadata(std::size_t index) const;
 
     protected:
         std::vector<QueryResultFieldMetadata> m_fieldMetadata;
+        std::unordered_map<std::string_view, std::size_t> m_fieldIndexByAlias;
         std::vector<Field> m_rows;
         uint64 m_rowCount;
         uint64 m_rowPosition;
