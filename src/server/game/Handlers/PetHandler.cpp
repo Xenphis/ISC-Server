@@ -370,7 +370,7 @@ void WorldSession::HandlePetActionHelper(Unit* pet, ObjectGuid guid1, uint32 spe
                 if (!pet->GetSpellHistory()->HasCooldown(spellid))
                     pet->GetSpellHistory()->ResetCooldown(spellid, true);
 
-                spell->finish(false);
+                spell->finish(result);
                 delete spell;
 
                 // reset specific flags in case of spell fail. AI will reset other flags
@@ -814,7 +814,7 @@ void WorldSession::HandlePetCastSpellOpcode(WorldPackets::Spells::PetCastSpell& 
         if (!caster->GetSpellHistory()->HasCooldown(spellInfo->Id))
             caster->GetSpellHistory()->ResetCooldown(spellInfo->Id, true);
 
-        spell->finish(false);
+        spell->finish(result);
         delete spell;
     }
 }

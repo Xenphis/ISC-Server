@@ -677,7 +677,7 @@ SpellInfo const* SpellScript::GetTriggeringSpell() const
 void SpellScript::FinishCast(SpellCastResult result, uint32* param1 /*= nullptr*/, uint32* param2 /*= nullptr*/)
 {
     m_spell->SendCastResult(result, param1, param2);
-    m_spell->finish(result == SPELL_CAST_OK);
+    m_spell->finish(result);
 }
 
 void SpellScript::SetCustomCastResultMessage(SpellCustomErrors result)
