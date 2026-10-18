@@ -260,7 +260,8 @@ Creature::Creature(bool isWorldObject): Unit(isWorldObject), MapObject(), m_Play
     m_meleeDamageSchoolMask(SPELL_SCHOOL_MASK_NORMAL), m_baseAttackPower(0), m_baseRangedAttackPower(0), m_originalEntry(0),
     m_homePosition(), m_transportHomePosition(), m_creatureInfo(nullptr), m_creatureData(nullptr), m_stringIds(),
     _waypointPathId(0), _currentWaypointNodeInfo(0, 0), m_formation(nullptr), m_triggerJustAppeared(true), m_respawnCompatibilityMode(false),
-    _lastDamagedTime(0), _regenerateHealth(true), _regenerateHealthLock(false), _isMissingCanSwimFlagOutOfCombat(false)
+    _lastDamagedTime(0), _regenerateHealth(true), _regenerateHealthLock(false), _isMissingCanSwimFlagOutOfCombat(false),
+    _sparringHealthPct(0)
 {
     m_regenTimer = CREATURE_REGEN_INTERVAL;
     m_valuesCount = UNIT_END;
@@ -632,6 +633,7 @@ bool Creature::UpdateEntry(uint32 entry, CreatureData const* data /*= nullptr*/,
 
     LoadTemplateRoot();
     LoadCreaturesAddon();
+    LoadCreaturesSparringHealth();
     InitializeMovementFlags();
     LoadTemplateImmunities();
 
@@ -2108,7 +2110,10 @@ void Creature::setDeathState(DeathState s)
         Unit::setDeathState(ALIVE);
 
         if (!IsPet())
+        {
             LoadCreaturesAddon();
+            LoadCreaturesSparringHealth();
+        }
     }
 }
 
@@ -2575,6 +2580,55 @@ CreatureAddon const* Creature::GetCreatureAddon() const
     return sObjectMgr->GetCreatureTemplateAddon(GetCreatureTemplate()->Entry);
 }
 
+void Creature::OverrideSparringHealthPct(std::vector<float> const& healthPct)
+{
+    _sparringHealthPct = Trinity::Containers::SelectRandomContainerElement(healthPct);
+}
+
+uint32 Creature::CalculateDamageForSparring(Unit* attacker, uint32 damage)
+{
+    if (GetSparringHealthPct() == 0)
+        return damage;
+
+    if (!attacker)
+        return damage;
+
+    if (!attacker->IsCreature() || attacker->IsCharmedOwnedByPlayerOrPlayer() || IsCharmedOwnedByPlayerOrPlayer())
+        return damage;
+
+    if (GetHealthPct() <= GetSparringHealthPct())
+        return 0;
+
+    uint32 sparringHealth = GetMaxHealth() * GetSparringHealthPct() / 100;
+    if (GetHealth() - damage <= sparringHealth)
+        return GetHealth() - sparringHealth;
+
+    if (damage >= GetHealth())
+        return GetHealth() - 1;
+
+    return damage;
+}
+
+bool Creature::ShouldFakeDamageFrom(Unit* attacker)
+{
+    if (!GetSparringHealthPct())
+        return false;
+
+    if (!attacker)
+        return false;
+
+    if (!attacker->IsCreature())
+        return false;
+
+    if (attacker->IsCharmedOwnedByPlayerOrPlayer() || IsCharmedOwnedByPlayerOrPlayer())
+        return false;
+
+    if (GetHealthPct() > GetSparringHealthPct())
+        return false;
+
+    return true;
+}
+
 //creature_addon table
 bool Creature::LoadCreaturesAddon()
 {
@@ -2630,6 +2684,12 @@ bool Creature::LoadCreaturesAddon()
     }
 
     return true;
+}
+
+void Creature::LoadCreaturesSparringHealth()
+{
+    if (std::vector<float> const* templateValues = sObjectMgr->GetCreatureTemplateSparringValues(GetCreatureTemplate()->Entry))
+        _sparringHealthPct = Trinity::Containers::SelectRandomContainerElement(*templateValues);
 }
 
 /// Send a message to LocalDefense channel for players opposition team in the zone

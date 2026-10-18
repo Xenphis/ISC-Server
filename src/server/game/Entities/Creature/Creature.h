@@ -87,6 +87,7 @@ class TC_GAME_API Creature : public Unit, public GridObject<Creature>, public Ma
         static Creature* CreateCreatureFromDB(ObjectGuid::LowType spawnId, Map* map, bool addToMap = true, bool allowDuplicate = false);
         
         bool LoadCreaturesAddon();
+        void LoadCreaturesSparringHealth();
         void SelectLevel();
         void UpdateLevelDependantStats();
         void LoadEquipment(int8 id = 1, bool force = false);
@@ -373,6 +374,11 @@ class TC_GAME_API Creature : public Unit, public GridObject<Creature>, public Ma
         void AtEngage(Unit* target) override;
         void AtDisengage() override;
 
+        void OverrideSparringHealthPct(std::vector<float> const& healthPct);
+        float GetSparringHealthPct() const { return _sparringHealthPct; }
+        uint32 CalculateDamageForSparring(Unit* attacker, uint32 damage);
+        bool ShouldFakeDamageFrom(Unit* attacker);
+
         bool HasCanSwimFlagOutOfCombat() const
         {
             return !_isMissingCanSwimFlagOutOfCombat;
@@ -482,6 +488,7 @@ class TC_GAME_API Creature : public Unit, public GridObject<Creature>, public Ma
         bool _regenerateHealthLock; // Dynamically set
 
         bool _isMissingCanSwimFlagOutOfCombat;
+        float _sparringHealthPct;
 };
 
 class TC_GAME_API AssistDelayEvent : public BasicEvent

@@ -719,6 +719,10 @@ bool Unit::HasBreakableByDamageCrowdControlAura(Unit* excludeCasterChannel) cons
 {
     uint32 rage_damage = damage + (cleanDamage ? cleanDamage->absorbed_damage : 0);
 
+    // sparring
+    if (Creature* victimCreature = victim->ToCreature())
+        damage = victimCreature->CalculateDamageForSparring(attacker, damage);
+
     if (UnitAI* victimAI = victim->GetAI())
         victimAI->DamageTaken(attacker, damage, damagetype, spellProto);
 
@@ -1980,6 +1984,13 @@ void Unit::HandleEmoteCommand(Emote emoteId)
             uint32 split_absorb = 0;
             Unit::DealDamageMods(caster, splitDamage, &split_absorb);
 
+            // sparring
+            if (Creature* victimCreature = damageInfo.GetVictim()->ToCreature())
+            {
+                if (victimCreature->ShouldFakeDamageFrom(damageInfo.GetAttacker()))
+                    damageInfo.ModifyDamage(damageInfo.GetDamage() * -1);
+            }
+
             SpellNonMeleeDamage log(damageInfo.GetAttacker(), caster, (*itr)->GetId(), damageInfo.GetSchoolMask());
             log.damage = splitDamage;
             log.absorb = split_absorb;
@@ -2163,6 +2174,13 @@ void Unit::AttackerStateUpdate(Unit* victim, WeaponAttackType attType, bool extr
 
         for (uint8 i = 0; i < MAX_ITEM_PROTO_DAMAGES; ++i)
             Unit::DealDamageMods(victim, damageInfo.Damages[i].Damage, &damageInfo.Damages[i].Absorb);
+
+        // sparring
+        if (Creature* victimCreature = victim->ToCreature())
+        {
+            if (victimCreature->ShouldFakeDamageFrom(damageInfo.Attacker))
+                damageInfo.HitInfo |= HITINFO_FAKE_DAMAGE;
+        }
 
         // Rage reward (only from direct melee weapon damage)
         if (this != victim && GetPowerType() == POWER_RAGE)
