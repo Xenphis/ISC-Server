@@ -1192,7 +1192,19 @@ bool SpellInfo::IsRequiringDeadTarget() const
 
 bool SpellInfo::IsAllowingDeadTarget() const
 {
-    return HasAttribute(SPELL_ATTR2_ALLOW_DEAD_TARGET) || Targets & (TARGET_FLAG_CORPSE_ALLY | TARGET_FLAG_CORPSE_ENEMY | TARGET_FLAG_UNIT_DEAD);
+    if (HasAttribute(SPELL_ATTR2_ALLOW_DEAD_TARGET) || Targets & (TARGET_FLAG_CORPSE_ALLY | TARGET_FLAG_CORPSE_ENEMY | TARGET_FLAG_UNIT_DEAD))
+        return true;
+
+    for (SpellEffectInfo const& effect : GetEffects())
+    {
+        if (!effect.IsEffect())
+            continue;
+
+        if (effect.TargetA.GetObjectType() == TARGET_OBJECT_TYPE_CORPSE || effect.TargetB.GetObjectType() == TARGET_OBJECT_TYPE_CORPSE)
+            return true;
+    }
+
+    return false;
 }
 
 bool SpellInfo::IsGroupBuff() const
