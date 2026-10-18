@@ -716,7 +716,7 @@ void MotionMaster::MoveCharge(PathGenerator const& path, float speed /*= SPEED_C
     init.Launch();
 }
 
-void MotionMaster::MoveKnockbackFrom(Position const& origin, float speedXY, float speedZ)
+void MotionMaster::MoveKnockbackFrom(Position const& origin, float speedXY, float speedZ, float angle /*= M_PI*/)
 {
     // This function may make players fall below map
     if (_owner->GetTypeId() == TYPEID_PLAYER)
@@ -726,7 +726,7 @@ void MotionMaster::MoveKnockbackFrom(Position const& origin, float speedXY, floa
         return;
 
     Position dest = _owner->GetPosition();
-    float o = dest == origin ? 0.0f : _owner->GetRelativeAngle(origin) + float(M_PI);
+    float o = (dest == origin ? 0.0f : _owner->GetRelativeAngle(origin)) + angle;
     if (speedXY < 0)
     {
         speedXY = -speedXY;
@@ -756,23 +756,6 @@ void MotionMaster::MoveKnockbackFrom(Position const& origin, float speedXY, floa
     movement->Priority = MOTION_PRIORITY_HIGHEST;
     movement->AddFlag(MOVEMENTGENERATOR_FLAG_PERSIST_ON_DEATH);
     Add(movement);
-}
-
-void MotionMaster::MoveJumpTo(float angle, float speedXY, float speedZ)
-{
-    // This function may make players fall below map
-    if (_owner->GetTypeId() == TYPEID_PLAYER)
-        return;
-
-    float x, y, z = _owner->GetPositionZ();
-
-    float moveTimeHalf = speedZ / Movement::gravity;
-    float dist = 2 * moveTimeHalf * speedXY;
-
-    _owner->GetNearPoint2D(nullptr, x, y, dist, _owner->GetOrientation() + angle);
-    _owner->UpdateAllowedPositionZ(x, y, z);
-
-    MoveJump(x, y, z, 0.0f, speedXY, speedZ);
 }
 
 void MotionMaster::MoveJump(Position const& pos, float speedXY, float speedZ, uint32 id/* = EVENT_JUMP*/, bool hasOrientation/* = false*/)

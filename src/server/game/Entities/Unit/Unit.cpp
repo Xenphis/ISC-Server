@@ -12039,15 +12039,15 @@ void Unit::SendMoveKnockBack(Player* player, float speedXY, float speedZ, float 
     player->SendDirectMessage(&data);
 }
 
-void Unit::KnockbackFrom(Position const& origin, float speedXY, float speedZ)
+void Unit::KnockbackFrom(Position const& origin, float speedXY, float speedZ, float angle /*= M_PI*/)
 {
     if (IsMovedByServer())
     {
-        GetMotionMaster()->MoveKnockbackFrom(origin, speedXY, speedZ);
+        GetMotionMaster()->MoveKnockbackFrom(origin, speedXY, speedZ, angle);
     }
     else
     {
-        float o = (GetPosition() == origin ? GetOrientation() : GetAbsoluteAngle(origin)) + float(M_PI);
+        float o = (GetPosition() == origin ? GetOrientation() : GetAbsoluteAngle(origin)) + angle;
         if (speedXY < 0)
         {
             speedXY = -speedXY;
@@ -12294,22 +12294,6 @@ uint32 Unit::GetModelForForm(ShapeshiftForm form, uint32 spellId) const
     }
 
     return modelid;
-}
-
-void Unit::JumpTo(float speedXY, float speedZ, bool forward, Optional<Position> dest)
-{
-    float angle = forward ? 0 : float(M_PI);
-    if (dest)
-        angle += GetRelativeAngle(*dest);
-
-    if (GetTypeId() == TYPEID_UNIT)
-        GetMotionMaster()->MoveJumpTo(angle, speedXY, speedZ);
-    else
-    {
-        float vcos = std::cos(angle+GetOrientation());
-        float vsin = std::sin(angle+GetOrientation());
-        SendMoveKnockBack(ToPlayer(), speedXY, -speedZ, vcos, vsin);
-    }
 }
 
 void Unit::JumpTo(WorldObject* obj, float speedZ, bool withOrientation)

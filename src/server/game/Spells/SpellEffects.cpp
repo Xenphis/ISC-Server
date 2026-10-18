@@ -4337,8 +4337,9 @@ void Spell::EffectLeapBack()
 
     float speedxy = effectInfo->MiscValue / 10.f;
     float speedz = damage/ 10.f;
+
     //1891: Disengage
-    unitTarget->JumpTo(speedxy, speedz, m_spellInfo->SpellIconID != 1891);
+    unitTarget->KnockbackFrom(unitTarget->GetPosition(), speedxy, speedz, m_spellInfo->SpellIconID != 1891 ? 0.0f : float(M_PI));
 
     // changes fall time
     if (m_caster->GetTypeId() == TYPEID_PLAYER)
@@ -4428,7 +4429,7 @@ void Spell::EffectPullTowards()
         return;
     }
 
-    unitTarget->JumpTo(speedXY, speedZ, true, pos);
+    unitTarget->KnockbackFrom(unitTarget->GetPosition(), speedXY, speedZ, unitTarget->GetRelativeAngle(pos));
 }
 
 void Spell::EffectPullTowardsDest()
@@ -4464,7 +4465,7 @@ void Spell::EffectPullTowardsDest()
         return;
     }
 
-    unitTarget->JumpTo(speedXY, speedZ, true, *pos);
+    unitTarget->KnockbackFrom(unitTarget->GetPosition(), speedXY, speedZ, unitTarget->GetRelativeAngle(pos));
 }
 
 void Spell::EffectDispelMechanic()

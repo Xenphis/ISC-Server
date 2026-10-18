@@ -1101,8 +1101,7 @@ class TC_GAME_API Unit : public WorldObject
         void UpdateHeight(float newZ);
 
         void SendMoveKnockBack(Player* player, float speedXY, float speedZ, float vcos, float vsin);
-        void KnockbackFrom(Position const& origin, float speedXY, float speedZ);
-        void JumpTo(float speedXY, float speedZ, bool forward = true, Optional<Position> dest = {});
+        void KnockbackFrom(Position const& origin, float speedXY, float speedZ, float angle = M_PI);
         void JumpTo(WorldObject* obj, float speedZ, bool withOrientation = false);
 
         void MonsterMoveWithSpeed(float x, float y, float z, float speed, bool generatePath = false, bool forceDestination = false);

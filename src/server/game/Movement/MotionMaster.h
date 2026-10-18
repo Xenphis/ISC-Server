@@ -175,8 +175,7 @@ class TC_GAME_API MotionMaster
         void MoveTakeoff(uint32 id, Position const& pos, Optional<float> velocity = {});
         void MoveCharge(float x, float y, float z, float speed = SPEED_CHARGE, uint32 id = EVENT_CHARGE, bool generatePath = false);
         void MoveCharge(PathGenerator const& path, float speed = SPEED_CHARGE);
-        void MoveKnockbackFrom(Position const& origin, float speedXY, float speedZ);
-        void MoveJumpTo(float angle, float speedXY, float speedZ);
+        void MoveKnockbackFrom(Position const& origin, float speedXY, float speedZ, float angle = M_PI);
         void MoveJump(Position const& pos, float speedXY, float speedZ, uint32 id = EVENT_JUMP, bool hasOrientation = false);
         void MoveJump(float x, float y, float z, float o, float speedXY, float speedZ, uint32 id = EVENT_JUMP, bool hasOrientation = false);
         void MoveCirclePath(float x, float y, float z, float radius, bool clockwise, uint8 stepCount);
