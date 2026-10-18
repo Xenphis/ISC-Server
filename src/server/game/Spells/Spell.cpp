@@ -3727,13 +3727,16 @@ uint64 Spell::handle_delayed(uint64 t_offset)
     bool single_missile = m_targets.HasDst();
     uint64 next_time = 0;
 
+    if (single_missile && !t_offset)
+        return m_delayMoment;
+
     Player* modOwner = m_caster->GetSpellModOwner();
     if (modOwner)
         modOwner->SetSpellModTakingSpell(this, true);
 
     PrepareTargetProcessing();
 
-    if (!m_immediateHandled && t_offset != 0)
+    if (!m_immediateHandled && t_offset)
     {
         _handle_immediate_phase();
         m_immediateHandled = true;
