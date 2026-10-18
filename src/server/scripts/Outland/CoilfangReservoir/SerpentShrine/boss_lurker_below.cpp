@@ -281,8 +281,6 @@ struct boss_the_lurker_below : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 };
 
@@ -350,8 +348,6 @@ struct npc_coilfang_ambusher : public ScriptedAI
             return;
 
         _scheduler.Update(diff);
-
-        DoMeleeAttackIfReady();
     }
 
 private:
@@ -414,8 +410,6 @@ struct npc_coilfang_guardian : public ScriptedAI
             return;
 
         _scheduler.Update(diff);
-
-        DoMeleeAttackIfReady();
     }
 
 private:

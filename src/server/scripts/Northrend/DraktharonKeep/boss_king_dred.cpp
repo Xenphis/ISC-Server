@@ -205,8 +205,6 @@ struct npc_drakkari_gutripper : public ScriptedAI
             return;
 
         _scheduler.Update(diff);
-
-        DoMeleeAttackIfReady();
     }
 
 private:
@@ -245,8 +243,6 @@ struct npc_drakkari_scytheclaw : public ScriptedAI
             return;
 
         _scheduler.Update(diff);
-
-        DoMeleeAttackIfReady();
     }
 
 private:

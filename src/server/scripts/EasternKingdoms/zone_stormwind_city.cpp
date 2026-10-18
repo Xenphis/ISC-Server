@@ -208,8 +208,6 @@ public:
 
             if (!UpdateVictim())
                 return;
-
-            DoMeleeAttackIfReady();
         }
     };
 };
@@ -292,10 +290,7 @@ public:
 
         void UpdateAI(uint32 /*diff*/) override
         {
-            if (!UpdateVictim())
-                return;
-
-            DoMeleeAttackIfReady();
+            UpdateVictim();
         }
     };
 };
@@ -459,8 +454,6 @@ public:
 
             if (!UpdateVictim())
                 return;
-
-            DoMeleeAttackIfReady();
         }
     };
 };

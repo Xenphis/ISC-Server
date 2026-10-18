@@ -197,8 +197,6 @@ struct boss_akilzon : public BossAI
                     break;
             }
         }
-
-        DoMeleeAttackIfReady();
     }
 };
 
@@ -228,8 +226,7 @@ struct npc_soaring_eagle : public ScriptedAI
     {
         _scheduler.Update(diff);
 
-        if (UpdateVictim())
-            DoMeleeAttackIfReady();
+        UpdateVictim();
     }
 
 private:

@@ -922,7 +922,6 @@ struct npc_bloodmage_laurith : public ScriptedAI
     {
         if (UpdateVictim())
         {
-            DoMeleeAttackIfReady();
             return;
         }
 

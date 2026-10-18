@@ -313,8 +313,6 @@ struct npc_ohgan : public ScriptedAI
         }
         else
             _sunderArmorTimer -= diff;
-
-        DoMeleeAttackIfReady();
     }
 
 private:
@@ -371,8 +369,6 @@ struct npc_vilebranch_speaker : public ScriptedAI
         }
         else
             _cleaveTimer -= diff;
-
-        DoMeleeAttackIfReady();
     }
 
 private:

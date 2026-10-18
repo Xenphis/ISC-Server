@@ -142,8 +142,6 @@ struct boss_azuregos : public WorldBossAI
             DoCast(me, SPELL_ENRAGE);
             _enraged = true;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:

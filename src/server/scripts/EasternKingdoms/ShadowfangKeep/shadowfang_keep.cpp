@@ -187,8 +187,6 @@ public:
                     DoCast(me, SPELL_DARK_OFFERING);
                 uiDarkOffering = urand(4400, 12500);
             } else uiDarkOffering -= uiDiff;
-
-            DoMeleeAttackIfReady();
         }
 
         void JustDied(Unit* /*killer*/) override
@@ -306,7 +304,6 @@ class boss_archmage_arugal : public CreatureScript
                             break;
                     }
                 }
-                DoMeleeAttackIfReady();
             }
         };
 

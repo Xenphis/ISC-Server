@@ -277,8 +277,6 @@ struct boss_moroes : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:
@@ -313,8 +311,6 @@ struct GuestBaseAI : public ScriptedAI
             return;
 
         scheduler.Update(diff);
-
-        DoMeleeAttackIfReady();
     }
 
 protected:

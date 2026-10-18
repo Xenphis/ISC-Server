@@ -101,8 +101,6 @@ struct boss_maleki_the_pallid : public BossAI
                     break;
             }
         }
-
-        DoMeleeAttackIfReady();
     }
 };
 

@@ -132,8 +132,6 @@ struct npc_coilfang_waterelemental : public ScriptedAI
             return;
 
         _scheduler.Update(diff);
-
-        DoMeleeAttackIfReady();
     }
 
 private:

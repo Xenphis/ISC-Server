@@ -239,8 +239,6 @@ struct boss_archaedas : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:
@@ -310,8 +308,7 @@ struct npc_earthen_hallshaper_custodian : public ScriptedAI
     {
         _scheduler.Update(diff);
 
-        if (UpdateVictim())
-            DoMeleeAttackIfReady();
+        UpdateVictim();
     }
 
 private:
@@ -376,8 +373,7 @@ struct npc_earthen_guardian : public ScriptedAI
     {
         _scheduler.Update(diff);
 
-        if (UpdateVictim())
-            DoMeleeAttackIfReady();
+        UpdateVictim();
     }
 
 private:
@@ -474,8 +470,7 @@ struct npc_vault_warder : public ScriptedAI
     {
         _scheduler.Update(diff);
 
-        if (UpdateVictim())
-            DoMeleeAttackIfReady();
+        UpdateVictim();
     }
 
 private:

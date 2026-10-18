@@ -195,8 +195,7 @@ struct boss_dorothee : public ScriptedAI
     {
         _scheduler.Update(diff);
 
-        if (UpdateVictim())
-            DoMeleeAttackIfReady();
+        UpdateVictim();
     }
 
 private:
@@ -267,8 +266,7 @@ struct boss_strawman : public ScriptedAI
     {
         _scheduler.Update(diff);
 
-        if (UpdateVictim())
-            DoMeleeAttackIfReady();
+        UpdateVictim();
     }
 
 private:
@@ -347,8 +345,7 @@ struct boss_tinhead : public ScriptedAI
     {
         _scheduler.Update(diff);
 
-        if (UpdateVictim())
-            DoMeleeAttackIfReady();
+        UpdateVictim();
     }
 
 private:
@@ -419,8 +416,7 @@ struct boss_roar : public ScriptedAI
     {
         _scheduler.Update(diff);
 
-        if (UpdateVictim())
-            DoMeleeAttackIfReady();
+        UpdateVictim();
     }
 
 private:
@@ -492,8 +488,7 @@ struct boss_crone : public BossAI
     {
         scheduler.Update(diff);
 
-        if (UpdateVictim())
-            DoMeleeAttackIfReady();
+        UpdateVictim();
     }
 };
 
@@ -544,10 +539,7 @@ struct npc_tito : public ScriptedAI
         if (!UpdateVictim())
             return;
 
-        _scheduler.Update(diff, [this]
-        {
-            DoMeleeAttackIfReady();
-        });
+        _scheduler.Update(diff);
     }
 
 private:
@@ -687,8 +679,7 @@ struct boss_big_bad_wolf : public BossAI
     {
         scheduler.Update(diff);
 
-        if (UpdateVictim())
-            DoMeleeAttackIfReady();
+        UpdateVictim();
     }
 };
 

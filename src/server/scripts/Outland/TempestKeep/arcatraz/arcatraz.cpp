@@ -229,8 +229,6 @@ struct npc_millhouse_manastorm : public ScriptedAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
     void UpdateIntroEvents(uint32 diff)

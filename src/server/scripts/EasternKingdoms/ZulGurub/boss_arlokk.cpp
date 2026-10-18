@@ -298,8 +298,6 @@ struct boss_arlokk : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:
@@ -385,7 +383,6 @@ struct npc_zulian_prowler : public ScriptedAI
     {
         if (UpdateVictim())
         {
-            DoMeleeAttackIfReady();
             return;
         }
 

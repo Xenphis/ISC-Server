@@ -343,8 +343,6 @@ struct boss_sacrolash : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:
@@ -688,8 +686,7 @@ struct npc_shadow_image : public ScriptedAI
     {
         _scheduler.Update(diff);
 
-        if (UpdateVictim())
-            DoMeleeAttackIfReady();
+        UpdateVictim();
     }
 
 private:

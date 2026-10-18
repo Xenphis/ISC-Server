@@ -298,8 +298,7 @@ struct npc_brood_of_anzu : public ScriptedAI
     {
         _scheduler.Update(diff);
 
-        if (UpdateVictim())
-            DoMeleeAttackIfReady();
+        UpdateVictim();
     }
 
 private:

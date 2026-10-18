@@ -338,8 +338,6 @@ struct boss_thekal : public BossAI
 
         if (!UpdateVictim())
             return;
-
-        DoMeleeAttackIfReady();
     }
 
 private:
@@ -472,8 +470,6 @@ struct npc_zealot_lorkhan : public ScriptedAI
 
         if (!UpdateVictim())
             return;
-
-        DoMeleeAttackIfReady();
     }
 
 private:
@@ -565,8 +561,6 @@ struct npc_zealot_zath : public ScriptedAI
 
         if (!UpdateVictim())
             return;
-
-        DoMeleeAttackIfReady();
     }
 
 private:

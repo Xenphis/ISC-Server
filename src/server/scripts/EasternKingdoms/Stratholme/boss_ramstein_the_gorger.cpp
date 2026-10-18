@@ -100,8 +100,6 @@ struct boss_ramstein_the_gorger : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 };
 

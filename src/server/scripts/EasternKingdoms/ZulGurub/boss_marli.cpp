@@ -217,8 +217,6 @@ struct boss_marli : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 };
 
@@ -267,8 +265,6 @@ struct npc_spawn_of_marli : public ScriptedAI
         }
         else
             _levelUpTimer -= diff;
-
-        DoMeleeAttackIfReady();
     }
 
 private:

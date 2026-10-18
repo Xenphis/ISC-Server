@@ -988,8 +988,6 @@ struct boss_kaelthas : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:
@@ -1115,8 +1113,6 @@ struct AdvisorBaseAI : public ScriptedAI
             return;
 
         Scheduler.Update(diff);
-
-        DoMeleeAttackIfReady();
     }
 
 protected:
@@ -1483,8 +1479,7 @@ struct npc_phoenix_the_eye : public ScriptedAI
     {
         _scheduler.Update(diff);
 
-        if (UpdateVictim())
-            DoMeleeAttackIfReady();
+        UpdateVictim();
     }
 
 private:

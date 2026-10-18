@@ -154,8 +154,6 @@ struct boss_jindo : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 };
 
@@ -230,8 +228,6 @@ struct npc_shade_of_jindo : public ScriptedAI
         }
         else
             _shadowShockTimer -= diff;
-
-        DoMeleeAttackIfReady();
     }
 
 private:

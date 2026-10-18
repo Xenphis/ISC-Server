@@ -107,8 +107,6 @@ public:
 
             if (!UpdateVictim())
                 return;
-
-            DoMeleeAttackIfReady();
         }
 
         void ReceiveEmote(Player* player, uint32 emote) override
@@ -222,8 +220,6 @@ public:
                 DoCastVictim(SPELL_SHOCK);
                 ShockTimer = 15000;
             } else ShockTimer -= diff;
-
-            DoMeleeAttackIfReady();
         }
 
         bool OnGossipSelect(Player* player, uint32 /*menuId*/, uint32 gossipListId) override

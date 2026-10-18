@@ -236,8 +236,6 @@ struct npc_nether_wraith : public ScriptedAI
             return;
 
         _scheduler.Update(diff);
-
-        DoMeleeAttackIfReady();
     }
 
 private:

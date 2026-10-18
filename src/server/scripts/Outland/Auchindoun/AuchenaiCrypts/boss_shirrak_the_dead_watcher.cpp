@@ -103,8 +103,6 @@ struct boss_shirrak_the_dead_watcher : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 };
 

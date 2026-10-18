@@ -128,8 +128,6 @@ struct boss_renataki : public BossAI
             else
                 _thousandBladesTimer -= diff;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:

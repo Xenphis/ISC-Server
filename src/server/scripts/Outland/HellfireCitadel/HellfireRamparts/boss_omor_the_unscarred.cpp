@@ -177,8 +177,6 @@ struct boss_omor_the_unscarred : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:

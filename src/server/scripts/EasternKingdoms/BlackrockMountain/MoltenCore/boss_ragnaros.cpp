@@ -378,10 +378,7 @@ struct npc_son_of_flame : public ScriptedAI
 
     void UpdateAI(uint32 /*diff*/) override
     {
-        if (!UpdateVictim())
-            return;
-
-        DoMeleeAttackIfReady();
+        UpdateVictim();
     }
 };
 

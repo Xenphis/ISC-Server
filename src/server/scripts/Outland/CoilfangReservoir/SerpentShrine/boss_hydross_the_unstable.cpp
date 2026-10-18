@@ -335,8 +335,6 @@ struct boss_hydross_the_unstable : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:

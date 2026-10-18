@@ -396,8 +396,7 @@ struct boss_entropius : public BossAI
                 return;
         }
 
-        if (UpdateVictim())
-            DoMeleeAttackIfReady();
+        UpdateVictim();
     }
 };
 
@@ -513,8 +512,7 @@ struct npc_void_sentinel : public ScriptedAI
     {
         _scheduler.Update(diff);
 
-        if (UpdateVictim())
-            DoMeleeAttackIfReady();
+        UpdateVictim();
     }
 
 private:
@@ -554,8 +552,7 @@ struct npc_void_spawn : public ScriptedAI
     {
         _scheduler.Update(diff);
 
-        if (UpdateVictim())
-            DoMeleeAttackIfReady();
+        UpdateVictim();
     }
 
 private:
@@ -808,8 +805,6 @@ struct ShadowswordBaseAI : public ScriptedAI
             return;
 
         scheduler.Update(diff);
-
-        DoMeleeAttackIfReady();
     }
 
 protected:

@@ -112,8 +112,6 @@ struct boss_death_knight_darkreaver : public ScriptedAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:

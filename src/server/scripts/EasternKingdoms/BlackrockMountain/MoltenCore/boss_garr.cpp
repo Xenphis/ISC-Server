@@ -153,10 +153,7 @@ struct npc_firesworn : public ScriptedAI
 
     void UpdateAI(uint32 /*diff*/) override
     {
-        if (!UpdateVictim())
-            return;
-
-        DoMeleeAttackIfReady();
+        UpdateVictim();
     }
 };
 

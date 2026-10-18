@@ -193,8 +193,6 @@ struct boss_warlord_kalithresh : public BossAI
                     break;
             }
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:

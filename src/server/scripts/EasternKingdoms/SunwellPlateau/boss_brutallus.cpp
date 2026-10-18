@@ -265,8 +265,6 @@ struct boss_brutallus : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 };
 
@@ -561,8 +559,7 @@ struct npc_madrigosa : public ScriptedAI
             }
         }
 
-        if (UpdateVictim())
-            DoMeleeAttackIfReady();
+        UpdateVictim();
     }
 
 private:

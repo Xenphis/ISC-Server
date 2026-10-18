@@ -164,8 +164,6 @@ struct boss_lieutenant_drake : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 };
 

@@ -258,8 +258,6 @@ struct boss_ayamiss : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:
@@ -345,10 +343,7 @@ struct npc_hive_zara_swarmer : public ScriptedAI
 
     void UpdateAI(uint32 /*diff*/) override
     {
-        if (!UpdateVictim())
-            return;
-
-        DoMeleeAttackIfReady();
+        UpdateVictim();
     }
 };
 

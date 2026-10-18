@@ -573,8 +573,6 @@ struct boss_hexlord_malacrass : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:
@@ -622,8 +620,6 @@ struct MalacrassCompanionBaseAI : public ScriptedAI
             return;
 
         Scheduler.Update(diff);
-
-        DoMeleeAttackIfReady();
     }
 
 protected:

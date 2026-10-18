@@ -193,8 +193,6 @@ struct boss_drakkari_colossus : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
     void JustSummoned(Creature* summon) override

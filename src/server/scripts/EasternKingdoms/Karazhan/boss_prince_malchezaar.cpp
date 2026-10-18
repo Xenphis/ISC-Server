@@ -207,6 +207,7 @@ public:
             AxesTargetSwitchTimer = urand(7500, 20000);
             SunderArmorTimer = urand(5000, 10000);
             phase = 1;
+            me->SetCanMelee(true);
 
             for (uint8 i = 0; i < 5; ++i)
             {
@@ -415,6 +416,7 @@ public:
                     me->InterruptNonMeleeSpells(false);
 
                     phase = 2;
+                    me->SetCanMelee(false); // melee is handled by DoMeleeAttacksIfReady
 
                     //animation
                     DoCast(me, SPELL_EQUIP_AXES);
@@ -439,6 +441,7 @@ public:
                     InfernalTimer = 15000;
 
                     phase = 3;
+                    me->SetCanMelee(true);
 
                     ClearWeapons();
 
@@ -553,8 +556,6 @@ public:
 
             if (phase == 2)
                 DoMeleeAttacksIfReady();
-            else
-                DoMeleeAttackIfReady();
         }
 
         void DoMeleeAttacksIfReady()

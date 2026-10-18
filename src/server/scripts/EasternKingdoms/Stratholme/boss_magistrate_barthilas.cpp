@@ -100,8 +100,6 @@ struct boss_magistrate_barthilas : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 };
 

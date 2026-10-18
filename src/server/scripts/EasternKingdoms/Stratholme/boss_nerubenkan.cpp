@@ -88,8 +88,6 @@ struct boss_nerubenkan : public BossAI
                     break;
             }
         }
-
-        DoMeleeAttackIfReady();
     }
 };
 

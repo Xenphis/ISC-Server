@@ -185,8 +185,6 @@ struct boss_warchief_kargath_bladefist : public BossAI
                     break;
             }
         }
-
-        DoMeleeAttackIfReady();
     }
 
 private:

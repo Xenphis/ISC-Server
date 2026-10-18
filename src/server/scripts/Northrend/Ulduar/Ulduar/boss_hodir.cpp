@@ -599,8 +599,6 @@ struct CoolestFriendBaseAI : public ScriptedAI
             return;
 
         Scheduler.Update(diff);
-
-        DoMeleeAttackIfReady();
     }
 
 protected:

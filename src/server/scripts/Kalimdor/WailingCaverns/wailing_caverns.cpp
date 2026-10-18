@@ -352,8 +352,6 @@ struct npc_disciple_of_naralex : public ScriptedAI
                     break;
             }
         }
-
-        DoMeleeAttackIfReady();
     }
 
     bool OnGossipHello(Player* player) override

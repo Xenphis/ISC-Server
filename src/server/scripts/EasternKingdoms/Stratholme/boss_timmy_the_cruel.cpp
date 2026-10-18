@@ -85,8 +85,6 @@ struct boss_timmy_the_cruel : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 };
 

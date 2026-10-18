@@ -188,8 +188,6 @@ struct boss_high_king_maulgar : public BossAI
             return;
 
         scheduler.Update(diff);
-
-        DoMeleeAttackIfReady();
     }
 
 private:
@@ -234,8 +232,6 @@ struct OgreBaseAI : public ScriptedAI
             return;
 
         Scheduler.Update(diff);
-
-        DoMeleeAttackIfReady();
     }
 
 protected:

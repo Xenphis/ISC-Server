@@ -249,8 +249,6 @@ struct npc_steamrigger_mechanic : public ScriptedAI
             return;
 
         _scheduler.Update(diff);
-
-        DoMeleeAttackIfReady();
     }
 
 private:

@@ -233,8 +233,6 @@ struct npc_andorov : public ScriptedAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 
     bool OnGossipHello(Player* player) override

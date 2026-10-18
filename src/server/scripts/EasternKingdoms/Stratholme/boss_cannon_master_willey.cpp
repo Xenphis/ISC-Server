@@ -97,8 +97,6 @@ struct boss_cannon_master_willey : public BossAI
             if (me->HasUnitState(UNIT_STATE_CASTING))
                 return;
         }
-
-        DoMeleeAttackIfReady();
     }
 };
 

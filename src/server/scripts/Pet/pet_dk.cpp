@@ -206,8 +206,6 @@ struct npc_pet_dk_rune_weapon : ScriptedAI
 
         if (!UpdateRuneWeaponVictim())
             return;
-
-        DoMeleeAttackIfReady();
     }
 
     bool CanAIAttack(Unit const* who) const override
