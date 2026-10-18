@@ -722,23 +722,34 @@ void MotionMaster::MoveKnockbackFrom(Position const& origin, float speedXY, floa
     if (_owner->GetTypeId() == TYPEID_PLAYER)
         return;
 
-    if (speedXY < 0.01f)
+    if (std::abs(speedXY) < 0.01f /* && std::abs(speedZ) < 0.01f */)
         return;
 
     Position dest = _owner->GetPosition();
+    float o = dest == origin ? 0.0f : _owner->GetRelativeAngle(origin) + float(M_PI);
+    if (speedXY < 0)
+    {
+        speedXY = -speedXY;
+        o = o - float(M_PI);
+    }
+
+    if (speedZ < 0)
+        speedZ = -speedZ; // doesn't seem to be supported on official servers - packet sent for knockback with positive and negative speed has the same flags and JumpGravity
+
     float moveTimeHalf = speedZ / Movement::gravity;
     float dist = 2 * moveTimeHalf * speedXY;
     float max_height = -Movement::computeFallElevation(moveTimeHalf, false, -speedZ);
 
     // Use a mmap raycast to get a valid destination.
-    _owner->MovePositionToFirstCollision(dest, dist, _owner->GetRelativeAngle(origin) + float(M_PI));
+    _owner->MovePositionToFirstCollision(dest, dist, o);
 
     std::function<void(Movement::MoveSplineInit&)> initializer = [=](Movement::MoveSplineInit& init)
     {
         init.MoveTo(dest.GetPositionX(), dest.GetPositionY(), dest.GetPositionZ(), false);
         init.SetParabolic(max_height, 0);
         init.SetOrientationFixed(true);
-        init.SetVelocity(speedXY);
+        if (speedXY >= 0.01f)
+            init.SetVelocity(speedXY);
     };
 
     GenericMovementGenerator* movement = new GenericMovementGenerator(std::move(initializer), EFFECT_MOTION_TYPE, 0);
