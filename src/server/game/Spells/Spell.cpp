@@ -2047,7 +2047,7 @@ void Spell::SearchChainTargets(std::list<WorldObject*>& targets, uint32 chainTar
                 if (Unit* unit = (*itr)->ToUnit())
                 {
                     uint32 deficit = unit->GetMaxHealth() - unit->GetHealth();
-                    if (deficit > maxHPDeficit && target->IsWithinDist(unit, jumpRadius) && target->IsWithinLOSInMap(unit, LINEOFSIGHT_ALL_CHECKS, VMAP::ModelIgnoreFlags::M2))
+                    if (deficit > maxHPDeficit && target->IsWithinDist(unit, jumpRadius) && IsWithinLOS(target, unit, false, VMAP::ModelIgnoreFlags::M2))
                     {
                         foundItr = itr;
                         maxHPDeficit = deficit;
@@ -2062,10 +2062,10 @@ void Spell::SearchChainTargets(std::list<WorldObject*>& targets, uint32 chainTar
             {
                 if (foundItr == tempTargets.end())
                 {
-                    if ((!isBouncingFar || target->IsWithinDist(*itr, jumpRadius)) && target->IsWithinLOSInMap(*itr, LINEOFSIGHT_ALL_CHECKS, VMAP::ModelIgnoreFlags::M2))
+                    if ((!isBouncingFar || target->IsWithinDist(*itr, jumpRadius)) && IsWithinLOS(target, *itr, false, VMAP::ModelIgnoreFlags::M2))
                         foundItr = itr;
                 }
-                else if (target->GetDistanceOrder(*itr, *foundItr) && target->IsWithinLOSInMap(*itr, LINEOFSIGHT_ALL_CHECKS, VMAP::ModelIgnoreFlags::M2))
+                else if (target->GetDistanceOrder(*itr, *foundItr) && IsWithinLOS(target, *itr, false, VMAP::ModelIgnoreFlags::M2))
                     foundItr = itr;
             }
         }
@@ -5419,7 +5419,7 @@ SpellCastResult Spell::CheckCast(bool strict, uint32* param1 /*= nullptr*/, uint
                     if (DynamicObject* dynObj = m_caster->ToUnit()->GetDynObject(m_triggeredByAuraSpell->Id))
                         losTarget = dynObj;
 
-                if (!m_spellInfo->HasAttribute(SPELL_ATTR2_IGNORE_LINE_OF_SIGHT) && !m_spellInfo->HasAttribute(SPELL_ATTR5_ALWAYS_AOE_LINE_OF_SIGHT) && !DisableMgr::IsDisabledFor(DISABLE_TYPE_SPELL, m_spellInfo->Id, nullptr, SPELL_DISABLE_LOS) && !target->IsWithinLOSInMap(losTarget, LINEOFSIGHT_ALL_CHECKS, VMAP::ModelIgnoreFlags::M2))
+                if (!m_spellInfo->HasAttribute(SPELL_ATTR5_ALWAYS_AOE_LINE_OF_SIGHT) && !IsWithinLOS(losTarget, target, true, VMAP::ModelIgnoreFlags::M2))
                     return SPELL_FAILED_LINE_OF_SIGHT;
             }
         }
@@ -5427,13 +5427,8 @@ SpellCastResult Spell::CheckCast(bool strict, uint32* param1 /*= nullptr*/, uint
 
     // Check for line of sight for spells with dest
     if (m_targets.HasDst())
-    {
-        float x, y, z;
-        m_targets.GetDstPos()->GetPosition(x, y, z);
-
-        if (!m_spellInfo->HasAttribute(SPELL_ATTR2_IGNORE_LINE_OF_SIGHT) && !m_spellInfo->HasAttribute(SPELL_ATTR5_ALWAYS_AOE_LINE_OF_SIGHT) && !DisableMgr::IsDisabledFor(DISABLE_TYPE_SPELL, m_spellInfo->Id, nullptr, SPELL_DISABLE_LOS) && !m_caster->IsWithinLOS(x, y, z, LINEOFSIGHT_ALL_CHECKS, VMAP::ModelIgnoreFlags::M2))
+        if (!m_spellInfo->HasAttribute(SPELL_ATTR5_ALWAYS_AOE_LINE_OF_SIGHT) && !IsWithinLOS(m_caster, *m_targets.GetDstPos(), VMAP::ModelIgnoreFlags::M2))
             return SPELL_FAILED_LINE_OF_SIGHT;
-    }
 
     // check pet presence
     if (Unit* unitCaster = m_caster->ToUnit())
@@ -5706,7 +5701,7 @@ SpellCastResult Spell::CheckCast(bool strict, uint32* param1 /*= nullptr*/, uint
                         return SPELL_FAILED_DONT_REPORT;
 
                     // first we must check to see if the target is in LoS. A path can usually be built but LoS matters for charge spells
-                    if (!target->IsWithinLOSInMap(unitCaster)) //Do full LoS/Path check. Don't exclude m2
+                    if (!IsWithinLOS(unitCaster, target, true, VMAP::ModelIgnoreFlags::Nothing)) //Do full LoS/Path check. Don't exclude m2
                         return SPELL_FAILED_LINE_OF_SIGHT;
 
                     float objSize = target->GetCombatReach();
@@ -7495,7 +7490,7 @@ bool Spell::CheckEffectTarget(Unit const* target, SpellEffectInfo const& spellEf
         {
             if (!m_targets.GetCorpseTargetGUID())
             {
-                if (target->IsWithinLOSInMap(m_caster, LINEOFSIGHT_ALL_CHECKS, VMAP::ModelIgnoreFlags::M2) && target->HasUnitFlag(UNIT_FLAG_SKINNABLE))
+                if (IsWithinLOS(m_caster, target, true, VMAP::ModelIgnoreFlags::M2) && target->HasUnitFlag(UNIT_FLAG_SKINNABLE))
                     return true;
 
                 return false;
@@ -7511,7 +7506,7 @@ bool Spell::CheckEffectTarget(Unit const* target, SpellEffectInfo const& spellEf
             if (!corpse->HasCorpseFlag(CORPSE_FLAG_LOOTABLE))
                 return false;
 
-            if (!corpse->IsWithinLOSInMap(m_caster, LINEOFSIGHT_ALL_CHECKS, VMAP::ModelIgnoreFlags::M2))
+            if (!IsWithinLOS(m_caster, corpse, true, VMAP::ModelIgnoreFlags::M2))
                 return false;
 
             break;
@@ -7519,7 +7514,7 @@ bool Spell::CheckEffectTarget(Unit const* target, SpellEffectInfo const& spellEf
         default:                                            // normal case
         {
             if (losPosition)
-                return target->IsWithinLOS(losPosition->GetPositionX(), losPosition->GetPositionY(), losPosition->GetPositionZ(), LINEOFSIGHT_ALL_CHECKS, VMAP::ModelIgnoreFlags::M2);
+                return IsWithinLOS(target, *losPosition, VMAP::ModelIgnoreFlags::M2);
             else
             {
                 // Get GO cast coordinates if original caster -> GO
@@ -7528,7 +7523,7 @@ bool Spell::CheckEffectTarget(Unit const* target, SpellEffectInfo const& spellEf
                     caster = m_caster->GetMap()->GetGameObject(m_originalCasterGUID);
                 if (!caster)
                     caster = m_caster;
-                if (target != m_caster && !target->IsWithinLOSInMap(caster, LINEOFSIGHT_ALL_CHECKS, VMAP::ModelIgnoreFlags::M2))
+                if (target != m_caster && !IsWithinLOS(caster, target, true, VMAP::ModelIgnoreFlags::M2))
                     return false;
             }
             break;
@@ -8394,6 +8389,33 @@ std::string Spell::GetDebugInfo() const
 Trinity::unique_weak_ptr<Spell> Spell::GetWeakPtr() const
 {
     return _spellEvent->GetSpellWeakPtr();
+}
+
+bool Spell::IsWithinLOS(WorldObject const* source, WorldObject const* target, bool targetAsSourceLocation, VMAP::ModelIgnoreFlags ignoreFlags) const
+{
+    if (m_spellInfo->HasAttribute(SPELL_ATTR2_IGNORE_LINE_OF_SIGHT))
+        return true;
+
+    if (DisableMgr::IsDisabledFor(DISABLE_TYPE_SPELL, m_spellInfo->Id, nullptr, SPELL_DISABLE_LOS))
+        return true;
+
+    if (target->IsCreature() && target->ToCreature()->CanIgnoreLineOfSightWhenCastingOnMe())
+        return true;
+
+    WorldObject const* src = targetAsSourceLocation ? target : source;
+    WorldObject const* dst = targetAsSourceLocation ? source : target;
+    return src->IsWithinLOSInMap(dst, LINEOFSIGHT_ALL_CHECKS, ignoreFlags);
+}
+
+bool Spell::IsWithinLOS(WorldObject const* source, Position const& target, VMAP::ModelIgnoreFlags ignoreFlags) const
+{
+    if (m_spellInfo->HasAttribute(SPELL_ATTR2_IGNORE_LINE_OF_SIGHT))
+        return true;
+
+    if (DisableMgr::IsDisabledFor(DISABLE_TYPE_SPELL, m_spellInfo->Id, nullptr, SPELL_DISABLE_LOS))
+        return true;
+
+    return source->IsWithinLOS(target.GetPositionX(), target.GetPositionY(), target.GetPositionZ(), LINEOFSIGHT_ALL_CHECKS, ignoreFlags);
 }
 
 namespace Trinity

@@ -20,6 +20,7 @@
 
 #include "ConditionMgr.h"
 #include "DBCEnums.h"
+#include "ModelIgnoreFlags.h"
 #include "ObjectGuid.h"
 #include "Position.h"
 #include "SharedDefines.h"
@@ -481,6 +482,9 @@ class TC_GAME_API Spell
         Trinity::unique_weak_ptr<Spell> GetWeakPtr() const;
 
         void CallScriptOnResistAbsorbCalculateHandlers(DamageInfo const& damageInfo, uint32& resistAmount, int32& absorbAmount);
+
+        bool IsWithinLOS(WorldObject const* source, WorldObject const* target, bool targetAsSourceLocation, VMAP::ModelIgnoreFlags ignoreFlags) const;
+        bool IsWithinLOS(WorldObject const* source, Position const& target, VMAP::ModelIgnoreFlags ignoreFlags) const;
 
         int64 GetUnitTargetCountForEffect(SpellEffIndex effect) const;
         int64 GetGameObjectTargetCountForEffect(SpellEffIndex effect) const;
