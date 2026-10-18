@@ -231,6 +231,7 @@ enum SpellScriptHookType
     SPELL_SCRIPT_HOOK_ON_CAST,
     SPELL_SCRIPT_HOOK_ON_RESIST_ABSORB_CALCULATION,
     SPELL_SCRIPT_HOOK_AFTER_CAST,
+    SPELL_SCRIPT_HOOK_CALC_CAST_TIME,
 };
 
 #define HOOK_SPELL_HIT_START SPELL_SCRIPT_HOOK_EFFECT_HIT
@@ -725,6 +726,9 @@ public:
     // where function is SpellCastResult function()
     HookList<CheckCastHandler> OnCheckCast;
     #define SpellCheckCastFn(F) CheckCastHandler(&F)
+
+    // example: int32 CalcCastTime(int32 castTime) override { return 1500; }
+    virtual int32 CalcCastTime(int32 castTime) { return castTime; }
 
     // example: OnEffect**** += SpellEffectFn(class::function, EffectIndexSpecifier, EffectNameSpecifier);
     // where function is void function(SpellEffIndex effIndex)
