@@ -15,12 +15,12 @@ jobs:
             cxx: g++-13
             pch: 1
             launcher: 
-          - cc: clang-17
-            cxx: clang++-17
+          - cc: clang-18
+            cxx: clang++-18
             pch: 1
             launcher: 
-          - cc: clang-17
-            cxx: clang++-17
+          - cc: clang-18
+            cxx: clang++-18
             pch: 0
             launcher: ccache
     steps:
