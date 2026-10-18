@@ -12039,16 +12039,23 @@ void Unit::SendMoveKnockBack(Player* player, float speedXY, float speedZ, float 
     player->SendDirectMessage(&data);
 }
 
-void Unit::KnockbackFrom(float x, float y, float speedXY, float speedZ)
+void Unit::KnockbackFrom(Position const& origin, float speedXY, float speedZ)
 {
     if (IsMovedByServer())
     {
-        GetMotionMaster()->MoveKnockbackFrom(x, y, speedXY, speedZ);
+        GetMotionMaster()->MoveKnockbackFrom(origin, speedXY, speedZ);
     }
     else
     {
-        float vcos, vsin;
-        GetSinCos(x, y, vsin, vcos);
+        float o = (GetPosition() == origin ? GetOrientation() : GetAbsoluteAngle(origin)) + float(M_PI);
+        if (speedXY < 0)
+        {
+            speedXY = -speedXY;
+            o = o - float(M_PI);
+        }
+
+        float vcos = std::cos(o);
+        float vsin = std::sin(o);
         SendMoveKnockBack(GetGameClientMovingMe()->GetBasePlayer(), speedXY, -speedZ, vcos, vsin);
 
         if (HasAuraType(SPELL_AURA_MOD_INCREASE_MOUNTED_FLIGHT_SPEED) || HasAuraType(SPELL_AURA_FLY))

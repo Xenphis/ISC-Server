@@ -716,7 +716,7 @@ void MotionMaster::MoveCharge(PathGenerator const& path, float speed /*= SPEED_C
     init.Launch();
 }
 
-void MotionMaster::MoveKnockbackFrom(float srcX, float srcY, float speedXY, float speedZ)
+void MotionMaster::MoveKnockbackFrom(Position const& origin, float speedXY, float speedZ)
 {
     // This function may make players fall below map
     if (_owner->GetTypeId() == TYPEID_PLAYER)
@@ -731,7 +731,7 @@ void MotionMaster::MoveKnockbackFrom(float srcX, float srcY, float speedXY, floa
     float max_height = -Movement::computeFallElevation(moveTimeHalf, false, -speedZ);
 
     // Use a mmap raycast to get a valid destination.
-    _owner->MovePositionToFirstCollision(dest, dist, _owner->GetRelativeAngle(srcX, srcY) + float(M_PI));
+    _owner->MovePositionToFirstCollision(dest, dist, _owner->GetRelativeAngle(origin) + float(M_PI));
 
     std::function<void(Movement::MoveSplineInit&)> initializer = [=](Movement::MoveSplineInit& init)
     {
