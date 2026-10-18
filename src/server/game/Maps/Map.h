@@ -687,6 +687,7 @@ class TC_GAME_API Map : public GridRefManager<NGridType>
         // Disable the spawn group, which prevents any creatures in the group from respawning until re-enabled
         // This will not affect any already-present creatures in the group
         void SetSpawnGroupInactive(uint32 groupId) { SetSpawnGroupActive(groupId, false); }
+        void InitSpawnGroupState();
 
         typedef std::function<void(Map*)> FarSpellCallback;
         void AddFarSpellCallback(FarSpellCallback&& callback);

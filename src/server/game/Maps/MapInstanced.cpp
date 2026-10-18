@@ -224,6 +224,7 @@ InstanceMap* MapInstanced::CreateInstance(uint32 InstanceId, InstanceSave* save,
 
     bool load_data = save != nullptr;
     map->CreateInstanceData(load_data);
+    map->InitSpawnGroupState();
 
     if (sWorld->getBoolConfig(CONFIG_INSTANCEMAP_LOAD_GRIDS))
         map->LoadAllCells();
@@ -256,6 +257,7 @@ BattlegroundMap* MapInstanced::CreateBattleground(uint32 InstanceId, Battlegroun
     ASSERT(map->IsBattlegroundOrArena());
     map->SetBG(bg);
     bg->SetBgMap(map);
+    map->InitSpawnGroupState();
 
     Trinity::unique_trackable_ptr<Map>& ptr = m_InstancedMaps[InstanceId];
     ptr.reset(map);
