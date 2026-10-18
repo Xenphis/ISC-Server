@@ -19,6 +19,7 @@
 #include "Battleground.h"
 #include "CellImpl.h"
 #include "ChatPackets.h"
+#include "ConditionMgr.h"
 #include "Containers.h"
 #include "DatabaseEnv.h"
 #include "DynamicTree.h"
@@ -595,6 +596,7 @@ void Map::Update(uint32 t_diff)
     if (_respawnCheckTimer <= t_diff)
     {
         ProcessRespawns();
+        UpdateSpawnGroupConditions();
         _respawnCheckTimer = sWorld->getIntConfig(CONFIG_RESPAWN_MINCHECKINTERVALMS);
     }
     else
@@ -2158,6 +2160,28 @@ bool Map::IsSpawnGroupActive(uint32 groupId) const
         return true;
     // either manual spawn group and toggled, or not manual spawn group and not toggled...
     return (_toggledSpawnGroupIds.find(groupId) != _toggledSpawnGroupIds.end()) != !(data->flags & SPAWNGROUP_FLAG_MANUAL_SPAWN);
+}
+
+void Map::UpdateSpawnGroupConditions()
+{
+    std::vector<uint32> const* spawnGroups = sObjectMgr->GetSpawnGroupsForMap(GetId());
+    if (!spawnGroups)
+        return;
+
+    for (uint32 spawnGroupId : *spawnGroups)
+    {
+        bool isActive = IsSpawnGroupActive(spawnGroupId);
+        bool shouldBeActive = sConditionMgr->IsMapMeetingNotGroupedConditions(CONDITION_SOURCE_TYPE_SPAWN_GROUP, spawnGroupId, this);
+        if (isActive == shouldBeActive)
+            continue;
+
+        if (shouldBeActive)
+            SpawnGroupSpawn(spawnGroupId);
+        else if (ASSERT_NOTNULL(GetSpawnGroupData(spawnGroupId))->flags & SPAWNGROUP_FLAG_DESPAWN_ON_CONDITION_FAILURE)
+            SpawnGroupDespawn(spawnGroupId, true);
+        else
+            SetSpawnGroupInactive(spawnGroupId);
+    }
 }
 
 ObjectGuidGenerator& Map::GetGuidSequenceGenerator(HighGuid high)
