@@ -187,13 +187,13 @@ void SpellHistory::HandleCooldowns(SpellInfo const* spellInfo, uint32 itemID, Sp
     StartCooldown(spellInfo, itemID, spell);
 }
 
-bool SpellHistory::IsReady(SpellInfo const* spellInfo, uint32 itemId /*= 0*/, bool ignoreCategoryCooldown /*= false*/) const
+bool SpellHistory::IsReady(SpellInfo const* spellInfo, uint32 itemId /*= 0*/) const
 {
     if (spellInfo->PreventionType == SPELL_PREVENTION_TYPE_SILENCE)
         if (IsSchoolLocked(spellInfo->GetSchoolMask()))
             return false;
 
-    if (HasCooldown(spellInfo->Id, itemId, ignoreCategoryCooldown))
+    if (HasCooldown(spellInfo->Id, itemId))
         return false;
 
     return true;
@@ -448,13 +448,10 @@ void SpellHistory::ResetAllCooldowns()
     _spellCooldowns.clear();
 }
 
-bool SpellHistory::HasCooldown(SpellInfo const* spellInfo, uint32 itemId /*= 0*/, bool ignoreCategoryCooldown /*= false*/) const
+bool SpellHistory::HasCooldown(SpellInfo const* spellInfo, uint32 itemId /*= 0*/) const
 {
     if (_spellCooldowns.count(spellInfo->Id) != 0)
         return true;
-
-    if (ignoreCategoryCooldown)
-        return false;
 
     uint32 category = 0;
     GetCooldownDurations(spellInfo, itemId, nullptr, &category, nullptr);
@@ -464,9 +461,9 @@ bool SpellHistory::HasCooldown(SpellInfo const* spellInfo, uint32 itemId /*= 0*/
     return _categoryCooldowns.count(category) != 0;
 }
 
-bool SpellHistory::HasCooldown(uint32 spellId, uint32 itemId /*= 0*/, bool ignoreCategoryCooldown /*= false*/) const
+bool SpellHistory::HasCooldown(uint32 spellId, uint32 itemId /*= 0*/) const
 {
-    return HasCooldown(sSpellMgr->AssertSpellInfo(spellId), itemId, ignoreCategoryCooldown);
+    return HasCooldown(sSpellMgr->AssertSpellInfo(spellId), itemId);
 }
 
 bool SpellHistory::HasCooldownOnHold(uint32 spellId) const
