@@ -795,30 +795,6 @@ bool Unit::HasBreakableByDamageCrowdControlAura(Unit* excludeCasterChannel) cons
         }
     }
 
-    // Rage from Damage made (only from direct weapon damage)
-    if (attacker && cleanDamage && damagetype == DIRECT_DAMAGE && attacker != victim && attacker->GetPowerType() == POWER_RAGE)
-    {
-        uint32 weaponSpeedHitFactor;
-
-        switch (cleanDamage->attackType)
-        {
-            case BASE_ATTACK:
-            case OFF_ATTACK:
-            {
-                weaponSpeedHitFactor = uint32(attacker->GetAttackTime(cleanDamage->attackType) / 1000.0f * (cleanDamage->attackType == BASE_ATTACK ? 3.5f : 1.75f));
-                if (cleanDamage->hitOutCome == MELEE_HIT_CRIT)
-                    weaponSpeedHitFactor *= 2;
-
-                attacker->RewardRage(rage_damage, weaponSpeedHitFactor, true);
-                break;
-            }
-            case RANGED_ATTACK:
-                break;
-            default:
-                break;
-        }
-    }
-
     if (!damage)
     {
         // Rage from absorbed damage
@@ -1153,6 +1129,7 @@ void Unit::CalculateMeleeDamage(Unit* victim, CalcDamageInfo* damageInfo, Weapon
     damageInfo->Blocked          = 0;
     damageInfo->HitInfo          = 0;
     damageInfo->TargetState      = 0;
+    damageInfo->RageGained       = 0;
 
     damageInfo->AttackType       = attackType;
     damageInfo->ProcAttacker     = PROC_FLAG_NONE;
@@ -2186,6 +2163,26 @@ void Unit::AttackerStateUpdate(Unit* victim, WeaponAttackType attType, bool extr
 
         for (uint8 i = 0; i < MAX_ITEM_PROTO_DAMAGES; ++i)
             Unit::DealDamageMods(victim, damageInfo.Damages[i].Damage, &damageInfo.Damages[i].Absorb);
+
+        // Rage reward (only from direct melee weapon damage)
+        if (this != victim && GetPowerType() == POWER_RAGE)
+        {
+            for (uint8 i = 0; i < MAX_ITEM_PROTO_DAMAGES; ++i)
+            {
+                if (!damageInfo.Damages[i].Damage && !damageInfo.Damages[i].Absorb && !damageInfo.Damages[i].Resist)
+                    continue;
+
+                uint32 weaponSpeedHitFactor = uint32(GetAttackTime(attType) / 1000.0f * (attType == BASE_ATTACK ? 3.5f : 1.75f));
+                if (damageInfo.HitOutCome == MELEE_HIT_CRIT)
+                    weaponSpeedHitFactor *= 2;
+
+                damageInfo.RageGained += RewardRage(damageInfo.Damages[i].Damage + damageInfo.Damages[i].Absorb, weaponSpeedHitFactor, true, false);
+            }
+
+            if (damageInfo.RageGained)
+                damageInfo.HitInfo |= HITINFO_RAGE_GAIN;
+        }
+
         SendAttackStateUpdate(&damageInfo);
 
         _lastDamagedTargetGuid = victim->GetGUID();
@@ -5449,7 +5446,7 @@ void Unit::SendAttackStateUpdate(CalcDamageInfo* damageInfo)
 
     packet.VictimState = damageInfo->TargetState;
     packet.BlockAmount = damageInfo->Blocked;
-    packet.RageGained = 0;
+    packet.RageGained = damageInfo->RageGained;
 
     packet.SubDmgCount = 1;
     if (damageInfo->Damages[1].Damage || damageInfo->Damages[1].Absorb || damageInfo->Damages[1].Resist)
@@ -5458,7 +5455,7 @@ void Unit::SendAttackStateUpdate(CalcDamageInfo* damageInfo)
     SendMessageToSet(packet.Write(), true);
 }
 
-void Unit::SendAttackStateUpdate(uint32 HitInfo, Unit* target, uint8 /*SwingType*/, SpellSchoolMask damageSchoolMask, uint32 Damage, uint32 AbsorbDamage, uint32 Resist, VictimState TargetState, uint32 BlockedAmount)
+void Unit::SendAttackStateUpdate(uint32 HitInfo, Unit* target, uint8 /*SwingType*/, SpellSchoolMask damageSchoolMask, uint32 Damage, uint32 AbsorbDamage, uint32 Resist, VictimState TargetState, uint32 BlockedAmount, uint32 RageGained)
 {
     CalcDamageInfo dmgInfo;
     dmgInfo.HitInfo = HitInfo;
@@ -5477,6 +5474,7 @@ void Unit::SendAttackStateUpdate(uint32 HitInfo, Unit* target, uint8 /*SwingType
 
     dmgInfo.TargetState = TargetState;
     dmgInfo.Blocked = BlockedAmount;
+    dmgInfo.RageGained = RageGained;
     SendAttackStateUpdate(&dmgInfo);
 }
 
@@ -12885,7 +12883,7 @@ PlayerMovementPendingChange::PlayerMovementPendingChange()
     time = GameTime::GetGameTimeMS();
 }
 
-void Unit::RewardRage(uint32 damage, uint32 weaponSpeedHitFactor, bool attacker)
+int32 Unit::RewardRage(uint32 damage, uint32 weaponSpeedHitFactor, bool attacker, bool withPowerUpdate /*= true*/)
 {
     float addRage;
 
@@ -12913,7 +12911,7 @@ void Unit::RewardRage(uint32 damage, uint32 weaponSpeedHitFactor, bool attacker)
 
     addRage *= sWorld->getRate(RATE_POWER_RAGE_INCOME);
 
-    ModifyPower(POWER_RAGE, uint32(addRage * 10));
+    return ModifyPower(POWER_RAGE, uint32(addRage * 10), withPowerUpdate);
 }
 
 void Unit::StopAttackFaction(uint32 faction_id)
