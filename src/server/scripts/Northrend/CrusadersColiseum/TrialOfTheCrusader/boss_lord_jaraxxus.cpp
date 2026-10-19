@@ -115,7 +115,6 @@ struct boss_jaraxxus : public BossAI
 
     void Reset() override
     {
-        me->SetCombatPulseDelay(0);
         me->ResetLootMode();
         events.Reset();
         summons.DespawnAll();

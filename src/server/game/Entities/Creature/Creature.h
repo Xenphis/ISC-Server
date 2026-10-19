@@ -97,6 +97,8 @@ class TC_GAME_API Creature : public Unit, public GridObject<Creature>, public Ma
         ObjectGuid::LowType GetSpawnId() const { return m_spawnId; }
 
         void Update(uint32 time) override;                         // overwrited Unit::Update
+        void Heartbeat() override;
+
         void GetRespawnPosition(float &x, float &y, float &z, float* ori = nullptr, float* dist = nullptr) const;
         bool IsSpawnedOnTransport() const { return m_creatureData && m_creatureData->mapId != GetMapId(); }
 
@@ -288,13 +290,6 @@ class TC_GAME_API Creature : public Unit, public GridObject<Creature>, public Ma
         void SetWanderDistance(float dist) { m_wanderDistance = dist; }
 
         void DoImmediateBoundaryCheck() { m_boundaryCheckTime = 0; }
-        uint32 GetCombatPulseDelay() const { return m_combatPulseDelay; }
-        void SetCombatPulseDelay(uint32 delay) // (secs) interval at which the creature pulses the entire zone into combat (only works in dungeons)
-        {
-            m_combatPulseDelay = delay;
-            if (m_combatPulseTime == 0 || m_combatPulseTime > delay)
-                m_combatPulseTime = delay;
-        }
 
         void SendZoneUnderAttackMessage(Player* attacker);
 
@@ -380,6 +375,8 @@ class TC_GAME_API Creature : public Unit, public GridObject<Creature>, public Ma
         void AtEngage(Unit* target) override;
         void AtDisengage() override;
 
+        void ForcePartyMembersIntoCombat();
+
         void OverrideSparringHealthPct(std::vector<float> const& healthPct);
         float GetSparringHealthPct() const { return _sparringHealthPct; }
         uint32 CalculateDamageForSparring(Unit* attacker, uint32 damage);
@@ -421,8 +418,6 @@ class TC_GAME_API Creature : public Unit, public GridObject<Creature>, public Ma
         bool m_ignoreCorpseDecayRatio;
         float m_wanderDistance;
         uint32 m_boundaryCheckTime;                         // (msecs) remaining time for next evade boundary check
-        uint32 m_combatPulseTime;                           // (msecs) remaining time for next zone-in-combat pulse
-        uint32 m_combatPulseDelay;                          // (secs) how often the creature puts the entire zone in combat (only works in dungeons)
 
         ReactStates m_reactState;                           // for AI, not charmInfo
         void RegenerateHealth();
