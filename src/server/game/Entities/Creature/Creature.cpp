@@ -309,7 +309,7 @@ void Creature::RemoveFromWorld()
             GetZoneScript()->OnCreatureRemove(this);
 
         if (m_formation)
-            sFormationMgr->RemoveCreatureFromGroup(m_formation, this);
+            FormationMgr::RemoveCreatureFromGroup(m_formation, this);
 
         Unit::RemoveFromWorld();
 
@@ -338,7 +338,7 @@ void Creature::SearchFormation()
         return;
 
     if (FormationInfo const* formationInfo = sFormationMgr->GetFormationInfo(lowguid))
-        sFormationMgr->AddCreatureToGroup(formationInfo->LeaderSpawnId, this);
+        FormationMgr::AddCreatureToGroup(formationInfo->LeaderSpawnId, this);
 }
 
 bool Creature::IsFormationLeader() const
