@@ -538,6 +538,9 @@ bool Creature::InitEntry(uint32 entry, CreatureData const* data /*= nullptr*/)
 
     ApplyAllStaticFlags(GenerateStaticFlags(cinfo, GetSpawnId(), GetMap()->GetDifficultyID()));
 
+    // TODO: migrate these in DB
+    SetIgnoreFeignDeath((cinfo->flags_extra & CREATURE_FLAG_EXTRA_IGNORE_FEIGN_DEATH) != 0);
+
     return true;
 }
 
@@ -2488,7 +2491,7 @@ bool Creature::_IsTargetAcceptable(Unit const* target) const
     if (target->HasUnitState(UNIT_STATE_DIED))
     {
         // some creatures can detect fake death
-        if (CanIgnoreFeignDeath() && target->HasUnitFlag2(UNIT_FLAG2_FEIGN_DEATH))
+        if (IsIgnoringFeignDeath() && target->HasUnitFlag2(UNIT_FLAG2_FEIGN_DEATH))
             return true;
         else
             return false;
