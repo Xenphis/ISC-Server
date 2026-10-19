@@ -145,6 +145,8 @@ class TC_GAME_API Creature : public Unit, public GridObject<Creature>, public Ma
         using Unit::SetImmuneToNPC;
         void SetImmuneToNPC(bool apply) override { Unit::SetImmuneToNPC(apply, HasReactState(REACT_PASSIVE)); }
 
+        void SetUnkillable(bool unkillable) { _staticFlags.ApplyFlag(CREATURE_STATIC_FLAG_UNKILLABLE, unkillable); }
+
         /// @todo Rename these properly
         bool isCanInteractWithBattleMaster(Player* player, bool msg) const;
         bool CanResetTalents(Player* player, bool pet) const;
