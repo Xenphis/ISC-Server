@@ -89,7 +89,7 @@ void FormationMgr::RemoveCreatureFromGroup(CreatureGroup* group, Creature* membe
             Map* map = member->GetMap();
             TC_LOG_DEBUG("entities.unit", "Deleting group with InstanceID {}", map->GetInstanceId());
             std::size_t erased = map->CreatureGroupHolder.erase(leaderSpawnId);
-            ASSERT(erased, "Not registered group " UI64FMTD " in map %u", leaderSpawnId, map->GetId());
+            ASSERT(erased, "Not registered group %u in map %u", leaderSpawnId, map->GetId());
         }
 
         delete group;
