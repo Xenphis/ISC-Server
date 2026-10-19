@@ -1382,7 +1382,8 @@ void Spell::SelectImplicitAreaTargets(SpellEffectInfo const& spellEffectInfo, Sp
 
     radius *= m_spellValue->RadiusMod;
 
-    SearchAreaTargets(targets, radius, center, referer, targetType.GetObjectType(), targetType.GetCheckType(), spellEffectInfo.ImplicitTargetConditions);
+    SearchAreaTargets(targets, radius, center, referer, targetType.GetObjectType(), targetType.GetCheckType(), spellEffectInfo.ImplicitTargetConditions,
+        Trinity::WorldObjectSpellAreaTargetSearchReason::Area);
 
     CallScriptObjectAreaTargetSelectHandlers(targets, spellEffectInfo.EffectIndex, targetType);
 
@@ -1970,14 +1971,15 @@ WorldObject* Spell::SearchNearbyTarget(float range, SpellTargetObjectTypes objec
     return target;
 }
 
-void Spell::SearchAreaTargets(std::list<WorldObject*>& targets, float range, Position const* position, WorldObject* referer, SpellTargetObjectTypes objectType, SpellTargetCheckTypes selectionType, ConditionContainer* condList)
+void Spell::SearchAreaTargets(std::list<WorldObject*>& targets, float range, Position const* position, WorldObject* referer, SpellTargetObjectTypes objectType, SpellTargetCheckTypes selectionType, ConditionContainer* condList,
+    Trinity::WorldObjectSpellAreaTargetSearchReason searchReason)
 {
     uint32 containerTypeMask = GetSearcherTypeMask(objectType, condList);
     if (!containerTypeMask)
         return;
 
     float extraSearchRadius = range > 0.0f ? EXTRA_CELL_SEARCH_RADIUS : 0.0f;
-    Trinity::WorldObjectSpellAreaTargetCheck check(range, position, m_caster, referer, m_spellInfo, selectionType, condList);
+    Trinity::WorldObjectSpellAreaTargetCheck check(range, position, m_caster, referer, m_spellInfo, selectionType, condList, searchReason);
     Trinity::WorldObjectListSearcher<Trinity::WorldObjectSpellAreaTargetCheck> searcher(m_caster, targets, check, containerTypeMask);
     searcher.i_phaseMask = PHASEMASK_ANYWHERE;
     SearchTargets<Trinity::WorldObjectListSearcher<Trinity::WorldObjectSpellAreaTargetCheck>>(searcher, containerTypeMask, m_caster, position, range + extraSearchRadius);
@@ -2019,7 +2021,8 @@ void Spell::SearchChainTargets(std::list<WorldObject*>& targets, uint32 chainTar
         searchRadius *= chainTargets;
 
     std::list<WorldObject*> tempTargets;
-    SearchAreaTargets(tempTargets, searchRadius, target, m_caster, objectType, selectType, condList);
+    SearchAreaTargets(tempTargets, searchRadius, target, m_caster, objectType, selectType, condList,
+        Trinity::WorldObjectSpellAreaTargetSearchReason::Chain);
     tempTargets.remove(target);
 
     // remove targets which are always invalid for chain spells
@@ -8523,15 +8526,16 @@ bool WorldObjectSpellNearbyTargetCheck::operator()(WorldObject* target)
 }
 
 WorldObjectSpellAreaTargetCheck::WorldObjectSpellAreaTargetCheck(float range, Position const* position, WorldObject* caster,
-    WorldObject* referer, SpellInfo const* spellInfo, SpellTargetCheckTypes selectionType, ConditionContainer const* condList)
-    : WorldObjectSpellTargetCheck(caster, referer, spellInfo, selectionType, condList), _range(range), _position(position) { }
+    WorldObject* referer, SpellInfo const* spellInfo, SpellTargetCheckTypes selectionType, ConditionContainer const* condList,
+    WorldObjectSpellAreaTargetSearchReason searchReason /*= Area*/)
+    : WorldObjectSpellTargetCheck(caster, referer, spellInfo, selectionType, condList), _range(range), _position(position), _searchReason(searchReason) { }
 
 bool WorldObjectSpellAreaTargetCheck::operator()(WorldObject* target) const
 {
-    if (target->ToGameObject())
+    if (GameObject* gameObjectTarget = target->ToGameObject())
     {
         // isInRange including the dimension of the GO
-        bool isInRange = target->ToGameObject()->IsInRange(_position->GetPositionX(), _position->GetPositionY(), _position->GetPositionZ(), _range);
+        bool isInRange = gameObjectTarget->IsInRange(_position->GetPositionX(), _position->GetPositionY(), _position->GetPositionZ(), _range);
         if (!isInRange)
             return false;
     }
@@ -8540,6 +8544,26 @@ bool WorldObjectSpellAreaTargetCheck::operator()(WorldObject* target) const
         bool isInsideCylinder = target->IsWithinDist2d(_position, _range) && std::abs(target->GetPositionZ() - _position->GetPositionZ()) <= _range;
         if (!isInsideCylinder)
             return false;
+
+        if (Creature* creatureTarget = target->ToCreature())
+        {
+            if (CreatureImmunities const* immunities = SpellMgr::GetCreatureImmunities(creatureTarget->GetCreatureTemplate()->CreatureImmunitiesId))
+            {
+                switch (_searchReason)
+                {
+                    case WorldObjectSpellAreaTargetSearchReason::Area:
+                        if (immunities->ImmuneAoE)
+                            return false;
+                        break;
+                    case WorldObjectSpellAreaTargetSearchReason::Chain:
+                        if (immunities->ImmuneChain)
+                            return false;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
     }
 
     return WorldObjectSpellTargetCheck::operator ()(target);

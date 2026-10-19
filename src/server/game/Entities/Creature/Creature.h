@@ -149,7 +149,7 @@ class TC_GAME_API Creature : public Unit, public GridObject<Creature>, public Ma
         bool isCanInteractWithBattleMaster(Player* player, bool msg) const;
         bool CanResetTalents(Player* player, bool pet) const;
         bool CanCreatureAttack(Unit const* victim, bool force = true) const;
-        void LoadTemplateImmunities();
+        void LoadTemplateImmunities(int32 creatureImmunitiesId);
         bool IsImmunedToSpell(SpellInfo const* spellInfo, WorldObject const* caster, bool requireImmunityPurgesEffectAttribute = false) const override;
         bool IsImmunedToSpellEffect(SpellInfo const* spellInfo, SpellEffectInfo const& spellEffectInfo, WorldObject const* caster, bool requireImmunityPurgesEffectAttribute = false) const override;
         bool isElite() const;
@@ -490,6 +490,7 @@ class TC_GAME_API Creature : public Unit, public GridObject<Creature>, public Ma
 
         bool _isMissingCanSwimFlagOutOfCombat;
         float _sparringHealthPct;
+        int32 _creatureImmunitiesId;
 };
 
 class TC_GAME_API AssistDelayEvent : public BasicEvent

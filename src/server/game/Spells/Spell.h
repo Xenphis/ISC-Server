@@ -61,6 +61,11 @@ class WorldObject;
 class WorldPacket;
 struct SummonPropertiesEntry;
 enum AuraType : uint32;
+
+namespace Trinity
+{
+enum class WorldObjectSpellAreaTargetSearchReason;
+}
 enum CurrentSpellTypes : uint8;
 enum LootType : uint8;
 enum SpellCastTargetFlags : uint32;
@@ -309,7 +314,8 @@ class TC_GAME_API Spell
         template<class SEARCHER> void SearchTargets(SEARCHER& searcher, uint32 containerMask, WorldObject* referer, Position const* pos, float radius);
 
         WorldObject* SearchNearbyTarget(float range, SpellTargetObjectTypes objectType, SpellTargetCheckTypes selectionType, ConditionContainer* condList = nullptr);
-        void SearchAreaTargets(std::list<WorldObject*>& targets, float range, Position const* position, WorldObject* referer, SpellTargetObjectTypes objectType, SpellTargetCheckTypes selectionType, ConditionContainer* condList);
+        void SearchAreaTargets(std::list<WorldObject*>& targets, float range, Position const* position, WorldObject* referer, SpellTargetObjectTypes objectType, SpellTargetCheckTypes selectionType, ConditionContainer* condList,
+            Trinity::WorldObjectSpellAreaTargetSearchReason searchReason);
         void SearchChainTargets(std::list<WorldObject*>& targets, uint32 chainTargets, WorldObject* target, SpellTargetObjectTypes objectType, SpellTargetCheckTypes selectType, ConditionContainer* condList, bool isChainHeal);
 
         GameObject* SearchSpellFocus();
@@ -765,12 +771,20 @@ namespace Trinity
         bool operator()(WorldObject* target);
     };
 
+    enum class WorldObjectSpellAreaTargetSearchReason
+    {
+        Area,
+        Chain
+    };
+
     struct TC_GAME_API WorldObjectSpellAreaTargetCheck : public WorldObjectSpellTargetCheck
     {
         float _range;
         Position const* _position;
+        WorldObjectSpellAreaTargetSearchReason _searchReason;
         WorldObjectSpellAreaTargetCheck(float range, Position const* position, WorldObject* caster,
-            WorldObject* referer, SpellInfo const* spellInfo, SpellTargetCheckTypes selectionType, ConditionContainer const* condList);
+            WorldObject* referer, SpellInfo const* spellInfo, SpellTargetCheckTypes selectionType, ConditionContainer const* condList,
+            WorldObjectSpellAreaTargetSearchReason searchReason = WorldObjectSpellAreaTargetSearchReason::Area);
 
         bool operator()(WorldObject* target) const;
     };

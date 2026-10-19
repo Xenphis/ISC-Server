@@ -1678,6 +1678,12 @@ SpellCastResult SpellInfo::CheckTarget(WorldObject const* caster, WorldObject co
                 return SPELL_FAILED_BAD_TARGETS;
         }
 
+        if (HasAttribute(SPELL_ATTR3_NOT_ON_AOE_IMMUNE))
+            if (Creature const* creatureTarget = unitTarget->ToCreature())
+                if (CreatureImmunities const* immunities = SpellMgr::GetCreatureImmunities(creatureTarget->GetCreatureTemplate()->CreatureImmunitiesId))
+                    if (immunities->ImmuneAoE)
+                        return SPELL_FAILED_BAD_TARGETS;
+
         if (caster != unitTarget)
         {
             if (caster->GetTypeId() == TYPEID_PLAYER)

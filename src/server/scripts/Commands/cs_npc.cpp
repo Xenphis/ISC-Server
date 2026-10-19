@@ -40,6 +40,7 @@ EndScriptData */
 #include "Player.h"
 #include "RBAC.h"
 #include "SmartEnum.h"
+#include "SpellMgr.h"
 #include "Transport.h"
 #include "World.h"
 #include "WorldSession.h"
@@ -464,7 +465,9 @@ public:
 
         uint32 faction = target->GetFaction();
         uint32 npcflags = target->GetNpcFlags();
-        uint32 mechanicImmuneMask = cInfo->MechanicImmuneMask;
+        uint32 mechanicImmuneMask = 0;
+        if (CreatureImmunities const* immunities = SpellMgr::GetCreatureImmunities(cInfo->CreatureImmunitiesId))
+            mechanicImmuneMask = uint32(immunities->Mechanic.to_ullong());
         uint32 displayid = target->GetDisplayId();
         uint32 nativeid = target->GetNativeDisplayId();
         uint32 entry = target->GetEntry();
@@ -517,7 +520,7 @@ public:
 
         handler->PSendSysMessage(LANG_NPCINFO_MECHANIC_IMMUNE, mechanicImmuneMask);
         for (Mechanics m : EnumUtils::Iterate<Mechanics>())
-            if (m && (mechanicImmuneMask & (1 << (m-1))))
+            if (m && (mechanicImmuneMask & (1 << m)))
                 handler->PSendSysMessage("* %s (0x%X)", EnumUtils::ToTitle(m), m);
 
         return true;

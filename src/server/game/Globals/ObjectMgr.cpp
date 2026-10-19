@@ -480,22 +480,20 @@ void ObjectMgr::LoadCreatureTemplates()
         // 59
         "RegenHealth,"
         // 60
-        "mechanic_immune_mask,"
+        "CreatureImmunitiesId,"
         // 61
-        "spell_school_immune_mask,"
-        // 62
         "flags_extra,"
-        // 63
+        // 62
         "ScriptName,"
-        // 64
+        // 63
         "StringId,"
-        // 65
+        // 64
         "csft.StaticFlags1,"
-        // 66
+        // 65
         "csft.StaticFlags2,"
-        // 67
+        // 66
         "csft.StaticFlags3,"
-        // 68
+        // 67
         "csft.StaticFlags4"
         " FROM creature_template ct"
         " LEFT JOIN creature_template_movement ctm ON ct.entry = ctm.CreatureId"
@@ -613,16 +611,15 @@ void ObjectMgr::LoadCreatureTemplate(Field* fields)
 
     creatureTemplate.movementId            = fields[58].GetUInt32();
     creatureTemplate.RegenHealth           = fields[59].GetBool();
-    creatureTemplate.MechanicImmuneMask    = fields[60].GetUInt32();
-    creatureTemplate.SpellSchoolImmuneMask = fields[61].GetUInt32();
-    creatureTemplate.flags_extra           = fields[62].GetUInt32();
-    creatureTemplate.ScriptID              = GetScriptId(fields[63].GetString());
-    creatureTemplate.StringId              = fields[64].GetString();
+    creatureTemplate.CreatureImmunitiesId  = fields[60].GetInt32();
+    creatureTemplate.flags_extra           = fields[61].GetUInt32();
+    creatureTemplate.ScriptID              = GetScriptId(fields[62].GetString());
+    creatureTemplate.StringId              = fields[63].GetString();
     creatureTemplate.StaticFlags           = CreatureStaticFlagsHolder(
-        fields[65].IsNull() ? CreatureStaticFlags() : CreatureStaticFlags(fields[65].GetUInt32()),
-        fields[66].IsNull() ? CreatureStaticFlags2() : CreatureStaticFlags2(fields[66].GetUInt32()),
-        fields[67].IsNull() ? CreatureStaticFlags3() : CreatureStaticFlags3(fields[67].GetUInt32()),
-        fields[68].IsNull() ? CreatureStaticFlags4() : CreatureStaticFlags4(fields[68].GetUInt32())
+        fields[64].IsNull() ? CreatureStaticFlags() : CreatureStaticFlags(fields[64].GetUInt32()),
+        fields[65].IsNull() ? CreatureStaticFlags2() : CreatureStaticFlags2(fields[65].GetUInt32()),
+        fields[66].IsNull() ? CreatureStaticFlags3() : CreatureStaticFlags3(fields[66].GetUInt32()),
+        fields[67].IsNull() ? CreatureStaticFlags4() : CreatureStaticFlags4(fields[67].GetUInt32())
     );
 }
 
@@ -1013,15 +1010,6 @@ void ObjectMgr::CheckCreatureTemplate(CreatureTemplate const* cInfo)
                 cInfo->Entry, cInfo->RegenHealth, diff + 1, cInfo->DifficultyEntry[diff], difficultyInfo->RegenHealth);
             TC_LOG_ERROR("sql.sql", "Possible FIX: UPDATE `creature_template` SET `RegenHealth`={} WHERE `entry`={};",
                 cInfo->RegenHealth, cInfo->DifficultyEntry[diff]);
-        }
-
-        differenceMask = cInfo->MechanicImmuneMask & (~difficultyInfo->MechanicImmuneMask);
-        if (differenceMask)
-        {
-            TC_LOG_ERROR("sql.sql", "Creature (Entry: {}, mechanic_immune_mask: {}) has weaker immunities in difficulty {} mode (Entry: {}, mechanic_immune_mask: {}).",
-                cInfo->Entry, cInfo->MechanicImmuneMask, diff + 1, cInfo->DifficultyEntry[diff], difficultyInfo->MechanicImmuneMask);
-            TC_LOG_ERROR("sql.sql", "Possible FIX: UPDATE `creature_template` SET `mechanic_immune_mask`=`mechanic_immune_mask`|{} WHERE `entry`={};",
-                differenceMask, cInfo->DifficultyEntry[diff]);
         }
 
         differenceMask = (cInfo->flags_extra ^ difficultyInfo->flags_extra) & (~CREATURE_FLAG_EXTRA_INSTANCE_BIND);

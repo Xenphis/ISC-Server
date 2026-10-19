@@ -31,6 +31,7 @@
 #include "Spell.h"
 #include "SpellAuraDefines.h"
 #include "SpellInfo.h"
+#include "StringConvert.h"
 #include <algorithm>
 
 bool IsPrimaryProfessionSkill(uint32 skill)
@@ -53,6 +54,11 @@ bool IsPartOfSkillLine(uint32 skillId, uint32 spellId)
             return true;
 
     return false;
+}
+
+namespace
+{
+    std::unordered_map<int32, CreatureImmunities> mCreatureImmunities;
 }
 
 SpellMgr::SpellMgr() { }
@@ -5112,9 +5118,60 @@ void SpellMgr::LoadSpellInfoDiminishing()
     TC_LOG_INFO("server.loading", ">> Loaded SpellInfo diminishing infos in {} ms", GetMSTimeDiffToNow(oldMSTime));
 }
 
+CreatureImmunities const* SpellMgr::GetCreatureImmunities(int32 creatureImmunitiesId)
+{
+    return Trinity::Containers::MapGetValuePtr(mCreatureImmunities, creatureImmunitiesId);
+}
+
 void SpellMgr::LoadSpellInfoImmunities()
 {
     uint32 oldMSTime = getMSTime();
+
+    mCreatureImmunities.clear();
+
+    //                                                   0   1           2               3              4        5      6          7
+    if (QueryResult result = WorldDatabase.Query("SELECT ID, SchoolMask, DispelTypeMask, MechanicsMask, Effects, Auras, ImmuneAoE, ImmuneChain FROM creature_immunities"))
+    {
+        do
+        {
+            Field* fields = result->Fetch();
+            int32 id = fields[0].GetInt32();
+            uint8 school = fields[1].GetInt8();
+            uint16 dispelType = fields[2].GetInt16();
+            uint64 mechanics = fields[3].GetInt64();
+
+            CreatureImmunities& immunities = mCreatureImmunities[id];
+            immunities.School = school;
+            immunities.DispelType = dispelType;
+            immunities.Mechanic = mechanics;
+            immunities.ImmuneAoE = fields[6].GetBool();
+            immunities.ImmuneChain = fields[7].GetBool();
+
+            if (immunities.School.to_ullong() != school)
+                TC_LOG_ERROR("sql.sql", "Invalid value in `SchoolMask` {} for creature immunities {}, truncated", school, id);
+            if (immunities.DispelType.to_ullong() != dispelType)
+                TC_LOG_ERROR("sql.sql", "Invalid value in `DispelTypeMask` {} for creature immunities {}, truncated", dispelType, id);
+            if (immunities.Mechanic.to_ullong() != mechanics)
+                TC_LOG_ERROR("sql.sql", "Invalid value in `MechanicsMask` {} for creature immunities {}, truncated", mechanics, id);
+
+            for (std::string_view token : Trinity::Tokenize(fields[4].GetStringView(), ',', false))
+            {
+                if (Optional<uint32> effect = Trinity::StringTo<uint32>(token); effect && effect < uint32(TOTAL_SPELL_EFFECTS))
+                    immunities.Effect.push_back(SpellEffects(*effect));
+                else
+                    TC_LOG_ERROR("sql.sql", "Invalid effect type in `Effects` {} for creature immunities {}, skipped", token, id);
+            }
+
+            for (std::string_view token : Trinity::Tokenize(fields[5].GetStringView(), ',', false))
+            {
+                if (Optional<uint32> aura = Trinity::StringTo<uint32>(token); aura && aura < TOTAL_AURAS)
+                    immunities.Aura.push_back(AuraType(*aura));
+                else
+                    TC_LOG_ERROR("sql.sql", "Invalid aura type in `Auras` {} for creature immunities {}, skipped", token, id);
+            }
+        }
+        while (result->NextRow());
+    }
 
     for (SpellInfo* spellInfo : mSpellInfoMap)
     {
