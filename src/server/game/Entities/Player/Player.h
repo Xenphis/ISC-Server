@@ -2252,7 +2252,6 @@ class TC_GAME_API Player : public Unit, public GridObject<Player>
         // Gamemaster whisper whitelist
         GuidList WhisperList;
         uint32 m_regenTimerCount;
-        uint32 m_foodEmoteTimerCount;
         float m_healthFraction;
         std::array<float, MAX_POWERS> m_powerFraction;
         uint32 m_contestedPvPTimer;

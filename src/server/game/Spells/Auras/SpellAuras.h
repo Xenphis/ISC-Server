@@ -251,6 +251,7 @@ class TC_GAME_API Aura
         uint8 GetProcEffectMask(AuraApplication* aurApp, ProcEventInfo& eventInfo, TimePoint now) const;
         float CalcProcChance(SpellProcEntry const& procEntry, ProcEventInfo& eventInfo) const;
         void TriggerProcOnEvent(uint8 procEffectMask, AuraApplication* aurApp, ProcEventInfo& eventInfo);
+        virtual void Heartbeat() { }
 
         // AuraScript
         void LoadScripts();
@@ -362,6 +363,9 @@ class TC_GAME_API UnitAura : public Aura
         DiminishingGroup GetDiminishGroup() const { return m_AuraDRGroup; }
 
         void AddStaticApplication(Unit* target, uint8 effMask);
+
+        void Heartbeat() override;
+        void HandlePeriodicFoodSpellVisualKit();
 
     private:
         DiminishingGroup m_AuraDRGroup;               // Diminishing
