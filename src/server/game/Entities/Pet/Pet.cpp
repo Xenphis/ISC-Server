@@ -1289,7 +1289,8 @@ void Pet::_LoadAuras(PreparedQueryResult auraResult, uint32 timediff)
             AuraCreateInfo createInfo(spellInfo, key.EffectMask, this);
             createInfo
                 .SetCasterGUID(casterGuid)
-                .SetBaseAmount(info.BaseAmounts.data());
+                .SetBaseAmount(info.BaseAmounts.data())
+                .SetStackAmount(stackCount);
 
             if (Aura* aura = Aura::TryCreate(createInfo))
             {
@@ -1299,7 +1300,7 @@ void Pet::_LoadAuras(PreparedQueryResult auraResult, uint32 timediff)
                     continue;
                 }
 
-                aura->SetLoadedState(maxDuration, remainTime, remainCharges, stackCount, recalculateMask, critChance, applyResilience, info.Amounts.data());
+                aura->SetLoadedState(maxDuration, remainTime, remainCharges, recalculateMask, critChance, applyResilience, info.Amounts.data());
                 aura->ApplyForTargets();
                 TC_LOG_DEBUG("entities.pet", "Added aura spellid {}, effectmask {}", spellInfo->Id, key.EffectMask);
             }

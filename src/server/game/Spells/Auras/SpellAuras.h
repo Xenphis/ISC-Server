@@ -216,7 +216,7 @@ class TC_GAME_API Aura
         void UnregisterSingleTarget();
         int32 CalcDispelChance(Unit const* auraTarget, bool offensive) const;
 
-        void SetLoadedState(int32 maxDuration, int32 duration, int32 charges, uint8 stackAmount, uint8 recalculateMask, float critChance, bool applyResilience, int32* amount);
+        void SetLoadedState(int32 maxDuration, int32 duration, int32 charges, uint8 recalculateMask, float critChance, bool applyResilience, int32* amount);
 
         // helpers for aura effects
         bool CanPeriodicTickCrit(Unit const* caster) const;
