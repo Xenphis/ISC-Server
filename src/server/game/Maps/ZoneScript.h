@@ -22,6 +22,7 @@
 #include "ObjectGuid.h"
 
 class Creature;
+class CreatureGroup;
 class GameObject;
 class Unit;
 class WorldObject;
@@ -43,6 +44,9 @@ class TC_GAME_API ZoneScript
         virtual void OnGameObjectRemove(GameObject* ) { }
 
         virtual void OnUnitDeath(Unit*) { }
+
+        // Triggers when the CreatureGroup no longer has any alive members (either last alive member dies or is removed from the group)
+        virtual void OnCreatureGroupDepleted([[maybe_unused]] CreatureGroup const* creatureGroup) { }
 
         //All-purpose data storage 64 bit
         virtual ObjectGuid GetGuidData(uint32 /*DataId*/) const { return ObjectGuid::Empty; }
