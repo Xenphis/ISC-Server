@@ -303,23 +303,6 @@ class TC_GAME_API PackedGuid
         std::array<uint8, PACKED_GUID_MIN_BUFFER_SIZE> _packedGuid;
 };
 
-class TC_GAME_API ObjectGuidGenerator
-{
-public:
-    explicit ObjectGuidGenerator(HighGuid high, ObjectGuid::LowType start = 1) : _high(high), _nextGuid(start) { }
-    ~ObjectGuidGenerator() = default;
-
-    void Set(ObjectGuid::LowType val) { _nextGuid = val; }
-    ObjectGuid::LowType Generate();
-    ObjectGuid::LowType GetNextAfterMaxUsed() const { return _nextGuid; }
-
-protected:
-    void HandleCounterOverflow();
-    void CheckGuidTrigger();
-    HighGuid _high;
-    ObjectGuid::LowType _nextGuid;
-};
-
 TC_GAME_API ByteBuffer& operator<<(ByteBuffer& buf, ObjectGuid const& guid);
 TC_GAME_API ByteBuffer& operator>>(ByteBuffer& buf, ObjectGuid&       guid);
 

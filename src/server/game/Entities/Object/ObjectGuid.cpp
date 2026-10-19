@@ -18,9 +18,7 @@
 #include "ObjectGuid.h"
 #include "ByteBuffer.h"
 #include "Errors.h"
-#include "Log.h"
 #include "Util.h"
-#include "World.h"
 #include <algorithm>
 #include <charconv>
 
@@ -163,29 +161,4 @@ ByteBuffer& operator>>(ByteBuffer& buf, PackedGuidReader const& guid)
 {
     buf.readPackGUID(reinterpret_cast<uint64&>(guid.Guid));
     return buf;
-}
-
-ObjectGuid::LowType ObjectGuidGenerator::Generate()
-{
-    if (_nextGuid >= ObjectGuid::GetMaxCounter(_high) - 1)
-        HandleCounterOverflow();
-
-    if (_high == HighGuid::Unit || _high == HighGuid::Vehicle || _high == HighGuid::GameObject || _high == HighGuid::Transport)
-        CheckGuidTrigger();
-
-    return _nextGuid++;
-}
-
-void ObjectGuidGenerator::HandleCounterOverflow()
-{
-    TC_LOG_ERROR("misc", "{} guid overflow!! Can't continue, shutting down server. ", ObjectGuid::GetTypeName(_high));
-    World::StopNow(ERROR_EXIT_CODE);
-}
-
-void ObjectGuidGenerator::CheckGuidTrigger()
-{
-    if (!sWorld->IsGuidAlert() && _nextGuid > sWorld->getIntConfig(CONFIG_RESPAWN_GUIDALERTLEVEL))
-        sWorld->TriggerGuidAlert();
-    else if (!sWorld->IsGuidWarning() && _nextGuid > sWorld->getIntConfig(CONFIG_RESPAWN_GUIDWARNLEVEL))
-        sWorld->TriggerGuidWarning();
 }
