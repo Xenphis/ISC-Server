@@ -2242,6 +2242,18 @@ void Aura::CallScriptAfterDispel(DispelInfo* dispelInfo)
     }
 }
 
+void Aura::CallScriptOnHeartbeat()
+{
+    for (AuraScript* script : m_loadedScripts)
+    {
+        script->_PrepareScriptCall(AURA_SCRIPT_HOOK_ON_HEARTBEAT);
+        for (AuraScript::AuraHeartbeatHandler const& onHeartbeat : script->OnHeartbeat)
+            onHeartbeat.Call(script);
+
+        script->_FinishScriptCall();
+    }
+}
+
 bool Aura::CallScriptEffectApplyHandlers(AuraEffect const* aurEff, AuraApplication const* aurApp, AuraEffectHandleModes mode)
 {
     bool preventDefault = false;
@@ -2735,6 +2747,9 @@ void UnitAura::Heartbeat()
 
     // Periodic food and drink emote animation
     HandlePeriodicFoodSpellVisualKit();
+
+    // Invoke the OnHeartbeat AuraScript hook
+    CallScriptOnHeartbeat();
 }
 
 void UnitAura::HandlePeriodicFoodSpellVisualKit()
